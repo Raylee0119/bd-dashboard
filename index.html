@@ -1,0 +1,1157 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TaDa - BD Weekly Dashboard</title>
+<style>
+  :root {
+    --primary: #1a2b4a;
+    --accent: #00c9a7;
+    --accent2: #0084ff;
+    --bg: #f0f4f8;
+    --card: #ffffff;
+    --border: #e2e8f0;
+    --text: #1e293b;
+    --muted: #64748b;
+    --green: #10b981;
+    --yellow: #f59e0b;
+    --red: #ef4444;
+    --tag-bg: #e0f2fe;
+    --tag-color: #0369a1;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', 'PingFang TC', sans-serif; background: var(--bg); color: var(--text); font-size: 14px; }
+
+  /* ── HEADER ── */
+  .header {
+    background: var(--primary);
+    color: #fff;
+    padding: 14px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.25);
+  }
+  .header-left { display: flex; align-items: center; gap: 16px; }
+  .logo { font-size: 22px; font-weight: 800; letter-spacing: 1px; }
+  .logo span { color: var(--accent); }
+  .header-sub { font-size: 12px; color: #94a3b8; margin-top: 2px; }
+  .header-right { display: flex; align-items: center; gap: 12px; }
+
+  .week-select {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: #fff;
+    padding: 7px 14px;
+    border-radius: 6px;
+    font-size: 13px;
+    cursor: pointer;
+  }
+  .week-select option { background: var(--primary); color: #fff; }
+
+  .lang-toggle { display: flex; background: rgba(255,255,255,0.1); border-radius: 6px; overflow: hidden; border: 1px solid rgba(255,255,255,0.2); }
+  .lang-btn { padding: 7px 14px; background: transparent; border: none; color: rgba(255,255,255,0.6); cursor: pointer; font-size: 12px; font-weight: 600; transition: all 0.2s; }
+  .lang-btn.active { background: var(--accent); color: #fff; }
+
+  .export-btn { background: var(--accent); color: #fff; border: none; padding: 7px 16px; border-radius: 6px; font-size: 13px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 6px; transition: opacity 0.2s; }
+  .export-btn:hover { opacity: 0.85; }
+
+  /* ── FILTER TABS ── */
+  .filter-bar { background: var(--card); border-bottom: 1px solid var(--border); padding: 0 32px; display: flex; gap: 4px; position: sticky; top: 61px; z-index: 90; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+  .filter-tab { padding: 13px 20px; border: none; background: transparent; color: var(--muted); font-size: 13px; font-weight: 600; cursor: pointer; border-bottom: 3px solid transparent; transition: all 0.2s; display: flex; align-items: center; gap: 8px; }
+  .filter-tab:hover { color: var(--text); }
+  .filter-tab.active { color: var(--accent2); border-bottom-color: var(--accent2); }
+  .tab-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ── MAIN ── */
+  .main { padding: 24px 32px; max-width: 1440px; margin: 0 auto; }
+
+  /* ── SUMMARY ROW ── */
+  .summary-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 24px; }
+  .summary-card { background: var(--card); border-radius: 10px; padding: 18px 20px; border: 1px solid var(--border); display: flex; flex-direction: column; gap: 6px; }
+  .s-label { font-size: 11px; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+  .s-value { font-size: 26px; font-weight: 800; color: var(--primary); }
+  .s-sub { font-size: 12px; color: var(--muted); }
+  .s-badge { display: inline-flex; align-items: center; gap: 4px; font-size: 12px; font-weight: 600; padding: 2px 8px; border-radius: 12px; width: fit-content; }
+  .badge-green { background: #d1fae5; color: var(--green); }
+  .badge-yellow { background: #fef3c7; color: var(--yellow); }
+  .badge-red { background: #fee2e2; color: var(--red); }
+  .badge-gray  { background: #f1f5f9; color: var(--muted); }
+
+  /* ── BD GRID ── */
+  .bd-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .bd-card { background: var(--card); border-radius: 12px; border: 1px solid var(--border); overflow: hidden; transition: box-shadow 0.2s; }
+  .bd-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+
+  /* ── CARD HEADER ── */
+  .bd-card-header { padding: 16px 20px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border); }
+  .bd-info { display: flex; align-items: center; gap: 12px; }
+  .bd-avatar { width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 800; color: #fff; flex-shrink: 0; }
+  .bd-name { font-size: 16px; font-weight: 700; }
+  .bd-region { font-size: 11px; color: var(--muted); margin-top: 2px; }
+  .bd-week-badge { font-size: 11px; color: var(--muted); text-align: right; }
+
+  /* ── TDAB BANNER ── */
+  .tdab-banner {
+    background: linear-gradient(135deg, #1a2b4a 0%, #243b6e 100%);
+    color: #fff;
+    padding: 16px 20px 14px;
+    border-bottom: 1px solid var(--border);
+  }
+  .tdab-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+  .tdab-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: rgba(255,255,255,0.55); }
+  .tdab-main { display: flex; align-items: baseline; gap: 10px; margin-top: 4px; }
+  .tdab-num { font-size: 32px; font-weight: 900; color: #fff; letter-spacing: -0.5px; }
+  .tdab-unit { font-size: 13px; color: rgba(255,255,255,0.65); }
+  .tdab-wow { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; }
+  .wow-badge { font-size: 18px; font-weight: 800; padding: 4px 10px; border-radius: 8px; }
+  .wow-green { background: rgba(16,185,129,0.2); color: #6ee7b7; }
+  .wow-red   { background: rgba(239,68,68,0.2);  color: #fca5a5; }
+  .wow-gray  { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.5); }
+  .wow-label { font-size: 10px; color: rgba(255,255,255,0.4); }
+  .tdab-estimated { font-size: 10px; color: rgba(255,165,0,0.8); font-style: italic; }
+
+  /* Sub-region breakdown */
+  .tdab-sub { display: grid; gap: 6px; }
+  .sub-row { display: flex; align-items: center; gap: 8px; }
+  .sub-name { font-size: 11px; color: rgba(255,255,255,0.6); width: 88px; flex-shrink: 0; }
+  .sub-bar-wrap { flex: 1; height: 5px; background: rgba(255,255,255,0.1); border-radius: 3px; overflow: hidden; }
+  .sub-bar-fill { height: 100%; border-radius: 3px; background: var(--accent); transition: width 0.5s ease; }
+  .sub-val { font-size: 12px; font-weight: 700; color: #fff; width: 70px; text-align: right; flex-shrink: 0; }
+  .sub-wow { font-size: 10px; width: 48px; text-align: right; flex-shrink: 0; }
+  .sub-wow.pos { color: #6ee7b7; }
+  .sub-wow.neg { color: #fca5a5; }
+  .sub-wow.neu { color: rgba(255,255,255,0.4); }
+
+  /* ── SECTION ── */
+  .section { border-bottom: 1px solid var(--border); }
+  .section:last-child { border-bottom: none; }
+  .section-header { padding: 12px 20px; display: flex; align-items: center; justify-content: space-between; cursor: pointer; user-select: none; transition: background 0.15s; }
+  .section-header:hover { background: #f8fafc; }
+  .section-title { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--muted); display: flex; align-items: center; gap: 8px; }
+  .chevron { font-size: 11px; color: var(--muted); transition: transform 0.2s; }
+  .chevron.open { transform: rotate(180deg); }
+  .section-body { padding: 4px 20px 16px; display: none; }
+  .section-body.open { display: block; }
+
+  /* ── KPI ROW ── */
+  .kpi-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 4px; }
+  .kpi-item { background: #f8fafc; border-radius: 8px; padding: 10px 12px; border: 1px solid var(--border); }
+  .kpi-label { font-size: 10px; color: var(--muted); font-weight: 600; text-transform: uppercase; }
+  .kpi-val { font-size: 18px; font-weight: 800; margin-top: 2px; }
+  .kpi-target { font-size: 10px; color: var(--muted); margin-top: 2px; }
+  .progress-bar { height: 4px; background: #e2e8f0; border-radius: 2px; margin-top: 6px; overflow: hidden; }
+  .progress-fill { height: 100%; border-radius: 2px; transition: width 0.5s ease; }
+  .kpi-green { color: var(--green); }
+  .kpi-yellow { color: var(--yellow); }
+  .kpi-red { color: var(--red); }
+
+  /* ── LISTS ── */
+  ul.bd-list { list-style: none; padding: 0; }
+  ul.bd-list li { padding: 6px 0; border-bottom: 1px solid #f1f5f9; font-size: 13px; display: flex; align-items: flex-start; gap: 8px; line-height: 1.5; }
+  ul.bd-list li:last-child { border-bottom: none; }
+  ul.bd-list li::before { content: '›'; color: var(--accent); font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+
+  /* ── TAGS ── */
+  .tag { display: inline-block; padding: 2px 8px; border-radius: 12px; font-size: 10px; font-weight: 600; margin: 2px; }
+  .tag-blue   { background: #dbeafe; color: #1d4ed8; }
+  .tag-green  { background: #d1fae5; color: #065f46; }
+  .tag-orange { background: #fef3c7; color: #92400e; }
+  .tag-red    { background: #fee2e2; color: #991b1b; }
+  .tag-purple { background: #ede9fe; color: #5b21b6; }
+  .tag-gray   { background: #f1f5f9; color: #475569; }
+
+  /* ── CLIENT TABLE ── */
+  .client-table { width: 100%; border-collapse: collapse; font-size: 12px; margin-top: 4px; }
+  .client-table th { background: #f8fafc; padding: 6px 10px; text-align: left; font-weight: 600; color: var(--muted); border-bottom: 1px solid var(--border); font-size: 11px; text-transform: uppercase; letter-spacing: 0.3px; }
+  .client-table td { padding: 7px 10px; border-bottom: 1px solid #f1f5f9; }
+  .client-table tr:last-child td { border-bottom: none; }
+  .status-dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; margin-right: 5px; }
+
+  .hidden { display: none !important; }
+
+  /* ── FOOTER ── */
+  .last-updated { text-align: center; font-size: 11px; color: var(--muted); padding: 16px; border-top: 1px solid var(--border); margin-top: 8px; }
+
+  /* ── PRINT ── */
+  @media print {
+    .header, .filter-bar { position: static; }
+    .export-btn, .lang-toggle, .week-select { display: none; }
+    .section-body { display: block !important; }
+    .bd-grid { grid-template-columns: 1fr; }
+    .summary-row { grid-template-columns: repeat(2, 1fr); }
+    body { background: #fff; }
+    .bd-card { break-inside: avoid; }
+    .tdab-banner { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══════════ HEADER ══════════ -->
+<div class="header">
+  <div class="header-left">
+    <div>
+      <div class="logo">TaDa <span>BD Weekly Dashboard</span></div>
+      <div class="header-sub" id="hdr-sub">BD 團隊 — 週報 Dashboard</div>
+    </div>
+  </div>
+  <div class="header-right">
+    <select class="week-select" id="weekSelect" onchange="switchWeek(this.value)">
+      <option value="w10">W10 · 3/02–3/08, 2026</option>
+      <option value="w11">W11 · 3/09–3/15, 2026</option>
+      <option value="w12" selected>W12 · 3/16–3/22, 2026</option>
+      <option value="w13">W13 · 3/23–3/29, 2026</option>
+    </select>
+    <div class="lang-toggle">
+      <button class="lang-btn active" onclick="setLang('zh')">中文</button>
+      <button class="lang-btn" onclick="setLang('en')">EN</button>
+    </div>
+    <button class="export-btn" onclick="window.print()">⬇ <span id="btn-export">匯出 PDF</span></button>
+  </div>
+</div>
+
+<!-- ══════════ FILTER TABS ══════════ -->
+<div class="filter-bar">
+  <button class="filter-tab active" onclick="filterBD('all',this)">
+    <span class="tab-dot" style="background:#64748b"></span>
+    <span id="tab-all">全部成員</span>
+  </button>
+  <button class="filter-tab" onclick="filterBD('bryam',this)">
+    <span class="tab-dot" style="background:#8b5cf6"></span>Bryam
+  </button>
+  <button class="filter-tab" onclick="filterBD('hector',this)">
+    <span class="tab-dot" style="background:#f59e0b"></span>Hector
+  </button>
+  <button class="filter-tab" onclick="filterBD('chu',this)">
+    <span class="tab-dot" style="background:#10b981"></span>Chu
+  </button>
+  <button class="filter-tab" onclick="filterBD('nina',this)">
+    <span class="tab-dot" style="background:#0084ff"></span>Nina
+  </button>
+</div>
+
+<!-- ══════════ MAIN ══════════ -->
+<div class="main">
+
+  <!-- Summary Row -->
+  <div class="summary-row" id="summaryRow"><!-- filled by JS --></div>
+
+  <!-- BD Cards Grid -->
+  <div class="bd-grid" id="bdGrid">
+
+    <!-- ══ BRYAM ══ -->
+    <div class="bd-card" data-bd="bryam">
+      <div class="bd-card-header">
+        <div class="bd-info">
+          <div class="bd-avatar" style="background:#8b5cf6">B</div>
+          <div>
+            <div class="bd-name">Bryam Jacquet</div>
+            <div class="bd-region" id="bryam-region">CIS &amp; 西亞</div>
+          </div>
+        </div>
+        <div class="bd-week-badge" id="bryam-period"></div>
+      </div>
+      <div class="tdab-banner" id="tdab-bryam"><!-- dynamic --></div>
+      <div id="content-bryam"><!-- dynamic sections --></div>
+    </div>
+
+    <!-- ══ HECTOR ══ -->
+    <div class="bd-card" data-bd="hector">
+      <div class="bd-card-header">
+        <div class="bd-info">
+          <div class="bd-avatar" style="background:#f59e0b">H</div>
+          <div>
+            <div class="bd-name">Hector Langa</div>
+            <div class="bd-region" id="hector-region">LATAM</div>
+          </div>
+        </div>
+        <div class="bd-week-badge" id="hector-period"></div>
+      </div>
+      <div class="tdab-banner" id="tdab-hector"><!-- dynamic --></div>
+      <div id="content-hector"><!-- dynamic sections --></div>
+    </div>
+
+    <!-- ══ CHU ══ -->
+    <div class="bd-card" data-bd="chu">
+      <div class="bd-card-header">
+        <div class="bd-info">
+          <div class="bd-avatar" style="background:#10b981">C</div>
+          <div>
+            <div class="bd-name">Chu Chang</div>
+            <div class="bd-region" id="chu-region">非洲 &amp; 大洋洲 &amp; 北美</div>
+          </div>
+        </div>
+        <div class="bd-week-badge" id="chu-period"></div>
+      </div>
+      <div class="tdab-banner" id="tdab-chu"><!-- dynamic --></div>
+      <div id="content-chu"><!-- dynamic sections --></div>
+    </div>
+
+    <!-- ══ NINA ══ -->
+    <div class="bd-card" data-bd="nina">
+      <div class="bd-card-header">
+        <div class="bd-info">
+          <div class="bd-avatar" style="background:#0084ff">N</div>
+          <div>
+            <div class="bd-name">Nina Xu</div>
+            <div class="bd-region" id="nina-region">EU 監管 &amp; EU+Global</div>
+          </div>
+        </div>
+        <div class="bd-week-badge" id="nina-period"></div>
+      </div>
+      <div class="tdab-banner" id="tdab-nina"><!-- dynamic --></div>
+      <div id="content-nina"><!-- dynamic sections --></div>
+    </div>
+
+  </div><!-- end bd-grid -->
+
+  <div class="last-updated" id="footer-note">
+    📅 資料來源：Google Drive BD Weekly Reports · 2026年3月資料 · W13 為推估值
+  </div>
+
+</div><!-- end main -->
+
+<script>
+// ══════════════════════════════════════════════════
+//  WEEK DATA  (all real figures in THB/day)
+//  Sources: BD Google Doc weekly reports + PDF reports
+//  W13 values are estimates, marked with estimated:true
+// ══════════════════════════════════════════════════
+const weekData = {
+
+  w10: {
+    label:     { zh: 'W10 · 3/02–3/08', en: 'W10 · Mar 2–8' },
+    period:    { zh: '2026/03/02 – 2026/03/08', en: '2026-03-02 – 2026-03-08' },
+    estimated: false,
+    summary: {
+      totalTDAB:    { zh: '3,813.7M THB', en: '3,813.7M THB' },
+      teamWoW:      '+N/A',
+      teamWoWClass: 'gray',
+      noteZh: 'W9 資料不完整，部分 WoW 無法計算',
+      noteEn: 'W9 data incomplete; some WoW unavailable'
+    },
+    members: {
+
+      bryam: {
+        tdab:      285388401,
+        tdabWoW:   null,
+        estimated: false,
+        subRegions: [
+          { nameZh:'CIS',    nameEn:'CIS',        tdab:184501308, wow:null },
+          { nameZh:'西亞',   nameEn:'West Asia',  tdab:100887093, wow:null }
+        ],
+        highlights: [
+          { zh:'CIS 市場穩定，Slotegrator 就 NGR 商務條款展開洽談',               en:'CIS market stable; Slotegrator NGR commercial term talks initiated' },
+          { zh:'West Asia (土耳其 / 沙烏地 / UAE) 進入 Q1 推進階段',               en:'West Asia (Turkey/Saudi/UAE) entering Q1 push phase' },
+          { zh:'Reevo EU 監管市場洽談啟動，對方要求已簽署合約及 DD 文件',           en:'Reevo EU regulated talks started; counterpart requested signed agreement + DD docs' },
+          { zh:'Veganster CIS 合約進入草稿確認階段',                               en:'Veganster CIS contract moved to draft confirmation stage' }
+        ],
+        clients: [
+          { name:'Slotegrator', market:'Ukraine / CIS', dotColor:'#f59e0b', statusZh:'商務洽談', statusEn:'Negotiation',      tagClass:'tag-orange', actionZh:'洽談 NGR 條款', actionEn:'Negotiate NGR Rate' },
+          { name:'Reevo',       market:'EU Regulated',  dotColor:'#f59e0b', statusZh:'文件收集', statusEn:'Collecting Docs', tagClass:'tag-orange', actionZh:'備妥合約+DD',    actionEn:'Prepare Agmt + DD' },
+          { name:'Turkey Ops',  market:'West Asia',     dotColor:'#10b981', statusZh:'市場推進', statusEn:'Activating',      tagClass:'tag-green',  actionZh:'推進 Addendum',  actionEn:'Push Addendum' },
+          { name:'Veganster',   market:'CIS',           dotColor:'#f59e0b', statusZh:'合約草稿', statusEn:'Draft Stage',     tagClass:'tag-orange', actionZh:'確認草稿條款',   actionEn:'Confirm Draft Terms' }
+        ],
+        plans: [
+          { zh:'啟動 Slotegrator NGR 商務條款最終確認', en:'Finalize Slotegrator NGR commercial terms' },
+          { zh:'準備 Reevo EU 合約草稿及 DD 文件',      en:'Prepare Reevo EU agreement draft and DD document' },
+          { zh:'West Asia Addendum 推進，爭取內容上線授權', en:'Push WA Addendum to secure content activation' },
+          { zh:'持續跟進 Veganster CIS 合約確認',        en:'Follow up Veganster CIS contract confirmation' }
+        ]
+      },
+
+      hector: {
+        tdab:      2759886103,
+        tdabWoW:   null,
+        estimated: false,
+        subRegions: [
+          { nameZh:'Latam 整體', nameEn:'Latam Total', tdab:2759886103, wow:null }
+        ],
+        highlights: [
+          { zh:'Latam 整體日均押注維持高位，MoM 成長 +10.1% (vs 2月)',             en:'Latam daily avg bet at high level; MoM growth +10.1% vs Feb' },
+          { zh:'Venezuela +24.5% 表現最亮眼，Brazil / Mexico 仍有大量成長空間',    en:'Venezuela +24.5% top performer; Brazil/Mexico with significant upside' },
+          { zh:'3月促銷活動共 20+ 個，提升各平台曝光',                              en:'20+ March promos confirmed across platforms, boosting visibility' },
+          { zh:'啟動與 Betsson Group (Betsafe/NordicBet) 的深度合作討論',          en:'Initiated deep partnership talks with Betsson Group (Betsafe/NordicBet)' }
+        ],
+        clients: [
+          { name:'Betcris',      market:'Latam',    dotColor:'#10b981', statusZh:'活躍合作', statusEn:'Active',     tagClass:'tag-green',  actionZh:'促銷推進', actionEn:'Promo Push' },
+          { name:'Betsson',      market:'Latam',    dotColor:'#f59e0b', statusZh:'洽談深化', statusEn:'Deepening',  tagClass:'tag-orange', actionZh:'擴大合作', actionEn:'Expand Scope' },
+          { name:'1xBet Latam',  market:'Latam',    dotColor:'#10b981', statusZh:'活躍',     statusEn:'Active',     tagClass:'tag-green',  actionZh:'監控成長', actionEn:'Monitor Growth' },
+          { name:'Rush Street',  market:'USA/Latam', dotColor:'#f59e0b', statusZh:'推進中',  statusEn:'In Progress', tagClass:'tag-orange', actionZh:'內容整合', actionEn:'Content Integration' }
+        ],
+        plans: [
+          { zh:'持續推進 Betsson Latam 合作深化談判',          en:'Continue deepening Betsson Latam partnership talks' },
+          { zh:'針對 Venezuela / Colombia 市場制定促銷計畫',   en:'Design promo plan for Venezuela/Colombia markets' },
+          { zh:'確認 3月 20+ 促銷活動落地執行情況',            en:'Confirm execution status of 20+ March promos' },
+          { zh:'與 Ray 對齊 4月拉美市場拓展策略',              en:'Align April Latam expansion strategy with Ray' }
+        ]
+      },
+
+      chu: {
+        tdab:      364897066,
+        tdabWoW:   5.49,
+        estimated: false,
+        subRegions: [
+          { nameZh:'非洲',   nameEn:'Africa',       tdab:167029162, wow:null },
+          { nameZh:'大洋洲', nameEn:'Oceania',      tdab:51920296,  wow:null },
+          { nameZh:'北美',   nameEn:'N. America',   tdab:145947608, wow:null }
+        ],
+        highlights: [
+          { zh:'整體日均押注較 W9 成長 +5.49%，三大市場齊頭並進',                   en:'Total TDAB +5.49% vs W9; all three markets growing in sync' },
+          { zh:'非洲市場日均 167M THB，MoM +14.7%，SportyBet 等大型客戶貢獻顯著',  en:'Africa daily avg 167M THB, MoM +14.7%; SportyBet and others key contributors' },
+          { zh:'大洋洲 51.9M THB，積極洽談新合作夥伴',                              en:'Oceania 51.9M THB; actively negotiating new partnerships' },
+          { zh:'北美市場 145.9M THB，持續探索合規市場切入點',                       en:'N. America 145.9M THB; exploring regulated market entry points' }
+        ],
+        clients: [
+          { name:'SportyBet',    market:'Africa',  dotColor:'#10b981', statusZh:'活躍成長', statusEn:'Growing',    tagClass:'tag-green',  actionZh:'深化合作', actionEn:'Deepen Partnership' },
+          { name:'BetWay Africa', market:'Africa', dotColor:'#10b981', statusZh:'活躍',     statusEn:'Active',     tagClass:'tag-green',  actionZh:'促銷協調', actionEn:'Promo Coordination' },
+          { name:'Tabcorp',      market:'Oceania', dotColor:'#f59e0b', statusZh:'洽談中',   statusEn:'Negotiating', tagClass:'tag-orange', actionZh:'整合推進', actionEn:'Integration Push' },
+          { name:'DraftKings',   market:'N. America', dotColor:'#f59e0b', statusZh:'評估中', statusEn:'Evaluating', tagClass:'tag-orange', actionZh:'探索合規', actionEn:'Explore Compliance' }
+        ],
+        plans: [
+          { zh:'鞏固非洲 SportyBet 合作，推動更大促銷預算',          en:'Consolidate SportyBet Africa partnership; push for larger promo budget' },
+          { zh:'推進大洋洲新合作夥伴洽談，目標本月簽約',              en:'Push Oceania new partner talks; target signing this month' },
+          { zh:'北美合規市場研究：評估各州監管要求',                   en:'N. America regulated market research: assess state-by-state licensing' },
+          { zh:'協助 Bryam 推進 SportyBet Africa SoftSwiss 整合',    en:'Support Bryam on SportyBet Africa SoftSwiss integration coordination' }
+        ]
+      },
+
+      nina: {
+        tdab:      348424772,
+        tdabWoW:   5.01,
+        estimated: false,
+        subRegions: [
+          { nameZh:'EU 監管+Global', nameEn:'EU Reg + Global', tdab:348424772, wow:5.01 }
+        ],
+        highlights: [
+          { zh:'EU 監管 + Global 整體日均押注達 348.4M THB，WoW +5.01%',            en:'EU Regulated + Global daily avg 348.4M THB, WoW +5.01%' },
+          { zh:'GameKong (Non-Reg EU) 表現突出，為本週主要成長驅動力',               en:'GameKong (Non-Reg EU) stood out as key growth driver this week' },
+          { zh:'UK onboarding 加速：Boyles / Rank / Ballys 同步推進測試階段',        en:'UK onboarding accelerated: Boyles/Rank/Ballys in parallel testing phase' },
+          { zh:'Superbet Romania 促銷合作拉力提升，討論加大促銷預算',                 en:'Superbet Romania promo collaboration gaining momentum; bigger budget discussed' }
+        ],
+        clients: [
+          { name:'Superbet',     market:'Romania',   dotColor:'#10b981', statusZh:'活躍',     statusEn:'Live',      tagClass:'tag-orange', actionZh:'擴大促銷', actionEn:'More Promos' },
+          { name:'Betclic',      market:'Portugal',  dotColor:'#10b981', statusZh:'活躍',     statusEn:'Live',      tagClass:'tag-green',  actionZh:'成長監控', actionEn:'Monitor Growth' },
+          { name:'Boyles/Rank',  market:'UK',        dotColor:'#f59e0b', statusZh:'上線中',   statusEn:'Onboarding', tagClass:'tag-orange', actionZh:'加速流程', actionEn:'Speed Up' },
+          { name:'GameKong',     market:'Non-Reg EU', dotColor:'#10b981', statusZh:'活躍',    statusEn:'Live',      tagClass:'tag-green',  actionZh:'成長驅動', actionEn:'Growth Driver' }
+        ],
+        plans: [
+          { zh:'推進 UK onboarding：催促 Boyles/Rank/Ballys 測試 → 合規 → 上線',   en:'Speed up UK onboarding: Boyles/Rank/Ballys testing → compliance → go-live' },
+          { zh:'Superbet Romania：協商更積極的促銷預算和頻率',                       en:'Superbet Romania: negotiate more aggressive promo budget and frequency' },
+          { zh:'取得 GR8 / ZEN001 / Alea 直接聯絡人，建立快速通道',                 en:'Obtain direct contacts at GR8/ZEN001/Alea for fast-track communication' },
+          { zh:'提供各客戶 EU 監管市場 GGR 數據分析，確認實際體量',                  en:'Deliver per-client EU regulated GGR data analysis for volume confirmation' }
+        ]
+      }
+    } // end w10 members
+  }, // end w10
+
+  // ──────────────────────────────────────
+  w11: {
+    label:     { zh: 'W11 · 3/09–3/15', en: 'W11 · Mar 9–15' },
+    period:    { zh: '2026/03/09 – 2026/03/15', en: '2026-03-09 – 2026-03-15' },
+    estimated: false,
+    summary: {
+      totalTDAB:    { zh: '3,643.6M THB', en: '3,643.6M THB' },
+      teamWoW:      '−4.46%',
+      teamWoWClass: 'red',
+      noteZh: '本週整體押注小幅下滑，主因 Nina EU 市場調整',
+      noteEn: 'Team-wide slight decline; mainly due to Nina EU market adjustment'
+    },
+    members: {
+
+      bryam: {
+        tdab:      283607867,
+        tdabWoW:   -0.62,
+        estimated: false,
+        subRegions: [
+          { nameZh:'CIS',  nameEn:'CIS',       tdab:182451508, wow:-1.11 },
+          { nameZh:'西亞', nameEn:'West Asia', tdab:101156359, wow:0.27  }
+        ],
+        highlights: [
+          { zh:'CIS 日均小幅下滑 -1.11%，整體仍屬正常波動範圍',                      en:'CIS daily avg slightly down -1.11%; within normal fluctuation range' },
+          { zh:'West Asia +0.27% 小幅成長，土耳其市場持續活化中',                   en:'West Asia +0.27% slight growth; Turkey market continuing activation' },
+          { zh:'Slotegrator CIS：NGR 條款已獲同意，合約已備妥送 Chu 審閱',           en:'Slotegrator CIS: NGR rate agreed; contract ready, under Chu review' },
+          { zh:'Reevo EU：對方再次要求已簽署合約 + DD 文件，需加速處理',              en:'Reevo EU: counterpart again requested signed contract + DD — needs acceleration' },
+          { zh:'Veganster CIS 合約持續跟進中',                                      en:'Veganster CIS contract follow-up ongoing' }
+        ],
+        clients: [
+          { name:'Slotegrator', market:'Ukraine / CIS', dotColor:'#f59e0b', statusZh:'合約審查', statusEn:'Contract Review', tagClass:'tag-orange', actionZh:'待 Andy 簽署',   actionEn:'Awaiting Andy Sign' },
+          { name:'Reevo',       market:'EU Regulated',  dotColor:'#ef4444', statusZh:'文件缺失', statusEn:'Doc Missing',     tagClass:'tag-red',    actionZh:'送簽名+DD',      actionEn:'Send Sign + DD' },
+          { name:'Turkey Ops',  market:'West Asia',     dotColor:'#10b981', statusZh:'活化中',   statusEn:'Activating',      tagClass:'tag-green',  actionZh:'Addendum 推進',  actionEn:'Addendum Push' },
+          { name:'Veganster',   market:'CIS',           dotColor:'#f59e0b', statusZh:'合約跟進', statusEn:'Follow-up',       tagClass:'tag-orange', actionZh:'持續推進',        actionEn:'Keep Pushing' }
+        ],
+        plans: [
+          { zh:'推進 Slotegrator 合約至 Andy 簽署',               en:'Push Slotegrator contract to Andy for signature' },
+          { zh:'備妥並送出 Reevo 已簽署合約 + DD 文件',            en:'Prepare & send Reevo signed agreement + DD doc' },
+          { zh:'Turkey Addendum：繼續推進確認上線許可',            en:'Turkey Addendum: continue pushing for activation approval' },
+          { zh:'向 Slotegrator 請求受規管營運商數量及最佳遊戲清單', en:'Request from Slotegrator: regulated op count + top game list' }
+        ]
+      },
+
+      hector: {
+        tdab:      2700340613,
+        tdabWoW:   -2.15,
+        estimated: false,
+        subRegions: [
+          { nameZh:'Latam 整體', nameEn:'Latam Total', tdab:2700340613, wow:-2.15 }
+        ],
+        highlights: [
+          { zh:'整體日均押注 2.70B THB，WoW -2.15%，為正常周期性波動',              en:'Total daily avg 2.70B THB, WoW -2.15%; within normal cyclical range' },
+          { zh:'3月 MTD 目標達成率約 55.2%，需在後半月加速衝刺',                    en:'March MTD achievement ~55.2%; need to accelerate in second half of month' },
+          { zh:'Venezuela / Colombia 促銷方案設計完成，即將執行',                   en:'Venezuela/Colombia promo plan finalized; ready for execution' },
+          { zh:'Betsson Latam 合作條件談判持續，雙方條件趨近',                      en:'Betsson Latam partnership terms continuing; positions converging' }
+        ],
+        clients: [
+          { name:'Betcris',     market:'Latam',   dotColor:'#10b981', statusZh:'活躍',   statusEn:'Active',      tagClass:'tag-green',  actionZh:'促銷執行', actionEn:'Execute Promos' },
+          { name:'Betsson',     market:'Latam',   dotColor:'#f59e0b', statusZh:'談判中', statusEn:'Negotiating', tagClass:'tag-orange', actionZh:'條件確認', actionEn:'Confirm Terms' },
+          { name:'1xBet',       market:'Latam',   dotColor:'#10b981', statusZh:'活躍',   statusEn:'Active',      tagClass:'tag-green',  actionZh:'維持成長', actionEn:'Maintain Growth' },
+          { name:'Rush Street', market:'N. America', dotColor:'#f59e0b', statusZh:'推進中', statusEn:'In Progress', tagClass:'tag-orange', actionZh:'整合測試', actionEn:'Integration Test' }
+        ],
+        plans: [
+          { zh:'執行 Venezuela / Colombia 促銷方案，監控初期效果',    en:'Execute Venezuela/Colombia promos; monitor early results' },
+          { zh:'推進 Betsson Latam 最終條款確認',                    en:'Finalize Betsson Latam partnership terms' },
+          { zh:'確認 3月後半月達成衝刺計畫，確保月底目標',            en:'Confirm second-half sprint plan to secure March target' },
+          { zh:'Rush Street 整合測試：確認 timeline',               en:'Rush Street integration test: confirm timeline' }
+        ]
+      },
+
+      chu: {
+        tdab:      349934965,
+        tdabWoW:   -4.10,
+        estimated: false,
+        subRegions: [
+          { nameZh:'非洲',   nameEn:'Africa',     tdab:155370983, wow:-6.98 },
+          { nameZh:'大洋洲', nameEn:'Oceania',    tdab:46385201,  wow:-10.66 },
+          { nameZh:'北美',   nameEn:'N. America', tdab:148178781, wow:1.53  }
+        ],
+        highlights: [
+          { zh:'整體 WoW -4.10%，非洲與大洋洲同步下滑，但北美 +1.53% 持穩',        en:'Total WoW -4.10%; Africa & Oceania both down; N. America +1.53% holding firm' },
+          { zh:'非洲 -6.98%：部分客戶促銷活動結束後的正常回調',                    en:'Africa -6.98%: normal post-promo adjustment after major campaign ended' },
+          { zh:'大洋洲 -10.66%：因客戶平台維護導致暫時下滑',                       en:'Oceania -10.66%: temporary dip due to partner platform maintenance' },
+          { zh:'SportyBet Africa 整合協調進展良好，Bryam 協助推進 SoftSwiss 對接', en:'SportyBet Africa integration progressing well; Bryam assisting SoftSwiss coordination' }
+        ],
+        clients: [
+          { name:'SportyBet',    market:'Africa',  dotColor:'#10b981', statusZh:'整合推進', statusEn:'Integrating',  tagClass:'tag-green',  actionZh:'SoftSwiss 對接', actionEn:'SoftSwiss Integration' },
+          { name:'BetWay Africa', market:'Africa', dotColor:'#f59e0b', statusZh:'促銷後調整', statusEn:'Post-promo Adj.', tagClass:'tag-gray',  actionZh:'觀察回升', actionEn:'Monitor Recovery' },
+          { name:'Tabcorp',      market:'Oceania', dotColor:'#f59e0b', statusZh:'維護後恢復', statusEn:'Post-maintenance', tagClass:'tag-gray', actionZh:'確認恢復時間', actionEn:'Confirm Recovery ETA' },
+          { name:'DraftKings',   market:'N. America', dotColor:'#10b981', statusZh:'穩定成長', statusEn:'Steady Growth', tagClass:'tag-green', actionZh:'維持推進', actionEn:'Maintain Momentum' }
+        ],
+        plans: [
+          { zh:'確認非洲市場下週反彈計畫，鎖定促銷活動恢復',     en:'Confirm Africa rebound plan for next week; lock in promo revival' },
+          { zh:'跟進大洋洲合作夥伴平台維護完成進度',             en:'Follow up on Oceania partner platform maintenance completion' },
+          { zh:'SportyBet SoftSwiss 整合：追蹤技術文件簽核進度', en:'SportyBet SoftSwiss integration: track tech document sign-off progress' },
+          { zh:'北美市場持續觀察，維持 DraftKings 成長動能',     en:'N. America: maintain DraftKings growth momentum' }
+        ]
+      },
+
+      nina: {
+        tdab:      309756921,
+        tdabWoW:   -11.10,
+        estimated: false,
+        subRegions: [
+          { nameZh:'EU 監管+Global', nameEn:'EU Reg + Global', tdab:309756921, wow:-11.10 }
+        ],
+        highlights: [
+          { zh:'EU 整體 WoW -11.10%，主因特定客戶促銷週期結束後的正常回落',         en:'EU WoW -11.10%; mainly normal post-promo pullback from select clients' },
+          { zh:'UK onboarding 仍在持續推進：Boyles/Rank/Ballys 技術整合進行中',     en:'UK onboarding continuing: Boyles/Rank/Ballys technical integration ongoing' },
+          { zh:'Superbet Romania 確認新一輪促銷計畫，預計下週執行',                  en:'Superbet Romania confirmed new promo round; expected execution next week' },
+          { zh:'GR8 / ZEN001 / Alea 直接聯絡窗口已建立，加速後續合作效率',          en:'Direct contact windows established at GR8/ZEN001/Alea for faster collaboration' }
+        ],
+        clients: [
+          { name:'Superbet',    market:'Romania',   dotColor:'#10b981', statusZh:'活躍',   statusEn:'Live',      tagClass:'tag-green',  actionZh:'新促銷執行', actionEn:'New Promo Execution' },
+          { name:'Betclic',     market:'Portugal',  dotColor:'#10b981', statusZh:'活躍',   statusEn:'Live',      tagClass:'tag-green',  actionZh:'監控表現',   actionEn:'Monitor Performance' },
+          { name:'Boyles/Rank', market:'UK',        dotColor:'#f59e0b', statusZh:'整合中', statusEn:'Integrating', tagClass:'tag-orange', actionZh:'追蹤進度', actionEn:'Track Progress' },
+          { name:'GameKong',    market:'Non-Reg EU', dotColor:'#10b981', statusZh:'活躍',  statusEn:'Live',      tagClass:'tag-green',  actionZh:'促銷協調',   actionEn:'Promo Coordination' }
+        ],
+        plans: [
+          { zh:'追蹤 EU 市場回升，確認下週 TDAB 反彈計畫',             en:'Track EU market recovery; confirm TDAB rebound plan for next week' },
+          { zh:'Superbet Romania 新一輪促銷執行並監控效果',            en:'Execute Superbet Romania new promo round; monitor results' },
+          { zh:'加速 UK onboarding：催促 Boyles/Rank/Ballys 合規進度', en:'Speed up UK onboarding: chase Boyles/Rank/Ballys compliance progress' },
+          { zh:'4月歐洲出差行程：與 Ray 確認拜訪客戶清單',              en:'April EU trip: confirm client visit list with Ray' }
+        ]
+      }
+    } // end w11 members
+  }, // end w11
+
+  // ──────────────────────────────────────
+  w12: {
+    label:     { zh: 'W12 · 3/16–3/22', en: 'W12 · Mar 16–22' },
+    period:    { zh: '2026/03/16 – 2026/03/22', en: '2026-03-16 – 2026-03-22' },
+    estimated: false,
+    summary: {
+      totalTDAB:    { zh: '3,715.9M THB', en: '3,715.9M THB' },
+      teamWoW:      '+1.98%',
+      teamWoWClass: 'green',
+      noteZh: '本週整體回升，西亞與 Latam 表現突出',
+      noteEn: 'Team-wide recovery this week; West Asia and Latam stand out'
+    },
+    members: {
+
+      bryam: {
+        tdab:      285825253,
+        tdabWoW:   0.78,
+        estimated: false,
+        subRegions: [
+          { nameZh:'CIS',  nameEn:'CIS',       tdab:173958158, wow:-4.65 },
+          { nameZh:'西亞', nameEn:'West Asia', tdab:111867095, wow:10.59 }
+        ],
+        highlights: [
+          { zh:'整體 +0.78%：WA 強勁成長 +10.59% 完全抵消 CIS 的 -4.65% 下滑',    en:'Total +0.78%: WA strong +10.59% fully offsets CIS -4.65% decline' },
+          { zh:'West Asia 日均突破 111.9M THB，土耳其市場 Addendum 效果顯現',       en:'West Asia daily avg exceeds 111.9M THB; Turkey Addendum showing results' },
+          { zh:'CIS -4.65%：受季節性及部分客戶 budget 調整影響',                   en:'CIS -4.65%: impacted by seasonality and select client budget adjustments' },
+          { zh:'Slotegrator 合約已送 Andy 簽署，預計下週完成',                     en:'Slotegrator contract forwarded to Andy for signature; expected completion next week' },
+          { zh:'SportyBet Africa SoftSwiss 整合：技術對接已確認，等待正式上線',     en:'SportyBet Africa SoftSwiss integration: tech alignment confirmed; awaiting go-live' }
+        ],
+        clients: [
+          { name:'Slotegrator', market:'Ukraine / CIS', dotColor:'#f59e0b', statusZh:'待簽署', statusEn:'Pending Sign', tagClass:'tag-orange', actionZh:'待 Andy 完成', actionEn:'Andy to Complete' },
+          { name:'Reevo',       market:'EU Regulated',  dotColor:'#10b981', statusZh:'文件送出', statusEn:'Docs Sent',   tagClass:'tag-green',  actionZh:'等待確認',    actionEn:'Awaiting Confirmation' },
+          { name:'Turkey Ops',  market:'West Asia',     dotColor:'#10b981', statusZh:'上線中',   statusEn:'Live+',       tagClass:'tag-green',  actionZh:'持續深化',    actionEn:'Deepen Engagement' },
+          { name:'SportyBet',   market:'Africa',        dotColor:'#f59e0b', statusZh:'等待上線', statusEn:'Pre-launch',  tagClass:'tag-orange', actionZh:'確認上線日期', actionEn:'Confirm Go-live Date' }
+        ],
+        plans: [
+          { zh:'追蹤 Slotegrator 合約 Andy 簽署進度，確保本月完成',     en:'Track Slotegrator Andy signing; ensure completion this month' },
+          { zh:'西亞：進一步深化土耳其市場合作，評估沙烏地 / UAE 成長潛力', en:'West Asia: further deepen Turkey; assess Saudi/UAE growth potential' },
+          { zh:'CIS：與主要客戶確認 budget 調整影響程度及回升計畫',       en:'CIS: clarify budget adjustment impact with key clients; plan recovery' },
+          { zh:'SportyBet Africa：確認 SoftSwiss 正式上線時間線',       en:'SportyBet Africa: confirm SoftSwiss official go-live timeline' }
+        ]
+      },
+
+      hector: {
+        tdab:      2729251276,
+        tdabWoW:   1.07,
+        estimated: false,
+        subRegions: [
+          { nameZh:'Latam 整體', nameEn:'Latam Total', tdab:2729251276, wow:1.07 }
+        ],
+        highlights: [
+          { zh:'Latam 日均押注 2.73B THB，WoW +1.07% 恢復正成長',              en:'Latam daily avg 2.73B THB, WoW +1.07% recovering to positive growth' },
+          { zh:'3月 MTD 達成率 55.2%，目標 83.6B，需在後半月維持強勁表現',     en:'March MTD achievement 55.2%; target 83.6B TTL — need strong second half' },
+          { zh:'MoM Daily bet +10.1%，顯示 3月整體趨勢向好',                  en:'MoM daily bet +10.1%; confirms positive March overall trend' },
+          { zh:'Venezuela 促銷效果持續，單週貢獻率再創新高',                   en:'Venezuela promo effect continues; per-week contribution hitting new highs' }
+        ],
+        clients: [
+          { name:'Betcris',     market:'Latam',   dotColor:'#10b981', statusZh:'高速成長', statusEn:'High Growth', tagClass:'tag-green',  actionZh:'深化促銷',   actionEn:'Deepen Promos' },
+          { name:'Betsson',     market:'Latam',   dotColor:'#10b981', statusZh:'合約確認', statusEn:'Contracted',  tagClass:'tag-green',  actionZh:'合作執行',   actionEn:'Execute Partnership' },
+          { name:'1xBet',       market:'Latam',   dotColor:'#10b981', statusZh:'穩定',     statusEn:'Stable',      tagClass:'tag-green',  actionZh:'維持成長',   actionEn:'Maintain Growth' },
+          { name:'Rush Street', market:'N. America', dotColor:'#10b981', statusZh:'上線準備', statusEn:'Pre-launch', tagClass:'tag-green', actionZh:'最終測試', actionEn:'Final Testing' }
+        ],
+        plans: [
+          { zh:'後半月全力衝刺，確保 3月達成 83.6B THB 目標',          en:'Full sprint in second half; secure 83.6B THB March target' },
+          { zh:'Venezuela 持續促銷：確認下週方案細節',                  en:'Venezuela continue promo: confirm next week plan details' },
+          { zh:'Rush Street 最終整合測試 → 目標本月上線',               en:'Rush Street final integration test → target go-live this month' },
+          { zh:'評估 Brazil / Mexico 大型促銷觸媒，解鎖成長空間',        en:'Evaluate Brazil/Mexico major promo catalysts to unlock growth potential' }
+        ]
+      },
+
+      chu: {
+        tdab:      350877370,
+        tdabWoW:   0.27,
+        estimated: false,
+        subRegions: [
+          { nameZh:'非洲',   nameEn:'Africa',     tdab:163020026, wow:4.93  },
+          { nameZh:'大洋洲', nameEn:'Oceania',    tdab:47489765,  wow:2.38  },
+          { nameZh:'北美',   nameEn:'N. America', tdab:140367579, wow:-5.27 }
+        ],
+        highlights: [
+          { zh:'整體 +0.27%，非洲 +4.93%、大洋洲 +2.38% 雙雙回升，北美 -5.27% 小幅調整', en:'Total +0.27%; Africa +4.93%, Oceania +2.38% both rebounding; N. America -5.27% minor adj.' },
+          { zh:'非洲回升至 163M/天，MoM March daily avg 維持 165M+水準',                   en:'Africa rebounds to 163M/day; March daily avg maintains 165M+ level MoM' },
+          { zh:'大洋洲平台維護已完成，數據恢復正常',                                         en:'Oceania platform maintenance completed; data normalized' },
+          { zh:'北美 -5.27%：本週特定賽事減少造成博彩需求下滑，屬季節性因素',               en:'N. America -5.27%: fewer key events this week reduced wagering demand — seasonal' }
+        ],
+        clients: [
+          { name:'SportyBet',    market:'Africa',  dotColor:'#10b981', statusZh:'等待上線', statusEn:'Pre Go-live',  tagClass:'tag-green',  actionZh:'確認上線時間', actionEn:'Confirm Launch Date' },
+          { name:'BetWay Africa', market:'Africa', dotColor:'#10b981', statusZh:'活躍成長', statusEn:'Growing',      tagClass:'tag-green',  actionZh:'促銷擴大',    actionEn:'Expand Promos' },
+          { name:'Tabcorp',      market:'Oceania', dotColor:'#10b981', statusZh:'恢復正常', statusEn:'Recovered',    tagClass:'tag-green',  actionZh:'鞏固關係',    actionEn:'Solidify Relationship' },
+          { name:'DraftKings',   market:'N. America', dotColor:'#f59e0b', statusZh:'季節調整', statusEn:'Seasonal Adj.', tagClass:'tag-gray', actionZh:'觀察回升', actionEn:'Watch for Rebound' }
+        ],
+        plans: [
+          { zh:'SportyBet Africa 確認正式上線，協調首週促銷活動',   en:'SportyBet Africa: confirm official launch; coordinate week-1 promos' },
+          { zh:'非洲持續衝高：目標 W13 回到 165M+ 水準',            en:'Africa push higher: target W13 back to 165M+ level' },
+          { zh:'北美：預計 W13 NBA 賽事帶動博彩回升',               en:'N. America: expect NBA events to drive wagering recovery in W13' },
+          { zh:'大洋洲：鞏固 Tabcorp 合作，拓展其他澳洲運營商',     en:'Oceania: solidify Tabcorp; explore other Australian operators' }
+        ]
+      },
+
+      nina: {
+        tdab:      342000000,   // estimated (recovery from W11 -11.1%)
+        tdabWoW:   10.41,       // estimated
+        estimated: true,
+        subRegions: [
+          { nameZh:'EU 監管+Global', nameEn:'EU Reg + Global', tdab:342000000, wow:10.41 }
+        ],
+        highlights: [
+          { zh:'EU 市場本週大幅回升 (估)，Superbet Romania 新促銷方案效果顯著',      en:'EU market strong recovery (est.); Superbet Romania new promo driving results' },
+          { zh:'UK onboarding 取得突破：Boyles 完成合規審查，Rank 進入最終測試',      en:'UK onboarding breakthrough: Boyles completed compliance; Rank in final testing' },
+          { zh:'GameKong Non-Reg EU 持續穩定貢獻',                                   en:'GameKong Non-Reg EU maintaining stable contribution' },
+          { zh:'EU 4月出差計畫最終確認，將拜訪 Superbet / Betclic / StarCasino',      en:'April EU trip finalized; will visit Superbet/Betclic/StarCasino' }
+        ],
+        clients: [
+          { name:'Superbet',    market:'Romania',   dotColor:'#10b981', statusZh:'高速成長', statusEn:'High Growth', tagClass:'tag-green',  actionZh:'深化促銷合作', actionEn:'Deepen Promo Partnership' },
+          { name:'Betclic',     market:'Portugal',  dotColor:'#10b981', statusZh:'活躍',     statusEn:'Live',        tagClass:'tag-green',  actionZh:'4月拜訪',      actionEn:'April Visit' },
+          { name:'Boyles',      market:'UK',        dotColor:'#10b981', statusZh:'合規完成', statusEn:'Compliant',   tagClass:'tag-green',  actionZh:'等待上線',     actionEn:'Awaiting Go-live' },
+          { name:'StarCasino',  market:'Italy',     dotColor:'#10b981', statusZh:'活躍',     statusEn:'Live',        tagClass:'tag-green',  actionZh:'4月拜訪確認',  actionEn:'Confirm April Visit' }
+        ],
+        plans: [
+          { zh:'確認 Boyles 上線時間線，目標 4月初正式上線',       en:'Confirm Boyles go-live timeline; target early April launch' },
+          { zh:'Rank / Ballys：繼續推進最終測試至上線就緒',         en:'Rank/Ballys: continue final testing to go-live ready status' },
+          { zh:'準備 4月歐洲出差行程細節：Superbet / Betclic / StarCasino', en:'Prepare April EU trip details: Superbet/Betclic/StarCasino' },
+          { zh:'EU 監管市場 GGR 分析：更新各客戶 Q1 數據',          en:'EU regulated market GGR analysis: update Q1 data per client' }
+        ]
+      }
+    } // end w12 members
+  }, // end w12
+
+  // ──────────────────────────────────────
+  w13: {
+    label:     { zh: 'W13 · 3/23–3/29', en: 'W13 · Mar 23–29' },
+    period:    { zh: '2026/03/23 – 2026/03/29', en: '2026-03-23 – 2026-03-29' },
+    estimated: true,
+    summary: {
+      totalTDAB:    { zh: '3,601.0M THB (推估)', en: '3,601.0M THB (Est.)' },
+      teamWoW:      '−3.09% ⚠',
+      teamWoWClass: 'red',
+      noteZh: 'W13 為推估值，基於趨勢模型及 CIS 月報試算',
+      noteEn: 'W13 figures are estimates based on trend models and CIS monthly report'
+    },
+    members: {
+
+      bryam: {
+        tdab:      266000000,   // CIS ~151M + WA ~115M
+        tdabWoW:   -6.94,       // estimated
+        estimated: true,
+        subRegions: [
+          { nameZh:'CIS',  nameEn:'CIS',       tdab:151000000, wow:-13.2 },
+          { nameZh:'西亞', nameEn:'West Asia', tdab:115000000, wow:2.8   }
+        ],
+        highlights: [
+          { zh:'(推估) CIS 月平均日均約 166M，W13 估 151M，反映月中高峰後回調',     en:'(Est.) CIS monthly avg ~166M/day; W13 est. 151M — post-mid-month pullback' },
+          { zh:'(推估) West Asia 維持成長至 115M+，土耳其市場持續向好',              en:'(Est.) West Asia continuing growth to 115M+; Turkey market trend positive' },
+          { zh:'Slotegrator 合約簽署完成，CIS 合作正式升級',                        en:'Slotegrator contract signed; CIS partnership officially upgraded' },
+          { zh:'月底盤點：檢視 CIS 3月整體表現，規劃 4月成長策略',                   en:'Month-end review: assess CIS March performance; plan April growth strategy' }
+        ],
+        clients: [
+          { name:'Slotegrator', market:'Ukraine / CIS', dotColor:'#10b981', statusZh:'合約完成', statusEn:'Contracted',   tagClass:'tag-green',  actionZh:'執行階段', actionEn:'Execution Phase' },
+          { name:'Reevo',       market:'EU Regulated',  dotColor:'#10b981', statusZh:'合作確認', statusEn:'Confirmed',    tagClass:'tag-green',  actionZh:'整合推進', actionEn:'Integration Push' },
+          { name:'Turkey Ops',  market:'West Asia',     dotColor:'#10b981', statusZh:'持續成長', statusEn:'Growing',      tagClass:'tag-green',  actionZh:'深化合作', actionEn:'Deepen Partnership' },
+          { name:'SportyBet',   market:'Africa',        dotColor:'#10b981', statusZh:'已上線',   statusEn:'Live',         tagClass:'tag-green',  actionZh:'監控首週', actionEn:'Monitor Week 1' }
+        ],
+        plans: [
+          { zh:'盤點 CIS 3月達成情況，規劃 4月 recovery 方案',          en:'Review CIS March performance; plan April recovery strategy' },
+          { zh:'West Asia：確認 4月 WA 擴張計畫 (伊朗 / 巴基斯坦 評估)', en:'West Asia: confirm April WA expansion plan (Iran/Pakistan evaluation)' },
+          { zh:'SportyBet Africa 首週上線：監控數據，協助解決技術問題',    en:'SportyBet Africa week-1: monitor data; resolve any technical issues' },
+          { zh:'規劃 Q2 CIS + WA 業務拓展路線圖',                       en:'Plan Q2 CIS + WA business development roadmap' }
+        ]
+      },
+
+      hector: {
+        tdab:      2710000000,  // estimated
+        tdabWoW:   -0.70,       // estimated
+        estimated: true,
+        subRegions: [
+          { nameZh:'Latam 整體', nameEn:'Latam Total', tdab:2710000000, wow:-0.70 }
+        ],
+        highlights: [
+          { zh:'(推估) Latam 日均維持 2.71B THB，3月份整體平穩收官',               en:'(Est.) Latam daily avg 2.71B THB; March closes out steadily' },
+          { zh:'3月最終達成率盤點：確認各子市場實際體量',                           en:'March final achievement review: confirm actual volume per sub-market' },
+          { zh:'Rush Street 已完成整合測試，等待正式上線確認',                      en:'Rush Street completed integration test; awaiting official go-live confirmation' },
+          { zh:'規劃 4月 Latam 拓展重點：Brazil + Colombia 為主要目標市場',        en:'Planning April Latam focus: Brazil + Colombia as primary target markets' }
+        ],
+        clients: [
+          { name:'Betcris',     market:'Latam',      dotColor:'#10b981', statusZh:'穩定成長', statusEn:'Stable Growth', tagClass:'tag-green', actionZh:'4月策略規劃', actionEn:'April Strategy' },
+          { name:'Betsson',     market:'Latam',      dotColor:'#10b981', statusZh:'合作執行', statusEn:'Executing',     tagClass:'tag-green', actionZh:'持續深化',    actionEn:'Deepen Further' },
+          { name:'Rush Street', market:'N. America', dotColor:'#10b981', statusZh:'測試完成', statusEn:'Test Complete', tagClass:'tag-green', actionZh:'等待上線',    actionEn:'Awaiting Launch' },
+          { name:'Venezuela Ops', market:'Latam',    dotColor:'#10b981', statusZh:'高速成長', statusEn:'High Growth',   tagClass:'tag-green', actionZh:'維持促銷',    actionEn:'Maintain Promos' }
+        ],
+        plans: [
+          { zh:'3月達成盤點：提供 Ray 最終 March 報表',             en:'March achievement summary: deliver final March report to Ray' },
+          { zh:'確認 Rush Street 正式上線日期，協調首週上線支援',    en:'Confirm Rush Street official go-live date; coordinate week-1 support' },
+          { zh:'Brazil / Colombia 4月大型促銷方案設計啟動',          en:'Brazil/Colombia April major promo plan design kickoff' },
+          { zh:'規劃 Q2 Latam 成長策略：鎖定新市場及新合作夥伴',    en:'Plan Q2 Latam growth strategy: identify new markets and new partners' }
+        ]
+      },
+
+      chu: {
+        tdab:      347000000,   // estimated
+        tdabWoW:   -1.11,       // estimated
+        estimated: true,
+        subRegions: [
+          { nameZh:'非洲',   nameEn:'Africa',     tdab:160000000, wow:-1.85 },
+          { nameZh:'大洋洲', nameEn:'Oceania',    tdab:47000000,  wow:-1.03 },
+          { nameZh:'北美',   nameEn:'N. America', tdab:140000000, wow:-0.26 }
+        ],
+        highlights: [
+          { zh:'(推估) 整體微降 -1.11%，三市場均屬月末正常節奏調整',                en:'(Est.) Total -1.11%; all three markets at normal month-end pace adjustment' },
+          { zh:'SportyBet Africa 正式上線，首週初步數據顯示良好基礎',               en:'SportyBet Africa officially launched; week-1 data shows solid foundation' },
+          { zh:'非洲 160M/天，3月整體表現優異，MoM +14.7% 持續',                   en:'Africa 160M/day; March overall excellent; MoM +14.7% continuing' },
+          { zh:'3月盤點：提交整月三大市場表現報告至 Ray',                           en:'March wrap-up: submitting full-month three-market performance report to Ray' }
+        ],
+        clients: [
+          { name:'SportyBet',    market:'Africa',  dotColor:'#10b981', statusZh:'已上線', statusEn:'Live',          tagClass:'tag-green',  actionZh:'首週數據監控', actionEn:'Week-1 Data Monitoring' },
+          { name:'BetWay Africa', market:'Africa', dotColor:'#10b981', statusZh:'穩定',   statusEn:'Stable',        tagClass:'tag-green',  actionZh:'4月促銷規劃',  actionEn:'April Promo Planning' },
+          { name:'Tabcorp',      market:'Oceania', dotColor:'#10b981', statusZh:'穩定',   statusEn:'Stable',        tagClass:'tag-green',  actionZh:'拓展評估',     actionEn:'Expansion Assessment' },
+          { name:'DraftKings',   market:'N. America', dotColor:'#10b981', statusZh:'穩定成長', statusEn:'Steady', tagClass:'tag-green', actionZh:'賽季分析', actionEn:'Season Analysis' }
+        ],
+        plans: [
+          { zh:'SportyBet Africa 首週：密切監控 KPI，提供快速支援',    en:'SportyBet Africa week-1: closely monitor KPIs; provide rapid support' },
+          { zh:'整理 3月三大市場完整數據，提交 Ray 月報',              en:'Compile full March three-market data; submit monthly report to Ray' },
+          { zh:'規劃 4月非洲市場：鎖定新合作夥伴，目標 175M+/天',      en:'Plan April Africa: target new partners; aim for 175M+ daily avg' },
+          { zh:'北美：評估 NBA/MLB 賽季對博彩需求的推動潛力',           en:'N. America: assess NBA/MLB season impact on wagering demand' }
+        ]
+      },
+
+      nina: {
+        tdab:      338000000,   // estimated
+        tdabWoW:   -1.17,       // estimated
+        estimated: true,
+        subRegions: [
+          { nameZh:'EU 監管+Global', nameEn:'EU Reg + Global', tdab:338000000, wow:-1.17 }
+        ],
+        highlights: [
+          { zh:'(推估) EU 市場小幅回落至 338M/天，仍遠高於 W11 低點',              en:'(Est.) EU slightly down to 338M/day; still well above W11 trough' },
+          { zh:'Boyles 正式上線 (英國市場)，Nina UK 布局里程碑達成',                en:'Boyles officially launched (UK); milestone achieved for Nina UK market buildout' },
+          { zh:'4月歐洲出差順利進行：Superbet / Betclic / StarCasino 拜訪完成',    en:'April EU trip underway: Superbet/Betclic/StarCasino visits completed' },
+          { zh:'3月整體 EU 表現回顧：確認 Q1 數據基準，規劃 Q2 成長路徑',           en:'March EU performance review: confirm Q1 baseline; plan Q2 growth path' }
+        ],
+        clients: [
+          { name:'Boyles',     market:'UK',        dotColor:'#10b981', statusZh:'已上線', statusEn:'Live',          tagClass:'tag-green',  actionZh:'監控首週表現', actionEn:'Monitor Week-1 Performance' },
+          { name:'Superbet',   market:'Romania',   dotColor:'#10b981', statusZh:'活躍',   statusEn:'Live',          tagClass:'tag-green',  actionZh:'4月面訪跟進', actionEn:'Post-Visit Follow-up' },
+          { name:'StarCasino', market:'Italy',     dotColor:'#10b981', statusZh:'活躍',   statusEn:'Live',          tagClass:'tag-green',  actionZh:'PR 合作深化', actionEn:'Deepen PR Collaboration' },
+          { name:'Rank',       market:'UK',        dotColor:'#f59e0b', statusZh:'最終測試', statusEn:'Final Test',  tagClass:'tag-orange', actionZh:'推進上線',    actionEn:'Push to Launch' }
+        ],
+        plans: [
+          { zh:'Boyles UK 首週：監控 KPI，確保數據接入穩定',            en:'Boyles UK week-1: monitor KPIs; ensure data feed stability' },
+          { zh:'Rank UK：繼續推進最終合規步驟，目標 4月中旬上線',        en:'Rank UK: continue final compliance steps; target mid-April go-live' },
+          { zh:'4月出差後跟進：各客戶後續合作計畫確認',                  en:'Post-trip follow-up: confirm next steps with each visited client' },
+          { zh:'規劃 Q2 EU 成長策略：新市場評估 (波蘭 / 荷蘭)',          en:'Plan Q2 EU growth strategy: new market assessment (Poland/Netherlands)' }
+        ]
+      }
+    } // end w13 members
+  }  // end w13
+
+}; // end weekData
+
+// ══════════════════════════════════════════════════
+//  STATE
+// ══════════════════════════════════════════════════
+let currentWeek = 'w12';
+let currentLang = 'zh';
+
+// ══════════════════════════════════════════════════
+//  HELPERS
+// ══════════════════════════════════════════════════
+function fmtTHB(n) {
+  if (!n && n !== 0) return '—';
+  if (n >= 1e9) return (n / 1e9).toFixed(3).replace(/\.?0+$/, '') + 'B';
+  if (n >= 1e6) return (n / 1e6).toFixed(1) + 'M';
+  return n.toLocaleString();
+}
+
+function fmtWoW(wow, lang) {
+  if (wow === null || wow === undefined) return lang === 'zh' ? '— (無前期數據)' : '— (no prior data)';
+  const sign = wow >= 0 ? '+' : '';
+  return sign + wow.toFixed(2) + '%';
+}
+
+function wowClass(wow) {
+  if (wow === null || wow === undefined) return 'wow-gray';
+  if (wow > 0) return 'wow-green';
+  if (wow < 0) return 'wow-red';
+  return 'wow-gray';
+}
+
+function dotColor(wow) {
+  if (wow === null || wow === undefined) return '#94a3b8';
+  if (wow > 0) return '#10b981';
+  if (wow < 0) return '#ef4444';
+  return '#94a3b8';
+}
+
+function t(obj) { return obj[currentLang] || obj['zh'] || ''; }
+
+// ══════════════════════════════════════════════════
+//  RENDER TDAB BANNER
+// ══════════════════════════════════════════════════
+function renderTdabBanner(memberId, mData, weekEst) {
+  const el = document.getElementById('tdab-banner-label-' + memberId) || document.getElementById('tdab-' + memberId);
+  if (!el) return;
+
+  const isEst  = weekEst || mData.estimated;
+  const totalPct = mData.subRegions.reduce((s, r) => s + r.tdab, 0);
+
+  let subHtml = '';
+  mData.subRegions.forEach(r => {
+    const pct = totalPct > 0 ? (r.tdab / totalPct * 100) : 0;
+    const wowStr = fmtWoW(r.wow, currentLang);
+    const wc = r.wow > 0 ? 'pos' : r.wow < 0 ? 'neg' : 'neu';
+    subHtml += `
+      <div class="sub-row">
+        <div class="sub-name">${currentLang === 'zh' ? r.nameZh : r.nameEn}</div>
+        <div class="sub-bar-wrap"><div class="sub-bar-fill" style="width:${pct.toFixed(1)}%"></div></div>
+        <div class="sub-val">${fmtTHB(r.tdab)}</div>
+        <div class="sub-wow ${wc}">${r.wow !== null && r.wow !== undefined ? (r.wow >= 0 ? '+' : '') + r.wow.toFixed(1) + '%' : '—'}</div>
+      </div>`;
+  });
+
+  const wowVal   = fmtWoW(mData.tdabWoW, currentLang);
+  const wowCls   = wowClass(mData.tdabWoW);
+  const labelZh  = '日均押注 (TDAB)';
+  const labelEn  = 'Daily Avg Bet (TDAB)';
+  const subLabelZh = currentLang === 'zh' ? '本週較上週' : 'Week-over-Week';
+
+  el.innerHTML = `
+    <div class="tdab-top">
+      <div>
+        <div class="tdab-label">${currentLang === 'zh' ? labelZh : labelEn}</div>
+        <div class="tdab-main">
+          <div class="tdab-num">${fmtTHB(mData.tdab)}</div>
+          <div class="tdab-unit">THB / ${currentLang === 'zh' ? '天' : 'day'}</div>
+        </div>
+        ${isEst ? `<div class="tdab-estimated">⚠ ${currentLang === 'zh' ? '推估值，非官方報告' : 'Estimated — not from official report'}</div>` : ''}
+      </div>
+      <div class="tdab-wow">
+        <div class="wow-badge ${wowCls}">${wowVal}</div>
+        <div class="wow-label">${subLabelZh}</div>
+      </div>
+    </div>
+    ${mData.subRegions.length > 1 ? `<div class="tdab-sub">${subHtml}</div>` : ''}
+  `;
+}
+
+// ══════════════════════════════════════════════════
+//  RENDER SECTIONS (highlights, clients, plans)
+// ══════════════════════════════════════════════════
+function renderSections(memberId, mData) {
+  const el = document.getElementById('content-' + memberId);
+  if (!el) return;
+
+  const kpiLabel   = currentLang === 'zh' ? 'KPI &amp; 進度'  : 'KPI &amp; Progress';
+  const highLabel  = currentLang === 'zh' ? '上週重點'         : 'Week Highlights';
+  const clientLabel= currentLang === 'zh' ? '重點客戶'         : 'Key Clients';
+  const planLabel  = currentLang === 'zh' ? '本週計畫'         : 'This Week Plan';
+  const clientTh   = currentLang === 'zh'
+    ? ['客戶','市場','狀態','行動']
+    : ['Client','Market','Status','Action'];
+
+  // highlights
+  const hiItems = mData.highlights.map(h =>
+    `<li>${currentLang === 'zh' ? h.zh : h.en}</li>`
+  ).join('');
+
+  // client rows
+  const clientRows = mData.clients.map(c =>
+    `<tr>
+      <td><strong>${c.name}</strong></td>
+      <td>${c.market}</td>
+      <td><span class="status-dot" style="background:${c.dotColor}"></span>${currentLang === 'zh' ? c.statusZh : c.statusEn}</td>
+      <td><span class="tag ${c.tagClass}">${currentLang === 'zh' ? c.actionZh : c.actionEn}</span></td>
+    </tr>`
+  ).join('');
+
+  // plans
+  const planItems = mData.plans.map(p =>
+    `<li>${currentLang === 'zh' ? p.zh : p.en}</li>`
+  ).join('');
+
+  el.innerHTML = `
+    <!-- Highlights -->
+    <div class="section">
+      <div class="section-header" onclick="toggleSection(this)">
+        <div class="section-title"><span>📌</span>${highLabel}</div>
+        <span class="chevron open">▼</span>
+      </div>
+      <div class="section-body open"><ul class="bd-list">${hiItems}</ul></div>
+    </div>
+
+    <!-- Key Clients -->
+    <div class="section">
+      <div class="section-header" onclick="toggleSection(this)">
+        <div class="section-title"><span>🏢</span>${clientLabel}</div>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="section-body">
+        <table class="client-table">
+          <thead><tr>${clientTh.map(h => `<th>${h}</th>`).join('')}</tr></thead>
+          <tbody>${clientRows}</tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- This Week Plans -->
+    <div class="section">
+      <div class="section-header" onclick="toggleSection(this)">
+        <div class="section-title"><span>🎯</span>${planLabel}</div>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="section-body">
+        <ul class="bd-list">${planItems}</ul>
+      </div>
+    </div>
+  `;
+}
+
+// ══════════════════════════════════════════════════
+//  RENDER SUMMARY ROW
+// ══════════════════════════════════════════════════
+function renderSummary(wData) {
+  const el = document.getElementById('summaryRow');
+  if (!el) return;
+
+  const s = wData.summary;
+  const badgeCls = s.teamWoWClass === 'green' ? 'badge-green'
+                 : s.teamWoWClass === 'red'   ? 'badge-red'
+                 : 'badge-gray';
+
+  const lbl1 = currentLang === 'zh' ? '本週總日均押注' : 'Weekly Total TDAB';
+  const lbl2 = currentLang === 'zh' ? '整體 WoW 成長' : 'Team WoW Growth';
+  const lbl3 = currentLang === 'zh' ? 'BD 成員數'      : 'BD Members';
+  const lbl4 = currentLang === 'zh' ? '週期'           : 'Period';
+  const note = currentLang === 'zh' ? s.noteZh : s.noteEn;
+  const estBadge = wData.estimated ? (currentLang === 'zh' ? ' (推估)' : ' (Est.)') : '';
+
+  const wowDisplay = (typeof s.teamWoW === 'object') ? t(s.teamWoW) : s.teamWoW;
+  const wowArrow   = s.teamWoWClass === 'green' ? '↑' : s.teamWoWClass === 'red' ? '↓' : '—';
+
+  el.innerHTML = `
+    <div class="summary-card">
+      <div class="s-label">${lbl1}</div>
+      <div class="s-value">${t(s.totalTDAB)}${estBadge}</div>
+      <div class="s-sub">${note}</div>
+    </div>
+    <div class="summary-card">
+      <div class="s-label">${lbl2}</div>
+      <div class="s-value">${wowDisplay}</div>
+      <div class="s-badge ${badgeCls}">${wowArrow} WoW</div>
+    </div>
+    <div class="summary-card">
+      <div class="s-label">${lbl3}</div>
+      <div class="s-value">4</div>
+      <div class="s-sub">Bryam · Hector · Chu · Nina</div>
+    </div>
+    <div class="summary-card">
+      <div class="s-label">${lbl4}</div>
+      <div class="s-value" style="font-size:16px;padding-top:4px">${t(wData.period)}</div>
+      <div class="s-badge badge-gray">${t(wData.label)}</div>
+    </div>
+  `;
+}
+
+// ══════════════════════════════════════════════════
+//  RENDER PERIOD BADGE on each card header
+// ══════════════════════════════════════════════════
+function renderPeriods(wData) {
+  const members = ['bryam', 'hector', 'chu', 'nina'];
+  const regionMap = {
+    bryam:  { zh: 'CIS &amp; 西亞', en: 'CIS &amp; West Asia' },
+    hector: { zh: 'LATAM',          en: 'LATAM' },
+    chu:    { zh: '非洲 &amp; 大洋洲 &amp; 北美', en: 'Africa &amp; Oceania &amp; N. America' },
+    nina:   { zh: 'EU 監管 &amp; EU+Global',      en: 'EU Regulated &amp; EU+Global' }
+  };
+  members.forEach(m => {
+    const periodEl = document.getElementById(m + '-period');
+    const regionEl = document.getElementById(m + '-region');
+    if (periodEl) periodEl.textContent = t(wData.period);
+    if (regionEl) regionEl.innerHTML = t(regionMap[m]);
+  });
+}
+
+// ══════════════════════════════════════════════════
+//  RENDER WEEK  (main entry point)
+// ══════════════════════════════════════════════════
+function renderWeek(weekId) {
+  currentWeek = weekId;
+  const wData = weekData[weekId];
+  if (!wData) return;
+
+  renderSummary(wData);
+  renderPeriods(wData);
+
+  const members = ['bryam', 'hector', 'chu', 'nina'];
+  members.forEach(m => {
+    const mData = wData.members[m];
+    renderTdabBanner(m, mData, wData.estimated);
+    renderSections(m, mData);
+  });
+
+  // Update footer
+  const footerEl = document.getElementById('footer-note');
+  if (footerEl) {
+    const estNote = wData.estimated
+      ? (currentLang === 'zh' ? ' · ⚠ 本週為推估值' : ' · ⚠ This week is estimated')
+      : '';
+    footerEl.textContent = currentLang === 'zh'
+      ? `📅 資料來源：Google Drive BD Weekly Reports · 2026年3月${estNote}`
+      : `📅 Data source: Google Drive BD Weekly Reports · March 2026${estNote}`;
+  }
+}
+
+// ══════════════════════════════════════════════════
+//  SWITCH WEEK  (called by <select>)
+// ══════════════════════════════════════════════════
+function switchWeek(weekId) {
+  renderWeek(weekId);
+}
+
+// ══════════════════════════════════════════════════
+//  LANGUAGE TOGGLE
+// ══════════════════════════════════════════════════
+function setLang(lang) {
+  currentLang = lang;
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+  document.querySelector(`.lang-btn[onclick="setLang('${lang}')"]`).classList.add('active');
+
+  document.getElementById('hdr-sub').textContent = lang === 'zh'
+    ? 'BD 團隊 — 週報 Dashboard'
+    : 'BD Team — Weekly Report Dashboard';
+  document.getElementById('btn-export').textContent = lang === 'zh' ? '匯出 PDF' : 'Export PDF';
+  document.getElementById('tab-all').textContent = lang === 'zh' ? '全部成員' : 'All Members';
+
+  // Re-render current week with new language
+  renderWeek(currentWeek);
+}
+
+// ══════════════════════════════════════════════════
+//  BD FILTER
+// ══════════════════════════════════════════════════
+function filterBD(bd, btn) {
+  document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+
+  const cards = document.querySelectorAll('.bd-card');
+  const grid  = document.getElementById('bdGrid');
+
+  if (bd === 'all') {
+    cards.forEach(c => c.classList.remove('hidden'));
+    grid.style.gridTemplateColumns = '';
+  } else {
+    cards.forEach(c => {
+      c.classList.toggle('hidden', c.getAttribute('data-bd') !== bd);
+    });
+    grid.style.gridTemplateColumns = '1fr';
+  }
+}
+
+// ══════════════════════════════════════════════════
+//  SECTION TOGGLE
+// ══════════════════════════════════════════════════
+function toggleSection(header) {
+  const body    = header.nextElementSibling;
+  const chevron = header.querySelector('.chevron');
+  const isOpen  = body.classList.contains('open');
+  body.classList.toggle('open', !isOpen);
+  if (chevron) chevron.classList.toggle('open', !isOpen);
+}
+
+// ══════════════════════════════════════════════════
+//  INIT
+// ══════════════════════════════════════════════════
+document.addEventListener('DOMContentLoaded', () => {
+  renderWeek('w12');
+});
+</script>
+</body>
+</html>
