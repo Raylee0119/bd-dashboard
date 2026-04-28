@@ -384,6 +384,14 @@
   .tp-note-area{width:100%;border:1px solid var(--border);border-radius:6px;padding:8px 10px;font-size:13px;font-family:inherit;color:var(--text);background:#fff;resize:vertical;line-height:1.55;transition:border-color .15s;}
   .tp-note-area:focus{outline:none;border-color:var(--orange);}
   .tp-note-hint{font-size:10px;color:#CBD5E1;margin-top:4px;text-align:right;}
+  /* 自動擷取按鈕 */
+  .tp-extract-btn{background:rgba(255,255,255,0.10);border:1px solid rgba(255,255,255,0.22);color:rgba(255,255,255,0.75);padding:7px 12px;border-radius:6px;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap;transition:all .2s;}
+  .tp-extract-btn:hover{background:rgba(249,115,22,0.25);border-color:var(--orange);color:#fff;}
+  /* 自動擷取行 */
+  .tp-row.tp-auto{border-left:3px solid var(--orange);}
+  .tp-auto-badge{font-size:12px;margin-right:4px;opacity:0.75;}
+  .tp-source-chip{background:#FFF7ED;color:#C2410C;font-weight:600;}
+  .tp-row-title{font-size:14px;font-weight:600;color:var(--text);display:flex;align-items:center;flex-wrap:wrap;gap:4px;}
 
   /* ── LOGIN SCREEN ── */
   #login-screen{position:fixed;inset:0;background:#FFF7ED;display:flex;align-items:center;justify-content:center;z-index:9999;}
@@ -2770,6 +2778,8 @@ function switchWeek(val) {
     wv.classList.remove('hidden');
     fb.classList.remove('hidden');
     renderWeek(val);
+    // 自動擷取本週 Action Items（新週別才擷取）
+    setTimeout(() => autoExtractTasks('weekly', true), 100);
   }
 }
 
@@ -2872,6 +2882,9 @@ function switchReportType(type, btn) {
     const el = document.getElementById('view-' + id);
     if (el) el.classList.toggle('active', type === id);
   });
+
+  // 自動擷取對應頁面的 Action Items
+  if (type === 'monthly-rpt') setTimeout(() => autoExtractTasks('monthly-rpt', true), 100);
 }
 
 // 月報選擇器（待 Drive 資料接入後實作篩選）
@@ -2977,7 +2990,10 @@ function renderTaskPanel(tab) {
           ${done    > 0 ? `<span class="tp-stat done">${zh?'完成':'Done'} ${done}</span>` : ''}
           ${blocked > 0 ? `<span class="tp-stat blocked">${zh?'擱置':'Blocked'} ${blocked}</span>` : ''}
         </div>
-        <button class="tp-add-btn" onclick="toggleAddForm('${tab}')">＋ ${zh?'新增任務':'Add Task'}</button>
+        <div style="display:flex;gap:6px">
+          <button class="tp-extract-btn" onclick="autoExtractTasks('${tab}')" title="${zh?'從報告自動擷取 Action Items':'Auto-extract action items from reports'}">🔄 ${zh?'自動擷取':'Auto-Extract'}</button>
+          <button class="tp-add-btn" onclick="toggleAddForm('${tab}')">＋ ${zh?'新增任務':'Add Task'}</button>
+        </div>
       </div>
       <div id="tp-form-${tab}" class="tp-form">
         <div class="tp-form-row">
@@ -3016,18 +3032,23 @@ function renderTaskRow(task, tab) {
   const zh     = currentLang === 'zh';
   const hasNote = !!(task.note && task.note.trim());
   const noteId  = `tp-note-row-${tab}-${task.id}`;
+  const isAuto  = !!task.autoExtracted;
 
   return `
-    <div class="tp-row${isDone ? ' tp-done' : ''}" id="tp-row-${tab}-${task.id}">
+    <div class="tp-row${isDone ? ' tp-done' : ''}${isAuto ? ' tp-auto' : ''}" id="tp-row-${tab}-${task.id}">
       <div class="tp-row-main">
         <button class="tp-check" onclick="cycleTaskStatus('${tab}',${task.id})" title="${zh?'切換狀態':'Cycle status'}">
           ${isDone ? '✅' : '⬜'}
         </button>
         <div class="tp-row-body">
-          <div class="tp-row-title">${escHtml(task.title)}</div>
+          <div class="tp-row-title">
+            ${isAuto ? `<span class="tp-auto-badge" title="${zh?'自動從報告擷取':'Auto-extracted from report'}">🤖</span>` : ''}
+            ${escHtml(task.title)}
+          </div>
           <div class="tp-row-meta">
             ${task.assignee ? `<span class="tp-meta-chip">👤 ${escHtml(task.assignee)}</span>` : ''}
             ${task.dueDate  ? `<span class="tp-meta-chip${od?' overdue':''}">📅 ${fmtDate(task.dueDate)}${od?' ⚠️':''}</span>` : ''}
+            ${task.source   ? `<span class="tp-meta-chip tp-source-chip">📌 ${escHtml(task.source)}</span>` : ''}
             <span class="tp-status-pill" style="background:${sm.bg};color:${sm.color}">${zh ? sm.zh : sm.en}</span>
           </div>
         </div>
@@ -3131,6 +3152,124 @@ function editTask(tab, id) {
 
 function initTaskPanels() {
   TASK_TABS.forEach(tab => renderTaskPanel(tab));
+}
+
+// ── 自動從報告擷取 Action Items ──
+const MEMBER_NAMES = { bryam:'Bryam', hector:'Hector', chu:'Chu', nina:'Nina' };
+
+function autoExtractTasks(tab, silent) {
+  const zh = currentLang === 'zh';
+  const extracted = [];
+
+  // ── 週報：從 plans[] + clients[orange] 擷取 ──
+  if (tab === 'weekly') {
+    const weekId   = document.getElementById('weekSelect')?.value || 'w13';
+    const wData    = weekData[weekId];
+    if (!wData) return;
+    const weekLabel = wData.label.zh;
+
+    Object.entries(wData.members).forEach(([member, mData]) => {
+      const name = MEMBER_NAMES[member] || member;
+      // Plans → 待辦
+      (mData.plans || []).forEach((plan, i) => {
+        extracted.push({
+          title:         zh ? plan.zh : plan.en,
+          assignee:      name,
+          dueDate:       '',
+          status:        'todo',
+          source:        `${weekLabel}`,
+          note:          `來源：${weekLabel} ${name} 週報 — Action Plan\n\n原文：${plan.zh}`,
+          autoExtracted: true,
+          sourceId:      `${weekId}-${member}-plan-${i}`
+        });
+      });
+      // Clients with pending action (orange = in negotiation / need follow-up)
+      (mData.clients || []).filter(c => c.tagClass === 'tag-orange').forEach(client => {
+        extracted.push({
+          title:         `【${client.name}】${zh ? client.actionZh : client.actionEn}`,
+          assignee:      name,
+          dueDate:       '',
+          status:        'doing',
+          source:        `${weekLabel} · ${client.market}`,
+          note:          `來源：${weekLabel} ${name} 週報 — 客戶追蹤\n客戶：${client.name}（${client.market}）\n狀態：${client.statusZh}\nAction：${client.actionZh}`,
+          autoExtracted: true,
+          sourceId:      `${weekId}-${member}-client-${client.name}`
+        });
+      });
+    });
+  }
+
+  // ── 月報（月總結）：從 watchout[] 擷取 ──
+  if (tab === 'monthly-rpt') {
+    const monthId = document.getElementById('monthRptSelect')?.value
+                  || document.getElementById('weekSelect')?.value  // fallback: mar2026
+                  || 'mar2026';
+    // 取第一個 monthly key if not match
+    const mKey = monthlyData[monthId] ? monthId : Object.keys(monthlyData)[0];
+    const mData = monthlyData[mKey];
+    if (!mData) return;
+    const label = mData.label.zh;
+
+    (mData.keyHighlights?.watchout || []).forEach((item, i) => {
+      const cleanZh = item.zh.replace(/^⚠️\s*/, '');
+      const cleanEn = item.en.replace(/^⚠️\s*/, '');
+      extracted.push({
+        title:         zh ? cleanZh : cleanEn,
+        assignee:      '',
+        dueDate:       '',
+        status:        'todo',
+        source:        label,
+        note:          `來源：${label} 月報 — 注意事項\n\n原文：${item.zh}`,
+        autoExtracted: true,
+        sourceId:      `monthly-${mKey}-watchout-${i}`
+      });
+    });
+    // KPI 未達標 → 自動建任務
+    (mData.kpi || []).filter(k => k.status === 'red' || k.status === 'yellow').forEach(k => {
+      extracted.push({
+        title:         `KPI 追蹤：${k.regionZh} (${k.achievement}%)`,
+        assignee:      MEMBER_NAMES[k.member] || k.member,
+        dueDate:       '',
+        status:        k.status === 'red' ? 'todo' : 'doing',
+        source:        label,
+        note:          `來源：${label} 月報 — KPI 達成率追蹤\n區域：${k.regionZh}\n達成率：${k.achievement}%\n狀態：${k.status === 'red' ? '未達標' : '接近達標'}`,
+        autoExtracted: true,
+        sourceId:      `monthly-${mKey}-kpi-${k.regionZh}`
+      });
+    });
+  }
+
+  if (extracted.length === 0) {
+    if (!silent) alert(zh ? '此分頁目前無可擷取的 Action Items' : 'No extractable action items for this tab');
+    return;
+  }
+
+  // 合併：避免 sourceId 重複
+  const all = loadTasks();
+  if (!all[tab]) all[tab] = [];
+  const existingIds = new Set(all[tab].filter(t => t.sourceId).map(t => t.sourceId));
+  let added = 0;
+  extracted.forEach(task => {
+    if (!existingIds.has(task.sourceId)) {
+      all[tab].push({ id: Date.now() + Math.random(), ...task, createdAt: Date.now() });
+      added++;
+    }
+  });
+  saveTasks(all);
+  renderTaskPanel(tab);
+
+  if (!silent) {
+    const msg = added > 0
+      ? (zh ? `已自動擷取 ${added} 筆 Action Item 📋` : `Auto-extracted ${added} action item(s) 📋`)
+      : (zh ? '所有 Action Items 已擷取，無新增項目' : 'All action items already extracted');
+    alert(msg);
+  }
+}
+
+// 切換週別時自動重新擷取
+function autoExtractForCurrentWeek() {
+  const tab = document.querySelector('.rtype-tab.active')?.getAttribute('onclick')?.match(/'(\w[\w-]*)'/)?.[1];
+  if (tab === 'weekly') autoExtractTasks('weekly', true);
 }
 
 // ══════════════════════════════════════
