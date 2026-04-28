@@ -336,6 +336,7 @@
 
   /* ── TASK TRACKER ── */
   .task-panel{background:var(--card);border-radius:12px;border:1px solid var(--border);margin-top:24px;overflow:hidden;}
+  /* Header */
   .tp-header{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;padding:14px 20px;border-bottom:1px solid var(--border);background:linear-gradient(135deg,#0F172A,#1E293B);}
   .tp-header-left{display:flex;align-items:center;gap:10px;}
   .tp-icon{font-size:18px;}
@@ -343,55 +344,70 @@
   .tp-badge{background:var(--orange);color:#fff;font-size:11px;font-weight:700;padding:2px 8px;border-radius:10px;min-width:20px;text-align:center;}
   .tp-stats{display:flex;gap:6px;flex-wrap:wrap;}
   .tp-stat{font-size:11px;font-weight:700;padding:3px 9px;border-radius:10px;}
-  .tp-stat.todo{background:#F1F5F9;color:#64748B;}
-  .tp-stat.doing{background:#DBEAFE;color:#1D4ED8;}
-  .tp-stat.done{background:#D1FAE5;color:#065F46;}
-  .tp-stat.blocked{background:#FEE2E2;color:#991B1B;}
+  .tp-stat.todo{background:rgba(100,116,139,0.25);color:#94A3B8;}
+  .tp-stat.doing{background:rgba(37,99,235,0.25);color:#93C5FD;}
+  .tp-stat.done{background:rgba(5,150,105,0.25);color:#6EE7B7;}
+  .tp-stat.blocked{background:rgba(220,38,38,0.25);color:#FCA5A5;}
+  .tp-header-btns{display:flex;gap:6px;}
+  .tp-extract-btn{background:rgba(255,255,255,0.10);border:1px solid rgba(255,255,255,0.22);color:rgba(255,255,255,0.75);padding:7px 12px;border-radius:6px;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap;transition:all .2s;}
+  .tp-extract-btn:hover{background:rgba(249,115,22,0.30);border-color:var(--orange);color:#fff;}
   .tp-add-btn{background:var(--orange);color:#fff;border:none;padding:7px 14px;border-radius:6px;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap;transition:background .2s;}
   .tp-add-btn:hover{background:var(--orange-hover);}
-  .tp-form{display:none;flex-wrap:wrap;gap:8px;align-items:center;padding:14px 20px;background:#F8FAFC;border-bottom:1px solid var(--border);}
-  .tp-input{border:1px solid var(--border);border-radius:6px;padding:7px 10px;font-size:13px;color:var(--text);background:#fff;flex:1;min-width:140px;}
+  /* Add form */
+  .tp-form{display:none;padding:14px 20px;background:#F8FAFC;border-bottom:1px solid var(--border);}
+  .tp-form-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;}
+  .tp-form-row+.tp-form-row{margin-top:8px;}
+  .tp-input{border:1px solid var(--border);border-radius:6px;padding:7px 10px;font-size:13px;color:var(--text);background:#fff;}
   .tp-input:focus{outline:none;border-color:var(--orange);}
+  .tp-textarea{resize:vertical;width:100%;font-family:inherit;line-height:1.5;}
   .tp-save-btn{background:var(--orange);color:#fff;border:none;padding:7px 16px;border-radius:6px;font-size:13px;font-weight:700;cursor:pointer;}
   .tp-cancel-btn{background:transparent;color:var(--muted);border:1px solid var(--border);padding:7px 12px;border-radius:6px;font-size:13px;cursor:pointer;}
-  .tp-list{display:flex;flex-direction:column;}
-  .tp-empty{padding:28px 20px;text-align:center;color:var(--muted);font-size:13px;}
-  .tp-row{display:flex;align-items:center;gap:12px;padding:12px 20px;border-bottom:1px solid var(--border);transition:background .15s;}
-  .tp-row:last-child{border-bottom:none;}
-  .tp-row:hover{background:#F8FAFC;}
-  .tp-row.tp-done .tp-row-title{text-decoration:line-through;color:var(--muted);}
-  .tp-check{background:none;border:none;font-size:18px;cursor:pointer;flex-shrink:0;padding:0;line-height:1;}
-  .tp-row-body{flex:1;min-width:0;}
-  .tp-row-title{font-size:14px;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-  .tp-row-meta{display:flex;align-items:center;gap:6px;margin-top:4px;flex-wrap:wrap;}
-  .tp-meta-chip{font-size:11px;color:var(--muted);background:#F1F5F9;padding:2px 7px;border-radius:8px;}
-  .tp-meta-chip.overdue{background:#FEE2E2;color:#991B1B;}
-  .tp-status-pill{font-size:11px;font-weight:700;padding:2px 8px;border-radius:8px;}
-  .tp-row-actions{display:flex;gap:4px;flex-shrink:0;}
-  .tp-edit-btn,.tp-del-btn{background:none;border:none;cursor:pointer;font-size:14px;padding:4px 6px;border-radius:6px;opacity:0.5;transition:opacity .15s;}
-  .tp-edit-btn:hover,.tp-del-btn:hover{opacity:1;background:#F1F5F9;}
-  /* 備註面板 */
-  .tp-form-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;}
-  .tp-form-row + .tp-form-row{margin-top:8px;}
-  .tp-textarea{resize:vertical;flex:1;min-width:200px;font-family:inherit;line-height:1.5;}
-  .tp-row{flex-direction:column;align-items:stretch;gap:0;}
-  .tp-row-main{display:flex;align-items:center;gap:12px;padding:12px 20px;}
-  .tp-note-toggle{background:none;border:none;cursor:pointer;font-size:15px;padding:4px 6px;border-radius:6px;opacity:0.45;transition:all .15s;}
-  .tp-note-toggle:hover{opacity:1;background:#F1F5F9;}
-  .tp-note-toggle.has-note{opacity:1;}
-  .tp-note-panel{max-height:0;overflow:hidden;transition:max-height .25s ease,padding .25s ease;background:#FAFBFC;border-top:0px solid var(--border);}
-  .tp-note-panel.open{max-height:200px;padding:10px 20px 12px 58px;border-top:1px solid var(--border);}
+  /* Table */
+  .tp-table{width:100%;border-collapse:collapse;}
+  .tp-th{padding:9px 14px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--muted);background:#F8FAFC;border-bottom:1px solid var(--border);text-align:left;white-space:nowrap;}
+  .tp-th:first-child{padding-left:20px;}
+  .tp-th:last-child{padding-right:20px;text-align:center;}
+  .tp-tbody-row{border-bottom:1px solid var(--border);transition:background .15s;}
+  .tp-tbody-row:last-child{border-bottom:none;}
+  .tp-tbody-row:hover{background:#FAFBFC;}
+  .tp-tbody-row.tp-auto{border-left:3px solid var(--orange);}
+  .tp-tbody-row.tp-done td .tp-task-name{text-decoration:line-through;color:var(--muted);}
+  .tp-td{padding:11px 14px;font-size:13px;vertical-align:middle;}
+  .tp-td:first-child{padding-left:20px;}
+  .tp-td:last-child{padding-right:20px;}
+  /* Task name cell */
+  .tp-task-cell{display:flex;align-items:flex-start;gap:8px;}
+  .tp-check{background:none;border:none;font-size:18px;cursor:pointer;flex-shrink:0;padding:0;line-height:1;margin-top:1px;}
+  .tp-task-inner{min-width:0;}
+  .tp-task-name{font-size:13px;font-weight:600;color:var(--text);line-height:1.4;}
+  .tp-auto-tag{font-size:10px;font-weight:700;background:#FFF7ED;color:#C2410C;border:1px solid #FED7AA;padding:1px 6px;border-radius:8px;vertical-align:middle;margin-left:4px;}
+  /* Assignee cell */
+  .tp-assignee-badge{display:inline-flex;align-items:center;gap:5px;background:#F1F5F9;border:1px solid var(--border);border-radius:20px;padding:3px 10px;font-size:12px;font-weight:600;color:var(--text);cursor:pointer;transition:background .15s;}
+  .tp-assignee-badge:hover{background:#E2E8F0;}
+  .tp-assignee-input{border:1px solid var(--orange);border-radius:20px;padding:3px 8px;font-size:12px;font-weight:600;width:90px;outline:none;}
+  /* Week/source cell */
+  .tp-source-tag{display:inline-flex;align-items:center;background:#FFF7ED;color:#C2410C;font-size:11px;font-weight:700;padding:3px 9px;border-radius:8px;border:1px solid #FED7AA;}
+  .tp-due-tag{display:inline-flex;align-items:center;gap:4px;background:#F1F5F9;color:var(--muted);font-size:11px;font-weight:600;padding:3px 9px;border-radius:8px;margin-top:4px;}
+  .tp-due-tag.overdue{background:#FEE2E2;color:#991B1B;}
+  /* Status select */
+  .tp-status-sel{border:none;border-radius:8px;padding:5px 10px;font-size:12px;font-weight:700;cursor:pointer;outline:none;-webkit-appearance:none;appearance:none;text-align:center;}
+  .tp-status-sel.todo{background:#F1F5F9;color:#475569;}
+  .tp-status-sel.doing{background:#DBEAFE;color:#1D4ED8;}
+  .tp-status-sel.done{background:#D1FAE5;color:#059669;}
+  .tp-status-sel.blocked{background:#FEE2E2;color:#DC2626;}
+  /* Actions */
+  .tp-actions-cell{display:flex;justify-content:center;gap:4px;}
+  .tp-note-btn,.tp-edit-btn,.tp-del-btn{background:none;border:none;cursor:pointer;font-size:14px;padding:5px 7px;border-radius:6px;opacity:0.45;transition:all .15s;}
+  .tp-note-btn:hover,.tp-edit-btn:hover{opacity:1;background:#EFF6FF;}
+  .tp-del-btn:hover{opacity:1;background:#FEE2E2;}
+  .tp-note-btn.has-note{opacity:1;color:var(--orange);}
+  /* Note panel */
+  .tp-note-panel{max-height:0;overflow:hidden;transition:max-height .28s ease,padding .28s ease;background:#FAFBFC;border-top:0 solid var(--border);}
+  .tp-note-panel.open{max-height:180px;padding:10px 20px 12px 20px;border-top:1px solid var(--border);}
   .tp-note-area{width:100%;border:1px solid var(--border);border-radius:6px;padding:8px 10px;font-size:13px;font-family:inherit;color:var(--text);background:#fff;resize:vertical;line-height:1.55;transition:border-color .15s;}
   .tp-note-area:focus{outline:none;border-color:var(--orange);}
   .tp-note-hint{font-size:10px;color:#CBD5E1;margin-top:4px;text-align:right;}
-  /* 自動擷取按鈕 */
-  .tp-extract-btn{background:rgba(255,255,255,0.10);border:1px solid rgba(255,255,255,0.22);color:rgba(255,255,255,0.75);padding:7px 12px;border-radius:6px;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap;transition:all .2s;}
-  .tp-extract-btn:hover{background:rgba(249,115,22,0.25);border-color:var(--orange);color:#fff;}
-  /* 自動擷取行 */
-  .tp-row.tp-auto{border-left:3px solid var(--orange);}
-  .tp-auto-badge{font-size:12px;margin-right:4px;opacity:0.75;}
-  .tp-source-chip{background:#FFF7ED;color:#C2410C;font-weight:600;}
-  .tp-row-title{font-size:14px;font-weight:600;color:var(--text);display:flex;align-items:center;flex-wrap:wrap;gap:4px;}
+  .tp-empty{padding:28px 20px;text-align:center;color:var(--muted);font-size:13px;}
 
   /* ── LOGIN SCREEN ── */
   #login-screen{position:fixed;inset:0;background:#FFF7ED;display:flex;align-items:center;justify-content:center;z-index:9999;}
@@ -2986,89 +3002,114 @@ function renderTaskPanel(tab) {
         </div>
         <div class="tp-stats">
           ${todo    > 0 ? `<span class="tp-stat todo">${zh?'待辦':'To Do'} ${todo}</span>` : ''}
-          ${doing   > 0 ? `<span class="tp-stat doing">${zh?'進行中':'Doing'} ${doing}</span>` : ''}
+          ${doing   > 0 ? `<span class="tp-stat doing">${zh?'進行中':'In Progress'} ${doing}</span>` : ''}
           ${done    > 0 ? `<span class="tp-stat done">${zh?'完成':'Done'} ${done}</span>` : ''}
           ${blocked > 0 ? `<span class="tp-stat blocked">${zh?'擱置':'Blocked'} ${blocked}</span>` : ''}
         </div>
-        <div style="display:flex;gap:6px">
-          <button class="tp-extract-btn" onclick="autoExtractTasks('${tab}')" title="${zh?'從報告自動擷取 Action Items':'Auto-extract action items from reports'}">🔄 ${zh?'自動擷取':'Auto-Extract'}</button>
-          <button class="tp-add-btn" onclick="toggleAddForm('${tab}')">＋ ${zh?'新增任務':'Add Task'}</button>
+        <div class="tp-header-btns">
+          <button class="tp-extract-btn" onclick="autoExtractTasks('${tab}')">🔄 ${zh?'自動擷取':'Auto-Extract'}</button>
+          <button class="tp-add-btn"     onclick="toggleAddForm('${tab}')">＋ ${zh?'新增任務':'Add Task'}</button>
         </div>
       </div>
+
       <div id="tp-form-${tab}" class="tp-form">
         <div class="tp-form-row">
-          <input class="tp-input" id="tp-title-${tab}"    placeholder="${zh?'任務名稱…':'Task name…'}" style="flex:2;min-width:180px">
-          <input class="tp-input" id="tp-assignee-${tab}" placeholder="${zh?'負責人':'Assignee'}"      style="max-width:120px">
-          <input class="tp-input" id="tp-due-${tab}"      type="date"                                  style="max-width:150px">
-          <select class="tp-input" id="tp-status-${tab}"  style="max-width:120px">
-            <option value="todo">${zh?'待辦':'To Do'}</option>
-            <option value="doing">${zh?'進行中':'In Progress'}</option>
-            <option value="done">${zh?'完成':'Done'}</option>
-            <option value="blocked">${zh?'擱置':'Blocked'}</option>
+          <input class="tp-input" id="tp-title-${tab}"    placeholder="${zh?'任務名稱…':'Task name…'}" style="flex:2;min-width:200px">
+          <input class="tp-input" id="tp-assignee-${tab}" placeholder="${zh?'負責人':'Assignee'}"      style="width:110px">
+          <input class="tp-input" id="tp-due-${tab}"      type="date"                                  style="width:145px">
+          <select class="tp-input" id="tp-status-${tab}"  style="width:120px">
+            <option value="todo">${zh?'⬜ 待辦':'⬜ To Do'}</option>
+            <option value="doing">${zh?'🔵 進行中':'🔵 In Progress'}</option>
+            <option value="done">${zh?'✅ 完成':'✅ Done'}</option>
+            <option value="blocked">${zh?'🔴 擱置':'🔴 Blocked'}</option>
           </select>
+          <button class="tp-save-btn"   onclick="saveNewTask('${tab}')">${zh?'儲存':'Save'}</button>
+          <button class="tp-cancel-btn" onclick="toggleAddForm('${tab}')">${zh?'取消':'Cancel'}</button>
         </div>
-        <div class="tp-form-row" style="align-items:flex-start">
-          <textarea class="tp-input tp-textarea" id="tp-note-${tab}"
-            placeholder="${zh?'任務細節 / 備註（來源報告、背景說明、追蹤細節…）':'Details / Notes (source report, context, follow-up info…)'}"
-            rows="3"></textarea>
-          <div style="display:flex;flex-direction:column;gap:6px;flex-shrink:0">
-            <button class="tp-save-btn"   onclick="saveNewTask('${tab}')">${zh?'儲存':'Save'}</button>
-            <button class="tp-cancel-btn" onclick="toggleAddForm('${tab}')">${zh?'取消':'Cancel'}</button>
-          </div>
+        <div class="tp-form-row" style="margin-top:8px">
+          <textarea class="tp-input tp-textarea" id="tp-note-${tab}" rows="2"
+            placeholder="${zh?'備註 / 任務細節（來源報告、背景說明、追蹤重點…）':'Notes / Details (source, context, follow-up points…)'}"
+            style="flex:1"></textarea>
         </div>
       </div>
-      <div class="tp-list">
-        ${tasks.length === 0
-          ? `<div class="tp-empty">${zh ? '尚無任務，點擊「新增任務」開始追蹤 Action Plans' : 'No tasks yet — click "Add Task" to start tracking action plans'}</div>`
-          : tasks.map(t => renderTaskRow(t, tab)).join('')}
-      </div>
+
+      ${tasks.length === 0 ? `<div class="tp-empty">${zh?'尚無任務 — 點擊「自動擷取」從報告拉入 Action Items，或手動新增':'No tasks — click Auto-Extract to pull action items from reports, or add manually'}</div>` : `
+      <table class="tp-table">
+        <thead>
+          <tr>
+            <th class="tp-th" style="width:42%">${zh?'任務':'Task'}</th>
+            <th class="tp-th" style="width:12%">${zh?'負責人':'Assignee'}</th>
+            <th class="tp-th" style="width:14%">${zh?'來源 / 截止':'Source / Due'}</th>
+            <th class="tp-th" style="width:14%">${zh?'狀態':'Status'}</th>
+            <th class="tp-th" style="width:18%;text-align:center">${zh?'備註 · 操作':'Notes · Actions'}</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${tasks.map(t => renderTaskRow(t, tab)).join('')}
+        </tbody>
+      </table>`}
     </div>`;
 }
 
 function renderTaskRow(task, tab) {
-  const sm     = STATUS_META[task.status] || STATUS_META.todo;
-  const isDone = task.status === 'done';
-  const od     = isOverdue(task);
-  const zh     = currentLang === 'zh';
+  const isDone  = task.status === 'done';
+  const od      = isOverdue(task);
+  const zh      = currentLang === 'zh';
   const hasNote = !!(task.note && task.note.trim());
-  const noteId  = `tp-note-row-${tab}-${task.id}`;
   const isAuto  = !!task.autoExtracted;
+  const noteId  = `tp-note-row-${tab}-${task.id}`;
+
+  const statusOptions = [
+    {v:'todo',    label: zh?'⬜ 待辦':'⬜ To Do'},
+    {v:'doing',   label: zh?'🔵 進行中':'🔵 In Progress'},
+    {v:'done',    label: zh?'✅ 完成':'✅ Done'},
+    {v:'blocked', label: zh?'🔴 擱置':'🔴 Blocked'},
+  ];
 
   return `
-    <div class="tp-row${isDone ? ' tp-done' : ''}${isAuto ? ' tp-auto' : ''}" id="tp-row-${tab}-${task.id}">
-      <div class="tp-row-main">
-        <button class="tp-check" onclick="cycleTaskStatus('${tab}',${task.id})" title="${zh?'切換狀態':'Cycle status'}">
-          ${isDone ? '✅' : '⬜'}
-        </button>
-        <div class="tp-row-body">
-          <div class="tp-row-title">
-            ${isAuto ? `<span class="tp-auto-badge" title="${zh?'自動從報告擷取':'Auto-extracted from report'}">🤖</span>` : ''}
-            ${escHtml(task.title)}
-          </div>
-          <div class="tp-row-meta">
-            ${task.assignee ? `<span class="tp-meta-chip">👤 ${escHtml(task.assignee)}</span>` : ''}
-            ${task.dueDate  ? `<span class="tp-meta-chip${od?' overdue':''}">📅 ${fmtDate(task.dueDate)}${od?' ⚠️':''}</span>` : ''}
-            ${task.source   ? `<span class="tp-meta-chip tp-source-chip">📌 ${escHtml(task.source)}</span>` : ''}
-            <span class="tp-status-pill" style="background:${sm.bg};color:${sm.color}">${zh ? sm.zh : sm.en}</span>
+    <tr class="tp-tbody-row${isDone?' tp-done':''}${isAuto?' tp-auto':''}" id="tp-row-${tab}-${task.id}">
+      <td class="tp-td">
+        <div class="tp-task-cell">
+          <button class="tp-check" onclick="cycleTaskStatus('${tab}',${task.id})" title="${zh?'快速切換完成狀態':'Toggle done'}">${isDone?'✅':'⬜'}</button>
+          <div class="tp-task-inner">
+            <div class="tp-task-name">
+              ${escHtml(task.title)}
+              ${isAuto ? `<span class="tp-auto-tag">🤖 ${zh?'自動擷取':'Auto'}</span>` : ''}
+            </div>
           </div>
         </div>
-        <div class="tp-row-actions">
-          <button class="tp-note-toggle ${hasNote?'has-note':''}" onclick="toggleNote('${noteId}')"
-            title="${zh?'展開備註':'Toggle notes'}">
-            ${hasNote ? '📝' : '📄'}
-          </button>
-          <button class="tp-edit-btn" onclick="editTask('${tab}',${task.id})"  title="${zh?'編輯標題':'Edit title'}">✏️</button>
+      </td>
+      <td class="tp-td">
+        <span class="tp-assignee-badge" onclick="promptEditAssignee('${tab}',${task.id})" title="${zh?'點擊修改':'Click to edit'}">
+          👤 ${escHtml(task.assignee || (zh?'未指定':'—'))}
+        </span>
+      </td>
+      <td class="tp-td">
+        ${task.source ? `<div class="tp-source-tag">📌 ${escHtml(task.source)}</div>` : ''}
+        ${task.dueDate ? `<div class="tp-due-tag${od?' overdue':''}">📅 ${fmtDate(task.dueDate)}${od?' ⚠️':''}</div>` : ''}
+        ${!task.source && !task.dueDate ? `<span style="color:#CBD5E1;font-size:12px">—</span>` : ''}
+      </td>
+      <td class="tp-td">
+        <select class="tp-status-sel ${task.status||'todo'}"
+          onchange="updateTaskStatus('${tab}',${task.id},this.value);this.className='tp-status-sel '+this.value">
+          ${statusOptions.map(o=>`<option value="${o.v}"${task.status===o.v?' selected':''}>${o.label}</option>`).join('')}
+        </select>
+      </td>
+      <td class="tp-td">
+        <div class="tp-actions-cell">
+          <button class="tp-note-btn${hasNote?' has-note':''}" onclick="toggleNote('${noteId}')" title="${zh?'備註':'Notes'}">📝</button>
+          <button class="tp-edit-btn" onclick="editTask('${tab}',${task.id})" title="${zh?'編輯':'Edit'}">✏️</button>
           <button class="tp-del-btn"  onclick="deleteTask('${tab}',${task.id})" title="${zh?'刪除':'Delete'}">🗑</button>
         </div>
-      </div>
-      <div id="${noteId}" class="tp-note-panel${hasNote?' open':''}">
-        <textarea class="tp-note-area" rows="3"
-          placeholder="${zh?'任務細節 / 備註（來源報告、追蹤細節、背景說明…）':'Details / notes (source report, follow-up info, context…)'}"
-          onblur="saveTaskNote('${tab}',${task.id},this.value)"
-        >${escHtml(task.note || '')}</textarea>
-        <div class="tp-note-hint">${zh?'點擊外部自動儲存':'Auto-saves on blur'}</div>
-      </div>
-    </div>`;
+        <div id="${noteId}" class="tp-note-panel${hasNote?' open':''}">
+          <textarea class="tp-note-area" rows="2"
+            placeholder="${zh?'備註 / 任務細節…':'Notes / details…'}"
+            onblur="saveTaskNote('${tab}',${task.id},this.value)"
+          >${escHtml(task.note||'')}</textarea>
+          <div class="tp-note-hint">${zh?'點擊外部自動儲存':'Auto-saves on blur'}</div>
+        </div>
+      </td>
+    </tr>`;
 }
 
 function toggleNote(noteId) {
@@ -3128,6 +3169,36 @@ function cycleTaskStatus(tab, id) {
   if (!task) return;
   const cycle = { todo:'doing', doing:'done', done:'todo', blocked:'todo' };
   task.status = cycle[task.status] || 'todo';
+  saveTasks(all);
+  renderTaskPanel(tab);
+}
+
+// 狀態下拉直接更新（不重新渲染整個面板）
+function updateTaskStatus(tab, id, newStatus) {
+  const all  = loadTasks();
+  const task = (all[tab]||[]).find(t => t.id === id);
+  if (!task) return;
+  task.status = newStatus;
+  saveTasks(all);
+  // 更新該列的樣式（done 劃線效果）
+  const row = document.getElementById(`tp-row-${tab}-${id}`);
+  if (row) row.classList.toggle('tp-done', newStatus === 'done');
+  // 更新 checkbox
+  const chk = row?.querySelector('.tp-check');
+  if (chk) chk.textContent = newStatus === 'done' ? '✅' : '⬜';
+  // 更新 header 統計數字
+  renderTaskPanel(tab);
+}
+
+// 點擊負責人快速修改
+function promptEditAssignee(tab, id) {
+  const all  = loadTasks();
+  const task = (all[tab]||[]).find(t => t.id === id);
+  if (!task) return;
+  const zh  = currentLang === 'zh';
+  const val = prompt(zh ? '修改負責人：' : 'Edit assignee:', task.assignee || '');
+  if (val === null) return;
+  task.assignee = val.trim();
   saveTasks(all);
   renderTaskPanel(tab);
 }
