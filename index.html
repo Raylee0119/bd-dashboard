@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TaDa - BD Weekly Dashboard</title>
+<title>TaDa BD Dashboard</title>
 <style>
   :root {
     --primary:      #0F172A;
@@ -314,6 +314,26 @@
   .rpt-section-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.6px;color:var(--muted);margin:24px 0 12px;display:flex;align-items:center;gap:10px;}
   .rpt-section-label::after{content:'';flex:1;height:1px;background:var(--border);}
 
+  /* ── MEETING VIEW ── */
+  .meeting-group-btn{padding:6px 14px;border:1px solid rgba(255,255,255,0.22);background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.55);border-radius:6px;font-size:12px;font-weight:700;cursor:pointer;transition:all .2s;}
+  .meeting-group-btn:hover{color:#fff;background:rgba(255,255,255,0.15);}
+  .meeting-group-btn.active{background:var(--orange);border-color:var(--orange);color:#fff;}
+  .meeting-section{margin-bottom:32px;}
+  .meeting-section-header{display:flex;align-items:center;gap:14px;padding:14px 18px;background:var(--card);border-radius:10px;border:1px solid var(--border);border-left:4px solid #F59E0B;margin-bottom:14px;}
+  .meeting-section-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
+  .meeting-section-title{font-size:16px;font-weight:800;color:var(--primary);}
+  .meeting-section-sub{font-size:12px;color:var(--muted);margin-top:2px;}
+  .meeting-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px;}
+  .meeting-card{background:var(--card);border-radius:10px;border:1px solid var(--border);padding:16px 18px;display:flex;flex-direction:column;gap:10px;transition:box-shadow .2s;}
+  .meeting-card:hover{box-shadow:0 4px 18px rgba(0,0,0,0.08);}
+  .meeting-card-week{font-size:11px;font-weight:700;color:var(--orange);text-transform:uppercase;letter-spacing:0.5px;}
+  .meeting-card-title{font-size:15px;font-weight:700;color:var(--primary);}
+  .meeting-agenda-list{display:flex;flex-direction:column;gap:7px;padding:10px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+  .meeting-agenda-item{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted);}
+  .agenda-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
+  .meeting-card-footer{display:flex;align-items:center;justify-content:space-between;}
+  .meeting-section.hidden{display:none;}
+
   /* ── LOGIN SCREEN ── */
   #login-screen{position:fixed;inset:0;background:#FFF7ED;display:flex;align-items:center;justify-content:center;z-index:9999;}
   .login-card{background:#fff;border-radius:20px;padding:44px 52px;text-align:center;box-shadow:0 8px 40px rgba(0,0,0,0.10);width:340px;}
@@ -364,8 +384,8 @@
 <div class="header">
   <div class="header-left">
     <div>
-      <div class="logo"><span class="logo-dot"></span>TaDa <span>BD Weekly Dashboard</span></div>
-      <div class="header-sub" id="hdr-sub">BD 團隊 — 週報 Dashboard</div>
+      <div class="logo"><span class="logo-dot"></span>TaDa <span>BD Dashboard</span></div>
+      <div class="header-sub" id="hdr-sub">BD 團隊 Dashboard</div>
     </div>
   </div>
   <div class="header-right">
@@ -437,6 +457,13 @@
         <option value="oceania" data-zh="大洋洲" data-en="Oceania">大洋洲</option>
       </optgroup>
     </select>
+    <!-- 每周會議選擇器 -->
+    <select class="week-select" id="meetingSelect" style="display:none" onchange="switchMeetingFilter(this.value)">
+      <option value="all" data-zh="全部組別" data-en="All Groups">全部組別</option>
+      <option value="bd" data-zh="BD 組" data-en="BD Group">BD 組</option>
+      <option value="am" data-zh="AM 組" data-en="AM Group">AM 組</option>
+      <option value="mkt" data-zh="MKT 組" data-en="MKT Group">MKT 組</option>
+    </select>
     <div class="lang-toggle">
       <button class="lang-btn active" onclick="setLang('zh')">中文</button>
       <button class="lang-btn" onclick="setLang('en')">EN</button>
@@ -461,6 +488,9 @@
   </button>
   <button class="rtype-tab" onclick="switchReportType('regional',this)">
     <span class="rtype-icon">🌏</span><span data-zh="區域報告" data-en="Regional Reports">區域報告</span>
+  </button>
+  <button class="rtype-tab" onclick="switchReportType('meeting',this)">
+    <span class="rtype-icon">📅</span><span data-zh="每周會議" data-en="Weekly Meeting">每周會議</span>
   </button>
 </div>
 
@@ -914,6 +944,158 @@
       <div class="rpt-sync-note">🔗 <span data-zh="等待 Google Drive 資料來源" data-en="Awaiting Google Drive data source">等待 Google Drive 資料來源</span></div>
     </div>
   </div><!-- end 區域報告 view -->
+
+  <!-- ══════════ 每周會議 VIEW ══════════ -->
+  <div id="view-meeting" class="rpt-view">
+    <div class="rpt-toolbar">
+      <div>
+        <div class="rpt-toolbar-title">📅 <span data-zh="TaDa 每周團隊會議" data-en="TaDa Weekly Team Meeting">TaDa 每周團隊會議</span></div>
+        <div class="rpt-toolbar-sub" data-zh="BD · AM · MKT 三組每周會議記錄與追蹤" data-en="BD · AM · MKT weekly meeting records and follow-ups">BD · AM · MKT 三組每周會議記錄與追蹤</div>
+      </div>
+      <div class="rpt-filter-row">
+        <button class="meeting-group-btn active" onclick="filterMeetingGroup('all',this)" data-zh="全部" data-en="All">全部</button>
+        <button class="meeting-group-btn" onclick="filterMeetingGroup('bd',this)">BD</button>
+        <button class="meeting-group-btn" onclick="filterMeetingGroup('am',this)">AM</button>
+        <button class="meeting-group-btn" onclick="filterMeetingGroup('mkt',this)">MKT</button>
+      </div>
+    </div>
+
+    <!-- ── BD 組 ── -->
+    <div class="meeting-section" data-group="bd">
+      <div class="meeting-section-header" style="border-left-color:#F59E0B">
+        <div class="meeting-section-icon" style="background:rgba(245,158,11,0.12);color:#F59E0B">💼</div>
+        <div>
+          <div class="meeting-section-title">BD 組</div>
+          <div class="meeting-section-sub" data-zh="Business Development 業務拓展組" data-en="Business Development Group">Business Development 業務拓展組</div>
+        </div>
+      </div>
+      <div class="meeting-grid">
+        <div class="meeting-card">
+          <div class="meeting-card-week">W13 · 2026/03/24</div>
+          <div class="meeting-card-title" data-zh="BD 週會 #13" data-en="BD Weekly Meeting #13">BD 週會 #13</div>
+          <div class="meeting-agenda-list">
+            <div class="meeting-agenda-item">
+              <span class="agenda-dot" style="background:#F59E0B"></span>
+              <span data-zh="各區域業績回顧與展望" data-en="Regional performance review & outlook">各區域業績回顧與展望</span>
+            </div>
+            <div class="meeting-agenda-item">
+              <span class="agenda-dot" style="background:#F59E0B"></span>
+              <span data-zh="新客戶 Pipeline 更新" data-en="New client pipeline update">新客戶 Pipeline 更新</span>
+            </div>
+            <div class="meeting-agenda-item">
+              <span class="agenda-dot" style="background:#F59E0B"></span>
+              <span data-zh="本周 Action Items" data-en="This week's action items">本周 Action Items</span>
+            </div>
+          </div>
+          <div class="meeting-card-footer">
+            <span class="rpt-status pending">⏳ <span data-zh="待同步" data-en="Pending">待同步</span></span>
+            <button class="rpt-view-btn" disabled>📂 <span data-zh="待連結 Drive" data-en="Link Drive">待連結 Drive</span></button>
+          </div>
+        </div>
+        <div class="meeting-card" style="opacity:0.5">
+          <div class="meeting-card-week">W12 · 2026/03/17</div>
+          <div class="meeting-card-title" data-zh="BD 週會 #12" data-en="BD Weekly Meeting #12">BD 週會 #12</div>
+          <div class="meeting-card-footer" style="margin-top:12px">
+            <span class="rpt-status pending">⏳ <span data-zh="待同步" data-en="Pending">待同步</span></span>
+            <button class="rpt-view-btn" disabled>📂 <span data-zh="待連結 Drive" data-en="Link Drive">待連結 Drive</span></button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── AM 組 ── -->
+    <div class="meeting-section" data-group="am">
+      <div class="meeting-section-header" style="border-left-color:#10B981">
+        <div class="meeting-section-icon" style="background:rgba(16,185,129,0.12);color:#10B981">🤝</div>
+        <div>
+          <div class="meeting-section-title">AM 組</div>
+          <div class="meeting-section-sub" data-zh="Account Management 客戶管理組" data-en="Account Management Group">Account Management 客戶管理組</div>
+        </div>
+      </div>
+      <div class="meeting-grid">
+        <div class="meeting-card">
+          <div class="meeting-card-week">W13 · 2026/03/24</div>
+          <div class="meeting-card-title" data-zh="AM 週會 #13" data-en="AM Weekly Meeting #13">AM 週會 #13</div>
+          <div class="meeting-agenda-list">
+            <div class="meeting-agenda-item">
+              <span class="agenda-dot" style="background:#10B981"></span>
+              <span data-zh="客戶留存率分析" data-en="Client retention analysis">客戶留存率分析</span>
+            </div>
+            <div class="meeting-agenda-item">
+              <span class="agenda-dot" style="background:#10B981"></span>
+              <span data-zh="客訴與優化追蹤" data-en="Complaint & optimization tracking">客訴與優化追蹤</span>
+            </div>
+            <div class="meeting-agenda-item">
+              <span class="agenda-dot" style="background:#10B981"></span>
+              <span data-zh="跨組協作事項" data-en="Cross-team collaboration items">跨組協作事項</span>
+            </div>
+          </div>
+          <div class="meeting-card-footer">
+            <span class="rpt-status pending">⏳ <span data-zh="待同步" data-en="Pending">待同步</span></span>
+            <button class="rpt-view-btn" disabled>📂 <span data-zh="待連結 Drive" data-en="Link Drive">待連結 Drive</span></button>
+          </div>
+        </div>
+        <div class="meeting-card" style="opacity:0.5">
+          <div class="meeting-card-week">W12 · 2026/03/17</div>
+          <div class="meeting-card-title" data-zh="AM 週會 #12" data-en="AM Weekly Meeting #12">AM 週會 #12</div>
+          <div class="meeting-card-footer" style="margin-top:12px">
+            <span class="rpt-status pending">⏳ <span data-zh="待同步" data-en="Pending">待同步</span></span>
+            <button class="rpt-view-btn" disabled>📂 <span data-zh="待連結 Drive" data-en="Link Drive">待連結 Drive</span></button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── MKT 組 ── -->
+    <div class="meeting-section" data-group="mkt">
+      <div class="meeting-section-header" style="border-left-color:#8B5CF6">
+        <div class="meeting-section-icon" style="background:rgba(139,92,246,0.12);color:#8B5CF6">📣</div>
+        <div>
+          <div class="meeting-section-title">MKT 組</div>
+          <div class="meeting-section-sub" data-zh="Marketing 市場行銷組" data-en="Marketing Group">Marketing 市場行銷組</div>
+        </div>
+      </div>
+      <div class="meeting-grid">
+        <div class="meeting-card">
+          <div class="meeting-card-week">W13 · 2026/03/24</div>
+          <div class="meeting-card-title" data-zh="MKT 週會 #13" data-en="MKT Weekly Meeting #13">MKT 週會 #13</div>
+          <div class="meeting-agenda-list">
+            <div class="meeting-agenda-item">
+              <span class="agenda-dot" style="background:#8B5CF6"></span>
+              <span data-zh="活動與促銷計劃審查" data-en="Campaign & promotion review">活動與促銷計劃審查</span>
+            </div>
+            <div class="meeting-agenda-item">
+              <span class="agenda-dot" style="background:#8B5CF6"></span>
+              <span data-zh="各平台內容規劃" data-en="Cross-platform content planning">各平台內容規劃</span>
+            </div>
+            <div class="meeting-agenda-item">
+              <span class="agenda-dot" style="background:#8B5CF6"></span>
+              <span data-zh="行銷數據回顧" data-en="Marketing data review">行銷數據回顧</span>
+            </div>
+          </div>
+          <div class="meeting-card-footer">
+            <span class="rpt-status pending">⏳ <span data-zh="待同步" data-en="Pending">待同步</span></span>
+            <button class="rpt-view-btn" disabled>📂 <span data-zh="待連結 Drive" data-en="Link Drive">待連結 Drive</span></button>
+          </div>
+        </div>
+        <div class="meeting-card" style="opacity:0.5">
+          <div class="meeting-card-week">W12 · 2026/03/17</div>
+          <div class="meeting-card-title" data-zh="MKT 週會 #12" data-en="MKT Weekly Meeting #12">MKT 週會 #12</div>
+          <div class="meeting-card-footer" style="margin-top:12px">
+            <span class="rpt-status pending">⏳ <span data-zh="待同步" data-en="Pending">待同步</span></span>
+            <button class="rpt-view-btn" disabled>📂 <span data-zh="待連結 Drive" data-en="Link Drive">待連結 Drive</span></button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="rpt-empty" style="margin-top:24px">
+      <div class="rpt-empty-icon">📅</div>
+      <div class="rpt-empty-title" data-zh="會議記錄即將上線" data-en="Meeting Records Coming Soon">會議記錄即將上線</div>
+      <div class="rpt-empty-sub" data-zh="連結 Google Drive 後，BD · AM · MKT 三組會議記錄將自動整合顯示於此" data-en="After linking Google Drive, BD · AM · MKT meeting records will be automatically integrated here">連結 Google Drive 後，BD · AM · MKT 三組會議記錄將自動整合顯示於此</div>
+      <div class="rpt-sync-note">🔗 <span data-zh="等待 Google Drive 資料來源" data-en="Awaiting Google Drive data source">等待 Google Drive 資料來源</span></div>
+    </div>
+  </div><!-- end 每周會議 view -->
 
   <div class="last-updated" id="footer-note">
     📅 資料來源：Google Drive BD Weekly Reports · 2026年3月資料
@@ -2540,7 +2722,7 @@ function setLang(lang) {
   document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
   document.querySelector(`.lang-btn[onclick="setLang('${lang}')"]`).classList.add('active');
   document.getElementById('hdr-sub').textContent = lang === 'zh'
-    ? 'BD 團隊 — 週報 Dashboard' : 'BD Team — Weekly Report Dashboard';
+    ? 'BD 團隊 Dashboard' : 'BD Team Dashboard';
   document.getElementById('btn-export').textContent = lang === 'zh' ? '匯出 PDF' : 'Export PDF';
   document.getElementById('tab-all').textContent = lang === 'zh' ? '全部成員' : 'All Members';
   // 更新所有 data-zh/data-en 元素
@@ -2592,7 +2774,8 @@ const SELECTOR_MAP = {
   'monthly-rpt': 'monthRptSelect',
   'travel':      'travelSelect',
   'exhibition':  'exhibitionSelect',
-  'regional':    'regionalSelect'
+  'regional':    'regionalSelect',
+  'meeting':     'meetingSelect'
 };
 
 function switchReportType(type, btn) {
@@ -2621,7 +2804,7 @@ function switchReportType(type, btn) {
   }
 
   // 切換新頁面
-  ['monthly-rpt','travel','exhibition','regional'].forEach(id => {
+  ['monthly-rpt','travel','exhibition','regional','meeting'].forEach(id => {
     const el = document.getElementById('view-' + id);
     if (el) el.classList.toggle('active', type === id);
   });
@@ -2649,6 +2832,28 @@ function switchExhibitionFilter(val) {
 function switchRegionalFilter(val) {
   console.log('區域報告篩選：', val);
   // TODO: 根據 val 篩選區域報告卡片（連結 Drive 資料後實作）
+}
+
+// 每周會議頁籤選擇器（右上角）
+function switchMeetingFilter(val) {
+  filterMeetingGroup(val, null);
+}
+
+// 每周會議組別篩選（頁面內按鈕）
+function filterMeetingGroup(group, btn) {
+  // 更新頁面內按鈕 active 狀態
+  if (btn) {
+    document.querySelectorAll('.meeting-group-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  }
+  // 同步右上角選擇器
+  const sel = document.getElementById('meetingSelect');
+  if (sel) sel.value = group;
+  // 顯示/隱藏各組
+  document.querySelectorAll('.meeting-section[data-group]').forEach(sec => {
+    const g = sec.dataset.group;
+    sec.classList.toggle('hidden', group !== 'all' && g !== group);
+  });
 }
 
 // ══════════════════════════════════════
