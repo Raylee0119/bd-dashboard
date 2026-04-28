@@ -267,6 +267,21 @@
   .mpa-body{display:none;overflow-x:auto;}
   .mpa-body.open{display:block;}
 
+  /* ── LOGIN SCREEN ── */
+  #login-screen{position:fixed;inset:0;background:#FFF7ED;display:flex;align-items:center;justify-content:center;z-index:9999;}
+  .login-card{background:#fff;border-radius:20px;padding:44px 52px;text-align:center;box-shadow:0 8px 40px rgba(0,0,0,0.10);width:340px;}
+  .login-logo-box{width:68px;height:68px;background:var(--orange);border-radius:18px;display:flex;align-items:center;justify-content:center;margin:0 auto 22px;font-size:30px;font-weight:900;color:#fff;letter-spacing:-1px;}
+  .login-title{font-size:20px;font-weight:800;color:var(--primary);margin-bottom:8px;}
+  .login-sub{font-size:13px;color:var(--muted);margin-bottom:30px;line-height:1.6;}
+  #google-btn-wrap{display:flex;justify-content:center;}
+  .login-error{color:#991B1B;font-size:12px;margin-top:14px;display:none;padding:9px 14px;background:#FEE2E2;border-radius:8px;}
+  /* ── USER CHIP ── */
+  .user-chip{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.18);border-radius:6px;padding:5px 10px;}
+  .user-avatar{width:26px;height:26px;border-radius:50%;object-fit:cover;}
+  .user-name{font-size:12px;color:rgba(255,255,255,0.85);max-width:130px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .signout-btn{font-size:11px;color:rgba(255,255,255,0.4);background:none;border:none;cursor:pointer;padding:0 0 0 4px;line-height:1;transition:color .2s;}
+  .signout-btn:hover{color:#fff;}
+
   /* ── PRINT ── */
   @media print {
     .header,.filter-bar{position:static;}
@@ -280,8 +295,23 @@
     .currency-grid{grid-template-columns:repeat(2,1fr);}
   }
 </style>
+<script src="https://accounts.google.com/gsi/client" async defer></script>
 </head>
 <body>
+
+<!-- ══════════ LOGIN SCREEN ══════════ -->
+<div id="login-screen">
+  <div class="login-card">
+    <div class="login-logo-box">T</div>
+    <div class="login-title">BD 週報儀表板</div>
+    <div class="login-sub">請使用授權的 Google 帳號登入<br><span style="font-size:11px;color:#9CA3AF">僅限 @tadagaming.com</span></div>
+    <div id="google-btn-wrap"></div>
+    <div class="login-error" id="login-error">⚠️ 僅限 @tadagaming.com 帳號才能登入</div>
+  </div>
+</div>
+
+<!-- ══════════ APP ══════════ -->
+<div id="app" style="display:none">
 
 <!-- ══════════ HEADER ══════════ -->
 <div class="header">
@@ -2135,9 +2165,102 @@ function toggleSection(header) {
 // ══════════════════════════════════════
 //  INIT
 // ══════════════════════════════════════
+// ══════════════════════════════════════
+//  GOOGLE AUTH
+// ══════════════════════════════════════
+const GOOGLE_CLIENT_ID = '955198747009-h9sebakb4kn72bc4qf4908k7pk07j8t1.apps.googleusercontent.com';
+const ALLOWED_DOMAIN   = 'tadagaming.com';
+const AUTH_KEY         = 'bd_auth_v1';
+const AUTH_TTL         = 24 * 60 * 60 * 1000; // 24 小時
+
+function parseJwt(token) {
+  try {
+    const base64 = token.split('.')[1].replace(/-/g,'+').replace(/_/g,'/');
+    return JSON.parse(atob(base64));
+  } catch(e) { return null; }
+}
+
+function handleCredentialResponse(response) {
+  const payload = parseJwt(response.credential);
+  if (!payload) return;
+  const email = (payload.email || '').toLowerCase();
+  if (email.endsWith('@' + ALLOWED_DOMAIN)) {
+    const auth = {
+      email:   email,
+      name:    payload.name || email.split('@')[0],
+      picture: payload.picture || '',
+      expiry:  Date.now() + AUTH_TTL
+    };
+    localStorage.setItem(AUTH_KEY, JSON.stringify(auth));
+    showDashboard(auth);
+  } else {
+    document.getElementById('login-error').style.display = 'block';
+  }
+}
+
+function showDashboard(auth) {
+  document.getElementById('login-screen').style.display = 'none';
+  document.getElementById('app').style.display = 'block';
+  // 在 header 加使用者資訊
+  const hr = document.querySelector('.header-right');
+  if (hr && !document.getElementById('user-chip')) {
+    const chip = document.createElement('div');
+    chip.id = 'user-chip';
+    chip.className = 'user-chip';
+    chip.innerHTML = auth.picture
+      ? `<img class="user-avatar" src="${auth.picture}" referrerpolicy="no-referrer" alt="">`
+      : `<span style="font-size:14px">👤</span>`;
+    chip.innerHTML += `<span class="user-name">${auth.name}</span>
+      <button class="signout-btn" onclick="signOut()" title="登出">✕</button>`;
+    hr.insertBefore(chip, hr.firstChild);
+  }
+  renderWeek(currentWeek);
+}
+
+function signOut() {
+  localStorage.removeItem(AUTH_KEY);
+  try { google.accounts.id.disableAutoSelect(); } catch(e) {}
+  location.reload();
+}
+
+function checkAuth() {
+  try {
+    const stored = localStorage.getItem(AUTH_KEY);
+    if (stored) {
+      const auth = JSON.parse(stored);
+      if (auth.expiry > Date.now() && auth.email.endsWith('@' + ALLOWED_DOMAIN)) {
+        showDashboard(auth);
+        return true;
+      }
+      localStorage.removeItem(AUTH_KEY);
+    }
+  } catch(e) {}
+  return false;
+}
+
 document.addEventListener('DOMContentLoaded', () => {
-  renderWeek('w12');
+  if (checkAuth()) return; // 已登入，直接顯示
+  // 等 Google GSI 載入後初始化
+  window._gsiReady = () => {
+    google.accounts.id.initialize({
+      client_id:   GOOGLE_CLIENT_ID,
+      callback:    handleCredentialResponse,
+      auto_select: false
+    });
+    google.accounts.id.renderButton(
+      document.getElementById('google-btn-wrap'),
+      { theme:'outline', size:'large', locale:'zh-TW', width:240 }
+    );
+  };
+  // 如果 GSI 已載入就直接呼叫
+  if (window.google && google.accounts) window._gsiReady();
 });
+
+// GSI script 的 onload callback
+window.onGoogleLibraryLoad = function() {
+  if (window._gsiReady) window._gsiReady();
+};
 </script>
+</div><!-- end #app -->
 </body>
 </html>
