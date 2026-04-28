@@ -333,6 +333,25 @@
   .agenda-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
   .meeting-card-footer{display:flex;align-items:center;justify-content:space-between;}
   .meeting-section.hidden{display:none;}
+  /* 展開式會議卡片 */
+  .meeting-card-real{cursor:default;}
+  .meeting-card-meta-row{display:flex;align-items:center;gap:8px;margin-top:8px;flex-wrap:wrap;}
+  .m-attendee{width:26px;height:26px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:#fff;border:2px solid #fff;flex-shrink:0;}
+  .m-attendee-more{font-size:11px;color:var(--muted);}
+  .meeting-toggle-btn{width:100%;background:none;border:none;border-top:1px dashed var(--border);margin-top:10px;padding:8px 0 0;font-size:12px;color:var(--orange);font-weight:700;cursor:pointer;text-align:left;display:flex;align-items:center;gap:4px;}
+  .meeting-card-body{display:none;margin-top:10px;border-top:1px solid var(--border);padding-top:10px;}
+  .meeting-card-body.open{display:block;}
+  .meeting-key-pts{list-style:none;padding:0;margin:0 0 10px;display:flex;flex-direction:column;gap:6px;}
+  .meeting-key-pts li{font-size:12px;color:var(--text);line-height:1.5;padding-left:14px;position:relative;}
+  .meeting-key-pts li::before{content:'▸';position:absolute;left:0;color:var(--orange);font-size:10px;top:2px;}
+  .meeting-action-list{display:flex;flex-direction:column;gap:5px;margin-top:8px;}
+  .meeting-action-item{display:flex;align-items:flex-start;gap:8px;font-size:12px;}
+  .action-status{flex-shrink:0;font-size:10px;font-weight:700;padding:2px 7px;border-radius:8px;margin-top:1px;}
+  .action-status.done{background:#D1FAE5;color:#065F46;}
+  .action-status.doing{background:#DBEAFE;color:#1D4ED8;}
+  .action-status.plan{background:#F1F5F9;color:#64748B;}
+  .action-status.urgent{background:#FEE2E2;color:#991B1B;}
+  .meeting-subsection{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:0.5px;color:var(--muted);margin:10px 0 6px;}
 
   /* ── TASK TRACKER ── */
   .task-panel{background:var(--card);border-radius:12px;border:1px solid var(--border);margin-top:24px;overflow:hidden;}
@@ -1031,152 +1050,411 @@
   <div id="view-meeting" class="rpt-view">
     <div class="rpt-toolbar">
       <div>
-        <div class="rpt-toolbar-title">📅 <span data-zh="TaDa 每周團隊會議" data-en="TaDa Weekly Team Meeting">TaDa 每周團隊會議</span></div>
-        <div class="rpt-toolbar-sub" data-zh="BD · AM · MKT 三組每周會議記錄與追蹤" data-en="BD · AM · MKT weekly meeting records and follow-ups">BD · AM · MKT 三組每周會議記錄與追蹤</div>
+        <div class="rpt-toolbar-title">📅 <span data-zh="TaDa 團隊月度策略會議" data-en="TaDa Team Monthly Strategy Meeting">TaDa 團隊月度策略會議</span></div>
+        <div class="rpt-toolbar-sub" data-zh="BD · AM · MKT 三組會議記錄 · 來源：Google Drive" data-en="BD · AM · MKT meeting records · Source: Google Drive">BD · AM · MKT 三組會議記錄 · 來源：Google Drive</div>
       </div>
       <div class="rpt-filter-row">
-        <button class="meeting-group-btn active" onclick="filterMeetingGroup('all',this)" data-zh="全部" data-en="All">全部</button>
+        <button class="meeting-group-btn active" onclick="filterMeetingGroup('all',this)">全部</button>
         <button class="meeting-group-btn" onclick="filterMeetingGroup('bd',this)">BD</button>
         <button class="meeting-group-btn" onclick="filterMeetingGroup('am',this)">AM</button>
         <button class="meeting-group-btn" onclick="filterMeetingGroup('mkt',this)">MKT</button>
       </div>
     </div>
 
-    <!-- ── BD 組 ── -->
+    <div class="rpt-section-label">2026 年 3 月</div>
+
+    <!-- ══ BD 組 ══ -->
     <div class="meeting-section" data-group="bd">
       <div class="meeting-section-header" style="border-left-color:#F59E0B">
         <div class="meeting-section-icon" style="background:rgba(245,158,11,0.12);color:#F59E0B">💼</div>
         <div>
           <div class="meeting-section-title">BD 組</div>
-          <div class="meeting-section-sub" data-zh="Business Development 業務拓展組" data-en="Business Development Group">Business Development 業務拓展組</div>
+          <div class="meeting-section-sub">Business Development · 月度策略會議</div>
         </div>
       </div>
       <div class="meeting-grid">
-        <div class="meeting-card">
-          <div class="meeting-card-week">W13 · 2026/03/24</div>
-          <div class="meeting-card-title" data-zh="BD 週會 #13" data-en="BD Weekly Meeting #13">BD 週會 #13</div>
-          <div class="meeting-agenda-list">
-            <div class="meeting-agenda-item">
-              <span class="agenda-dot" style="background:#F59E0B"></span>
-              <span data-zh="各區域業績回顧與展望" data-en="Regional performance review & outlook">各區域業績回顧與展望</span>
-            </div>
-            <div class="meeting-agenda-item">
-              <span class="agenda-dot" style="background:#F59E0B"></span>
-              <span data-zh="新客戶 Pipeline 更新" data-en="New client pipeline update">新客戶 Pipeline 更新</span>
-            </div>
-            <div class="meeting-agenda-item">
-              <span class="agenda-dot" style="background:#F59E0B"></span>
-              <span data-zh="本周 Action Items" data-en="This week's action items">本周 Action Items</span>
-            </div>
+
+        <!-- BD Card 1: Latam 3/24 -->
+        <div class="meeting-card meeting-card-real">
+          <div class="meeting-card-week">2026/03/24 · Latam BD 月度策略</div>
+          <div class="meeting-card-title">Latam 市場 3月業績回顧與4月策略</div>
+          <div class="meeting-card-meta-row">
+            <span class="m-attendee" style="background:#F97316">R</span>
+            <span class="m-attendee" style="background:#F59E0B">H</span>
+            <span class="m-attendee" style="background:#64748B">S</span>
+            <span class="m-attendee" style="background:#94A3B8">M</span>
+            <span class="m-attendee-more">Ray · Hector · Steven · Max</span>
           </div>
-          <div class="meeting-card-footer">
-            <span class="rpt-status pending">⏳ <span data-zh="待同步" data-en="Pending">待同步</span></span>
-            <button class="rpt-view-btn" disabled>📂 <span data-zh="待連結 Drive" data-en="Link Drive">待連結 Drive</span></button>
+          <div class="meeting-agenda-list" style="margin-top:10px">
+            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#F59E0B"></span>Latam MoM +10.4%｜KPI 達成 74.8%｜Venezuela +24.5% 最強</div>
+            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#F59E0B"></span>Brazil / Mexico 體量未達市場規模，需加大促銷力道</div>
+            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#F59E0B"></span>4月促銷 90% 已確認，Argentina / Peru 需加強 BD 投入</div>
+          </div>
+          <button class="meeting-toggle-btn" onclick="this.nextElementSibling.classList.toggle('open');this.textContent=this.nextElementSibling.classList.contains('open')?'▲ 收合':'▼ 展開會議記錄'">▼ 展開會議記錄</button>
+          <div class="meeting-card-body">
+            <div class="meeting-subsection">📌 關鍵討論</div>
+            <ul class="meeting-key-pts">
+              <li>WG、NQ、ZFRT090 (Brabet) 為本月主要成長驅動力</li>
+              <li>Top 5 Latam 幣別：BRL、MXN、Venezuela、Chile、Argentina</li>
+              <li>Brazil Exposure 策略：Pixbet、EstrelaBet、Esportes da Sorte、Blaze</li>
+              <li>Venezuela Push：Apuestas Royal、Aprieta y Gana</li>
+              <li>Fortune Zombie Free Spin Campaign 促銷策略</li>
+              <li>Sportium Mexico 4/20 上線，需 Microsoft Teams Business 帳號確認</li>
+            </ul>
+            <div class="meeting-subsection">✅ Action Items</div>
+            <div class="meeting-action-list">
+              <div class="meeting-action-item"><span class="action-status doing">進行中</span>Steven：HUB88 & Winpot PROD 整合、WG 新群組追蹤</div>
+              <div class="meeting-action-item"><span class="action-status urgent">急件</span>Steven：向 Staniely 確認 TaDa Big Jackpot 認證 ETA</div>
+              <div class="meeting-action-item"><span class="action-status doing">進行中</span>Hector：Wiztech & HUB88 測試 FS、Betnacional & Apuestas Royal 錦標賽</div>
+              <div class="meeting-action-item"><span class="action-status done">完成</span>Hector：KTO LJ500 Campaign 上線、Superbet 預發佈遊戲</div>
+              <div class="meeting-action-item"><span class="action-status plan">計劃中</span>Hector：Argentina 市場研究</div>
+              <div class="meeting-action-item"><span class="action-status done">完成</span>Max：Streamer 研究、PP/PG 遊戲能見度調查</div>
+            </div>
           </div>
         </div>
-        <div class="meeting-card" style="opacity:0.5">
-          <div class="meeting-card-week">W12 · 2026/03/17</div>
-          <div class="meeting-card-title" data-zh="BD 週會 #12" data-en="BD Weekly Meeting #12">BD 週會 #12</div>
-          <div class="meeting-card-footer" style="margin-top:12px">
-            <span class="rpt-status pending">⏳ <span data-zh="待同步" data-en="Pending">待同步</span></span>
-            <button class="rpt-view-btn" disabled>📂 <span data-zh="待連結 Drive" data-en="Link Drive">待連結 Drive</span></button>
+
+        <!-- BD Card 2: Latam 2/Feb review 3/11 -->
+        <div class="meeting-card meeting-card-real">
+          <div class="meeting-card-week">2026/03/11 · Latam BD 2月回顧</div>
+          <div class="meeting-card-title">Latam 2月業績回顧與3月預測</div>
+          <div class="meeting-card-meta-row">
+            <span class="m-attendee" style="background:#F97316">R</span>
+            <span class="m-attendee" style="background:#F59E0B">H</span>
+            <span class="m-attendee" style="background:#64748B">S</span>
+            <span class="m-attendee" style="background:#94A3B8">M</span>
+            <span class="m-attendee-more">Ray · Hector · Steven · Max</span>
+          </div>
+          <div class="meeting-agenda-list" style="margin-top:10px">
+            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#F59E0B"></span>2月 KPI 達成 80.7%（目標 85.7%），受巴西嘉年華影響</div>
+            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#F59E0B"></span>TTHB MoM +1.74%，3月預測回升 +11.34%</div>
+            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#F59E0B"></span>Andean 地區成長強勁，建議持續投入</div>
+          </div>
+          <button class="meeting-toggle-btn" onclick="this.nextElementSibling.classList.toggle('open');this.textContent=this.nextElementSibling.classList.contains('open')?'▲ 收合':'▼ 展開會議記錄'">▼ 展開會議記錄</button>
+          <div class="meeting-card-body">
+            <div class="meeting-subsection">📌 關鍵討論</div>
+            <ul class="meeting-key-pts">
+              <li>WG 活躍群組需密切監控；3/15 WG 分組調整後特別注意</li>
+              <li>TaDa Mega Jackpot 活動力道需加強</li>
+              <li>Latam Bet Lists 變動頻繁，需更好的工具/防護機制</li>
+              <li>UI/UX 優化與 Banner 調整進行中</li>
+            </ul>
+            <div class="meeting-subsection">✅ Action Items</div>
+            <div class="meeting-action-list">
+              <div class="meeting-action-item"><span class="action-status doing">進行中</span>Steven：UI/UX 優化、Bet List 防護機制建立</div>
+              <div class="meeting-action-item"><span class="action-status doing">進行中</span>Steven：HUB88 & Winpot PROD 整合</div>
+              <div class="meeting-action-item"><span class="action-status doing">進行中</span>Hector：追進 Hub88 整合進度</div>
+            </div>
           </div>
         </div>
+
+        <!-- BD Card 3: EU Regulated 3/30 -->
+        <div class="meeting-card meeting-card-real">
+          <div class="meeting-card-week">2026/03/30 · EU Regulated BD 月度策略</div>
+          <div class="meeting-card-title">EU 監管市場 3月回顧與4月策略</div>
+          <div class="meeting-card-meta-row">
+            <span class="m-attendee" style="background:#F97316">R</span>
+            <span class="m-attendee" style="background:#F97316">N</span>
+            <span class="m-attendee" style="background:#64748B">Si</span>
+            <span class="m-attendee" style="background:#94A3B8">+3</span>
+            <span class="m-attendee-more">Ray · Nina · Silvio · Charcy · Ping · Gima</span>
+          </div>
+          <div class="meeting-agenda-list" style="margin-top:10px">
+            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#F59E0B"></span>EU Regulated MoM +10.4%｜KPI 達成 90.6%｜預計4月 +12%</div>
+            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#F59E0B"></span>成長主力：Betclic (Portugal)、StarCasino (Italy)、Superbet (Romania)</div>
+            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#F59E0B"></span>KOL 預算策略討論：Regulated EU 不適合直接導流，建議轉給 operators</div>
+          </div>
+          <button class="meeting-toggle-btn" onclick="this.nextElementSibling.classList.toggle('open');this.textContent=this.nextElementSibling.classList.contains('open')?'▲ 收合':'▼ 展開會議記錄'">▼ 展開會議記錄</button>
+          <div class="meeting-card-body">
+            <div class="meeting-subsection">📌 關鍵討論</div>
+            <ul class="meeting-key-pts">
+              <li>Superbet Romania 促銷力度加大，更積極地推進</li>
+              <li>Betano Portugal：與 Hector 討論促銷方式</li>
+              <li>Nina 加速新 EU 監管客戶上線（過多在 testing/compliance 等待）</li>
+              <li>Nina 提供更多 EU 監管市場實際 GGR 數據</li>
+              <li>MKT：EU Regulated + UK 不適合 KOL 直接導流；EUR 25,000 KOL 預算建議移給 operators</li>
+              <li>優先事項：Regulated 市場正確遊戲上架、Affiliate 模式、Marketing Consultant 方案</li>
+            </ul>
+            <div class="meeting-subsection">✅ Action Items</div>
+            <div class="meeting-action-list">
+              <div class="meeting-action-item"><span class="action-status done">完成</span>Silvio：Betano Portugal TaDa 版塊 3/18 上線</div>
+              <div class="meeting-action-item"><span class="action-status done">完成</span>Silvio：Superbet MKT 團隊 3/12 加入聊天群組</div>
+              <div class="meeting-action-item"><span class="action-status doing">進行中</span>Gima：追進 Superbet 後續；EU & UK 預算討論</div>
+              <div class="meeting-action-item"><span class="action-status doing">進行中</span>Nina/Silvio：與 Ray 討論4月出差促銷細節</div>
+              <div class="meeting-action-item"><span class="action-status doing">進行中</span>Silvio：Superbet Romania 增加促銷預算</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- BD Card 4: UK & Non-reg EU 3/30 -->
+        <div class="meeting-card meeting-card-real">
+          <div class="meeting-card-week">2026/03/30 · UK & Non-reg EU BD 月度策略</div>
+          <div class="meeting-card-title">UK 監管 & 非監管 EU 3月回顧</div>
+          <div class="meeting-card-meta-row">
+            <span class="m-attendee" style="background:#F97316">R</span>
+            <span class="m-attendee" style="background:#F97316">N</span>
+            <span class="m-attendee" style="background:#10B981">C</span>
+            <span class="m-attendee" style="background:#94A3B8">+4</span>
+            <span class="m-attendee-more">Ray · Nina · Chu · Aisha · Charcy · Gima · Ping</span>
+          </div>
+          <div class="meeting-agenda-list" style="margin-top:10px">
+            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#F59E0B"></span>Non-Reg EU MoM +21.6%｜達成率 106%｜4月預估 +15%</div>
+            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#F59E0B"></span>Global MoM +28.5%｜達成率 113%｜成長主力：GameKong、SOFTSWISS、UpGaming</div>
+            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#F59E0B"></span>新規：合作前必須確認客戶付款方式（Usoftgaming 事件教訓）</div>
+          </div>
+          <button class="meeting-toggle-btn" onclick="this.nextElementSibling.classList.toggle('open');this.textContent=this.nextElementSibling.classList.contains('open')?'▲ 收合':'▼ 展開會議記錄'">▼ 展開會議記錄</button>
+          <div class="meeting-card-body">
+            <div class="meeting-subsection">📌 關鍵討論</div>
+            <ul class="meeting-key-pts">
+              <li>每月至少在 SOFTSWISS operators 下開一個促銷群組</li>
+              <li>需要取得直接聯絡人：GR8 10302 SAC46、ZEN001 10665、Alea OPID 1709</li>
+              <li>UK 監管新上線：Boyles、The Pools、Rank、Ballys（上線中）</li>
+              <li>IGB Live 攤位設計：不要用單一遊戲做整個攤位，放 3 款遊戲背景，影片改成 UK 導向 40-60 秒</li>
+              <li>Ontario Game List 最新版需取得；OMG Casino (Blazesoft) 非監管加拿大需監控</li>
+              <li>Competitor BGaming：單週觸及率 +112%（944K → 2M），Streamer 帶動效果強</li>
+            </ul>
+            <div class="meeting-subsection">✅ Action Items</div>
+            <div class="meeting-action-list">
+              <div class="meeting-action-item"><span class="action-status doing">進行中</span>Chu：Australia Expo 研究、非監管加拿大市場分析</div>
+              <div class="meeting-action-item"><span class="action-status doing">進行中</span>Nina：法國市場分析報告、UK 上線客戶進度催進</div>
+              <div class="meeting-action-item"><span class="action-status doing">進行中</span>Nina：各客戶 EU 監管市場 GGR 數據整理</div>
+              <div class="meeting-action-item"><span class="action-status doing">進行中</span>Gima：Superbet 後續跟進、EU & UK 預算與 Andy 討論</div>
+              <div class="meeting-action-item"><span class="action-status doing">進行中</span>Silvio：Betano Portugal 促銷方式討論、Superbet Romania 增加促銷預算</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- BD Card 5: UK & Non-reg EU Feb review 3/13 -->
+        <div class="meeting-card meeting-card-real">
+          <div class="meeting-card-week">2026/03/13 · UK & Non-reg EU 2月回顧</div>
+          <div class="meeting-card-title">UK & 非監管 EU 2月回顧與策略</div>
+          <div class="meeting-card-meta-row">
+            <span class="m-attendee" style="background:#F97316">R</span>
+            <span class="m-attendee" style="background:#F97316">N</span>
+            <span class="m-attendee" style="background:#10B981">C</span>
+            <span class="m-attendee" style="background:#94A3B8">+3</span>
+            <span class="m-attendee-more">Ray · Nina · Chu · Aisha · Charcy · Max</span>
+          </div>
+          <div class="meeting-agenda-list" style="margin-top:10px">
+            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#F59E0B"></span>UK + 非監管 EU：利用 GameKong & Upgaming 擴展進監管 EU</div>
+            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#F59E0B"></span>大洋洲：市場潛力巨大（與美國相當）；以 SoftSwiss 為主要切入</div>
+            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#F59E0B"></span>Chu 聚焦大洋洲 & Crypto 市場；非監管加拿大需進一步研究</div>
+          </div>
+          <button class="meeting-toggle-btn" onclick="this.nextElementSibling.classList.toggle('open');this.textContent=this.nextElementSibling.classList.contains('open')?'▲ 收合':'▼ 展開會議記錄'">▼ 展開會議記錄</button>
+          <div class="meeting-card-body">
+            <div class="meeting-subsection">📌 關鍵討論</div>
+            <ul class="meeting-key-pts">
+              <li>BD + AM 主動擴展 SoftSwiss；建立專屬溝通群組</li>
+              <li>Global + Crypto 板塊成長強勁：Stake、Roobet、Rainbet</li>
+              <li>法國市場：啟動商務層面研究</li>
+              <li>產品討論：豬主題系列遊戲；UK 市場缺乏合適遊戲類型</li>
+              <li>Australia Expo 研究；StarCasino HK 拜訪規劃</li>
+            </ul>
+            <div class="meeting-subsection">✅ Action Items</div>
+            <div class="meeting-action-list">
+              <div class="meeting-action-item"><span class="action-status done">完成</span>Aisha：豬主題系列遊戲（提案完成）、4月出差規劃</div>
+              <div class="meeting-action-item"><span class="action-status doing">進行中</span>Chu：Australia Expo 研究</div>
+              <div class="meeting-action-item"><span class="action-status doing">進行中</span>Nina：法國市場分析報告</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- BD Card 6: EU Regulated Feb review 3/12 -->
+        <div class="meeting-card meeting-card-real">
+          <div class="meeting-card-week">2026/03/12 · EU Regulated 2月回顧</div>
+          <div class="meeting-card-title">EU 監管 2月回顧與市場策略</div>
+          <div class="meeting-card-meta-row">
+            <span class="m-attendee" style="background:#F97316">R</span>
+            <span class="m-attendee" style="background:#F97316">N</span>
+            <span class="m-attendee" style="background:#64748B">Si</span>
+            <span class="m-attendee" style="background:#94A3B8">+2</span>
+            <span class="m-attendee-more">Ray · Nina · Silvio · Charcy · Ping</span>
+          </div>
+          <div class="meeting-agenda-list" style="margin-top:10px">
+            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#F59E0B"></span>Portugal & Romania：抓住動能，擴大促銷</div>
+            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#F59E0B"></span>Italy：把握新機會，加速進入；Greece：尋找強力市場切入點</div>
+            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#F59E0B"></span>短期策略：以讓步換曝光；免費版位；首月收益免分潤吸引要求高的合作商</div>
+          </div>
+          <button class="meeting-toggle-btn" onclick="this.nextElementSibling.classList.toggle('open');this.textContent=this.nextElementSibling.classList.contains('open')?'▲ 收合':'▼ 展開會議記錄'">▼ 展開會議記錄</button>
+          <div class="meeting-card-body">
+            <div class="meeting-subsection">📌 關鍵討論</div>
+            <ul class="meeting-key-pts">
+              <li>4月計畫：BD + AM 聯合商務拜訪</li>
+              <li>上線前嚴格追蹤管控</li>
+              <li>Italy：取得 ADM codes</li>
+              <li>重要夥伴 PR：確認上線 ETA 後與 MKT 協調</li>
+            </ul>
+            <div class="meeting-subsection">✅ Action Items</div>
+            <div class="meeting-action-list">
+              <div class="meeting-action-item"><span class="action-status done">完成</span>Nina/Ping：StarVegas 合作夥伴聲明 3/13 發布</div>
+              <div class="meeting-action-item"><span class="action-status done">完成</span>Silvio：Betano Portugal TaDa 版塊上線</div>
+              <div class="meeting-action-item"><span class="action-status done">完成</span>Silvio：Superbet MKT 團隊加入群組</div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
 
-    <!-- ── AM 組 ── -->
+    <!-- ══ AM 組 ══ -->
     <div class="meeting-section" data-group="am">
       <div class="meeting-section-header" style="border-left-color:#10B981">
         <div class="meeting-section-icon" style="background:rgba(16,185,129,0.12);color:#10B981">🤝</div>
         <div>
           <div class="meeting-section-title">AM 組</div>
-          <div class="meeting-section-sub" data-zh="Account Management 客戶管理組" data-en="Account Management Group">Account Management 客戶管理組</div>
+          <div class="meeting-section-sub">Account Management · 月度策略會議</div>
         </div>
       </div>
       <div class="meeting-grid">
-        <div class="meeting-card">
-          <div class="meeting-card-week">W13 · 2026/03/24</div>
-          <div class="meeting-card-title" data-zh="AM 週會 #13" data-en="AM Weekly Meeting #13">AM 週會 #13</div>
-          <div class="meeting-agenda-list">
-            <div class="meeting-agenda-item">
-              <span class="agenda-dot" style="background:#10B981"></span>
-              <span data-zh="客戶留存率分析" data-en="Client retention analysis">客戶留存率分析</span>
-            </div>
-            <div class="meeting-agenda-item">
-              <span class="agenda-dot" style="background:#10B981"></span>
-              <span data-zh="客訴與優化追蹤" data-en="Complaint & optimization tracking">客訴與優化追蹤</span>
-            </div>
-            <div class="meeting-agenda-item">
-              <span class="agenda-dot" style="background:#10B981"></span>
-              <span data-zh="跨組協作事項" data-en="Cross-team collaboration items">跨組協作事項</span>
-            </div>
+
+        <!-- AM Card 1 -->
+        <div class="meeting-card meeting-card-real">
+          <div class="meeting-card-week">2026/03/30 · EU & UK AM 月度策略</div>
+          <div class="meeting-card-title">EU / UK 客戶管理與促銷協作</div>
+          <div class="meeting-card-meta-row">
+            <span class="m-attendee" style="background:#10B981">G</span>
+            <span class="m-attendee" style="background:#10B981">Si</span>
+            <span class="m-attendee" style="background:#10B981">A</span>
+            <span class="m-attendee" style="background:#94A3B8">+3</span>
+            <span class="m-attendee-more">Gima · Silvio · Aisha · Charcy · Ping</span>
           </div>
-          <div class="meeting-card-footer">
-            <span class="rpt-status pending">⏳ <span data-zh="待同步" data-en="Pending">待同步</span></span>
-            <button class="rpt-view-btn" disabled>📂 <span data-zh="待連結 Drive" data-en="Link Drive">待連結 Drive</span></button>
+          <div class="meeting-agenda-list" style="margin-top:10px">
+            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#10B981"></span>Superbet Romania：更積極的促銷預算與頻率協商</div>
+            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#10B981"></span>Betano Portugal：與 Hector 討論促銷合作方式</div>
+            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#10B981"></span>UK Regulated：AM 建議至少 5 款適合 UK 的遊戲</div>
+          </div>
+          <button class="meeting-toggle-btn" onclick="this.nextElementSibling.classList.toggle('open');this.textContent=this.nextElementSibling.classList.contains('open')?'▲ 收合':'▼ 展開會議記錄'">▼ 展開會議記錄</button>
+          <div class="meeting-card-body">
+            <div class="meeting-subsection">📌 關鍵討論</div>
+            <ul class="meeting-key-pts">
+              <li>新上線客戶：Boyles、The Pools、Rank、Ballys（UK）</li>
+              <li>EU & UK 預算討論：KOL 預算移轉給 operators</li>
+              <li>Gima 追進 Superbet 後續</li>
+              <li>需取得直接聯絡人：GR8 SAC46、ZEN001、Alea OPID 1709、Vavada</li>
+            </ul>
+            <div class="meeting-subsection">✅ Action Items</div>
+            <div class="meeting-action-list">
+              <div class="meeting-action-item"><span class="action-status doing">進行中</span>Gima：Superbet 後續跟進</div>
+              <div class="meeting-action-item"><span class="action-status doing">進行中</span>Gima：與 Andy 討論 EU & UK 預算</div>
+              <div class="meeting-action-item"><span class="action-status doing">進行中</span>Silvio：Betano Portugal 促銷討論</div>
+              <div class="meeting-action-item"><span class="action-status doing">進行中</span>Silvio：Superbet Romania 增加促銷預算</div>
+            </div>
           </div>
         </div>
-        <div class="meeting-card" style="opacity:0.5">
-          <div class="meeting-card-week">W12 · 2026/03/17</div>
-          <div class="meeting-card-title" data-zh="AM 週會 #12" data-en="AM Weekly Meeting #12">AM 週會 #12</div>
-          <div class="meeting-card-footer" style="margin-top:12px">
-            <span class="rpt-status pending">⏳ <span data-zh="待同步" data-en="Pending">待同步</span></span>
-            <button class="rpt-view-btn" disabled>📂 <span data-zh="待連結 Drive" data-en="Link Drive">待連結 Drive</span></button>
+
+        <!-- AM Card 2 -->
+        <div class="meeting-card meeting-card-real">
+          <div class="meeting-card-week">2026/03/13 · Global & Oceania AM 月度策略</div>
+          <div class="meeting-card-title">Global / 大洋洲 / Crypto 客戶管理</div>
+          <div class="meeting-card-meta-row">
+            <span class="m-attendee" style="background:#10B981">A</span>
+            <span class="m-attendee" style="background:#10B981">C</span>
+            <span class="m-attendee" style="background:#94A3B8">Ch</span>
+            <span class="m-attendee-more">Aisha · Chu · Charcy</span>
+          </div>
+          <div class="meeting-agenda-list" style="margin-top:10px">
+            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#10B981"></span>SoftSwiss：BD + AM 主動擴展，建立專屬溝通群組</div>
+            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#10B981"></span>大洋洲市場潛力大，以 SoftSwiss 為切入主軸</div>
+            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#10B981"></span>新規：合作前必須確認客戶付款方式</div>
+          </div>
+          <button class="meeting-toggle-btn" onclick="this.nextElementSibling.classList.toggle('open');this.textContent=this.nextElementSibling.classList.contains('open')?'▲ 收合':'▼ 展開會議記錄'">▼ 展開會議記錄</button>
+          <div class="meeting-card-body">
+            <div class="meeting-subsection">📌 關鍵討論</div>
+            <ul class="meeting-key-pts">
+              <li>Usoftgaming 付款問題：只接受第三方付款、不接受 crypto → 造成困擾</li>
+              <li>Global + Crypto 板塊強勁：Stake、Roobet、Rainbet</li>
+              <li>非監管加拿大 OMG Casino (Blazesoft) 需監控</li>
+              <li>Ontario Game List 最新版需取得並分享給 Chu</li>
+            </ul>
+            <div class="meeting-subsection">✅ Action Items</div>
+            <div class="meeting-action-list">
+              <div class="meeting-action-item"><span class="action-status done">完成</span>Aisha：4月出差規劃</div>
+              <div class="meeting-action-item"><span class="action-status doing">進行中</span>Chu：Australia Expo 研究</div>
+              <div class="meeting-action-item"><span class="action-status doing">進行中</span>Chu：非監管加拿大市場分析</div>
+            </div>
           </div>
         </div>
+
       </div>
     </div>
 
-    <!-- ── MKT 組 ── -->
+    <!-- ══ MKT 組 ══ -->
     <div class="meeting-section" data-group="mkt">
       <div class="meeting-section-header" style="border-left-color:#8B5CF6">
         <div class="meeting-section-icon" style="background:rgba(139,92,246,0.12);color:#8B5CF6">📣</div>
         <div>
           <div class="meeting-section-title">MKT 組</div>
-          <div class="meeting-section-sub" data-zh="Marketing 市場行銷組" data-en="Marketing Group">Marketing 市場行銷組</div>
+          <div class="meeting-section-sub">Marketing · 月度策略會議</div>
         </div>
       </div>
       <div class="meeting-grid">
-        <div class="meeting-card">
-          <div class="meeting-card-week">W13 · 2026/03/24</div>
-          <div class="meeting-card-title" data-zh="MKT 週會 #13" data-en="MKT Weekly Meeting #13">MKT 週會 #13</div>
-          <div class="meeting-agenda-list">
-            <div class="meeting-agenda-item">
-              <span class="agenda-dot" style="background:#8B5CF6"></span>
-              <span data-zh="活動與促銷計劃審查" data-en="Campaign & promotion review">活動與促銷計劃審查</span>
-            </div>
-            <div class="meeting-agenda-item">
-              <span class="agenda-dot" style="background:#8B5CF6"></span>
-              <span data-zh="各平台內容規劃" data-en="Cross-platform content planning">各平台內容規劃</span>
-            </div>
-            <div class="meeting-agenda-item">
-              <span class="agenda-dot" style="background:#8B5CF6"></span>
-              <span data-zh="行銷數據回顧" data-en="Marketing data review">行銷數據回顧</span>
-            </div>
+
+        <!-- MKT Card 1 -->
+        <div class="meeting-card meeting-card-real">
+          <div class="meeting-card-week">2026/03/30 · MKT 策略討論</div>
+          <div class="meeting-card-title">KOL 預算策略 & IGB Live 攤位規劃</div>
+          <div class="meeting-card-meta-row">
+            <span class="m-attendee" style="background:#F97316">R</span>
+            <span class="m-attendee" style="background:#8B5CF6">M</span>
+            <span class="m-attendee-more">Ray · Max</span>
           </div>
-          <div class="meeting-card-footer">
-            <span class="rpt-status pending">⏳ <span data-zh="待同步" data-en="Pending">待同步</span></span>
-            <button class="rpt-view-btn" disabled>📂 <span data-zh="待連結 Drive" data-en="Link Drive">待連結 Drive</span></button>
+          <div class="meeting-agenda-list" style="margin-top:10px">
+            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#8B5CF6"></span>Regulated EU / UK 不適合 KOL 直接導流；EUR 25,000 預算建議移轉給 operators</div>
+            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#8B5CF6"></span>IGB Live 攤位：3 款遊戲背景設計，影片改為 UK 導向 40-60 秒</div>
+            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#8B5CF6"></span>Competitor BGaming：Streamer 帶動單週觸及 +112%（944K → 2M）</div>
+          </div>
+          <button class="meeting-toggle-btn" onclick="this.nextElementSibling.classList.toggle('open');this.textContent=this.nextElementSibling.classList.contains('open')?'▲ 收合':'▼ 展開會議記錄'">▼ 展開會議記錄</button>
+          <div class="meeting-card-body">
+            <div class="meeting-subsection">📌 關鍵討論</div>
+            <ul class="meeting-key-pts">
+              <li>MKT 優先事項：Regulated 市場正確遊戲上架 → Affiliate 模式 → Marketing Consultant 方案</li>
+              <li>Italy / UK / Romania KOL 預算重新評估策略方向</li>
+              <li>IGB Live：Ray 建議不要用單一遊戲做整個攤位設計（尚未與足夠 UK operators 上線）</li>
+              <li>Streamer 合作機會：調查哪些 Streamer 正在 PP/PG 遊戲進行直播</li>
+            </ul>
+            <div class="meeting-subsection">✅ Action Items</div>
+            <div class="meeting-action-list">
+              <div class="meeting-action-item"><span class="action-status done">完成</span>Max：Streamer 研究完成</div>
+              <div class="meeting-action-item"><span class="action-status done">完成</span>Max：PP/PG 遊戲在頂級 Streamer 能見度調查完成</div>
+              <div class="meeting-action-item"><span class="action-status doing">進行中</span>MKT：IGB Live 攤位影片重新製作（UK 導向）</div>
+              <div class="meeting-action-item"><span class="action-status doing">進行中</span>MKT：Affiliate 模式與 Marketing Consultant 方案評估</div>
+            </div>
           </div>
         </div>
-        <div class="meeting-card" style="opacity:0.5">
-          <div class="meeting-card-week">W12 · 2026/03/17</div>
-          <div class="meeting-card-title" data-zh="MKT 週會 #12" data-en="MKT Weekly Meeting #12">MKT 週會 #12</div>
-          <div class="meeting-card-footer" style="margin-top:12px">
-            <span class="rpt-status pending">⏳ <span data-zh="待同步" data-en="Pending">待同步</span></span>
-            <button class="rpt-view-btn" disabled>📂 <span data-zh="待連結 Drive" data-en="Link Drive">待連結 Drive</span></button>
+
+        <!-- MKT Card 2 -->
+        <div class="meeting-card meeting-card-real">
+          <div class="meeting-card-week">2026/03/11 · MKT Latam 市場行銷</div>
+          <div class="meeting-card-title">Latam TaDa Jackpot & Streamer 策略</div>
+          <div class="meeting-card-meta-row">
+            <span class="m-attendee" style="background:#F97316">R</span>
+            <span class="m-attendee" style="background:#8B5CF6">M</span>
+            <span class="m-attendee" style="background:#64748B">S</span>
+            <span class="m-attendee-more">Ray · Max · Steven</span>
+          </div>
+          <div class="meeting-agenda-list" style="margin-top:10px">
+            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#8B5CF6"></span>TaDa Mega Jackpot 活動需加強力道</div>
+            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#8B5CF6"></span>Fortune Zombie Free Spin Campaign 促銷效益追蹤</div>
+            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#8B5CF6"></span>Superbet Free Spin Campaign：+12.5% 流量、+24.5% 用戶</div>
+          </div>
+          <button class="meeting-toggle-btn" onclick="this.nextElementSibling.classList.toggle('open');this.textContent=this.nextElementSibling.classList.contains('open')?'▲ 收合':'▼ 展開會議記錄'">▼ 展開會議記錄</button>
+          <div class="meeting-card-body">
+            <div class="meeting-subsection">📌 關鍵討論</div>
+            <ul class="meeting-key-pts">
+              <li>Domino Effect 策略：在大型品牌內部擴大影響力</li>
+              <li>每人為未來 3 個月撰寫 3 個關鍵國家 Action Plans</li>
+              <li>Service team 共用帳號問題（TaDa + JILI 使用同一帳號）待改善</li>
+            </ul>
+            <div class="meeting-subsection">✅ Action Items</div>
+            <div class="meeting-action-list">
+              <div class="meeting-action-item"><span class="action-status urgent">急件</span>Steven：確認 TaDa Big Jackpot ETA（向 Staniely 詢問）</div>
+              <div class="meeting-action-item"><span class="action-status doing">進行中</span>MKT：各區域 3 個關鍵國家 Action Plans 撰寫</div>
+            </div>
           </div>
         </div>
+
       </div>
     </div>
 
-    <div class="rpt-empty" style="margin-top:24px">
-      <div class="rpt-empty-icon">📅</div>
-      <div class="rpt-empty-title" data-zh="會議記錄即將上線" data-en="Meeting Records Coming Soon">會議記錄即將上線</div>
-      <div class="rpt-empty-sub" data-zh="連結 Google Drive 後，BD · AM · MKT 三組會議記錄將自動整合顯示於此" data-en="After linking Google Drive, BD · AM · MKT meeting records will be automatically integrated here">連結 Google Drive 後，BD · AM · MKT 三組會議記錄將自動整合顯示於此</div>
-      <div class="rpt-sync-note">🔗 <span data-zh="等待 Google Drive 資料來源" data-en="Awaiting Google Drive data source">等待 Google Drive 資料來源</span></div>
-    </div>
     <div id="tasks-meeting"></div>
   </div><!-- end 每周會議 view -->
 
@@ -2823,7 +3101,10 @@ function setLang(lang) {
 // ══════════════════════════════════════
 //  BD FILTER
 // ══════════════════════════════════════
+let currentBDFilter = 'all';
+
 function filterBD(bd, btn) {
+  currentBDFilter = bd;
   document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
   if (btn) btn.classList.add('active');
   const cards = document.querySelectorAll('.bd-card');
@@ -2835,6 +3116,8 @@ function filterBD(bd, btn) {
     cards.forEach(c => c.classList.toggle('hidden', c.getAttribute('data-bd') !== bd));
     grid.style.gridTemplateColumns = '1fr';
   }
+  // 同步任務追蹤欄：只顯示該 BD 的任務
+  renderTaskPanel('weekly');
 }
 
 // ══════════════════════════════════════
@@ -2984,7 +3267,11 @@ function isOverdue(task) {
 function renderTaskPanel(tab) {
   const el = document.getElementById('tasks-' + tab);
   if (!el) return;
-  const tasks   = getTabTasks(tab);
+  // 週報分頁：依 BD filter 篩選
+  const allTasks = getTabTasks(tab);
+  const tasks = (tab === 'weekly' && currentBDFilter !== 'all')
+    ? allTasks.filter(t => t.assignee && t.assignee.toLowerCase() === MEMBER_NAMES[currentBDFilter]?.toLowerCase())
+    : allTasks;
   const todo    = tasks.filter(t => t.status === 'todo').length;
   const doing   = tasks.filter(t => t.status === 'doing').length;
   const done    = tasks.filter(t => t.status === 'done').length;
@@ -3398,6 +3685,9 @@ function showDashboard(auth) {
   }
   renderWeek(currentWeek);
   initTaskPanels();
+  // 初始化時確保週報任務追蹤欄顯示
+  const tw = document.getElementById('tasks-weekly');
+  if (tw) tw.classList.remove('hidden');
 }
 
 function signOut() {
