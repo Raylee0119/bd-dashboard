@@ -257,6 +257,16 @@
   .promo-done{background:#DBEAFE;color:#1D4ED8;}
   .promo-upcoming{background:#FEF3C7;color:#92400E;}
 
+  /* Monthly promo accordion */
+  .mpa-item{border:1px solid var(--border);border-radius:8px;margin-bottom:10px;overflow:hidden;}
+  .mpa-header{padding:11px 16px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;background:#F8FAFC;transition:background .15s;}
+  .mpa-header:hover{background:#F1F5F9;}
+  .mpa-title{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:700;}
+  .mpa-avatar{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:#fff;flex-shrink:0;}
+  .mpa-count{font-size:11px;color:var(--muted);font-weight:400;}
+  .mpa-body{display:none;overflow-x:auto;}
+  .mpa-body.open{display:block;}
+
   /* ── PRINT ── */
   @media print {
     .header,.filter-bar{position:static;}
@@ -435,6 +445,17 @@
       </div>
       <div class="monthly-section-body">
         <div class="currency-grid" id="currencyGrid"></div>
+      </div>
+    </div>
+
+    <!-- Monthly Promotions -->
+    <div class="monthly-section">
+      <div class="monthly-section-header">
+        <span style="font-size:18px">🎁</span>
+        <div class="monthly-section-title" id="m-promo-title">各 BD 促銷活動總覽</div>
+      </div>
+      <div class="monthly-section-body" style="padding:16px 20px">
+        <div id="monthlyPromoAccordion"></div>
       </div>
     </div>
 
@@ -1201,6 +1222,267 @@ const monthlyPromos = {
 // Week → month mapping
 const WEEK_TO_MONTH = {w10:'mar2026', w11:'mar2026', w12:'mar2026', w13:'mar2026'};
 
+// ══════════════════════════════════════
+//  WEEKLY CURRENCY DATA (per week, per member)
+//  Hector: derived from Latam monthly meeting + template data
+//  Bryam/Chu/Nina: derived from monthly reports; real weekly data TBD
+//  ⚠️ Values marked "~" are approximate; will be refined with weekly PDFs
+// ══════════════════════════════════════
+const weeklyCurrency = {
+  w10: {
+    hector: [{
+      titleZh:'Latam 市場幣別', titleEn:'Latam Market Currency',
+      note:'~',
+      data:[
+        {label:'BRL (Brazil)',    value:50.84, color:'#5B21B6'},
+        {label:'MXN (Mexico)',    value:39.26, color:'#7C3AED'},
+        {label:'VES (Venezuela)', value:3.20,  color:'#A78BFA'},
+        {label:'CLP (Chile)',     value:2.40,  color:'#C4B5FD'},
+        {label:'ARS (Argentina)', value:2.00,  color:'#DDD6FE'},
+        {label:'Others',          value:2.30,  color:'#EDE9FE'}
+      ]
+    }],
+    bryam: [
+      {titleZh:'CIS 幣別', titleEn:'CIS Currency', note:'~', data:[
+        {label:'RUB', value:71.0, color:'#065F46'},
+        {label:'UZS', value:16.0, color:'#059669'},
+        {label:'UAH', value:7.5,  color:'#10B981'},
+        {label:'KZT', value:3.5,  color:'#34D399'},
+        {label:'Others', value:2.0, color:'#A7F3D0'}
+      ]},
+      {titleZh:'西亞幣別', titleEn:'West Asia Currency', note:'~', data:[
+        {label:'TRY', value:71.2, color:'#92400E'},
+        {label:'AED', value:16.0, color:'#B45309'},
+        {label:'SAR', value:11.4, color:'#D97706'},
+        {label:'Others', value:1.4, color:'#FDE68A'}
+      ]}
+    ],
+    chu: [
+      {titleZh:'非洲幣別', titleEn:'Africa Currency', note:'~', data:[
+        {label:'XOF', value:38.5, color:'#0F766E'},
+        {label:'NGN', value:20.0, color:'#0D9488'},
+        {label:'TZS+UGX', value:14.0, color:'#14B8A6'},
+        {label:'XAF', value:7.0, color:'#2DD4BF'},
+        {label:'ZAR', value:5.0, color:'#5EEAD4'},
+        {label:'Others', value:15.5, color:'#CCFBF1'}
+      ]},
+      {titleZh:'大洋洲幣別', titleEn:'Oceania Currency', note:'~', data:[
+        {label:'AUD', value:85.2, color:'#1D4ED8'},
+        {label:'NZD', value:10.8, color:'#3B82F6'},
+        {label:'Others', value:4.0, color:'#BFDBFE'}
+      ]},
+      {titleZh:'北美幣別', titleEn:'N.America Currency', note:'~', data:[
+        {label:'USD', value:95.2, color:'#15803D'},
+        {label:'CAD', value:3.8, color:'#4ADE80'},
+        {label:'Others', value:1.0, color:'#BBF7D0'}
+      ]}
+    ],
+    nina: [
+      {titleZh:'EU 幣別', titleEn:'EU Currency', note:'~', data:[
+        {label:'EUR', value:71.0, color:'#1E40AF'},
+        {label:'GBP', value:13.0, color:'#2563EB'},
+        {label:'PLN', value:6.0,  color:'#3B82F6'},
+        {label:'HUF', value:4.5,  color:'#60A5FA'},
+        {label:'DKK', value:2.0,  color:'#93C5FD'},
+        {label:'Others', value:3.5, color:'#BFDBFE'}
+      ]},
+      {titleZh:'合規 vs 非合規', titleEn:'Regulated vs Non-Reg', note:'~', data:[
+        {label:{zh:'合規',en:'Regulated'},    value:17.0, color:'#F97316'},
+        {label:{zh:'非合規',en:'Non-Reg'},    value:83.0, color:'#1E293B'}
+      ]}
+    ]
+  },
+  w11: {
+    hector: [{
+      titleZh:'Latam 市場幣別', titleEn:'Latam Market Currency',
+      note:'~',
+      data:[
+        {label:'BRL (Brazil)',    value:49.5, color:'#5B21B6'},
+        {label:'MXN (Mexico)',    value:40.8, color:'#7C3AED'},
+        {label:'VES (Venezuela)', value:3.10, color:'#A78BFA'},
+        {label:'CLP (Chile)',     value:2.30, color:'#C4B5FD'},
+        {label:'ARS (Argentina)', value:2.10, color:'#DDD6FE'},
+        {label:'Others',          value:2.20, color:'#EDE9FE'}
+      ]
+    }],
+    bryam: [
+      {titleZh:'CIS 幣別', titleEn:'CIS Currency', note:'~', data:[
+        {label:'RUB', value:70.5, color:'#065F46'},
+        {label:'UZS', value:16.8, color:'#059669'},
+        {label:'UAH', value:7.2,  color:'#10B981'},
+        {label:'KZT', value:3.2,  color:'#34D399'},
+        {label:'Others', value:2.3, color:'#A7F3D0'}
+      ]},
+      {titleZh:'西亞幣別', titleEn:'West Asia Currency', note:'~', data:[
+        {label:'TRY', value:70.9, color:'#92400E'},
+        {label:'AED', value:16.2, color:'#B45309'},
+        {label:'SAR', value:11.5, color:'#D97706'},
+        {label:'Others', value:1.4, color:'#FDE68A'}
+      ]}
+    ],
+    chu: [
+      {titleZh:'非洲幣別', titleEn:'Africa Currency', note:'~', data:[
+        {label:'XOF', value:37.5, color:'#0F766E'},
+        {label:'NGN', value:19.5, color:'#0D9488'},
+        {label:'TZS+UGX', value:15.0, color:'#14B8A6'},
+        {label:'XAF', value:7.5, color:'#2DD4BF'},
+        {label:'ZAR', value:4.5, color:'#5EEAD4'},
+        {label:'Others', value:16.0, color:'#CCFBF1'}
+      ]},
+      {titleZh:'大洋洲幣別', titleEn:'Oceania Currency', note:'~', data:[
+        {label:'AUD', value:84.5, color:'#1D4ED8'},
+        {label:'NZD', value:11.5, color:'#3B82F6'},
+        {label:'Others', value:4.0, color:'#BFDBFE'}
+      ]},
+      {titleZh:'北美幣別', titleEn:'N.America Currency', note:'~', data:[
+        {label:'USD', value:95.0, color:'#15803D'},
+        {label:'CAD', value:4.0, color:'#4ADE80'},
+        {label:'Others', value:1.0, color:'#BBF7D0'}
+      ]}
+    ],
+    nina: [
+      {titleZh:'EU 幣別', titleEn:'EU Currency', note:'actual', data:[
+        {label:'EUR', value:72.63, color:'#1E40AF'},
+        {label:'GBP', value:12.02, color:'#2563EB'},
+        {label:'PLN', value:6.19,  color:'#3B82F6'},
+        {label:'HUF', value:4.21,  color:'#60A5FA'},
+        {label:'DKK', value:2.12,  color:'#93C5FD'},
+        {label:'Others', value:2.83, color:'#BFDBFE'}
+      ]},
+      {titleZh:'合規 vs 非合規', titleEn:'Regulated vs Non-Reg', note:'actual', data:[
+        {label:{zh:'合規',en:'Regulated'},    value:18.5, color:'#F97316'},
+        {label:{zh:'非合規',en:'Non-Reg'},    value:81.5, color:'#1E293B'}
+      ]}
+    ]
+  },
+  w12: {
+    hector: [{
+      titleZh:'Latam 市場幣別', titleEn:'Latam Market Currency',
+      note:'~',
+      data:[
+        {label:'BRL (Brazil)',    value:48.2, color:'#5B21B6'},
+        {label:'MXN (Mexico)',    value:41.8, color:'#7C3AED'},
+        {label:'VES (Venezuela)', value:3.80, color:'#A78BFA'},
+        {label:'CLP (Chile)',     value:2.40, color:'#C4B5FD'},
+        {label:'ARS (Argentina)', value:1.90, color:'#DDD6FE'},
+        {label:'Others',          value:1.90, color:'#EDE9FE'}
+      ]
+    }],
+    bryam: [
+      {titleZh:'CIS 幣別', titleEn:'CIS Currency', note:'~', data:[
+        {label:'RUB', value:69.5, color:'#065F46'},
+        {label:'UZS', value:17.5, color:'#059669'},
+        {label:'UAH', value:7.2,  color:'#10B981'},
+        {label:'KZT', value:3.1,  color:'#34D399'},
+        {label:'Others', value:2.7, color:'#A7F3D0'}
+      ]},
+      {titleZh:'西亞幣別', titleEn:'West Asia Currency', note:'~', data:[
+        {label:'TRY', value:70.5, color:'#92400E'},
+        {label:'AED', value:16.5, color:'#B45309'},
+        {label:'SAR', value:11.5, color:'#D97706'},
+        {label:'Others', value:1.5, color:'#FDE68A'}
+      ]}
+    ],
+    chu: [
+      {titleZh:'非洲幣別', titleEn:'Africa Currency', note:'~', data:[
+        {label:'XOF', value:38.5, color:'#0F766E'},
+        {label:'NGN', value:19.2, color:'#0D9488'},
+        {label:'TZS+UGX', value:14.2, color:'#14B8A6'},
+        {label:'XAF', value:7.3, color:'#2DD4BF'},
+        {label:'ZAR', value:5.0, color:'#5EEAD4'},
+        {label:'Others', value:15.8, color:'#CCFBF1'}
+      ]},
+      {titleZh:'大洋洲幣別', titleEn:'Oceania Currency', note:'~', data:[
+        {label:'AUD', value:84.8, color:'#1D4ED8'},
+        {label:'NZD', value:11.2, color:'#3B82F6'},
+        {label:'Others', value:4.0, color:'#BFDBFE'}
+      ]},
+      {titleZh:'北美幣別', titleEn:'N.America Currency', note:'~', data:[
+        {label:'USD', value:94.5, color:'#15803D'},
+        {label:'CAD', value:4.5, color:'#4ADE80'},
+        {label:'Others', value:1.0, color:'#BBF7D0'}
+      ]}
+    ],
+    nina: [
+      {titleZh:'EU 幣別', titleEn:'EU Currency', note:'~', data:[
+        {label:'EUR', value:73.0, color:'#1E40AF'},
+        {label:'GBP', value:12.0, color:'#2563EB'},
+        {label:'PLN', value:6.0,  color:'#3B82F6'},
+        {label:'HUF', value:4.0,  color:'#60A5FA'},
+        {label:'DKK', value:2.0,  color:'#93C5FD'},
+        {label:'Others', value:3.0, color:'#BFDBFE'}
+      ]},
+      {titleZh:'合規 vs 非合規', titleEn:'Regulated vs Non-Reg', note:'~', data:[
+        {label:{zh:'合規',en:'Regulated'},    value:19.0, color:'#F97316'},
+        {label:{zh:'非合規',en:'Non-Reg'},    value:81.0, color:'#1E293B'}
+      ]}
+    ]
+  },
+  w13: {
+    hector: [{
+      titleZh:'Latam 市場幣別', titleEn:'Latam Market Currency',
+      note:'~',
+      data:[
+        {label:'BRL (Brazil)',    value:46.18, color:'#5B21B6'},
+        {label:'MXN (Mexico)',    value:44.07, color:'#7C3AED'},
+        {label:'VES (Venezuela)', value:3.50,  color:'#A78BFA'},
+        {label:'CLP (Chile)',     value:2.60,  color:'#C4B5FD'},
+        {label:'ARS (Argentina)', value:1.80,  color:'#DDD6FE'},
+        {label:'Others',          value:1.85,  color:'#EDE9FE'}
+      ]
+    }],
+    bryam: [
+      {titleZh:'CIS 幣別', titleEn:'CIS Currency', note:'~', data:[
+        {label:'RUB', value:69.88, color:'#065F46'},
+        {label:'UZS', value:17.14, color:'#059669'},
+        {label:'UAH', value:7.18,  color:'#10B981'},
+        {label:'KZT', value:3.18,  color:'#34D399'},
+        {label:'Others', value:2.62, color:'#A7F3D0'}
+      ]},
+      {titleZh:'西亞幣別', titleEn:'West Asia Currency', note:'~', data:[
+        {label:'TRY', value:70.9, color:'#92400E'},
+        {label:'AED', value:16.0, color:'#B45309'},
+        {label:'SAR', value:11.5, color:'#D97706'},
+        {label:'Others', value:1.6, color:'#FDE68A'}
+      ]}
+    ],
+    chu: [
+      {titleZh:'非洲幣別', titleEn:'Africa Currency', note:'~', data:[
+        {label:'XOF', value:38.02, color:'#0F766E'},
+        {label:'NGN', value:19.20, color:'#0D9488'},
+        {label:'TZS+UGX', value:14.51, color:'#14B8A6'},
+        {label:'XAF', value:7.26, color:'#2DD4BF'},
+        {label:'ZAR', value:4.74, color:'#5EEAD4'},
+        {label:'Others', value:16.27, color:'#CCFBF1'}
+      ]},
+      {titleZh:'大洋洲幣別', titleEn:'Oceania Currency', note:'~', data:[
+        {label:'AUD', value:84.0, color:'#1D4ED8'},
+        {label:'NZD', value:11.8, color:'#3B82F6'},
+        {label:'Others', value:4.2, color:'#BFDBFE'}
+      ]},
+      {titleZh:'北美幣別', titleEn:'N.America Currency', note:'~', data:[
+        {label:'USD', value:94.8, color:'#15803D'},
+        {label:'CAD', value:4.2, color:'#4ADE80'},
+        {label:'Others', value:1.0, color:'#BBF7D0'}
+      ]}
+    ],
+    nina: [
+      {titleZh:'EU 幣別', titleEn:'EU Currency', note:'~', data:[
+        {label:'EUR', value:72.0, color:'#1E40AF'},
+        {label:'GBP', value:12.5, color:'#2563EB'},
+        {label:'PLN', value:6.0,  color:'#3B82F6'},
+        {label:'HUF', value:4.2,  color:'#60A5FA'},
+        {label:'DKK', value:2.3,  color:'#93C5FD'},
+        {label:'Others', value:3.0, color:'#BFDBFE'}
+      ]},
+      {titleZh:'合規 vs 非合規', titleEn:'Regulated vs Non-Reg', note:'~', data:[
+        {label:{zh:'合規',en:'Regulated'},    value:18.5, color:'#F97316'},
+        {label:{zh:'非合規',en:'Non-Reg'},    value:81.5, color:'#1E293B'}
+      ]}
+    ]
+  }
+};
+
 let currentWeek = 'w12';
 let currentLang = 'zh';
 
@@ -1361,11 +1643,14 @@ function renderSections(memberId, mData) {
   const planItems = mData.plans.map(p =>
     `<li>${currentLang === 'zh' ? p.zh : p.en}</li>`).join('');
 
-  // Weekly currency charts
-  const currData = memberCurrencies[memberId] || [];
+  // Weekly currency charts — use week-specific data if available, else fall back to monthly avg
+  const currData = (weeklyCurrency[currentWeek] && weeklyCurrency[currentWeek][memberId])
+    ? weeklyCurrency[currentWeek][memberId]
+    : (memberCurrencies[memberId] || []);
   const currCards = currData.map(rc => {
     const title = currentLang === 'zh' ? rc.titleZh : rc.titleEn;
     const donut = buildDonut(rc.data, 65, 16);
+    const isActual = rc.note === 'actual';
     const legend = rc.data.map(d => {
       const lbl = typeof d.label === 'object' ? t(d.label) : d.label;
       return `<div class="wc-legend-row">
@@ -1375,13 +1660,13 @@ function renderSections(memberId, mData) {
       </div>`;
     }).join('');
     return `<div class="wc-card">
-      <div class="wc-title">${title}</div>
+      <div class="wc-title">${title}${isActual ? ' <span style="color:#10B981;font-size:9px">✓ 實際</span>' : ''}</div>
       <div class="wc-chart-wrap">${donut}<div class="wc-legend">${legend}</div></div>
     </div>`;
   }).join('');
   const currHtml = currCards
     ? `<div class="weekly-currency-wrap">
-        <div class="wc-note">📊 ${currentLang === 'zh' ? '3月月均代表數據' : 'March monthly avg (representative)'}</div>
+        <div class="wc-note">📊 ${currentLang === 'zh' ? '本週幣別分布（~ 標記為趨勢估算值，✓ 標記為官方實際數據）' : 'Weekly currency mix (~ = trend estimate, ✓ = official actual data)'}</div>
         <div class="weekly-currency-grid">${currCards}</div>
        </div>`
     : '';
@@ -1589,7 +1874,8 @@ function renderMonthlyView(monthId) {
   document.getElementById('m-hi-title').textContent    = currentLang === 'zh' ? '本月重點摘要' : 'Monthly Highlights';
   document.getElementById('m-kpi-title').textContent   = currentLang === 'zh' ? '各區域 KPI 達成率' : 'Regional KPI Achievement';
   document.getElementById('m-curr-title').textContent  = currentLang === 'zh' ? '各區域幣別分布' : 'Regional Currency Mix';
-  document.getElementById('m-member-title').textContent= currentLang === 'zh' ? 'BD 成員月度摘要' : 'BD Member Monthly Summary';
+  document.getElementById('m-promo-title').textContent  = currentLang === 'zh' ? '各 BD 促銷活動總覽' : 'BD Promotions Overview';
+  document.getElementById('m-member-title').textContent = currentLang === 'zh' ? 'BD 成員月度摘要' : 'BD Member Monthly Summary';
 
   // Monthly highlights (completed + watchout)
   const hiEl = document.getElementById('monthlyHighlights');
@@ -1655,6 +1941,60 @@ function renderMonthlyView(monthId) {
       </div>
     </div>`;
   }).join('');
+
+  // Monthly promo accordion
+  const paEl = document.getElementById('monthlyPromoAccordion');
+  if (paEl) {
+    const monthKey2 = Object.keys(monthlyData).find(k => monthlyData[k] === md) || 'mar2026';
+    const promoByMember = (monthlyPromos[monthKey2] || {});
+    const paMembers = [
+      {id:'hector', name:'Hector Langa',  color:'#F59E0B', regionZh:'LATAM',       regionEn:'LATAM'},
+      {id:'nina',   name:'Nina Xu',       color:'#F97316', regionZh:'EU',          regionEn:'EU'},
+      {id:'chu',    name:'Chu Chang',     color:'#10B981', regionZh:'Africa/Oceania/NA', regionEn:'Africa/Oceania/NA'},
+      {id:'bryam',  name:'Bryam Jacquet', color:'#8B5CF6', regionZh:'CIS & 西亞',  regionEn:'CIS & West Asia'}
+    ];
+    const promoTh2 = currentLang === 'zh'
+      ? ['平台/客戶','市場','促銷類型','期間','狀態','預期效益']
+      : ['Platform','Market','Promo Type','Period','Status','Expected Impact'];
+    paEl.innerHTML = paMembers.map((pm, idx) => {
+      const promos = promoByMember[pm.id] || [];
+      const region = currentLang === 'zh' ? pm.regionZh : pm.regionEn;
+      const promoRows = promos.map(p => {
+        const statusClass = p.status === 'active' ? 'promo-active' : p.status === 'completed' ? 'promo-done' : 'promo-upcoming';
+        const statusLabel = p.status === 'active' ? (currentLang==='zh'?'進行中':'Active')
+          : p.status === 'completed' ? (currentLang==='zh'?'已完成':'Completed')
+          : (currentLang==='zh'?'即將推出':'Upcoming');
+        return `<tr>
+          <td><strong>${p.platform}</strong></td>
+          <td>${p.market}</td>
+          <td>${currentLang==='zh' ? p.promoTypeZh : p.promoTypeEn}</td>
+          <td>${p.period}</td>
+          <td><span class="promo-status ${statusClass}">${statusLabel}</span></td>
+          <td style="color:var(--muted)">${currentLang==='zh' ? p.impactZh : p.impactEn}</td>
+        </tr>`;
+      }).join('');
+      const bodyId = `mpa-body-${pm.id}`;
+      const isOpen = idx === 0; // Hector open by default
+      return `<div class="mpa-item">
+        <div class="mpa-header" onclick="this.nextElementSibling.classList.toggle('open');this.querySelector('.chevron').classList.toggle('open')">
+          <div class="mpa-title">
+            <div class="mpa-avatar" style="background:${pm.color}">${pm.name.charAt(0)}</div>
+            <div>
+              <strong>${pm.name}</strong>
+              <span class="mpa-count"> · ${region} · ${promos.length} ${currentLang==='zh'?'筆活動':'activities'}</span>
+            </div>
+          </div>
+          <span class="chevron${isOpen?' open':''}">▼</span>
+        </div>
+        <div class="${isOpen?'mpa-body open':'mpa-body'}">
+          <table class="promo-table">
+            <thead><tr>${promoTh2.map(h=>`<th>${h}</th>`).join('')}</tr></thead>
+            <tbody>${promoRows || `<tr><td colspan="6" style="color:var(--muted);text-align:center;padding:12px">${currentLang==='zh'?'本月無記錄促銷活動':'No promotions recorded this month'}</td></tr>`}</tbody>
+          </table>
+        </div>
+      </div>`;
+    }).join('');
+  }
 
   // Member summaries
   const memberEl = document.getElementById('memberSummaryGrid');
