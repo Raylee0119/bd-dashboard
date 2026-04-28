@@ -369,6 +369,7 @@
     </div>
   </div>
   <div class="header-right">
+    <!-- 週報選擇器 -->
     <select class="week-select" id="weekSelect" onchange="switchWeek(this.value)">
       <optgroup label="── 週報 ──">
         <option value="w10">W10 · 3/02–3/08, 2026</option>
@@ -378,6 +379,42 @@
       </optgroup>
       <optgroup label="── 月總結 ──">
         <option value="mar2026">三月 2026 月總結</option>
+      </optgroup>
+    </select>
+    <!-- 月報選擇器 -->
+    <select class="week-select" id="monthRptSelect" style="display:none" onchange="switchMonthRpt(this.value)">
+      <optgroup id="mg-2026" label="── 2026 ──">
+        <option value="mar2026" data-zh="三月 2026" data-en="March 2026">三月 2026</option>
+        <option value="feb2026" data-zh="二月 2026" data-en="February 2026">二月 2026</option>
+        <option value="jan2026" data-zh="一月 2026" data-en="January 2026">一月 2026</option>
+      </optgroup>
+      <optgroup id="mg-2025" label="── 2025 ──">
+        <option value="dec2025" data-zh="十二月 2025" data-en="December 2025">十二月 2025</option>
+        <option value="nov2025" data-zh="十一月 2025" data-en="November 2025">十一月 2025</option>
+      </optgroup>
+    </select>
+    <!-- 出差報告選擇器 -->
+    <select class="week-select" id="travelSelect" style="display:none" onchange="switchTravelFilter(this.value)">
+      <optgroup id="tg-2026" label="── 2026 ──">
+        <option value="all-2026" data-zh="全部 · 2026" data-en="All · 2026">全部 · 2026</option>
+        <option value="q1-2026" data-zh="Q1 · 2026" data-en="Q1 · 2026">Q1 · 2026</option>
+        <option value="q2-2026" data-zh="Q2 · 2026" data-en="Q2 · 2026">Q2 · 2026</option>
+        <option value="q3-2026" data-zh="Q3 · 2026" data-en="Q3 · 2026">Q3 · 2026</option>
+        <option value="q4-2026" data-zh="Q4 · 2026" data-en="Q4 · 2026">Q4 · 2026</option>
+      </optgroup>
+      <optgroup id="tg-2025" label="── 2025 ──">
+        <option value="all-2025" data-zh="全部 · 2025" data-en="All · 2025">全部 · 2025</option>
+      </optgroup>
+    </select>
+    <!-- 參展報告選擇器 -->
+    <select class="week-select" id="exhibitionSelect" style="display:none" onchange="switchExhibitionFilter(this.value)">
+      <optgroup id="eg-2026" label="── 2026 ──">
+        <option value="all-2026" data-zh="全部 · 2026" data-en="All · 2026">全部 · 2026</option>
+        <option value="q1-2026" data-zh="Q1 · 2026" data-en="Q1 · 2026">Q1 · 2026</option>
+        <option value="q2-2026" data-zh="Q2 · 2026" data-en="Q2 · 2026">Q2 · 2026</option>
+      </optgroup>
+      <optgroup id="eg-2025" label="── 2025 ──">
+        <option value="all-2025" data-zh="全部 · 2025" data-en="All · 2025">全部 · 2025</option>
       </optgroup>
     </select>
     <div class="lang-toggle">
@@ -2445,17 +2482,31 @@ function toggleSection(header) {
 // ══════════════════════════════════════
 //  REPORT TYPE SWITCHING
 // ══════════════════════════════════════
+// 各頁籤對應的選擇器 ID
+const SELECTOR_MAP = {
+  'weekly':      'weekSelect',
+  'monthly-rpt': 'monthRptSelect',
+  'travel':      'travelSelect',
+  'exhibition':  'exhibitionSelect'
+};
+
 function switchReportType(type, btn) {
-  // Update nav tabs
+  // 更新頁籤 active 狀態
   document.querySelectorAll('.rtype-tab').forEach(t => t.classList.remove('active'));
   btn.classList.add('active');
+
+  // 切換右上角選擇器：只顯示對應的那個
+  Object.entries(SELECTOR_MAP).forEach(([t, selId]) => {
+    const sel = document.getElementById(selId);
+    if (sel) sel.style.display = t === type ? '' : 'none';
+  });
 
   const weeklyView  = document.getElementById('weekly-view');
   const monthlyView = document.getElementById('monthly-view');
   const filterBar   = document.getElementById('filterBar');
 
   if (type === 'weekly') {
-    // 讓 switchWeek 統一處理 weekly/monthly 顯示邏輯，避免衝突
+    // 讓 switchWeek 統一處理週報/月總結顯示邏輯
     switchWeek(document.getElementById('weekSelect').value);
   } else {
     // 隱藏週報和月總結
@@ -2469,6 +2520,24 @@ function switchReportType(type, btn) {
     const el = document.getElementById('view-' + id);
     if (el) el.classList.toggle('active', type === id);
   });
+}
+
+// 月報選擇器（待 Drive 資料接入後實作篩選）
+function switchMonthRpt(val) {
+  console.log('月報選擇：', val);
+  // TODO: 根據 val 篩選月報卡片
+}
+
+// 出差報告選擇器
+function switchTravelFilter(val) {
+  console.log('出差篩選：', val);
+  // TODO: 根據 val 篩選出差卡片
+}
+
+// 參展報告選擇器
+function switchExhibitionFilter(val) {
+  console.log('參展篩選：', val);
+  // TODO: 根據 val 篩選參展卡片
 }
 
 // ══════════════════════════════════════
