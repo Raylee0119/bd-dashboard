@@ -391,16 +391,16 @@
 <!-- ══════════ REPORT TYPE NAV ══════════ -->
 <div class="report-type-bar">
   <button class="rtype-tab active" onclick="switchReportType('weekly',this)">
-    <span class="rtype-icon">📊</span>週報
+    <span class="rtype-icon">📊</span><span data-zh="週報" data-en="Weekly">週報</span>
   </button>
   <button class="rtype-tab" onclick="switchReportType('monthly-rpt',this)">
-    <span class="rtype-icon">📋</span>月報
+    <span class="rtype-icon">📋</span><span data-zh="月報" data-en="Monthly Reports">月報</span>
   </button>
   <button class="rtype-tab" onclick="switchReportType('travel',this)">
-    <span class="rtype-icon">✈️</span>出差報告
+    <span class="rtype-icon">✈️</span><span data-zh="出差報告" data-en="Travel Reports">出差報告</span>
   </button>
   <button class="rtype-tab" onclick="switchReportType('exhibition',this)">
-    <span class="rtype-icon">🏢</span>參展報告
+    <span class="rtype-icon">🏢</span><span data-zh="參展報告" data-en="Exhibitions">參展報告</span>
   </button>
 </div>
 
@@ -568,13 +568,13 @@
   <div id="view-monthly-rpt" class="rpt-view">
     <div class="rpt-toolbar">
       <div>
-        <div class="rpt-toolbar-title">📋 月報</div>
-        <div class="rpt-toolbar-sub">BD 團隊每月正式報告</div>
+        <div class="rpt-toolbar-title">📋 <span data-zh="月報" data-en="Monthly Reports">月報</span></div>
+        <div class="rpt-toolbar-sub" data-zh="BD 團隊每月正式報告" data-en="BD Team Official Monthly Reports">BD 團隊每月正式報告</div>
       </div>
       <div class="rpt-filter-row">
         <select class="rpt-select" id="mRptYear"><option>2026</option><option>2025</option></select>
         <select class="rpt-select" id="mRptMember">
-          <option value="all">全部成員</option>
+          <option value="all" data-zh="全部成員" data-en="All Members">全部成員</option>
           <option value="hector">Hector Langa</option>
           <option value="chu">Chu Huang</option>
           <option value="nina">Nina Cheng</option>
@@ -582,47 +582,47 @@
         </select>
       </div>
     </div>
-    <div class="rpt-section-label">2026 年</div>
+    <div class="rpt-section-label" data-zh="2026 年" data-en="Year 2026">2026 年</div>
     <div class="rpt-grid">
       <!-- Mar 2026 -->
       <div class="rpt-card">
         <div class="rpt-card-top">
-          <div class="rpt-card-type">📋 月報 <span style="color:var(--orange)">·</span> 2026 年 3 月</div>
-          <div class="rpt-card-title">3 月 BD 月報 — March 2026</div>
+          <div class="rpt-card-type">📋 <span data-zh="月報" data-en="Monthly Report">月報</span> <span style="color:var(--orange)">·</span> <span data-zh="2026 年 3 月" data-en="March 2026">2026 年 3 月</span></div>
+          <div class="rpt-card-title" data-zh="3 月 BD 月報 — March 2026" data-en="March 2026 BD Monthly Report">3 月 BD 月報 — March 2026</div>
           <div class="rpt-card-meta">
             <span class="rpt-meta-chip">📅 2026/03/01 – 03/31</span>
-            <span class="rpt-meta-chip">👥 全員</span>
+            <span class="rpt-meta-chip">👥 <span data-zh="全員" data-en="All Members">全員</span></span>
           </div>
         </div>
         <div class="rpt-card-body">
-          <div class="rpt-card-desc">涵蓋 Hector / Chu / Nina / Bryam 四位 BD 3月整體達成率、重點客戶、促銷活動及下月計畫。</div>
+          <div class="rpt-card-desc" data-zh="涵蓋 Hector / Chu / Nina / Bryam 四位 BD 3月整體達成率、重點客戶、促銷活動及下月計畫。" data-en="Covers March achievement rate, key clients, promotions and April plans for all 4 BD members.">涵蓋 Hector / Chu / Nina / Bryam 四位 BD 3月整體達成率、重點客戶、促銷活動及下月計畫。</div>
         </div>
         <div class="rpt-card-footer">
-          <span class="rpt-status done">✓ 已完成</span>
-          <button class="rpt-view-btn" disabled>📂 待連結 Drive</button>
+          <span class="rpt-status done">✓ <span data-zh="已完成" data-en="Completed">已完成</span></span>
+          <button class="rpt-view-btn" disabled>📂 <span data-zh="待連結 Drive" data-en="Link Drive">待連結 Drive</span></button>
         </div>
       </div>
       <!-- Feb 2026 placeholder -->
       <div class="rpt-card" style="opacity:0.55">
         <div class="rpt-card-top">
-          <div class="rpt-card-type">📋 月報 <span style="color:var(--orange)">·</span> 2026 年 2 月</div>
-          <div class="rpt-card-title">2 月 BD 月報 — February 2026</div>
+          <div class="rpt-card-type">📋 <span data-zh="月報" data-en="Monthly Report">月報</span> <span style="color:var(--orange)">·</span> <span data-zh="2026 年 2 月" data-en="February 2026">2026 年 2 月</span></div>
+          <div class="rpt-card-title" data-zh="2 月 BD 月報 — February 2026" data-en="February 2026 BD Monthly Report">2 月 BD 月報 — February 2026</div>
           <div class="rpt-card-meta">
             <span class="rpt-meta-chip">📅 2026/02/01 – 02/28</span>
-            <span class="rpt-meta-chip">👥 全員</span>
+            <span class="rpt-meta-chip">👥 <span data-zh="全員" data-en="All Members">全員</span></span>
           </div>
         </div>
         <div class="rpt-card-body">
-          <div class="rpt-card-desc" style="color:#CBD5E1">資料待從 Google Drive 同步</div>
+          <div class="rpt-card-desc" style="color:#CBD5E1" data-zh="資料待從 Google Drive 同步" data-en="Pending sync from Google Drive">資料待從 Google Drive 同步</div>
         </div>
         <div class="rpt-card-footer">
-          <span class="rpt-status pending">⏳ 待同步</span>
-          <button class="rpt-view-btn" disabled>📂 待連結 Drive</button>
+          <span class="rpt-status pending">⏳ <span data-zh="待同步" data-en="Pending">待同步</span></span>
+          <button class="rpt-view-btn" disabled>📂 <span data-zh="待連結 Drive" data-en="Link Drive">待連結 Drive</span></button>
         </div>
       </div>
     </div>
     <div class="rpt-empty" style="margin-top:16px">
-      <div class="rpt-sync-note">🔗 更多月報將在連結 Google Drive 後自動載入</div>
+      <div class="rpt-sync-note">🔗 <span data-zh="更多月報將在連結 Google Drive 後自動載入" data-en="More reports will auto-load after linking Google Drive">更多月報將在連結 Google Drive 後自動載入</span></div>
     </div>
   </div><!-- end 月報 view -->
 
@@ -630,48 +630,48 @@
   <div id="view-travel" class="rpt-view">
     <div class="rpt-toolbar">
       <div>
-        <div class="rpt-toolbar-title">✈️ 出差報告</div>
-        <div class="rpt-toolbar-sub">BD 成員商務出差記錄與報告</div>
+        <div class="rpt-toolbar-title">✈️ <span data-zh="出差報告" data-en="Travel Reports">出差報告</span></div>
+        <div class="rpt-toolbar-sub" data-zh="BD 成員商務出差記錄與報告" data-en="BD Member Business Travel Records & Reports">BD 成員商務出差記錄與報告</div>
       </div>
       <div class="rpt-filter-row">
         <select class="rpt-select"><option>2026</option><option>2025</option></select>
         <select class="rpt-select">
-          <option value="all">全部成員</option>
+          <option value="all" data-zh="全部成員" data-en="All Members">全部成員</option>
           <option value="hector">Hector Langa</option>
           <option value="chu">Chu Huang</option>
           <option value="nina">Nina Cheng</option>
           <option value="bryam">Bryam Jacquet</option>
         </select>
         <select class="rpt-select">
-          <option>全部狀態</option>
-          <option>已完成</option>
-          <option>進行中</option>
-          <option>計畫中</option>
+          <option data-zh="全部狀態" data-en="All Status">全部狀態</option>
+          <option data-zh="已完成" data-en="Completed">已完成</option>
+          <option data-zh="進行中" data-en="In Progress">進行中</option>
+          <option data-zh="計畫中" data-en="Planned">計畫中</option>
         </select>
       </div>
     </div>
-    <div class="rpt-section-label">2026 年 Q1</div>
+    <div class="rpt-section-label" data-zh="2026 年 Q1" data-en="2026 Q1">2026 年 Q1</div>
     <div class="rpt-grid">
       <!-- Example card 1 -->
       <div class="rpt-card" style="opacity:0.6">
         <div class="rpt-card-top">
           <div class="rpt-card-type">
             <div class="rpt-avatar" style="background:#F59E0B;width:22px;height:22px;font-size:10px;border:none;margin-right:2px">H</div>
-            Hector Langa · 出差
+            Hector Langa · <span data-zh="出差" data-en="Travel">出差</span>
           </div>
-          <div class="rpt-card-title">Latam 客戶拜訪 — São Paulo</div>
+          <div class="rpt-card-title" data-zh="Latam 客戶拜訪 — São Paulo" data-en="Latam Client Visit — São Paulo">Latam 客戶拜訪 — São Paulo</div>
           <div class="rpt-card-meta">
-            <span class="rpt-meta-chip">📅 待填入</span>
+            <span class="rpt-meta-chip">📅 <span data-zh="待填入" data-en="TBD">待填入</span></span>
             <span class="rpt-meta-chip">📍 São Paulo, Brazil</span>
-            <span class="rpt-meta-chip">🎯 客戶洽談</span>
+            <span class="rpt-meta-chip">🎯 <span data-zh="客戶洽談" data-en="Client Meeting">客戶洽談</span></span>
           </div>
         </div>
         <div class="rpt-card-body">
-          <div class="rpt-card-desc" style="color:#CBD5E1">出差報告內容將從 Google Drive 同步</div>
+          <div class="rpt-card-desc" style="color:#CBD5E1" data-zh="出差報告內容將從 Google Drive 同步" data-en="Report content pending sync from Google Drive">出差報告內容將從 Google Drive 同步</div>
         </div>
         <div class="rpt-card-footer">
-          <span class="rpt-status pending">⏳ 待同步</span>
-          <button class="rpt-view-btn" disabled>📂 待連結 Drive</button>
+          <span class="rpt-status pending">⏳ <span data-zh="待同步" data-en="Pending">待同步</span></span>
+          <button class="rpt-view-btn" disabled>📂 <span data-zh="待連結 Drive" data-en="Link Drive">待連結 Drive</span></button>
         </div>
       </div>
       <!-- Example card 2 -->
@@ -679,29 +679,29 @@
         <div class="rpt-card-top">
           <div class="rpt-card-type">
             <div class="rpt-avatar" style="background:#F97316;width:22px;height:22px;font-size:10px;border:none;margin-right:2px">N</div>
-            Nina Cheng · 出差
+            Nina Cheng · <span data-zh="出差" data-en="Travel">出差</span>
           </div>
-          <div class="rpt-card-title">EU 市場客戶拜訪</div>
+          <div class="rpt-card-title" data-zh="EU 市場客戶拜訪" data-en="EU Market Client Visit">EU 市場客戶拜訪</div>
           <div class="rpt-card-meta">
-            <span class="rpt-meta-chip">📅 待填入</span>
+            <span class="rpt-meta-chip">📅 <span data-zh="待填入" data-en="TBD">待填入</span></span>
             <span class="rpt-meta-chip">📍 Europe</span>
-            <span class="rpt-meta-chip">🎯 合規市場洽談</span>
+            <span class="rpt-meta-chip">🎯 <span data-zh="合規市場洽談" data-en="Regulated Market Meeting">合規市場洽談</span></span>
           </div>
         </div>
         <div class="rpt-card-body">
-          <div class="rpt-card-desc" style="color:#CBD5E1">出差報告內容將從 Google Drive 同步</div>
+          <div class="rpt-card-desc" style="color:#CBD5E1" data-zh="出差報告內容將從 Google Drive 同步" data-en="Report content pending sync from Google Drive">出差報告內容將從 Google Drive 同步</div>
         </div>
         <div class="rpt-card-footer">
-          <span class="rpt-status pending">⏳ 待同步</span>
-          <button class="rpt-view-btn" disabled>📂 待連結 Drive</button>
+          <span class="rpt-status pending">⏳ <span data-zh="待同步" data-en="Pending">待同步</span></span>
+          <button class="rpt-view-btn" disabled>📂 <span data-zh="待連結 Drive" data-en="Link Drive">待連結 Drive</span></button>
         </div>
       </div>
     </div>
     <div class="rpt-empty" style="margin-top:24px">
       <div class="rpt-empty-icon">✈️</div>
-      <div class="rpt-empty-title">出差報告即將上線</div>
-      <div class="rpt-empty-sub">連結 Google Drive 後，所有出差報告將自動整合顯示於此</div>
-      <div class="rpt-sync-note">🔗 等待 Google Drive 資料來源</div>
+      <div class="rpt-empty-title" data-zh="出差報告即將上線" data-en="Travel Reports Coming Soon">出差報告即將上線</div>
+      <div class="rpt-empty-sub" data-zh="連結 Google Drive 後，所有出差報告將自動整合顯示於此" data-en="After linking Google Drive, all travel reports will be displayed here automatically">連結 Google Drive 後，所有出差報告將自動整合顯示於此</div>
+      <div class="rpt-sync-note">🔗 <span data-zh="等待 Google Drive 資料來源" data-en="Awaiting Google Drive data source">等待 Google Drive 資料來源</span></div>
     </div>
   </div><!-- end 出差報告 view -->
 
@@ -709,68 +709,68 @@
   <div id="view-exhibition" class="rpt-view">
     <div class="rpt-toolbar">
       <div>
-        <div class="rpt-toolbar-title">🏢 參展報告</div>
-        <div class="rpt-toolbar-sub">展會參與記錄與成果報告</div>
+        <div class="rpt-toolbar-title">🏢 <span data-zh="參展報告" data-en="Exhibitions">參展報告</span></div>
+        <div class="rpt-toolbar-sub" data-zh="展會參與記錄與成果報告" data-en="Exhibition Participation Records & Reports">展會參與記錄與成果報告</div>
       </div>
       <div class="rpt-filter-row">
         <select class="rpt-select"><option>2026</option><option>2025</option></select>
         <select class="rpt-select">
-          <option>全部地區</option>
+          <option data-zh="全部地區" data-en="All Regions">全部地區</option>
           <option>Europe</option>
           <option>Americas</option>
           <option>Asia</option>
         </select>
       </div>
     </div>
-    <div class="rpt-section-label">2026 年</div>
+    <div class="rpt-section-label" data-zh="2026 年" data-en="Year 2026">2026 年</div>
     <div class="rpt-grid">
       <!-- ICE London -->
       <div class="rpt-card" style="opacity:0.6">
         <div class="rpt-card-top">
-          <div class="rpt-card-type">🏢 展會報告 <span style="color:var(--orange)">·</span> Europe</div>
+          <div class="rpt-card-type">🏢 <span data-zh="展會報告" data-en="Exhibition Report">展會報告</span> <span style="color:var(--orange)">·</span> Europe</div>
           <div class="rpt-card-title">ICE London 2026</div>
           <div class="rpt-card-meta">
-            <span class="rpt-meta-chip">📅 待填入</span>
+            <span class="rpt-meta-chip">📅 <span data-zh="待填入" data-en="TBD">待填入</span></span>
             <span class="rpt-meta-chip">📍 London, UK</span>
           </div>
           <div class="rpt-card-meta" style="margin-top:6px">
             <div class="rpt-avatar" style="background:#F97316;border:2px solid #fff">N</div>
             <div class="rpt-avatar" style="background:#F59E0B;border:2px solid #fff">H</div>
-            <span style="font-size:11px;color:var(--muted);margin-left:10px">出席成員</span>
+            <span style="font-size:11px;color:var(--muted);margin-left:10px" data-zh="出席成員" data-en="Attendees">出席成員</span>
           </div>
         </div>
         <div class="rpt-card-body">
-          <div class="rpt-card-desc" style="color:#CBD5E1">展會報告內容將從 Google Drive 同步</div>
+          <div class="rpt-card-desc" style="color:#CBD5E1" data-zh="展會報告內容將從 Google Drive 同步" data-en="Report content pending sync from Google Drive">展會報告內容將從 Google Drive 同步</div>
         </div>
         <div class="rpt-card-footer">
-          <span class="rpt-status pending">⏳ 待同步</span>
-          <button class="rpt-view-btn" disabled>📂 待連結 Drive</button>
+          <span class="rpt-status pending">⏳ <span data-zh="待同步" data-en="Pending">待同步</span></span>
+          <button class="rpt-view-btn" disabled>📂 <span data-zh="待連結 Drive" data-en="Link Drive">待連結 Drive</span></button>
         </div>
       </div>
       <!-- SiGMA -->
       <div class="rpt-card" style="opacity:0.6">
         <div class="rpt-card-top">
-          <div class="rpt-card-type">🏢 展會報告 <span style="color:var(--orange)">·</span> Europe</div>
+          <div class="rpt-card-type">🏢 <span data-zh="展會報告" data-en="Exhibition Report">展會報告</span> <span style="color:var(--orange)">·</span> Europe</div>
           <div class="rpt-card-title">SiGMA Europe 2026</div>
           <div class="rpt-card-meta">
-            <span class="rpt-meta-chip">📅 待填入</span>
+            <span class="rpt-meta-chip">📅 <span data-zh="待填入" data-en="TBD">待填入</span></span>
             <span class="rpt-meta-chip">📍 Malta</span>
           </div>
         </div>
         <div class="rpt-card-body">
-          <div class="rpt-card-desc" style="color:#CBD5E1">展會報告內容將從 Google Drive 同步</div>
+          <div class="rpt-card-desc" style="color:#CBD5E1" data-zh="展會報告內容將從 Google Drive 同步" data-en="Report content pending sync from Google Drive">展會報告內容將從 Google Drive 同步</div>
         </div>
         <div class="rpt-card-footer">
-          <span class="rpt-status pending">⏳ 待同步</span>
-          <button class="rpt-view-btn" disabled>📂 待連結 Drive</button>
+          <span class="rpt-status pending">⏳ <span data-zh="待同步" data-en="Pending">待同步</span></span>
+          <button class="rpt-view-btn" disabled>📂 <span data-zh="待連結 Drive" data-en="Link Drive">待連結 Drive</span></button>
         </div>
       </div>
     </div>
     <div class="rpt-empty" style="margin-top:24px">
       <div class="rpt-empty-icon">🏢</div>
-      <div class="rpt-empty-title">參展報告即將上線</div>
-      <div class="rpt-empty-sub">連結 Google Drive 後，展會報告將自動整合顯示於此</div>
-      <div class="rpt-sync-note">🔗 等待 Google Drive 資料來源</div>
+      <div class="rpt-empty-title" data-zh="參展報告即將上線" data-en="Exhibition Reports Coming Soon">參展報告即將上線</div>
+      <div class="rpt-empty-sub" data-zh="連結 Google Drive 後，展會報告將自動整合顯示於此" data-en="After linking Google Drive, all exhibition reports will be displayed here automatically">連結 Google Drive 後，展會報告將自動整合顯示於此</div>
+      <div class="rpt-sync-note">🔗 <span data-zh="等待 Google Drive 資料來源" data-en="Awaiting Google Drive data source">等待 Google Drive 資料來源</span></div>
     </div>
   </div><!-- end 參展報告 view -->
 
@@ -2402,6 +2402,10 @@ function setLang(lang) {
     ? 'BD 團隊 — 週報 Dashboard' : 'BD Team — Weekly Report Dashboard';
   document.getElementById('btn-export').textContent = lang === 'zh' ? '匯出 PDF' : 'Export PDF';
   document.getElementById('tab-all').textContent = lang === 'zh' ? '全部成員' : 'All Members';
+  // 更新所有 data-zh/data-en 元素
+  document.querySelectorAll('[data-zh]').forEach(el => {
+    el.textContent = lang === 'zh' ? el.dataset.zh : el.dataset.en;
+  });
   // Re-render
   const sel = document.getElementById('weekSelect').value;
   switchWeek(sel);
