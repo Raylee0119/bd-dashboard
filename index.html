@@ -220,6 +220,43 @@
   .ms-note{font-size:11px;color:var(--muted);margin-top:6px;line-height:1.4;}
   .ms-sparkline{margin-top:8px;}
 
+  /* Currency grid: 4 cols on monthly view */
+  .currency-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;}
+
+  /* ── MONTHLY HIGHLIGHTS ── */
+  .monthly-highlights-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  .hi-col{border-radius:10px;padding:14px 16px;}
+  .hi-col.done{background:rgba(16,185,129,0.07);border:1px solid rgba(16,185,129,0.22);}
+  .hi-col.watch{background:rgba(249,115,22,0.07);border:1px solid rgba(249,115,22,0.22);}
+  .hi-col-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:10px;display:flex;align-items:center;gap:6px;}
+  .hi-col.done .hi-col-title{color:#059669;}
+  .hi-col.watch .hi-col-title{color:#C2410C;}
+  .hi-item{font-size:12px;padding:5px 0;border-bottom:1px solid rgba(0,0,0,0.05);display:flex;gap:8px;align-items:flex-start;line-height:1.45;}
+  .hi-item:last-child{border-bottom:none;}
+
+  /* ── WEEKLY CURRENCY SECTION ── */
+  .weekly-currency-wrap{padding:8px 18px 14px;background:#FAFBFC;}
+  .weekly-currency-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(185px,1fr));gap:10px;margin-top:6px;}
+  .wc-card{background:#fff;border-radius:8px;padding:10px 12px;border:1px solid var(--border);}
+  .wc-title{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.4px;color:var(--muted);margin-bottom:8px;}
+  .wc-chart-wrap{display:flex;align-items:center;gap:10px;}
+  .wc-legend{flex:1;}
+  .wc-legend-row{display:flex;align-items:center;gap:5px;font-size:10px;padding:1.5px 0;}
+  .wc-legend-dot{width:8px;height:8px;border-radius:2px;flex-shrink:0;}
+  .wc-legend-label{flex:1;color:var(--text);}
+  .wc-legend-pct{font-weight:700;color:var(--muted);min-width:32px;text-align:right;}
+  .wc-note{font-size:9px;color:var(--muted);margin-top:5px;font-style:italic;text-align:right;}
+
+  /* ── PROMOTION TABLE ── */
+  .promo-table{width:100%;border-collapse:collapse;font-size:11px;margin-top:4px;}
+  .promo-table th{background:#F8FAFC;padding:5px 8px;text-align:left;font-weight:600;color:var(--muted);border-bottom:1px solid var(--border);font-size:10px;text-transform:uppercase;letter-spacing:0.3px;}
+  .promo-table td{padding:5px 8px;border-bottom:1px solid #F1F5F9;vertical-align:top;}
+  .promo-table tr:last-child td{border-bottom:none;}
+  .promo-status{display:inline-block;padding:1px 7px;border-radius:10px;font-size:9px;font-weight:700;}
+  .promo-active{background:#D1FAE5;color:#065F46;}
+  .promo-done{background:#DBEAFE;color:#1D4ED8;}
+  .promo-upcoming{background:#FEF3C7;color:#92400E;}
+
   /* ── PRINT ── */
   @media print {
     .header,.filter-bar{position:static;}
@@ -366,6 +403,17 @@
     </div>
 
     <div class="monthly-stats" id="monthlyStats"></div>
+
+    <!-- Monthly Highlights Summary -->
+    <div class="monthly-section">
+      <div class="monthly-section-header">
+        <span style="font-size:18px">📋</span>
+        <div class="monthly-section-title" id="m-hi-title">本月重點摘要</div>
+      </div>
+      <div class="monthly-section-body">
+        <div class="monthly-highlights-grid" id="monthlyHighlights"></div>
+      </div>
+    </div>
 
     <!-- KPI Section -->
     <div class="monthly-section">
@@ -895,6 +943,25 @@ const monthlyData = {
     kpiNoteZh:'* 月度 KPI 數據由 Ray 於每月10號前提供並確認。CIS KPI 數據待補充。',
     kpiNoteEn:'* Monthly KPI data confirmed by Ray before the 10th of each month. CIS KPI data pending.',
 
+    // Key highlights for top of monthly summary
+    keyHighlights: {
+      completed: [
+        {zh:'✅ Slotegrator CIS 合約正式完成簽署，4月進入執行階段', en:'✅ Slotegrator CIS contract signed; April execution phase begins'},
+        {zh:'✅ SportyBet Africa 正式上線 (SoftSwiss 整合完成) — 新市場里程碑', en:'✅ SportyBet Africa officially live (SoftSwiss integrated) — new market milestone'},
+        {zh:'✅ Boyles UK 上線 — 英國市場首個 live 合規客戶', en:'✅ Boyles UK live — first UK regulated client launched'},
+        {zh:'✅ Betsson Latam 合作條款確認，合約完成', en:'✅ Betsson Latam partnership terms confirmed, contract signed'},
+        {zh:'✅ 4月歐洲出差完成：Superbet (羅馬尼亞) / Betclic (葡萄牙) / StarCasino (義大利) 客戶面訪', en:'✅ April EU client visits completed: Superbet (Romania) / Betclic (Portugal) / StarCasino (Italy)'},
+        {zh:'✅ Nina EU KPI 達成 109.3%，EU+Global 整體達 116.8% — 超標達成', en:'✅ Nina EU KPI 109.3% achieved; EU+Global total 116.8% — target exceeded'}
+      ],
+      watchout: [
+        {zh:'⚠️ Latam KPI 74.8% 未達標 — 4月需加速衝刺，重點關注 Brazil/Colombia', en:'⚠️ Latam KPI 74.8% below target — April requires accelerated push; focus Brazil/Colombia'},
+        {zh:'⚠️ Bryam CIS 月末大幅下滑至 157.6M/天 — 4月 recovery 計畫關鍵', en:'⚠️ Bryam CIS dropped sharply to 157.6M/day at month-end — April recovery plan is critical'},
+        {zh:'⚠️ West Asia WA KPI 97.4% 接近但未達標 — 維持土耳其市場動能', en:'⚠️ West Asia KPI 97.4% near-miss — maintain Turkey market momentum in April'},
+        {zh:'⚠️ Rank / Ballys UK 仍在最終測試 — 推進速度需加快，目標 4月中上線', en:'⚠️ Rank/Ballys UK still in final testing — need to accelerate; target mid-April go-live'},
+        {zh:'⚠️ Rush Street (北美) 整合完成待上線 — 確認正式日期及首週支援計畫', en:'⚠️ Rush Street (N.America) integration done, awaiting launch — confirm go-live date & week-1 plan'}
+      ]
+    },
+
     // Currency breakdown (source: W11 representative week + monthly reports)
     currencies: {
       euCurrency: {
@@ -966,6 +1033,26 @@ const monthlyData = {
           {label:'ZAR',     value:4.74,  color:'#5EEAD4'},
           {label:'Others',  value:16.27, color:'#CCFBF1'}
         ]
+      },
+      oceania: {
+        titleZh:'大洋洲幣別分布', titleEn:'Oceania Currency Mix',
+        noteZh:'(月報代表數據)', noteEn:'(Monthly representative)',
+        icon:'🦘',
+        data:[
+          {label:'AUD',    value:84.6, color:'#1D4ED8'},
+          {label:'NZD',    value:11.2, color:'#3B82F6'},
+          {label:'Others', value:4.2,  color:'#BFDBFE'}
+        ]
+      },
+      northAmerica: {
+        titleZh:'北美幣別分布', titleEn:'North America Currency Mix',
+        noteZh:'(月報代表數據)', noteEn:'(Monthly representative)',
+        icon:'🦅',
+        data:[
+          {label:'USD',    value:94.8, color:'#15803D'},
+          {label:'CAD',    value:4.2,  color:'#4ADE80'},
+          {label:'Others', value:1.0,  color:'#BBF7D0'}
+        ]
       }
     },
 
@@ -979,8 +1066,141 @@ const monthlyData = {
 };
 
 // ══════════════════════════════════════
+//  MEMBER CURRENCY DATA (for weekly view)
+//  Source: March 2026 monthly reports (representative)
+// ══════════════════════════════════════
+const memberCurrencies = {
+  bryam: [
+    {
+      titleZh:'CIS 幣別', titleEn:'CIS Currency',
+      data:[
+        {label:'RUB',    value:69.88, color:'#065F46'},
+        {label:'UZS',    value:17.14, color:'#059669'},
+        {label:'UAH',    value:7.18,  color:'#10B981'},
+        {label:'KZT',    value:3.18,  color:'#34D399'},
+        {label:'Others', value:2.62,  color:'#A7F3D0'}
+      ]
+    },
+    {
+      titleZh:'西亞幣別', titleEn:'West Asia Currency',
+      data:[
+        {label:'TRY',    value:70.9, color:'#92400E'},
+        {label:'AED',    value:16.0, color:'#B45309'},
+        {label:'SAR',    value:11.5, color:'#D97706'},
+        {label:'Others', value:1.6,  color:'#FDE68A'}
+      ]
+    }
+  ],
+  hector: [
+    {
+      titleZh:'Latam 幣別', titleEn:'Latam Currency',
+      data:[
+        {label:'BRL',    value:49.0, color:'#5B21B6'},
+        {label:'MXN',    value:42.0, color:'#7C3AED'},
+        {label:'VES',    value:3.25, color:'#A78BFA'},
+        {label:'CLP',    value:2.27, color:'#C4B5FD'},
+        {label:'Others', value:3.48, color:'#EDE9FE'}
+      ]
+    }
+  ],
+  chu: [
+    {
+      titleZh:'非洲幣別', titleEn:'Africa Currency',
+      data:[
+        {label:'XOF',     value:38.02, color:'#0F766E'},
+        {label:'NGN',     value:19.20, color:'#0D9488'},
+        {label:'TZS+UGX', value:14.51, color:'#14B8A6'},
+        {label:'XAF',     value:7.26,  color:'#2DD4BF'},
+        {label:'Others',  value:21.01, color:'#CCFBF1'}
+      ]
+    },
+    {
+      titleZh:'大洋洲幣別', titleEn:'Oceania Currency',
+      data:[
+        {label:'AUD',    value:84.6, color:'#1D4ED8'},
+        {label:'NZD',    value:11.2, color:'#3B82F6'},
+        {label:'Others', value:4.2,  color:'#BFDBFE'}
+      ]
+    },
+    {
+      titleZh:'北美幣別', titleEn:'N.America Currency',
+      data:[
+        {label:'USD',    value:94.8, color:'#15803D'},
+        {label:'CAD',    value:4.2,  color:'#4ADE80'},
+        {label:'Others', value:1.0,  color:'#BBF7D0'}
+      ]
+    }
+  ],
+  nina: [
+    {
+      titleZh:'EU 幣別', titleEn:'EU Currency',
+      data:[
+        {label:'EUR',    value:72.63, color:'#1E40AF'},
+        {label:'GBP',    value:12.02, color:'#2563EB'},
+        {label:'PLN',    value:6.19,  color:'#3B82F6'},
+        {label:'HUF',    value:4.21,  color:'#60A5FA'},
+        {label:'DKK',    value:2.12,  color:'#93C5FD'},
+        {label:'Others', value:2.83,  color:'#BFDBFE'}
+      ]
+    },
+    {
+      titleZh:'合規 vs 非合規', titleEn:'Regulated vs Non-Reg',
+      data:[
+        {label:{zh:'合規',en:'Regulated'},    value:18.5, color:'#F97316'},
+        {label:{zh:'非合規',en:'Non-Reg'},    value:81.5, color:'#1E293B'}
+      ]
+    }
+  ]
+};
+
+// ══════════════════════════════════════
 //  STATE
 // ══════════════════════════════════════
+// ══════════════════════════════════════
+//  MONTHLY PROMOTIONS DATA
+//  Source: Google Drive BD Promotion Spreadsheets (Actual data)
+// ══════════════════════════════════════
+const monthlyPromos = {
+  mar2026: {
+    hector: [
+      {platform:'ZeroUm',        market:'Brazil',   promoTypeZh:'位置+錦標賽',  promoTypeEn:'Position + Tournament', period:'3/01–3/31', status:'completed', impactZh:'錦標賽 25,000 BRL×2；含影響者推廣', impactEn:'Tournament 25,000 BRL ×2; incl. influencer push'},
+      {platform:'Estrela Bet',   market:'Brazil',   promoTypeZh:'位置+CRM+錦標賽',promoTypeEn:'Position+CRM+Tournament',period:'3/01–3/31',status:'completed',impactZh:'CRM 推廣＋遊戲位置＋版面',impactEn:'CRM campaigns + game positions + section'},
+      {platform:'Rei do Pitaco', market:'Brazil',   promoTypeZh:'CRM+位置+錦標賽',promoTypeEn:'CRM+Position+Tournament',period:'3/01–3/31',status:'completed',impactZh:'CRM＋位置＋使命＋錦標賽',impactEn:'CRM + positions + missions + tournament'},
+      {platform:'Betboom',       market:'Brazil',   promoTypeZh:'位置 (月中)',  promoTypeEn:'Position (mid-month)',  period:'3/02–3/16', status:'completed', impactZh:'7款遊戲位置；3月前半月', impactEn:'7 games positioned; first half March'},
+      {platform:'Betboom',       market:'Mexico',   promoTypeZh:'位置 (月末)',  promoTypeEn:'Position (month-end)',  period:'3/17–3/31', status:'completed', impactZh:'9款遊戲位置', impactEn:'9 games positioned'},
+      {platform:'Apuestas Royal',market:'Venezuela',promoTypeZh:'錦標賽',       promoTypeEn:'Tournament',            period:'3/20–3/28', status:'completed', impactZh:'10,000 USDT；Venezuela Top 2 Casino', impactEn:'10,000 USDT; Venezuela Top 2 casino'},
+      {platform:'Superbet',      market:'Brazil',   promoTypeZh:'免費旋轉大型活動',promoTypeEn:'Free Spins Campaign',  period:'3/01–3/31', status:'completed', impactZh:'大型 FS 活動；本月重點', impactEn:'Major FS campaign; highlight of the month'},
+      {platform:'KTO',           market:'Brazil',   promoTypeZh:'位置+歡迎獎勵',promoTypeEn:'Position + Welcome',    period:'3/01–3/31', status:'completed', impactZh:'LJ500 活動上線；歡迎獎勵', impactEn:'LJ500 campaign live; welcome offer'},
+      {platform:'Pixbet',        market:'Brazil',   promoTypeZh:'位置',         promoTypeEn:'Position',              period:'3/17–3/31', status:'completed', impactZh:'高曝光位置', impactEn:'High-exposure positioning'},
+      {platform:'Aposta Ganha',  market:'Brazil',   promoTypeZh:'位置 (NGR)',   promoTypeEn:'Position (NGR)',         period:'3/01–3/31', status:'completed', impactZh:'1.5% NGR 條款', impactEn:'1.5% NGR terms'},
+      {platform:'Viva Sorte',    market:'Brazil',   promoTypeZh:'位置 (Casino版)', promoTypeEn:'Position (Casino Section)', period:'3/01–3/31', status:'completed', impactZh:'Casino 版面曝光', impactEn:'Casino section exposure'},
+      {platform:'Easy Bet',      market:'Argentina',promoTypeZh:'位置',         promoTypeEn:'Position',              period:'3/06–3/31', status:'completed', impactZh:'阿根廷市場拓展', impactEn:'Argentina market expansion'}
+    ],
+    chu: [
+      {platform:'QTech',     market:'Africa',promoTypeZh:'位置',          promoTypeEn:'Position',         period:'3/01–3/31',status:'completed',impactZh:'60% 折扣；非洲多市場', impactEn:'60% discount; multi-Africa markets'},
+      {platform:'Koralplay', market:'Africa',promoTypeZh:'新遊戲上線推廣',promoTypeEn:'Pre-release Push',  period:'3/10–4/07',status:'completed',impactZh:'多國上線追蹤：Mali/Gabon/Angola/SL', impactEn:'Multi-country launch: Mali/Gabon/Angola/SL'},
+      {platform:'SportyBet', market:'Africa',promoTypeZh:'首週上線促銷',  promoTypeEn:'Go-live Week Promo',period:'3/29–4/05',status:'completed',impactZh:'SoftSwiss 整合後首週活化', impactEn:'Week-1 activation post-SoftSwiss integration'},
+      {platform:'BetWay Africa',market:'Africa',promoTypeZh:'位置',        promoTypeEn:'Position',          period:'3/01–3/31',status:'completed',impactZh:'非洲多國位置曝光', impactEn:'Multi-country Africa positioning'}
+    ],
+    bryam: [
+      {platform:'Betnplay', market:'Mexico', promoTypeZh:'位置',   promoTypeEn:'Position',   period:'3/01–3/31', status:'completed', impactZh:'30% 折扣；墨西哥市場', impactEn:'30% discount; Mexico market'},
+      {platform:'Betnplay', market:'Mexico', promoTypeZh:'錦標賽', promoTypeEn:'Tournament', period:'3/01–3/31', status:'completed', impactZh:'10,000 USDT 錦標賽', impactEn:'10,000 USDT tournament'},
+      {platform:'Slotegrator/CIS partners', market:'CIS',promoTypeZh:'合約完成後位置推廣',promoTypeEn:'Post-contract Position Push',period:'3/29–4/30',status:'upcoming',impactZh:'合約完成，4月開始位置推廣',impactEn:'Contract signed; position push starting April'},
+      {platform:'Turkey Ops',market:'West Asia',promoTypeZh:'Addendum 促銷啟動',promoTypeEn:'Addendum Promo Activation',period:'3/16–3/31',status:'completed',impactZh:'Addendum 效果顯現；WA W12 +10.59%',impactEn:'Addendum effect visible; WA W12 +10.59%'}
+    ],
+    nina: [
+      {platform:'Superbet',   market:'Romania', promoTypeZh:'新一輪促銷活動', promoTypeEn:'New Promo Round',  period:'3/09–3/31', status:'completed', impactZh:'推動 W12 EU 市場回升', impactEn:'Key driver of EU W12 recovery'},
+      {platform:'Betclic',    market:'Portugal',promoTypeZh:'精選遊戲位置',   promoTypeEn:'Featured Game Positions',period:'3/01–3/31',status:'completed',impactZh:'Joker Coins & 3 Charge Buffalo 精選', impactEn:'Joker Coins & 3 Charge Buffalo featured'},
+      {platform:'Boyles',     market:'UK',      promoTypeZh:'上線活化推廣',   promoTypeEn:'Go-live Activation',period:'3/23–4/15',status:'completed',impactZh:'英國首個合規客戶上線', impactEn:'First UK regulated client go-live'},
+      {platform:'Megasino',   market:'Non-Reg EU',promoTypeZh:'位置推廣 (提議)',promoTypeEn:'Position (Proposed)',period:'3/01–3/31',status:'upcoming',impactZh:'50% 折扣；待確認', impactEn:'50% discount; pending confirmation'},
+      {platform:'Napoleon',   market:'Belgium', promoTypeZh:'上線後位置推廣', promoTypeEn:'Post-launch Positions',period:'3/01–3/31',status:'completed',impactZh:'11月上線後穩定成長', impactEn:'Stable growth since Nov go-live'}
+    ]
+  }
+};
+
+// Week → month mapping
+const WEEK_TO_MONTH = {w10:'mar2026', w11:'mar2026', w12:'mar2026', w13:'mar2026'};
+
 let currentWeek = 'w12';
 let currentLang = 'zh';
 
@@ -1124,7 +1344,10 @@ function renderSections(memberId, mData) {
   const highLabel   = currentLang === 'zh' ? '上週重點'   : 'Week Highlights';
   const clientLabel = currentLang === 'zh' ? '重點客戶'   : 'Key Clients';
   const planLabel   = currentLang === 'zh' ? '本週計畫'   : 'This Week Plan';
+  const currLabel   = currentLang === 'zh' ? '幣別分布'   : 'Currency Mix';
+  const promoLabel  = currentLang === 'zh' ? '促銷活動'   : 'Promotions';
   const clientTh    = currentLang === 'zh' ? ['客戶','市場','狀態','行動'] : ['Client','Market','Status','Action'];
+  const promoTh     = currentLang === 'zh' ? ['平台/客戶','市場','促銷類型','期間','狀態','預期效益'] : ['Platform','Market','Promo Type','Period','Status','Expected Impact'];
 
   const hiItems = mData.highlights.map(h =>
     `<li>${currentLang === 'zh' ? h.zh : h.en}</li>`).join('');
@@ -1137,6 +1360,68 @@ function renderSections(memberId, mData) {
     </tr>`).join('');
   const planItems = mData.plans.map(p =>
     `<li>${currentLang === 'zh' ? p.zh : p.en}</li>`).join('');
+
+  // Weekly currency charts
+  const currData = memberCurrencies[memberId] || [];
+  const currCards = currData.map(rc => {
+    const title = currentLang === 'zh' ? rc.titleZh : rc.titleEn;
+    const donut = buildDonut(rc.data, 65, 16);
+    const legend = rc.data.map(d => {
+      const lbl = typeof d.label === 'object' ? t(d.label) : d.label;
+      return `<div class="wc-legend-row">
+        <div class="wc-legend-dot" style="background:${d.color}"></div>
+        <div class="wc-legend-label">${lbl}</div>
+        <div class="wc-legend-pct">${d.value.toFixed(1)}%</div>
+      </div>`;
+    }).join('');
+    return `<div class="wc-card">
+      <div class="wc-title">${title}</div>
+      <div class="wc-chart-wrap">${donut}<div class="wc-legend">${legend}</div></div>
+    </div>`;
+  }).join('');
+  const currHtml = currCards
+    ? `<div class="weekly-currency-wrap">
+        <div class="wc-note">📊 ${currentLang === 'zh' ? '3月月均代表數據' : 'March monthly avg (representative)'}</div>
+        <div class="weekly-currency-grid">${currCards}</div>
+       </div>`
+    : '';
+
+  // Promotions table (if data exists)
+  let promoHtml = '';
+  // Look up promotions from monthly promo data
+  const monthKey = WEEK_TO_MONTH[currentWeek];
+  const promos = (monthKey && monthlyPromos[monthKey]) ? (monthlyPromos[monthKey][memberId] || []) : [];
+
+  if (promos.length > 0) {
+    const promoRows = promos.map(p => {
+      const statusClass = p.status === 'active' ? 'promo-active' : p.status === 'completed' ? 'promo-done' : 'promo-upcoming';
+      const statusLabel = p.status === 'active'
+        ? (currentLang === 'zh' ? '進行中' : 'Active')
+        : p.status === 'completed'
+          ? (currentLang === 'zh' ? '已完成' : 'Completed')
+          : (currentLang === 'zh' ? '即將推出' : 'Upcoming');
+      return `<tr>
+        <td><strong>${p.platform}</strong></td>
+        <td>${p.market}</td>
+        <td>${currentLang === 'zh' ? p.promoTypeZh : p.promoTypeEn}</td>
+        <td>${p.period}</td>
+        <td><span class="promo-status ${statusClass}">${statusLabel}</span></td>
+        <td style="color:var(--muted)">${currentLang === 'zh' ? p.impactZh : p.impactEn}</td>
+      </tr>`;
+    }).join('');
+    promoHtml = `<div class="section">
+      <div class="section-header" onclick="toggleSection(this)">
+        <div class="section-title"><span>🎁</span>${promoLabel}</div>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="section-body">
+        <table class="promo-table">
+          <thead><tr>${promoTh.map(h => `<th>${h}</th>`).join('')}</tr></thead>
+          <tbody>${promoRows}</tbody>
+        </table>
+      </div>
+    </div>`;
+  }
 
   el.innerHTML = `
     <div class="section">
@@ -1164,6 +1449,14 @@ function renderSections(memberId, mData) {
         <span class="chevron">▼</span>
       </div>
       <div class="section-body"><ul class="bd-list">${planItems}</ul></div>
+    </div>
+    ${promoHtml}
+    <div class="section">
+      <div class="section-header" onclick="toggleSection(this)">
+        <div class="section-title"><span>💱</span>${currLabel} <span style="font-size:9px;color:var(--muted);margin-left:4px">${currentLang==='zh'?'月均代表':'Monthly avg'}</span></div>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="section-body" style="padding:0">${currHtml}</div>
     </div>
   `;
 }
@@ -1293,9 +1586,30 @@ function renderMonthlyView(monthId) {
   `;
 
   // Section labels
-  document.getElementById('m-kpi-title').textContent = currentLang === 'zh' ? '各區域 KPI 達成率' : 'Regional KPI Achievement';
-  document.getElementById('m-curr-title').textContent = currentLang === 'zh' ? '各區域幣別分布' : 'Regional Currency Mix';
-  document.getElementById('m-member-title').textContent = currentLang === 'zh' ? 'BD 成員月度摘要' : 'BD Member Monthly Summary';
+  document.getElementById('m-hi-title').textContent    = currentLang === 'zh' ? '本月重點摘要' : 'Monthly Highlights';
+  document.getElementById('m-kpi-title').textContent   = currentLang === 'zh' ? '各區域 KPI 達成率' : 'Regional KPI Achievement';
+  document.getElementById('m-curr-title').textContent  = currentLang === 'zh' ? '各區域幣別分布' : 'Regional Currency Mix';
+  document.getElementById('m-member-title').textContent= currentLang === 'zh' ? 'BD 成員月度摘要' : 'BD Member Monthly Summary';
+
+  // Monthly highlights (completed + watchout)
+  const hiEl = document.getElementById('monthlyHighlights');
+  if (hiEl && md.keyHighlights) {
+    const doneItems = md.keyHighlights.completed.map(h =>
+      `<div class="hi-item"><span>›</span><span>${currentLang === 'zh' ? h.zh : h.en}</span></div>`
+    ).join('');
+    const watchItems = md.keyHighlights.watchout.map(h =>
+      `<div class="hi-item"><span>›</span><span>${currentLang === 'zh' ? h.zh : h.en}</span></div>`
+    ).join('');
+    hiEl.innerHTML = `
+      <div class="hi-col done">
+        <div class="hi-col-title">✅ ${currentLang === 'zh' ? '本月完成事項' : 'Completed This Month'}</div>
+        ${doneItems}
+      </div>
+      <div class="hi-col watch">
+        <div class="hi-col-title">⚠️ ${currentLang === 'zh' ? '需持續關注' : 'Watch Points'}</div>
+        ${watchItems}
+      </div>`;
+  }
 
   // KPI bars
   const kpiEl = document.getElementById('kpiList');
@@ -1319,7 +1633,7 @@ function renderMonthlyView(monthId) {
 
   // Currency charts
   const currEl = document.getElementById('currencyGrid');
-  const currKeys = ['euCurrency','euRegType','wa','cis','latam','africa'];
+  const currKeys = ['euCurrency','euRegType','wa','cis','latam','africa','oceania','northAmerica'];
   currEl.innerHTML = currKeys.map(key => {
     const c = md.currencies[key];
     const title = currentLang === 'zh' ? c.titleZh : c.titleEn;
