@@ -417,6 +417,26 @@
         <option value="all-2025" data-zh="全部 · 2025" data-en="All · 2025">全部 · 2025</option>
       </optgroup>
     </select>
+    <!-- 區域報告選擇器 -->
+    <select class="week-select" id="regionalSelect" style="display:none" onchange="switchRegionalFilter(this.value)">
+      <option value="all" data-zh="全部地區" data-en="All Regions">全部地區</option>
+      <optgroup label="── Americas ──">
+        <option value="latam" data-zh="拉丁美洲" data-en="Latin America">拉丁美洲</option>
+        <option value="na" data-zh="北美" data-en="North America">北美</option>
+      </optgroup>
+      <optgroup label="── Europe / CIS ──">
+        <option value="europe" data-zh="歐洲" data-en="Europe">歐洲</option>
+        <option value="cis" data-zh="CIS" data-en="CIS">CIS</option>
+      </optgroup>
+      <optgroup label="── Asia ──">
+        <option value="sea" data-zh="東南亞" data-en="Southeast Asia">東南亞</option>
+        <option value="mena" data-zh="中東 / 北非" data-en="MENA">中東 / 北非</option>
+      </optgroup>
+      <optgroup label="── Other ──">
+        <option value="africa" data-zh="非洲" data-en="Africa">非洲</option>
+        <option value="oceania" data-zh="大洋洲" data-en="Oceania">大洋洲</option>
+      </optgroup>
+    </select>
     <div class="lang-toggle">
       <button class="lang-btn active" onclick="setLang('zh')">中文</button>
       <button class="lang-btn" onclick="setLang('en')">EN</button>
@@ -438,6 +458,9 @@
   </button>
   <button class="rtype-tab" onclick="switchReportType('exhibition',this)">
     <span class="rtype-icon">🏢</span><span data-zh="參展報告" data-en="Exhibitions">參展報告</span>
+  </button>
+  <button class="rtype-tab" onclick="switchReportType('regional',this)">
+    <span class="rtype-icon">🌏</span><span data-zh="區域報告" data-en="Regional Reports">區域報告</span>
   </button>
 </div>
 
@@ -810,6 +833,87 @@
       <div class="rpt-sync-note">🔗 <span data-zh="等待 Google Drive 資料來源" data-en="Awaiting Google Drive data source">等待 Google Drive 資料來源</span></div>
     </div>
   </div><!-- end 參展報告 view -->
+
+  <!-- ══════════ 區域報告 VIEW ══════════ -->
+  <div id="view-regional" class="rpt-view">
+    <div class="rpt-toolbar">
+      <div>
+        <div class="rpt-toolbar-title">🌏 <span data-zh="不定時區域報告" data-en="Regional Reports">不定時區域報告</span></div>
+        <div class="rpt-toolbar-sub" data-zh="各市場不定期深度分析與區域洞察報告" data-en="Periodic in-depth analysis and insights by market region">各市場不定期深度分析與區域洞察報告</div>
+      </div>
+      <div class="rpt-filter-row">
+        <select class="rpt-select" onchange="switchRegionalFilter(this.value)">
+          <option value="all" data-zh="全部地區" data-en="All Regions">全部地區</option>
+          <option value="latam" data-zh="拉丁美洲" data-en="Latin America">拉丁美洲</option>
+          <option value="europe">Europe</option>
+          <option value="cis">CIS</option>
+          <option value="sea" data-zh="東南亞" data-en="Southeast Asia">東南亞</option>
+          <option value="mena" data-zh="中東/北非" data-en="MENA">中東/北非</option>
+          <option value="africa" data-zh="非洲" data-en="Africa">非洲</option>
+        </select>
+        <select class="rpt-select">
+          <option>2026</option>
+          <option>2025</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- 區域報告卡片 — 範例佔位 -->
+    <div class="rpt-section-label" data-zh="最新報告" data-en="Latest Reports">最新報告</div>
+    <div class="rpt-grid">
+      <!-- 佔位卡 1 -->
+      <div class="rpt-card" style="opacity:0.6">
+        <div class="rpt-card-top">
+          <div class="rpt-card-type">🌏 <span data-zh="區域報告" data-en="Regional Report">區域報告</span> <span style="color:var(--orange)">·</span> <span data-zh="拉丁美洲" data-en="Latin America">拉丁美洲</span></div>
+          <div class="rpt-card-title" data-zh="LatAm 市場概況報告" data-en="LatAm Market Overview Report">LatAm 市場概況報告</div>
+          <div class="rpt-card-meta">
+            <span class="rpt-meta-chip">📅 <span data-zh="待填入" data-en="TBD">待填入</span></span>
+            <span class="rpt-meta-chip">📍 <span data-zh="墨西哥、巴西、哥倫比亞" data-en="Mexico, Brazil, Colombia">墨西哥、巴西、哥倫比亞</span></span>
+          </div>
+          <div class="rpt-card-meta" style="margin-top:6px">
+            <div class="rpt-avatar" style="background:#F59E0B;border:2px solid #fff">H</div>
+            <span style="font-size:11px;color:var(--muted);margin-left:10px" data-zh="撰寫人員" data-en="Author">撰寫人員</span>
+          </div>
+        </div>
+        <div class="rpt-card-body">
+          <div class="rpt-card-desc" style="color:#CBD5E1" data-zh="區域報告內容將從 Google Drive 同步" data-en="Report content pending sync from Google Drive">區域報告內容將從 Google Drive 同步</div>
+        </div>
+        <div class="rpt-card-footer">
+          <span class="rpt-status pending">⏳ <span data-zh="待同步" data-en="Pending">待同步</span></span>
+          <button class="rpt-view-btn" disabled>📂 <span data-zh="待連結 Drive" data-en="Link Drive">待連結 Drive</span></button>
+        </div>
+      </div>
+      <!-- 佔位卡 2 -->
+      <div class="rpt-card" style="opacity:0.6">
+        <div class="rpt-card-top">
+          <div class="rpt-card-type">🌏 <span data-zh="區域報告" data-en="Regional Report">區域報告</span> <span style="color:var(--orange)">·</span> CIS</div>
+          <div class="rpt-card-title" data-zh="CIS 市場深度分析" data-en="CIS Market Deep Dive">CIS 市場深度分析</div>
+          <div class="rpt-card-meta">
+            <span class="rpt-meta-chip">📅 <span data-zh="待填入" data-en="TBD">待填入</span></span>
+            <span class="rpt-meta-chip">📍 <span data-zh="俄羅斯、哈薩克、烏克蘭" data-en="Russia, Kazakhstan, Ukraine">俄羅斯、哈薩克、烏克蘭</span></span>
+          </div>
+          <div class="rpt-card-meta" style="margin-top:6px">
+            <div class="rpt-avatar" style="background:#8B5CF6;border:2px solid #fff">B</div>
+            <span style="font-size:11px;color:var(--muted);margin-left:10px" data-zh="撰寫人員" data-en="Author">撰寫人員</span>
+          </div>
+        </div>
+        <div class="rpt-card-body">
+          <div class="rpt-card-desc" style="color:#CBD5E1" data-zh="區域報告內容將從 Google Drive 同步" data-en="Report content pending sync from Google Drive">區域報告內容將從 Google Drive 同步</div>
+        </div>
+        <div class="rpt-card-footer">
+          <span class="rpt-status pending">⏳ <span data-zh="待同步" data-en="Pending">待同步</span></span>
+          <button class="rpt-view-btn" disabled>📂 <span data-zh="待連結 Drive" data-en="Link Drive">待連結 Drive</span></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="rpt-empty" style="margin-top:24px">
+      <div class="rpt-empty-icon">🌏</div>
+      <div class="rpt-empty-title" data-zh="區域報告即將上線" data-en="Regional Reports Coming Soon">區域報告即將上線</div>
+      <div class="rpt-empty-sub" data-zh="連結 Google Drive 後，各地區不定時深度報告將自動整合顯示於此" data-en="After linking Google Drive, regional reports will be automatically integrated here">連結 Google Drive 後，各地區不定時深度報告將自動整合顯示於此</div>
+      <div class="rpt-sync-note">🔗 <span data-zh="等待 Google Drive 資料來源" data-en="Awaiting Google Drive data source">等待 Google Drive 資料來源</span></div>
+    </div>
+  </div><!-- end 區域報告 view -->
 
   <div class="last-updated" id="footer-note">
     📅 資料來源：Google Drive BD Weekly Reports · 2026年3月資料
@@ -2487,7 +2591,8 @@ const SELECTOR_MAP = {
   'weekly':      'weekSelect',
   'monthly-rpt': 'monthRptSelect',
   'travel':      'travelSelect',
-  'exhibition':  'exhibitionSelect'
+  'exhibition':  'exhibitionSelect',
+  'regional':    'regionalSelect'
 };
 
 function switchReportType(type, btn) {
@@ -2515,8 +2620,8 @@ function switchReportType(type, btn) {
     if (filterBar)   filterBar.classList.add('hidden');
   }
 
-  // 切換三個新頁面
-  ['monthly-rpt','travel','exhibition'].forEach(id => {
+  // 切換新頁面
+  ['monthly-rpt','travel','exhibition','regional'].forEach(id => {
     const el = document.getElementById('view-' + id);
     if (el) el.classList.toggle('active', type === id);
   });
@@ -2538,6 +2643,12 @@ function switchTravelFilter(val) {
 function switchExhibitionFilter(val) {
   console.log('參展篩選：', val);
   // TODO: 根據 val 篩選參展卡片
+}
+
+// 區域報告選擇器
+function switchRegionalFilter(val) {
+  console.log('區域報告篩選：', val);
+  // TODO: 根據 val 篩選區域報告卡片（連結 Drive 資料後實作）
 }
 
 // ══════════════════════════════════════
