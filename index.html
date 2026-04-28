@@ -2450,18 +2450,21 @@ function switchReportType(type, btn) {
   document.querySelectorAll('.rtype-tab').forEach(t => t.classList.remove('active'));
   btn.classList.add('active');
 
-  // Show/hide filter bar (only for weekly view)
-  const filterBar = document.getElementById('filterBar');
-  if (filterBar) filterBar.style.display = type === 'weekly' ? 'flex' : 'none';
-
-  // Show/hide weekly & monthly views
   const weeklyView  = document.getElementById('weekly-view');
   const monthlyView = document.getElementById('monthly-view');
-  const isWeekly = type === 'weekly';
-  if (weeklyView)  weeklyView.style.display  = isWeekly ? 'block' : 'none';
-  if (monthlyView) monthlyView.style.display = isWeekly ? (currentWeek.startsWith('w') ? 'none' : 'block') : 'none';
+  const filterBar   = document.getElementById('filterBar');
 
-  // Show/hide report views
+  if (type === 'weekly') {
+    // 讓 switchWeek 統一處理 weekly/monthly 顯示邏輯，避免衝突
+    switchWeek(document.getElementById('weekSelect').value);
+  } else {
+    // 隱藏週報和月總結
+    if (weeklyView)  weeklyView.classList.add('hidden');
+    if (monthlyView) monthlyView.classList.add('hidden');
+    if (filterBar)   filterBar.classList.add('hidden');
+  }
+
+  // 切換三個新頁面
   ['monthly-rpt','travel','exhibition'].forEach(id => {
     const el = document.getElementById('view-' + id);
     if (el) el.classList.toggle('active', type === id);
