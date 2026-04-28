@@ -401,12 +401,12 @@
   .tp-note-btn:hover,.tp-edit-btn:hover{opacity:1;background:#EFF6FF;}
   .tp-del-btn:hover{opacity:1;background:#FEE2E2;}
   .tp-note-btn.has-note{opacity:1;color:var(--orange);}
-  /* Note panel */
-  .tp-note-panel{max-height:0;overflow:hidden;transition:max-height .28s ease,padding .28s ease;background:#FAFBFC;border-top:0 solid var(--border);}
-  .tp-note-panel.open{max-height:180px;padding:10px 20px 12px 20px;border-top:1px solid var(--border);}
-  .tp-note-area{width:100%;border:1px solid var(--border);border-radius:6px;padding:8px 10px;font-size:13px;font-family:inherit;color:var(--text);background:#fff;resize:vertical;line-height:1.55;transition:border-color .15s;}
-  .tp-note-area:focus{outline:none;border-color:var(--orange);}
-  .tp-note-hint{font-size:10px;color:#CBD5E1;margin-top:4px;text-align:right;}
+  /* Note row */
+  .tp-note-tr td{padding:0 !important;}
+  .tp-note-td{padding:12px 20px 14px 20px !important;background:#F8FAFC;border-top:1px dashed var(--border);}
+  .tp-note-area{width:100%;border:1px solid var(--border);border-radius:8px;padding:10px 12px;font-size:13px;font-family:inherit;color:var(--text);background:#fff;resize:vertical;line-height:1.6;transition:border-color .15s;min-height:72px;}
+  .tp-note-area:focus{outline:none;border-color:var(--orange);box-shadow:0 0 0 3px rgba(249,115,22,0.10);}
+  .tp-note-hint{font-size:10px;color:#CBD5E1;margin-top:5px;text-align:right;}
   .tp-empty{padding:28px 20px;text-align:center;color:var(--muted);font-size:13px;}
 
   /* ── LOGIN SCREEN ── */
@@ -3101,24 +3101,28 @@ function renderTaskRow(task, tab) {
           <button class="tp-edit-btn" onclick="editTask('${tab}',${task.id})" title="${zh?'編輯':'Edit'}">✏️</button>
           <button class="tp-del-btn"  onclick="deleteTask('${tab}',${task.id})" title="${zh?'刪除':'Delete'}">🗑</button>
         </div>
-        <div id="${noteId}" class="tp-note-panel${hasNote?' open':''}">
-          <textarea class="tp-note-area" rows="2"
-            placeholder="${zh?'備註 / 任務細節…':'Notes / details…'}"
-            onblur="saveTaskNote('${tab}',${task.id},this.value)"
-          >${escHtml(task.note||'')}</textarea>
-          <div class="tp-note-hint">${zh?'點擊外部自動儲存':'Auto-saves on blur'}</div>
-        </div>
+      </td>
+    </tr>
+    <tr id="${noteId}" class="tp-note-tr${hasNote?' open':''}" style="${hasNote?'':'display:none'}">
+      <td colspan="5" class="tp-note-td">
+        <textarea class="tp-note-area" rows="3"
+          placeholder="${zh?'備註 / 任務細節（來源報告、追蹤重點、背景說明…）':'Notes / details (source report, follow-up points, context…)'}"
+          onblur="saveTaskNote('${tab}',${task.id},this.value)"
+        >${escHtml(task.note||'')}</textarea>
+        <div class="tp-note-hint">${zh?'點擊外部自動儲存':'Auto-saves on blur'}</div>
       </td>
     </tr>`;
 }
 
 function toggleNote(noteId) {
-  const panel = document.getElementById(noteId);
-  if (!panel) return;
-  panel.classList.toggle('open');
-  if (panel.classList.contains('open')) {
-    panel.querySelector('textarea')?.focus();
-  }
+  const row = document.getElementById(noteId);
+  if (!row) return;
+  const isOpen = row.style.display !== 'none';
+  row.style.display = isOpen ? 'none' : '';
+  if (!isOpen) setTimeout(() => row.querySelector('textarea')?.focus(), 50);
+  // 更新 📝 按鈕樣式
+  const btn = row.previousElementSibling?.querySelector('.tp-note-btn');
+  if (btn) btn.style.opacity = isOpen ? '' : '1';
 }
 
 function saveTaskNote(tab, id, value) {
