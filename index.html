@@ -370,6 +370,20 @@
   .tp-row-actions{display:flex;gap:4px;flex-shrink:0;}
   .tp-edit-btn,.tp-del-btn{background:none;border:none;cursor:pointer;font-size:14px;padding:4px 6px;border-radius:6px;opacity:0.5;transition:opacity .15s;}
   .tp-edit-btn:hover,.tp-del-btn:hover{opacity:1;background:#F1F5F9;}
+  /* 備註面板 */
+  .tp-form-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;}
+  .tp-form-row + .tp-form-row{margin-top:8px;}
+  .tp-textarea{resize:vertical;flex:1;min-width:200px;font-family:inherit;line-height:1.5;}
+  .tp-row{flex-direction:column;align-items:stretch;gap:0;}
+  .tp-row-main{display:flex;align-items:center;gap:12px;padding:12px 20px;}
+  .tp-note-toggle{background:none;border:none;cursor:pointer;font-size:15px;padding:4px 6px;border-radius:6px;opacity:0.45;transition:all .15s;}
+  .tp-note-toggle:hover{opacity:1;background:#F1F5F9;}
+  .tp-note-toggle.has-note{opacity:1;}
+  .tp-note-panel{max-height:0;overflow:hidden;transition:max-height .25s ease,padding .25s ease;background:#FAFBFC;border-top:0px solid var(--border);}
+  .tp-note-panel.open{max-height:200px;padding:10px 20px 12px 58px;border-top:1px solid var(--border);}
+  .tp-note-area{width:100%;border:1px solid var(--border);border-radius:6px;padding:8px 10px;font-size:13px;font-family:inherit;color:var(--text);background:#fff;resize:vertical;line-height:1.55;transition:border-color .15s;}
+  .tp-note-area:focus{outline:none;border-color:var(--orange);}
+  .tp-note-hint{font-size:10px;color:#CBD5E1;margin-top:4px;text-align:right;}
 
   /* ── LOGIN SCREEN ── */
   #login-screen{position:fixed;inset:0;background:#FFF7ED;display:flex;align-items:center;justify-content:center;z-index:9999;}
@@ -2966,17 +2980,26 @@ function renderTaskPanel(tab) {
         <button class="tp-add-btn" onclick="toggleAddForm('${tab}')">＋ ${zh?'新增任務':'Add Task'}</button>
       </div>
       <div id="tp-form-${tab}" class="tp-form">
-        <input class="tp-input" id="tp-title-${tab}" placeholder="${zh?'任務名稱…':'Task name…'}" style="flex:2;min-width:180px">
-        <input class="tp-input" id="tp-assignee-${tab}" placeholder="${zh?'負責人':'Assignee'}" style="max-width:120px">
-        <input class="tp-input" id="tp-due-${tab}" type="date" style="max-width:150px">
-        <select class="tp-input" id="tp-status-${tab}" style="max-width:120px">
-          <option value="todo">${zh?'待辦':'To Do'}</option>
-          <option value="doing">${zh?'進行中':'In Progress'}</option>
-          <option value="done">${zh?'完成':'Done'}</option>
-          <option value="blocked">${zh?'擱置':'Blocked'}</option>
-        </select>
-        <button class="tp-save-btn" onclick="saveNewTask('${tab}')">${zh?'儲存':'Save'}</button>
-        <button class="tp-cancel-btn" onclick="toggleAddForm('${tab}')">${zh?'取消':'Cancel'}</button>
+        <div class="tp-form-row">
+          <input class="tp-input" id="tp-title-${tab}"    placeholder="${zh?'任務名稱…':'Task name…'}" style="flex:2;min-width:180px">
+          <input class="tp-input" id="tp-assignee-${tab}" placeholder="${zh?'負責人':'Assignee'}"      style="max-width:120px">
+          <input class="tp-input" id="tp-due-${tab}"      type="date"                                  style="max-width:150px">
+          <select class="tp-input" id="tp-status-${tab}"  style="max-width:120px">
+            <option value="todo">${zh?'待辦':'To Do'}</option>
+            <option value="doing">${zh?'進行中':'In Progress'}</option>
+            <option value="done">${zh?'完成':'Done'}</option>
+            <option value="blocked">${zh?'擱置':'Blocked'}</option>
+          </select>
+        </div>
+        <div class="tp-form-row" style="align-items:flex-start">
+          <textarea class="tp-input tp-textarea" id="tp-note-${tab}"
+            placeholder="${zh?'任務細節 / 備註（來源報告、背景說明、追蹤細節…）':'Details / Notes (source report, context, follow-up info…)'}"
+            rows="3"></textarea>
+          <div style="display:flex;flex-direction:column;gap:6px;flex-shrink:0">
+            <button class="tp-save-btn"   onclick="saveNewTask('${tab}')">${zh?'儲存':'Save'}</button>
+            <button class="tp-cancel-btn" onclick="toggleAddForm('${tab}')">${zh?'取消':'Cancel'}</button>
+          </div>
+        </div>
       </div>
       <div class="tp-list">
         ${tasks.length === 0
@@ -2987,35 +3010,74 @@ function renderTaskPanel(tab) {
 }
 
 function renderTaskRow(task, tab) {
-  const sm    = STATUS_META[task.status] || STATUS_META.todo;
+  const sm     = STATUS_META[task.status] || STATUS_META.todo;
   const isDone = task.status === 'done';
-  const od    = isOverdue(task);
-  const zh    = currentLang === 'zh';
+  const od     = isOverdue(task);
+  const zh     = currentLang === 'zh';
+  const hasNote = !!(task.note && task.note.trim());
+  const noteId  = `tp-note-row-${tab}-${task.id}`;
+
   return `
-    <div class="tp-row${isDone ? ' tp-done' : ''}">
-      <button class="tp-check" onclick="cycleTaskStatus('${tab}',${task.id})" title="${zh?'切換狀態':'Cycle status'}">
-        ${isDone ? '✅' : '⬜'}
-      </button>
-      <div class="tp-row-body">
-        <div class="tp-row-title">${escHtml(task.title)}</div>
-        <div class="tp-row-meta">
-          ${task.assignee ? `<span class="tp-meta-chip">👤 ${escHtml(task.assignee)}</span>` : ''}
-          ${task.dueDate  ? `<span class="tp-meta-chip${od?' overdue':''}">📅 ${fmtDate(task.dueDate)}${od?` ⚠️`:''}</span>` : ''}
-          <span class="tp-status-pill" style="background:${sm.bg};color:${sm.color}">${zh ? sm.zh : sm.en}</span>
+    <div class="tp-row${isDone ? ' tp-done' : ''}" id="tp-row-${tab}-${task.id}">
+      <div class="tp-row-main">
+        <button class="tp-check" onclick="cycleTaskStatus('${tab}',${task.id})" title="${zh?'切換狀態':'Cycle status'}">
+          ${isDone ? '✅' : '⬜'}
+        </button>
+        <div class="tp-row-body">
+          <div class="tp-row-title">${escHtml(task.title)}</div>
+          <div class="tp-row-meta">
+            ${task.assignee ? `<span class="tp-meta-chip">👤 ${escHtml(task.assignee)}</span>` : ''}
+            ${task.dueDate  ? `<span class="tp-meta-chip${od?' overdue':''}">📅 ${fmtDate(task.dueDate)}${od?' ⚠️':''}</span>` : ''}
+            <span class="tp-status-pill" style="background:${sm.bg};color:${sm.color}">${zh ? sm.zh : sm.en}</span>
+          </div>
+        </div>
+        <div class="tp-row-actions">
+          <button class="tp-note-toggle ${hasNote?'has-note':''}" onclick="toggleNote('${noteId}')"
+            title="${zh?'展開備註':'Toggle notes'}">
+            ${hasNote ? '📝' : '📄'}
+          </button>
+          <button class="tp-edit-btn" onclick="editTask('${tab}',${task.id})"  title="${zh?'編輯標題':'Edit title'}">✏️</button>
+          <button class="tp-del-btn"  onclick="deleteTask('${tab}',${task.id})" title="${zh?'刪除':'Delete'}">🗑</button>
         </div>
       </div>
-      <div class="tp-row-actions">
-        <button class="tp-edit-btn" onclick="editTask('${tab}',${task.id})" title="${zh?'編輯':'Edit'}">✏️</button>
-        <button class="tp-del-btn"  onclick="deleteTask('${tab}',${task.id})" title="${zh?'刪除':'Delete'}">🗑</button>
+      <div id="${noteId}" class="tp-note-panel${hasNote?' open':''}">
+        <textarea class="tp-note-area" rows="3"
+          placeholder="${zh?'任務細節 / 備註（來源報告、追蹤細節、背景說明…）':'Details / notes (source report, follow-up info, context…)'}"
+          onblur="saveTaskNote('${tab}',${task.id},this.value)"
+        >${escHtml(task.note || '')}</textarea>
+        <div class="tp-note-hint">${zh?'點擊外部自動儲存':'Auto-saves on blur'}</div>
       </div>
     </div>`;
+}
+
+function toggleNote(noteId) {
+  const panel = document.getElementById(noteId);
+  if (!panel) return;
+  panel.classList.toggle('open');
+  if (panel.classList.contains('open')) {
+    panel.querySelector('textarea')?.focus();
+  }
+}
+
+function saveTaskNote(tab, id, value) {
+  const all  = loadTasks();
+  const task = (all[tab] || []).find(t => t.id === id);
+  if (!task) return;
+  task.note = value.trim();
+  saveTasks(all);
+  // 更新 note toggle icon 不需重渲染整個 panel，只更新按鈕
+  const btn = document.querySelector(`#tp-row-${tab}-${id} .tp-note-toggle`);
+  if (btn) {
+    btn.textContent = task.note ? '📝' : '📄';
+    btn.classList.toggle('has-note', !!task.note);
+  }
 }
 
 function toggleAddForm(tab) {
   const f = document.getElementById('tp-form-' + tab);
   if (!f) return;
-  const open = f.style.display === 'flex';
-  f.style.display = open ? 'none' : 'flex';
+  const open = f.style.display !== 'none' && f.style.display !== '';
+  f.style.display = open ? 'none' : 'block';
   if (!open) setTimeout(() => document.getElementById('tp-title-' + tab)?.focus(), 50);
 }
 
@@ -3031,6 +3093,7 @@ function saveNewTask(tab) {
     assignee:  (document.getElementById('tp-assignee-' + tab)?.value || '').trim(),
     dueDate:   document.getElementById('tp-due-' + tab)?.value || '',
     status:    document.getElementById('tp-status-' + tab)?.value || 'todo',
+    note:      (document.getElementById('tp-note-' + tab)?.value || '').trim(),
     createdAt: Date.now()
   });
   saveTasks(all);
