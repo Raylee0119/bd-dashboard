@@ -342,6 +342,24 @@
   .meeting-week-content.active{display:block;}
   /* 展開式會議卡片 */
   .meeting-card-real{cursor:default;}
+
+  /* ── 月報區域卡片 ── */
+  .monthly-region-section{background:var(--card);border-radius:12px;border:1px solid var(--border);margin-bottom:16px;overflow:hidden;}
+  .monthly-region-section.hidden{display:none;}
+  .monthly-region-header{display:flex;align-items:center;gap:12px;padding:14px 18px;border-left:4px solid var(--orange);border-bottom:1px solid var(--border);}
+  .monthly-region-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
+  .monthly-region-info{flex:1;}
+  .monthly-region-title{font-size:16px;font-weight:700;color:var(--primary);}
+  .monthly-region-meta{font-size:12px;color:var(--muted);margin-top:2px;}
+  .monthly-region-badge{font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;white-space:nowrap;}
+  .monthly-region-body{padding:16px 18px;}
+  .monthly-strategy-section{}
+  .monthly-strategy-label{font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:12px;}
+  .monthly-strategy-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+  @media(max-width:900px){.monthly-strategy-grid{grid-template-columns:1fr;}}
+  .monthly-strategy-item{background:#F8FAFC;border-radius:8px;padding:12px;border:1px solid var(--border);}
+  .monthly-strategy-tag{display:inline-block;font-size:11px;font-weight:700;padding:3px 8px;border-radius:6px;margin-bottom:8px;}
+  .monthly-strategy-text{font-size:13px;color:#374151;line-height:1.55;}
   .meeting-card-meta-row{display:flex;align-items:center;gap:8px;margin-top:8px;flex-wrap:wrap;}
   .m-attendee{width:26px;height:26px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:#fff;border:2px solid #fff;flex-shrink:0;}
   .m-attendee-more{font-size:11px;color:var(--muted);}
@@ -763,63 +781,411 @@
   <div id="view-monthly-rpt" class="rpt-view">
     <div class="rpt-toolbar">
       <div>
-        <div class="rpt-toolbar-title">📋 <span data-zh="月報" data-en="Monthly Reports">月報</span></div>
-        <div class="rpt-toolbar-sub" data-zh="BD 團隊每月正式報告" data-en="BD Team Official Monthly Reports">BD 團隊每月正式報告</div>
+        <div class="rpt-toolbar-title">📋 <span data-zh="月報 · 六大區域商務策略" data-en="Monthly Reports · Regional BD Strategy">月報 · 六大區域商務策略</span></div>
+        <div class="rpt-toolbar-sub" data-zh="BD 團隊每月正式報告 · 來源：Google Drive · 聚焦下月商務策略" data-en="BD Team Monthly Reports · Source: Google Drive · Next-month strategy focus">BD 團隊每月正式報告 · 來源：Google Drive · 聚焦下月商務策略</div>
       </div>
       <div class="rpt-filter-row">
-        <select class="rpt-select" id="mRptYear"><option>2026</option><option>2025</option></select>
-        <select class="rpt-select" id="mRptMember">
-          <option value="all" data-zh="全部成員" data-en="All Members">全部成員</option>
-          <option value="hector">Hector Langa</option>
-          <option value="chu">Chu Huang</option>
-          <option value="nina">Nina Cheng</option>
-          <option value="bryam">Bryam Jacquet</option>
-        </select>
+        <button class="meeting-group-btn active" onclick="filterMonthRegion('all',this)">全部區域</button>
+        <button class="meeting-group-btn" onclick="filterMonthRegion('latam',this)">LATAM</button>
+        <button class="meeting-group-btn" onclick="filterMonthRegion('africa',this)">Africa</button>
+        <button class="meeting-group-btn" onclick="filterMonthRegion('eu',this)">EU Reg.</button>
+        <button class="meeting-group-btn" onclick="filterMonthRegion('uk',this)">UK & Non-reg</button>
+        <button class="meeting-group-btn" onclick="filterMonthRegion('cis',this)">CIS</button>
+        <button class="meeting-group-btn" onclick="filterMonthRegion('wa',this)">West Asia</button>
       </div>
     </div>
-    <div class="rpt-section-label" data-zh="2026 年" data-en="Year 2026">2026 年</div>
-    <div class="rpt-grid">
-      <!-- Mar 2026 -->
-      <div class="rpt-card">
-        <div class="rpt-card-top">
-          <div class="rpt-card-type">📋 <span data-zh="月報" data-en="Monthly Report">月報</span> <span style="color:var(--orange)">·</span> <span data-zh="2026 年 3 月" data-en="March 2026">2026 年 3 月</span></div>
-          <div class="rpt-card-title" data-zh="3 月 BD 月報 — March 2026" data-en="March 2026 BD Monthly Report">3 月 BD 月報 — March 2026</div>
-          <div class="rpt-card-meta">
-            <span class="rpt-meta-chip">📅 2026/03/01 – 03/31</span>
-            <span class="rpt-meta-chip">👥 <span data-zh="全員" data-en="All Members">全員</span></span>
+
+    <!-- Month Tabs -->
+    <div class="meeting-week-tabs">
+      <button class="meeting-week-tab" onclick="switchMonthRptTab('month-feb',this)">📋 2月 月報</button>
+      <button class="meeting-week-tab active" onclick="switchMonthRptTab('month-mar',this)">📋 3月 月報</button>
+    </div>
+
+    <!-- ══ 2月月報 ══ -->
+    <div class="meeting-week-content" id="month-feb">
+      <div class="rpt-section-label">2026年 2月 月報 · 各區域下月（3月）商務策略</div>
+
+      <!-- LATAM Feb -->
+      <div class="monthly-region-section" data-region="latam">
+        <div class="monthly-region-header" style="border-left-color:#F97316">
+          <div class="monthly-region-icon" style="background:rgba(249,115,22,0.12);color:#F97316">🌎</div>
+          <div class="monthly-region-info">
+            <div class="monthly-region-title">LATAM 拉美地區</div>
+            <div class="monthly-region-meta">BD：Hector · 2月月報 → 3月策略</div>
+          </div>
+          <div class="monthly-region-badge" style="background:#FFF7ED;color:#C2410C">3月策略已定</div>
+        </div>
+        <div class="monthly-region-body">
+          <div class="monthly-strategy-section">
+            <div class="monthly-strategy-label">🎯 下月（3月）核心商務策略</div>
+            <div class="monthly-strategy-grid">
+              <div class="monthly-strategy-item">
+                <div class="monthly-strategy-tag" style="background:#FFF7ED;color:#C2410C">促銷活動</div>
+                <div class="monthly-strategy-text">TaDa Jackpot Campaign 全面推進：覆蓋 NQ_Seamless、9F_Brazil、BrazinoMX 等主要客戶；Fortune Garuda 500 Pre-release for NQ_Afun (MX)</div>
+              </div>
+              <div class="monthly-strategy-item">
+                <div class="monthly-strategy-tag" style="background:#FFF7ED;color:#C2410C">市場重點</div>
+                <div class="monthly-strategy-text">Mexico TTB 追趕 Brazil，成長動能強勁；多平台錦標賽（Tournaments）計畫推進；ZeroUm / BETVIP 新版位確認（via Inplaysoft / Cactus_Brazil）</div>
+              </div>
+              <div class="monthly-strategy-item">
+                <div class="monthly-strategy-tag" style="background:#FFF7ED;color:#C2410C">BD 行動</div>
+                <div class="monthly-strategy-text">主動向 WG_Seamless 爭取 Casino 版位；確認各平台 3月促銷活動落地情況</div>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="rpt-card-body">
-          <div class="rpt-card-desc" data-zh="涵蓋 Hector / Chu / Nina / Bryam 四位 BD 3月整體達成率、重點客戶、促銷活動及下月計畫。" data-en="Covers March achievement rate, key clients, promotions and April plans for all 4 BD members.">涵蓋 Hector / Chu / Nina / Bryam 四位 BD 3月整體達成率、重點客戶、促銷活動及下月計畫。</div>
-        </div>
-        <div class="rpt-card-footer">
-          <span class="rpt-status done">✓ <span data-zh="已完成" data-en="Completed">已完成</span></span>
-          <button class="rpt-view-btn" disabled>📂 <span data-zh="待連結 Drive" data-en="Link Drive">待連結 Drive</span></button>
-        </div>
       </div>
-      <!-- Feb 2026 placeholder -->
-      <div class="rpt-card" style="opacity:0.55">
-        <div class="rpt-card-top">
-          <div class="rpt-card-type">📋 <span data-zh="月報" data-en="Monthly Report">月報</span> <span style="color:var(--orange)">·</span> <span data-zh="2026 年 2 月" data-en="February 2026">2026 年 2 月</span></div>
-          <div class="rpt-card-title" data-zh="2 月 BD 月報 — February 2026" data-en="February 2026 BD Monthly Report">2 月 BD 月報 — February 2026</div>
-          <div class="rpt-card-meta">
-            <span class="rpt-meta-chip">📅 2026/02/01 – 02/28</span>
-            <span class="rpt-meta-chip">👥 <span data-zh="全員" data-en="All Members">全員</span></span>
+
+      <!-- Africa Feb -->
+      <div class="monthly-region-section" data-region="africa">
+        <div class="monthly-region-header" style="border-left-color:#10B981">
+          <div class="monthly-region-icon" style="background:rgba(16,185,129,0.12);color:#10B981">🌍</div>
+          <div class="monthly-region-info">
+            <div class="monthly-region-title">Africa 非洲地區</div>
+            <div class="monthly-region-meta">BD：Chu · 2月月報 → 3月策略</div>
+          </div>
+          <div class="monthly-region-badge" style="background:#ECFDF5;color:#065F46">3月策略已定</div>
+        </div>
+        <div class="monthly-region-body">
+          <div class="monthly-strategy-section">
+            <div class="monthly-strategy-label">🎯 下月（3月）核心商務策略</div>
+            <div class="monthly-strategy-grid">
+              <div class="monthly-strategy-item">
+                <div class="monthly-strategy-tag" style="background:#ECFDF5;color:#065F46">Pre-release</div>
+                <div class="monthly-strategy-text">X15-Koral Play（3/10 Pre-release）、Fruit Diamond for Betpawa；重點推廣 BongoBongo（Qtech 平台，+121% TB）</div>
+              </div>
+              <div class="monthly-strategy-item">
+                <div class="monthly-strategy-tag" style="background:#ECFDF5;color:#065F46">獨家合作</div>
+                <div class="monthly-strategy-text">開發 Betway South Africa 專屬 Branded Aviator 遊戲；South Africa 客戶推進：World Sports Betting、SportyBet、Hollywood Bet</div>
+              </div>
+              <div class="monthly-strategy-item">
+                <div class="monthly-strategy-tag" style="background:#ECFDF5;color:#065F46">市場策略</div>
+                <div class="monthly-strategy-text">AM 報告必須包含 Key Recommended Products 清單；媒體適配在地語言（Zulu、Pidgin）</div>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="rpt-card-body">
-          <div class="rpt-card-desc" style="color:#CBD5E1" data-zh="資料待從 Google Drive 同步" data-en="Pending sync from Google Drive">資料待從 Google Drive 同步</div>
+      </div>
+
+      <!-- EU Regulated Feb -->
+      <div class="monthly-region-section" data-region="eu">
+        <div class="monthly-region-header" style="border-left-color:#3B82F6">
+          <div class="monthly-region-icon" style="background:rgba(59,130,246,0.12);color:#3B82F6">🏛️</div>
+          <div class="monthly-region-info">
+            <div class="monthly-region-title">EU Regulated 歐洲監管地區</div>
+            <div class="monthly-region-meta">BD：Nina · 2月月報 → 3月策略</div>
+          </div>
+          <div class="monthly-region-badge" style="background:#EFF6FF;color:#1D4ED8">3月策略已定</div>
         </div>
-        <div class="rpt-card-footer">
-          <span class="rpt-status pending">⏳ <span data-zh="待同步" data-en="Pending">待同步</span></span>
-          <button class="rpt-view-btn" disabled>📂 <span data-zh="待連結 Drive" data-en="Link Drive">待連結 Drive</span></button>
+        <div class="monthly-region-body">
+          <div class="monthly-strategy-section">
+            <div class="monthly-strategy-label">🎯 下月（3月）核心商務策略</div>
+            <div class="monthly-strategy-grid">
+              <div class="monthly-strategy-item">
+                <div class="monthly-strategy-tag" style="background:#EFF6FF;color:#1D4ED8">Italy</div>
+                <div class="monthly-strategy-text">推送更多 ADM 認證遊戲至 StarCasino、Admiral、Sisal；接洽 Lottomatica 和 Goldbet；測試 PokerStars（EUR 幣別修正）</div>
+              </div>
+              <div class="monthly-strategy-item">
+                <div class="monthly-strategy-tag" style="background:#EFF6FF;color:#1D4ED8">Portugal / Romania</div>
+                <div class="monthly-strategy-text">Betano 目標 3/18 上線；Kaizen Romania 22 款遊戲已 Live；推進 Don.ro 和 Relax 客戶</div>
+              </div>
+              <div class="monthly-strategy-item">
+                <div class="monthly-strategy-tag" style="background:#EFF6FF;color:#1D4ED8">Spain / Netherlands</div>
+                <div class="monthly-strategy-text">Casino 777 第二批遊戲上架；推進 Luckia、Casino Barcelona；NL：追蹤 Toto Casino 測試、Hommerson QA、711 合約</div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="rpt-empty" style="margin-top:16px">
-      <div class="rpt-sync-note">🔗 <span data-zh="更多月報將在連結 Google Drive 後自動載入" data-en="More reports will auto-load after linking Google Drive">更多月報將在連結 Google Drive 後自動載入</span></div>
-    </div>
-    <div id="tasks-monthly-rpt"></div>
+
+      <!-- UK & Non-reg Feb -->
+      <div class="monthly-region-section" data-region="uk">
+        <div class="monthly-region-header" style="border-left-color:#8B5CF6">
+          <div class="monthly-region-icon" style="background:rgba(139,92,246,0.12);color:#8B5CF6">🇬🇧</div>
+          <div class="monthly-region-info">
+            <div class="monthly-region-title">UK & Non-regulated EU & Anglosphere</div>
+            <div class="monthly-region-meta">BD：Nina · 2月月報 → 3月策略</div>
+          </div>
+          <div class="monthly-region-badge" style="background:#F5F3FF;color:#6D28D9">3月策略已定</div>
+        </div>
+        <div class="monthly-region-body">
+          <div class="monthly-strategy-section">
+            <div class="monthly-strategy-label">🎯 下月（3月）核心商務策略</div>
+            <div class="monthly-strategy-grid">
+              <div class="monthly-strategy-item">
+                <div class="monthly-strategy-tag" style="background:#F5F3FF;color:#6D28D9">UK Regulated</div>
+                <div class="monthly-strategy-text">Rank Group 推動正式上線；Flutter 磋商（釣魚遊戲優先，老虎機明年）；Entain / Lottoland 洽談中；與 Gabi（LNW）、Sam（Relax）建立直接關係</div>
+              </div>
+              <div class="monthly-strategy-item">
+                <div class="monthly-strategy-tag" style="background:#F5F3FF;color:#6D28D9">Unreg EU</div>
+                <div class="monthly-strategy-text">My777bet（Softswiss）群組建立；Rainbet / Megasino / Metaspin 促銷推進；Usoftgaming 促銷洽談；Roobet / Soft2Bet 探索合作</div>
+              </div>
+              <div class="monthly-strategy-item">
+                <div class="monthly-strategy-tag" style="background:#F5F3FF;color:#6D28D9">Belgium</div>
+                <div class="monthly-strategy-text">Napoleon / Circus / Starcasino / Blitz 已上線；Casino777 / Unibet / bwin / betFIRST 尚未上線，積極推進</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CIS Feb -->
+      <div class="monthly-region-section" data-region="cis">
+        <div class="monthly-region-header" style="border-left-color:#EF4444">
+          <div class="monthly-region-icon" style="background:rgba(239,68,68,0.12);color:#EF4444">🗺️</div>
+          <div class="monthly-region-info">
+            <div class="monthly-region-title">CIS 獨立國協地區</div>
+            <div class="monthly-region-meta">BD：Bryam · 2月月報 → 3月策略</div>
+          </div>
+          <div class="monthly-region-badge" style="background:#FEF2F2;color:#991B1B">3月策略已定</div>
+        </div>
+        <div class="monthly-region-body">
+          <div class="monthly-strategy-section">
+            <div class="monthly-strategy-label">🎯 下月（3月）核心商務策略</div>
+            <div class="monthly-strategy-grid">
+              <div class="monthly-strategy-item">
+                <div class="monthly-strategy-tag" style="background:#FEF2F2;color:#991B1B">1xBet（Tier 1）</div>
+                <div class="monthly-strategy-text">確認本地錦標賽 + Provider Page（第 3 版位）；發送 Spec Document（計劃 2026 年 4 款品牌遊戲）；申請 6/7 月促銷</div>
+              </div>
+              <div class="monthly-strategy-item">
+                <div class="monthly-strategy-tag" style="background:#FEF2F2;color:#991B1B">平台推進</div>
+                <div class="monthly-strategy-text">Digitain/Pinco：Fortune Gems 2 品牌遊戲計畫；GR8：長期全組合促銷（2-4月）；Softswiss：Vavada Pre-release + CIS 擴大促銷</div>
+              </div>
+              <div class="monthly-strategy-item">
+                <div class="monthly-strategy-tag" style="background:#FEF2F2;color:#991B1B">重點推廣</div>
+                <div class="monthly-strategy-text">3月主打遊戲：3 Lightning Blitz；Azino Group 測試活動；Ukraine：Slots City / InfinGame / 1GameHub 持續推進</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- West Asia Feb -->
+      <div class="monthly-region-section" data-region="wa">
+        <div class="monthly-region-header" style="border-left-color:#0EA5E9">
+          <div class="monthly-region-icon" style="background:rgba(14,165,233,0.12);color:#0EA5E9">🕌</div>
+          <div class="monthly-region-info">
+            <div class="monthly-region-title">West Asia 西亞地區</div>
+            <div class="monthly-region-meta">BD：Bryam · 2月月報 → 3月策略</div>
+          </div>
+          <div class="monthly-region-badge" style="background:#F0F9FF;color:#0369A1">3月策略已定</div>
+        </div>
+        <div class="monthly-region-body">
+          <div class="monthly-strategy-section">
+            <div class="monthly-strategy-label">🎯 下月（3月）核心商務策略</div>
+            <div class="monthly-strategy-grid">
+              <div class="monthly-strategy-item">
+                <div class="monthly-strategy-tag" style="background:#F0F9FF;color:#0369A1">大型客戶</div>
+                <div class="monthly-strategy-text">Betconstruct：試行 Bonus Campaign（穩定 TTB 下滑）；Pronet Gaming：網路錦標賽持續 + 4月 Pre-release 計畫；Tapking：全平台網路錦標賽</div>
+              </div>
+              <div class="monthly-strategy-item">
+                <div class="monthly-strategy-tag" style="background:#F0F9FF;color:#0369A1">Turkey 市場</div>
+                <div class="monthly-strategy-text">GR8 Turkey：3月遊戲版位和錦標賽全準備好；Everymatrix：Hitbet 促銷洽談；3月主打：Bison Fortune Coins；新客戶目標：Bets10 Group</div>
+              </div>
+              <div class="monthly-strategy-item">
+                <div class="monthly-strategy-tag" style="background:#F0F9FF;color:#0369A1">齋戒月後策略</div>
+                <div class="monthly-strategy-text">齋戒月（3/15）結束後立即準備新促銷和錦標賽，抓住 Ramadan 後反彈商機；UAE 市場：開始規劃拓展活動</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end month-feb -->
+
+
+    <!-- ══ 3月月報 ══ -->
+    <div class="meeting-week-content active" id="month-mar">
+      <div class="rpt-section-label">2026年 3月 月報 · 各區域下月（4月）商務策略</div>
+
+      <!-- LATAM Mar -->
+      <div class="monthly-region-section" data-region="latam">
+        <div class="monthly-region-header" style="border-left-color:#F97316">
+          <div class="monthly-region-icon" style="background:rgba(249,115,22,0.12);color:#F97316">🌎</div>
+          <div class="monthly-region-info">
+            <div class="monthly-region-title">LATAM 拉美地區</div>
+            <div class="monthly-region-meta">BD：Hector · 3月月報 → 4月策略</div>
+          </div>
+          <div class="monthly-region-badge" style="background:#FFF7ED;color:#C2410C">4月策略已定</div>
+        </div>
+        <div class="monthly-region-body">
+          <div class="monthly-strategy-section">
+            <div class="monthly-strategy-label">🎯 下月（4月）核心商務策略</div>
+            <div class="monthly-strategy-grid">
+              <div class="monthly-strategy-item">
+                <div class="monthly-strategy-tag" style="background:#FFF7ED;color:#C2410C">主力促銷</div>
+                <div class="monthly-strategy-text">TaDa Jackpot for BrazinoMX & NQ_Afun（MX）；錦標賽：ZF310（BR）、ICECASSINO（BR）、9F_IJOGO（BR）、Betnacional（BR）、GROWE（Chile）</div>
+              </div>
+              <div class="monthly-strategy-item">
+                <div class="monthly-strategy-tag" style="background:#FFF7ED;color:#C2410C">Pre-release</div>
+                <div class="monthly-strategy-text">Betano（BR）、Superbet（BR）、BrazinoMX 三大平台 Pre-release；World Cup 長期促銷規劃啟動</div>
+              </div>
+              <div class="monthly-strategy-item">
+                <div class="monthly-strategy-tag" style="background:#FFF7ED;color:#C2410C">新客戶開發</div>
+                <div class="monthly-strategy-text">接觸尚未進入的 Top 25 客戶：ZT001、Megaslot、Digitain_Seamless、Betmaster_Curacao；⚠️ 注意：巴西封鎖 27,000+ 違法域名，需使用 .bet.br 合規域名</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Africa Mar -->
+      <div class="monthly-region-section" data-region="africa">
+        <div class="monthly-region-header" style="border-left-color:#10B981">
+          <div class="monthly-region-icon" style="background:rgba(16,185,129,0.12);color:#10B981">🌍</div>
+          <div class="monthly-region-info">
+            <div class="monthly-region-title">Africa 非洲地區</div>
+            <div class="monthly-region-meta">BD：Chu · 3月月報 → 4月策略</div>
+          </div>
+          <div class="monthly-region-badge" style="background:#ECFDF5;color:#065F46">4月策略已定</div>
+        </div>
+        <div class="monthly-region-body">
+          <div class="monthly-strategy-section">
+            <div class="monthly-strategy-label">🎯 下月（4月）核心商務策略</div>
+            <div class="monthly-strategy-grid">
+              <div class="monthly-strategy-item">
+                <div class="monthly-strategy-tag" style="background:#ECFDF5;color:#065F46">體量目標</div>
+                <div class="monthly-strategy-text">TTB 目標：3月 5.1B → 4月 5.3B → 5月 5.8B；策略從單純遊戲版位轉型至主動促銷工具（錦標賽 + Free Spins）</div>
+              </div>
+              <div class="monthly-strategy-item">
+                <div class="monthly-strategy-tag" style="background:#ECFDF5;color:#065F46">新內容上線</div>
+                <div class="monthly-strategy-text">推出 Joker's Coin Unlimited Fortune、X15 Hot、Fruit Diamond（Tier 1 夥伴全覆蓋）；Betway Recovery：Royal Shooter 獨家 Banner（待 10 Sparkling Crowns 監管核准）；HWB 上線後立即監控 TTB 貢獻</div>
+              </div>
+              <div class="monthly-strategy-item">
+                <div class="monthly-strategy-tag" style="background:#ECFDF5;color:#065F46">新客戶上線</div>
+                <div class="monthly-strategy-text">完成 PlayTsogo 和 Sunbet QA，4月正式上線；「每周最佳老虎機」常態計畫；BongoBongo / WAJE 獨家錦標賽；推進 BETIFY & Netbet 商業談判</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- EU Regulated Mar -->
+      <div class="monthly-region-section" data-region="eu">
+        <div class="monthly-region-header" style="border-left-color:#3B82F6">
+          <div class="monthly-region-icon" style="background:rgba(59,130,246,0.12);color:#3B82F6">🏛️</div>
+          <div class="monthly-region-info">
+            <div class="monthly-region-title">EU Regulated 歐洲監管地區</div>
+            <div class="monthly-region-meta">BD：Nina · 3月月報 → 4月策略</div>
+          </div>
+          <div class="monthly-region-badge" style="background:#EFF6FF;color:#1D4ED8">4月策略已定</div>
+        </div>
+        <div class="monthly-region-body">
+          <div class="monthly-strategy-section">
+            <div class="monthly-strategy-label">🎯 下月（4月）核心商務策略 · 目標 0.9B → 1.0B THB（+12% MoM）</div>
+            <div class="monthly-strategy-grid">
+              <div class="monthly-strategy-item">
+                <div class="monthly-strategy-tag" style="background:#EFF6FF;color:#1D4ED8">Romania / Portugal</div>
+                <div class="monthly-strategy-text">Superbet（RO）：獨家錦標賽（€10K）+ Napoleon 錦標賽（€2K）+ Joker Week P4 版位；Solverde（PT）：Battle of Slots（4/5）；Betclic（PT）：爭取品牌遊戲更佳版位</div>
+              </div>
+              <div class="monthly-strategy-item">
+                <div class="monthly-strategy-tag" style="background:#EFF6FF;color:#1D4ED8">Greece / Italy</div>
+                <div class="monthly-strategy-text">Novibet（GR）：Coin of Lightning Pre-release（4/8）；Stoiximan：Money Pot Deluxe Pre-release；OPAP：復活節遊戲促銷；StarCasino（IT）：品牌遊戲報告 ETA 4/15</div>
+              </div>
+              <div class="monthly-strategy-item">
+                <div class="monthly-strategy-tag" style="background:#EFF6FF;color:#1D4ED8">Netherlands / Spain</div>
+                <div class="monthly-strategy-text">Circus（NL）：Coin of Lightning P2 版位（4/1–4/30）；準備 Coin of Lightning 品牌遊戲；Casino 777（ES）：4月 Pre-release 計畫；⚽ 6月 World Cup 促銷啟動準備</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- UK & Non-reg Mar -->
+      <div class="monthly-region-section" data-region="uk">
+        <div class="monthly-region-header" style="border-left-color:#8B5CF6">
+          <div class="monthly-region-icon" style="background:rgba(139,92,246,0.12);color:#8B5CF6">🇬🇧</div>
+          <div class="monthly-region-info">
+            <div class="monthly-region-title">UK & Non-regulated EU & Anglosphere</div>
+            <div class="monthly-region-meta">BD：Nina · 3月月報 → 4月策略 · GBP +73.3% · Belgium +14.8%</div>
+          </div>
+          <div class="monthly-region-badge" style="background:#F5F3FF;color:#6D28D9">4月策略已定</div>
+        </div>
+        <div class="monthly-region-body">
+          <div class="monthly-strategy-section">
+            <div class="monthly-strategy-label">🎯 下月（4月）核心商務策略</div>
+            <div class="monthly-strategy-grid">
+              <div class="monthly-strategy-item">
+                <div class="monthly-strategy-tag" style="background:#F5F3FF;color:#6D28D9">UK 監管市場</div>
+                <div class="monthly-strategy-text">Boyles（LNW，UK）& Bally's（LNW，GR + UK）推進 configuration；Rank Group：9 個賭場已配置但只有 1 家上線 → 全力推進其他上線；Flutter：釣魚遊戲優先，老虎機明年；VideoSlots：4月第 2 版位確認</div>
+              </div>
+              <div class="monthly-strategy-item">
+                <div class="monthly-strategy-tag" style="background:#F5F3FF;color:#6D28D9">非監管 EU</div>
+                <div class="monthly-strategy-text">Leon（Unreg EU）：4月 2 日正式上線；Hero Gaming（Unreg EU）：等待 Hub88 整合；Usoftgaming：版位現已自動化；整理 UK Top 遊戲清單，推動更多客戶上線</div>
+              </div>
+              <div class="monthly-strategy-item">
+                <div class="monthly-strategy-tag" style="background:#F5F3FF;color:#6D28D9">策略重點</div>
+                <div class="monthly-strategy-text">理解 UK 市場適合的遊戲類型；協助 AM 建立更多直接運營商溝通群組；Betano（Belgium）：A+/B+ 評級但促銷回應冷淡，需加強溝通</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CIS Mar -->
+      <div class="monthly-region-section" data-region="cis">
+        <div class="monthly-region-header" style="border-left-color:#EF4444">
+          <div class="monthly-region-icon" style="background:rgba(239,68,68,0.12);color:#EF4444">🗺️</div>
+          <div class="monthly-region-info">
+            <div class="monthly-region-title">CIS 獨立國協地區</div>
+            <div class="monthly-region-meta">BD：Bryam · 3月月報 → 4月策略</div>
+          </div>
+          <div class="monthly-region-badge" style="background:#FEF2F2;color:#991B1B">4月策略已定</div>
+        </div>
+        <div class="monthly-region-body">
+          <div class="monthly-strategy-section">
+            <div class="monthly-strategy-label">🎯 下月（4月）核心商務策略</div>
+            <div class="monthly-strategy-grid">
+              <div class="monthly-strategy-item">
+                <div class="monthly-strategy-tag" style="background:#FEF2F2;color:#991B1B">1xBet（Tier 1）</div>
+                <div class="monthly-strategy-text">申請 6/7 月大型活動（錦標賽 + Provider Page）；2026 首個品牌遊戲（全年目標 4 個）；發送 Spec Document；啟動 Free Spin API 促銷討論；1xBet_1xSlots 首個獨家錦標賽（4/16–4/20，€3,000）</div>
+              </div>
+              <div class="monthly-strategy-item">
+                <div class="monthly-strategy-tag" style="background:#FEF2F2;color:#991B1B">平台推進</div>
+                <div class="monthly-strategy-text">Pinco：4月底前版位促銷持續；努力建立直接合約（繞過 Digitain 額外抽成）；Azinomobile：本地錦標賽（4/14–4/28）；GR8：長期組合促銷 + Free Spin 測試；Softswiss/RioBet：3/31 Pre-release 已啟動</div>
+              </div>
+              <div class="monthly-strategy-item">
+                <div class="monthly-strategy-tag" style="background:#FEF2F2;color:#991B1B">成長目標</div>
+                <div class="monthly-strategy-text">SoftGamings 目標：從 Top 60 → Top 20；4月主打：Joker's Coin Unlimited Fortune；5月 Pre-release：3 Pot Panda；鞏固 Tier 2 客戶並開拓潛力新客</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- West Asia Mar -->
+      <div class="monthly-region-section" data-region="wa">
+        <div class="monthly-region-header" style="border-left-color:#0EA5E9">
+          <div class="monthly-region-icon" style="background:rgba(14,165,233,0.12);color:#0EA5E9">🕌</div>
+          <div class="monthly-region-info">
+            <div class="monthly-region-title">West Asia 西亞地區</div>
+            <div class="monthly-region-meta">BD：Bryam · 3月月報 → 4月策略</div>
+          </div>
+          <div class="monthly-region-badge" style="background:#F0F9FF;color:#0369A1">4月策略已定</div>
+        </div>
+        <div class="monthly-region-body">
+          <div class="monthly-strategy-section">
+            <div class="monthly-strategy-label">🎯 下月（4月）核心商務策略 · ⚠️ 伊朗戰局持續監控（效率 -50%）</div>
+            <div class="monthly-strategy-grid">
+              <div class="monthly-strategy-item">
+                <div class="monthly-strategy-tag" style="background:#F0F9FF;color:#0369A1">最大客戶：Pronet</div>
+                <div class="monthly-strategy-text">Pronet Gaming（已成第一大客戶）：計畫 3 個品牌遊戲 + 2 個 Pre-release；目標日均 TTB 90M THB；持續擴大合作深度；土耳其特色遊戲作為 Pre-release</div>
+              </div>
+              <div class="monthly-strategy-item">
+                <div class="monthly-strategy-tag" style="background:#F0F9FF;color:#0369A1">平台推進</div>
+                <div class="monthly-strategy-text">Betconstruct：全網路（500+ 網站）低成本錦標賽；追蹤 Betcio Group（15+ 品牌）；Gamingtec：4月在所有運營商上線本地錦標賽；Tapking：預算暫調配至 Pronet（戰區影響）</div>
+              </div>
+              <div class="monthly-strategy-item">
+                <div class="monthly-strategy-tag" style="background:#F0F9FF;color:#0369A1">新客戶 & 品牌遊戲</div>
+                <div class="monthly-strategy-text">新客戶目標：Betarabia、Vegangester（土耳其大型聚合商）、Inntech（整合接近完成）；品牌遊戲：5月底前在 Betebet/Piabet/Perabet 上線；4月主打：Clover Coins 4x4；Reevo：尋找 TRY 幣別品牌建立連結</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end month-mar -->
+
   </div><!-- end 月報 view -->
 
   <!-- ══════════ 出差報告 VIEW ══════════ -->
@@ -3880,14 +4246,37 @@ function switchReportType(type, btn) {
     if (el) el.classList.toggle('active', type === id);
   });
 
-  // 自動擷取對應頁面的 Action Items
-  if (type === 'monthly-rpt') setTimeout(() => autoExtractTasks('monthly-rpt', true), 100);
+  // 自動擷取對應頁面的 Action Items（月報分頁不追蹤任務）
+  if (type !== 'monthly-rpt') setTimeout(() => autoExtractTasks(type, true), 100);
 }
 
-// 月報選擇器（待 Drive 資料接入後實作篩選）
+// 月報月份 Tab 切換
+function switchMonthRptTab(tabId, btn) {
+  document.querySelectorAll('#view-monthly-rpt .meeting-week-tab').forEach(t => t.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  document.querySelectorAll('#view-monthly-rpt .meeting-week-content').forEach(c => c.classList.remove('active'));
+  const target = document.getElementById(tabId);
+  if (target) target.classList.add('active');
+  const sel = document.getElementById('monthRptSelect');
+  if (sel) sel.value = tabId === 'month-mar' ? 'mar2026' : 'feb2026';
+}
+
+// 月報區域篩選
+function filterMonthRegion(region, btn) {
+  document.querySelectorAll('.monthly-region-section[data-region]').forEach(sec => {
+    sec.classList.toggle('hidden', region !== 'all' && sec.dataset.region !== region);
+  });
+  document.querySelectorAll('#view-monthly-rpt .meeting-group-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+}
+
+// 月報右上角選擇器（同步月份 tab）
 function switchMonthRpt(val) {
-  console.log('月報選擇：', val);
-  // TODO: 根據 val 篩選月報卡片
+  const tabId = val === 'feb2026' ? 'month-feb' : 'month-mar';
+  const tabs = document.querySelectorAll('#view-monthly-rpt .meeting-week-tab');
+  let matchBtn = null;
+  tabs.forEach(t => { if ((t.getAttribute('onclick') || '').includes(tabId)) matchBtn = t; });
+  switchMonthRptTab(tabId, matchBtn);
 }
 
 // 出差報告選擇器
