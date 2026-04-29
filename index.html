@@ -2259,7 +2259,7 @@
         <div class="rpt-toolbar-sub" data-zh="BD · AM · MKT 週報 · 2026年3月 · 來源：Google Drive" data-en="BD · AM · MKT weekly reports · March 2026 · Source: Google Drive">BD · AM · MKT 週報 · 2026年3月 · 來源：Google Drive</div>
       </div>
       <div class="rpt-filter-row">
-        <button class="meeting-group-btn active" onclick="filterMeetingGroup('all',this)">全部</button>
+        <button class="meeting-group-btn active" onclick="filterMeetingGroup('all',this)" data-zh="全部" data-en="All">全部</button>
         <button class="meeting-group-btn" onclick="filterMeetingGroup('bd',this)">BD</button>
         <button class="meeting-group-btn" onclick="filterMeetingGroup('am',this)">AM</button>
         <button class="meeting-group-btn" onclick="filterMeetingGroup('mkt',this)">MKT</button>
@@ -2268,24 +2268,24 @@
 
     <!-- ── 週別切換 Tabs ── -->
     <div class="meeting-week-tabs">
-      <button class="meeting-week-tab" onclick="switchMeetingWeek('w-mar03',this)">📅 3/03 週會</button>
-      <button class="meeting-week-tab" onclick="switchMeetingWeek('w-mar10',this)">📅 3/10 週會</button>
-      <button class="meeting-week-tab" onclick="switchMeetingWeek('w-mar17',this)">📅 3/17 週會</button>
-      <button class="meeting-week-tab" onclick="switchMeetingWeek('w-mar24',this)">📅 3/24 週會</button>
-      <button class="meeting-week-tab active" onclick="switchMeetingWeek('w-mar31',this)">🌟 3/31 全體會議</button>
+      <button class="meeting-week-tab" onclick="switchMeetingWeek('w-mar03',this)" data-zh="📅 3/03 週會" data-en="📅 3/03 Weekly">📅 3/03 週會</button>
+      <button class="meeting-week-tab" onclick="switchMeetingWeek('w-mar10',this)" data-zh="📅 3/10 週會" data-en="📅 3/10 Weekly">📅 3/10 週會</button>
+      <button class="meeting-week-tab" onclick="switchMeetingWeek('w-mar17',this)" data-zh="📅 3/17 週會" data-en="📅 3/17 Weekly">📅 3/17 週會</button>
+      <button class="meeting-week-tab" onclick="switchMeetingWeek('w-mar24',this)" data-zh="📅 3/24 週會" data-en="📅 3/24 Weekly">📅 3/24 週會</button>
+      <button class="meeting-week-tab active" onclick="switchMeetingWeek('w-mar31',this)" data-zh="🌟 3/31 全體會議" data-en="🌟 3/31 All-Hands">🌟 3/31 全體會議</button>
     </div>
 
 
   <!-- ══════════ W-MAR03 ══════════ -->
   <div class="meeting-week-content" id="w-mar03">
-    <div class="rpt-section-label">2026/03/03 (二) 週會 · W10</div>
+    <div class="rpt-section-label" data-zh="2026/03/03 (二) 週會 · W10" data-en="2026/03/03 (Tue) Weekly · W10">2026/03/03 (二) 週會 · W10</div>
 
     <div class="meeting-section" data-group="bd">
       <div class="meeting-section-header" style="border-left-color:#F59E0B">
         <div class="meeting-section-icon" style="background:rgba(245,158,11,0.12);color:#F59E0B">💼</div>
         <div>
-          <div class="meeting-section-title">BD 組</div>
-          <div class="meeting-section-sub">Business Development · 週報</div>
+          <div class="meeting-section-title" data-zh="BD 組" data-en="BD Team">BD 組</div>
+          <div class="meeting-section-sub" data-zh="Business Development · 週報" data-en="Business Development · Weekly">Business Development · 週報</div>
         </div>
       </div>
       <div class="meeting-grid">
@@ -2293,30 +2293,30 @@
         <!-- Hector / Latam W10 -->
         <div class="meeting-card meeting-card-real">
           <div class="meeting-card-week">Hector · Latam</div>
-          <div class="meeting-card-title">巴西市場新夥伴 & BRAGG Peru 獨家洽談啟動</div>
+          <div class="meeting-card-title" data-zh="巴西市場新夥伴 & BRAGG Peru 獨家洽談啟動" data-en="Brazil New Partners &amp; BRAGG Peru Exclusive Deal Initiated">巴西市場新夥伴 & BRAGG Peru 獨家洽談啟動</div>
           <div class="meeting-card-meta-row">
             <span class="m-attendee" style="background:#F59E0B">H</span>
             <span class="m-attendee-more">Hector</span>
           </div>
           <div class="meeting-agenda-list" style="margin-top:10px">
-            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#F59E0B"></span>Blaze / Betsson / Superbet Brazil 促銷談判推進</div>
-            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#F59E0B"></span>BRAGG Peru 獨家遊戲供應洽談啟動</div>
-            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#F59E0B"></span>Sportingbet Brazil 新合作接洽</div>
+            <div class="meeting-agenda-item" data-zh="Blaze / Betsson / Superbet Brazil 促銷談判推進" data-en="Blaze / Betsson / Superbet Brazil promo negotiation push"><span class="agenda-dot" style="background:#F59E0B"></span>Blaze / Betsson / Superbet Brazil 促銷談判推進</div>
+            <div class="meeting-agenda-item" data-zh="BRAGG Peru 獨家遊戲供應洽談啟動" data-en="BRAGG Peru exclusive game supply negotiation initiated"><span class="agenda-dot" style="background:#F59E0B"></span>BRAGG Peru 獨家遊戲供應洽談啟動</div>
+            <div class="meeting-agenda-item" data-zh="Sportingbet Brazil 新合作接洽" data-en="Sportingbet Brazil new partnership outreach"><span class="agenda-dot" style="background:#F59E0B"></span>Sportingbet Brazil 新合作接洽</div>
           </div>
-          <button class="meeting-toggle-btn" onclick="this.nextElementSibling.classList.toggle('open');this.textContent=this.nextElementSibling.classList.contains('open')?'▲ 收合':'▼ 展開會議記錄'">▼ 展開會議記錄</button>
+          <button class="meeting-toggle-btn" onclick="this.nextElementSibling.classList.toggle('open');this.textContent=this.nextElementSibling.classList.contains('open')?(currentLang==='en'?'▲ Collapse':'▲ 收合'):(currentLang==='en'?'▼ Expand':'▼ 展開會議記錄')">▼ 展開會議記錄</button>
           <div class="meeting-card-body">
-            <div class="meeting-subsection">📌 關鍵討論</div>
+            <div class="meeting-subsection" data-zh="📌 關鍵討論" data-en="📌 Key Discussion">📌 關鍵討論</div>
             <ul class="meeting-key-pts">
-              <li>Blaze Brazil 持續推進促銷合作，Q1 成效良好</li>
-              <li>BRAGG Peru 獨家遊戲條款：TaDa 作為 BRAGG 在 Peru 的獨家 slots 內容供應商</li>
-              <li>Superbet Brazil：初步接觸，評估合作可能性</li>
-              <li>Betsson Latam 深度合作討論持續推進</li>
+              <li data-zh="Blaze Brazil 持續推進促銷合作，Q1 成效良好" data-en="Blaze Brazil promo partnership continuously advancing, Q1 results positive">Blaze Brazil 持續推進促銷合作，Q1 成效良好</li>
+              <li data-zh="BRAGG Peru 獨家遊戲條款：TaDa 作為 BRAGG 在 Peru 的獨家 slots 內容供應商" data-en="BRAGG Peru exclusive terms: TaDa as exclusive slots content supplier for BRAGG in Peru">BRAGG Peru 獨家遊戲條款：TaDa 作為 BRAGG 在 Peru 的獨家 slots 內容供應商</li>
+              <li data-zh="Superbet Brazil：初步接觸，評估合作可能性" data-en="Superbet Brazil: initial contact, evaluating partnership potential">Superbet Brazil：初步接觸，評估合作可能性</li>
+              <li data-zh="Betsson Latam 深度合作討論持續推進" data-en="Betsson Latam deep partnership talks continuously advancing">Betsson Latam 深度合作討論持續推進</li>
             </ul>
             <div class="meeting-subsection">✅ Action Items</div>
             <div class="meeting-action-list">
-              <div class="meeting-action-item"><span class="action-status doing">進行中</span>Hector：BRAGG Peru 獨家合作協議條款確認</div>
-              <div class="meeting-action-item"><span class="action-status doing">進行中</span>Hector：Blaze Brazil 促銷細節確認</div>
-              <div class="meeting-action-item"><span class="action-status plan">計劃中</span>Hector：Superbet Brazil 合作規模評估</div>
+              <div class="meeting-action-item" data-zh="Hector：BRAGG Peru 獨家合作協議條款確認" data-en="Hector: Confirm BRAGG Peru exclusive partnership agreement terms"><span class="action-status doing">進行中</span>Hector：BRAGG Peru 獨家合作協議條款確認</div>
+              <div class="meeting-action-item" data-zh="Hector：Blaze Brazil 促銷細節確認" data-en="Hector: Confirm Blaze Brazil promo details"><span class="action-status doing">進行中</span>Hector：Blaze Brazil 促銷細節確認</div>
+              <div class="meeting-action-item" data-zh="Hector：Superbet Brazil 合作規模評估" data-en="Hector: Evaluate Superbet Brazil partnership scale"><span class="action-status plan">計劃中</span>Hector：Superbet Brazil 合作規模評估</div>
             </div>
           </div>
         </div>
@@ -2324,30 +2324,30 @@
         <!-- Bryam / CIS+WA W10 -->
         <div class="meeting-card meeting-card-real">
           <div class="meeting-card-week">Bryam · CIS & West Asia</div>
-          <div class="meeting-card-title">Slotegrator NGR 洽談 & West Asia Addendum 推進</div>
+          <div class="meeting-card-title" data-zh="Slotegrator NGR 洽談 & West Asia Addendum 推進" data-en="Slotegrator NGR Negotiation &amp; West Asia Addendum Push">Slotegrator NGR 洽談 & West Asia Addendum 推進</div>
           <div class="meeting-card-meta-row">
             <span class="m-attendee" style="background:#8B5CF6">B</span>
             <span class="m-attendee-more">Bryam</span>
           </div>
           <div class="meeting-agenda-list" style="margin-top:10px">
-            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#8B5CF6"></span>Slotegrator NGR 商務條款談判啟動</div>
-            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#8B5CF6"></span>Veganster CIS 合約草稿確認中</div>
-            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#8B5CF6"></span>West Asia（土耳其/沙烏地/UAE）Addendum 推進</div>
+            <div class="meeting-agenda-item" data-zh="Slotegrator NGR 商務條款談判啟動" data-en="Slotegrator NGR commercial term negotiation initiated"><span class="agenda-dot" style="background:#8B5CF6"></span>Slotegrator NGR 商務條款談判啟動</div>
+            <div class="meeting-agenda-item" data-zh="Veganster CIS 合約草稿確認中" data-en="Veganster CIS contract draft under confirmation"><span class="agenda-dot" style="background:#8B5CF6"></span>Veganster CIS 合約草稿確認中</div>
+            <div class="meeting-agenda-item" data-zh="West Asia（土耳其/沙烏地/UAE）Addendum 推進" data-en="West Asia (Turkey/Saudi/UAE) Addendum push"><span class="agenda-dot" style="background:#8B5CF6"></span>West Asia（土耳其/沙烏地/UAE）Addendum 推進</div>
           </div>
-          <button class="meeting-toggle-btn" onclick="this.nextElementSibling.classList.toggle('open');this.textContent=this.nextElementSibling.classList.contains('open')?'▲ 收合':'▼ 展開會議記錄'">▼ 展開會議記錄</button>
+          <button class="meeting-toggle-btn" onclick="this.nextElementSibling.classList.toggle('open');this.textContent=this.nextElementSibling.classList.contains('open')?(currentLang==='en'?'▲ Collapse':'▲ 收合'):(currentLang==='en'?'▼ Expand':'▼ 展開會議記錄')">▼ 展開會議記錄</button>
           <div class="meeting-card-body">
-            <div class="meeting-subsection">📌 關鍵討論</div>
+            <div class="meeting-subsection" data-zh="📌 關鍵討論" data-en="📌 Key Discussion">📌 關鍵討論</div>
             <ul class="meeting-key-pts">
-              <li>Slotegrator：以 NGR 為商務基礎，洽談優先條款</li>
-              <li>Veganster：合約草稿進入確認階段，預計本週完成</li>
-              <li>Reevo EU：對方要求已簽署合約及 DD 文件，準備中</li>
-              <li>BetArabia / Inntec：West Asia 市場新客戶接洽啟動</li>
+              <li data-zh="Slotegrator：以 NGR 為商務基礎，洽談優先條款" data-en="Slotegrator: NGR as commercial basis, negotiating priority terms">Slotegrator：以 NGR 為商務基礎，洽談優先條款</li>
+              <li data-zh="Veganster：合約草稿進入確認階段，預計本週完成" data-en="Veganster: contract draft entering confirmation stage, expected completion this week">Veganster：合約草稿進入確認階段，預計本週完成</li>
+              <li data-zh="Reevo EU：對方要求已簽署合約及 DD 文件，準備中" data-en="Reevo EU: counterpart requested signed agreement and DD docs, preparing">Reevo EU：對方要求已簽署合約及 DD 文件，準備中</li>
+              <li data-zh="BetArabia / Inntec：West Asia 市場新客戶接洽啟動" data-en="BetArabia / Inntec: West Asia market new client outreach initiated">BetArabia / Inntec：West Asia 市場新客戶接洽啟動</li>
             </ul>
             <div class="meeting-subsection">✅ Action Items</div>
             <div class="meeting-action-list">
-              <div class="meeting-action-item"><span class="action-status doing">進行中</span>Bryam：Slotegrator NGR 條款最終確認</div>
-              <div class="meeting-action-item"><span class="action-status doing">進行中</span>Bryam：Veganster CIS 合約草稿完成</div>
-              <div class="meeting-action-item"><span class="action-status plan">計劃中</span>Bryam：Reevo EU Addendum + DD 文件準備</div>
+              <div class="meeting-action-item" data-zh="Bryam：Slotegrator NGR 條款最終確認" data-en="Bryam: Finalize Slotegrator NGR terms"><span class="action-status doing">進行中</span>Bryam：Slotegrator NGR 條款最終確認</div>
+              <div class="meeting-action-item" data-zh="Bryam：Veganster CIS 合約草稿完成" data-en="Bryam: Complete Veganster CIS contract draft"><span class="action-status doing">進行中</span>Bryam：Veganster CIS 合約草稿完成</div>
+              <div class="meeting-action-item" data-zh="Bryam：Reevo EU Addendum + DD 文件準備" data-en="Bryam: Prepare Reevo EU Addendum + DD documents"><span class="action-status plan">計劃中</span>Bryam：Reevo EU Addendum + DD 文件準備</div>
             </div>
           </div>
         </div>
@@ -2355,30 +2355,30 @@
         <!-- Nina / EU W10 -->
         <div class="meeting-card meeting-card-real">
           <div class="meeting-card-week">Nina · EU Regulated</div>
-          <div class="meeting-card-title">Italy / Romania / Spain / Netherlands 上線進度</div>
+          <div class="meeting-card-title" data-zh="Italy / Romania / Spain / Netherlands 上線進度" data-en="Italy / Romania / Spain / Netherlands Launch Progress">Italy / Romania / Spain / Netherlands 上線進度</div>
           <div class="meeting-card-meta-row">
             <span class="m-attendee" style="background:#F97316">N</span>
             <span class="m-attendee-more">Nina</span>
           </div>
           <div class="meeting-agenda-list" style="margin-top:10px">
-            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#F97316"></span>StarCasino Italy 上線計畫進度更新</div>
-            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#F97316"></span>Kaizen Romania 上線準備</div>
-            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#F97316"></span>Spain / Netherlands 新客戶接洽</div>
+            <div class="meeting-agenda-item" data-zh="StarCasino Italy 上線計畫進度更新" data-en="StarCasino Italy launch plan progress update"><span class="agenda-dot" style="background:#F97316"></span>StarCasino Italy 上線計畫進度更新</div>
+            <div class="meeting-agenda-item" data-zh="Kaizen Romania 上線準備" data-en="Kaizen Romania launch preparation"><span class="agenda-dot" style="background:#F97316"></span>Kaizen Romania 上線準備</div>
+            <div class="meeting-agenda-item" data-zh="Spain / Netherlands 新客戶接洽" data-en="Spain / Netherlands new client outreach"><span class="agenda-dot" style="background:#F97316"></span>Spain / Netherlands 新客戶接洽</div>
           </div>
-          <button class="meeting-toggle-btn" onclick="this.nextElementSibling.classList.toggle('open');this.textContent=this.nextElementSibling.classList.contains('open')?'▲ 收合':'▼ 展開會議記錄'">▼ 展開會議記錄</button>
+          <button class="meeting-toggle-btn" onclick="this.nextElementSibling.classList.toggle('open');this.textContent=this.nextElementSibling.classList.contains('open')?(currentLang==='en'?'▲ Collapse':'▲ 收合'):(currentLang==='en'?'▼ Expand':'▼ 展開會議記錄')">▼ 展開會議記錄</button>
           <div class="meeting-card-body">
-            <div class="meeting-subsection">📌 關鍵討論</div>
+            <div class="meeting-subsection" data-zh="📌 關鍵討論" data-en="📌 Key Discussion">📌 關鍵討論</div>
             <ul class="meeting-key-pts">
-              <li>StarCasino Italy：合規認證進行中，預計 3月中旬上線</li>
-              <li>Kaizen Romania：技術整合測試中，合規文件備妥</li>
-              <li>Spain 市場：Casino 777 合作可行性評估</li>
-              <li>Netherlands：探索受監管市場準入途徑</li>
+              <li data-zh="StarCasino Italy：合規認證進行中，預計 3月中旬上線" data-en="StarCasino Italy: compliance certification in progress, expected mid-March launch">StarCasino Italy：合規認證進行中，預計 3月中旬上線</li>
+              <li data-zh="Kaizen Romania：技術整合測試中，合規文件備妥" data-en="Kaizen Romania: technical integration testing, compliance docs ready">Kaizen Romania：技術整合測試中，合規文件備妥</li>
+              <li data-zh="Spain 市場：Casino 777 合作可行性評估" data-en="Spain market: Casino 777 partnership feasibility evaluation">Spain 市場：Casino 777 合作可行性評估</li>
+              <li data-zh="Netherlands：探索受監管市場準入途徑" data-en="Netherlands: exploring regulated market entry pathways">Netherlands：探索受監管市場準入途徑</li>
             </ul>
             <div class="meeting-subsection">✅ Action Items</div>
             <div class="meeting-action-list">
-              <div class="meeting-action-item"><span class="action-status doing">進行中</span>Nina：StarCasino Italy ADM 認證跟進</div>
-              <div class="meeting-action-item"><span class="action-status doing">進行中</span>Nina：Kaizen Romania 整合測試確認</div>
-              <div class="meeting-action-item"><span class="action-status plan">計劃中</span>Nina：Spain / NL 市場可行性評估</div>
+              <div class="meeting-action-item" data-zh="Nina：StarCasino Italy ADM 認證跟進" data-en="Nina: Follow up StarCasino Italy ADM certification"><span class="action-status doing">進行中</span>Nina：StarCasino Italy ADM 認證跟進</div>
+              <div class="meeting-action-item" data-zh="Nina：Kaizen Romania 整合測試確認" data-en="Nina: Confirm Kaizen Romania integration testing"><span class="action-status doing">進行中</span>Nina：Kaizen Romania 整合測試確認</div>
+              <div class="meeting-action-item" data-zh="Nina：Spain / NL 市場可行性評估" data-en="Nina: Spain / NL market feasibility evaluation"><span class="action-status plan">計劃中</span>Nina：Spain / NL 市場可行性評估</div>
             </div>
           </div>
         </div>
@@ -2386,30 +2386,30 @@
         <!-- Chu / Africa+Canada W10 -->
         <div class="meeting-card meeting-card-real">
           <div class="meeting-card-week">Chu · Africa & Canada</div>
-          <div class="meeting-card-title">SportyBet 非洲市場 & 加拿大合規探索</div>
+          <div class="meeting-card-title" data-zh="SportyBet 非洲市場 & 加拿大合規探索" data-en="SportyBet Africa Market &amp; Canada Compliance Exploration">SportyBet 非洲市場 & 加拿大合規探索</div>
           <div class="meeting-card-meta-row">
             <span class="m-attendee" style="background:#10B981">C</span>
             <span class="m-attendee-more">Chu</span>
           </div>
           <div class="meeting-agenda-list" style="margin-top:10px">
-            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#10B981"></span>SportyBet Africa 業績回顧 & 深化合作策略</div>
-            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#10B981"></span>Betway Africa 促銷協調</div>
-            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#10B981"></span>加拿大合規市場切入評估</div>
+            <div class="meeting-agenda-item" data-zh="SportyBet Africa 業績回顧 &amp; 深化合作策略" data-en="SportyBet Africa performance review &amp; deepened partnership strategy"><span class="agenda-dot" style="background:#10B981"></span>SportyBet Africa 業績回顧 & 深化合作策略</div>
+            <div class="meeting-agenda-item" data-zh="Betway Africa 促銷協調" data-en="Betway Africa promo coordination"><span class="agenda-dot" style="background:#10B981"></span>Betway Africa 促銷協調</div>
+            <div class="meeting-agenda-item" data-zh="加拿大合規市場切入評估" data-en="Canada regulated market entry evaluation"><span class="agenda-dot" style="background:#10B981"></span>加拿大合規市場切入評估</div>
           </div>
-          <button class="meeting-toggle-btn" onclick="this.nextElementSibling.classList.toggle('open');this.textContent=this.nextElementSibling.classList.contains('open')?'▲ 收合':'▼ 展開會議記錄'">▼ 展開會議記錄</button>
+          <button class="meeting-toggle-btn" onclick="this.nextElementSibling.classList.toggle('open');this.textContent=this.nextElementSibling.classList.contains('open')?(currentLang==='en'?'▲ Collapse':'▲ 收合'):(currentLang==='en'?'▼ Expand':'▼ 展開會議記錄')">▼ 展開會議記錄</button>
           <div class="meeting-card-body">
-            <div class="meeting-subsection">📌 關鍵討論</div>
+            <div class="meeting-subsection" data-zh="📌 關鍵討論" data-en="📌 Key Discussion">📌 關鍵討論</div>
             <ul class="meeting-key-pts">
-              <li>SportyBet Africa：Q1 MoM +14.7%，為非洲最大客戶</li>
-              <li>Betway Africa：促銷深化，要求更多遊戲曝光版位</li>
-              <li>加拿大 Ontario：iGaming Ontario 監管要求研究</li>
-              <li>SiGMA Africa 展覽：評估出展可能性</li>
+              <li data-zh="SportyBet Africa：Q1 MoM +14.7%，為非洲最大客戶" data-en="SportyBet Africa: Q1 MoM +14.7%, largest Africa client">SportyBet Africa：Q1 MoM +14.7%，為非洲最大客戶</li>
+              <li data-zh="Betway Africa：促銷深化，要求更多遊戲曝光版位" data-en="Betway Africa: promo deepening, requesting more game exposure slots">Betway Africa：促銷深化，要求更多遊戲曝光版位</li>
+              <li data-zh="加拿大 Ontario：iGaming Ontario 監管要求研究" data-en="Canada Ontario: iGaming Ontario regulatory requirements research">加拿大 Ontario：iGaming Ontario 監管要求研究</li>
+              <li data-zh="SiGMA Africa 展覽：評估出展可能性" data-en="SiGMA Africa exhibition: evaluating participation possibility">SiGMA Africa 展覽：評估出展可能性</li>
             </ul>
             <div class="meeting-subsection">✅ Action Items</div>
             <div class="meeting-action-list">
-              <div class="meeting-action-item"><span class="action-status doing">進行中</span>Chu：SportyBet Africa 促銷升級方案</div>
-              <div class="meeting-action-item"><span class="action-status plan">計劃中</span>Chu：SiGMA Africa 出展評估</div>
-              <div class="meeting-action-item"><span class="action-status plan">計劃中</span>Chu：Ontario 合規市場研究報告</div>
+              <div class="meeting-action-item" data-zh="Chu：SportyBet Africa 促銷升級方案" data-en="Chu: SportyBet Africa promo upgrade plan"><span class="action-status doing">進行中</span>Chu：SportyBet Africa 促銷升級方案</div>
+              <div class="meeting-action-item" data-zh="Chu：SiGMA Africa 出展評估" data-en="Chu: SiGMA Africa exhibition evaluation"><span class="action-status plan">計劃中</span>Chu：SiGMA Africa 出展評估</div>
+              <div class="meeting-action-item" data-zh="Chu：Ontario 合規市場研究報告" data-en="Chu: Ontario regulated market research report"><span class="action-status plan">計劃中</span>Chu：Ontario 合規市場研究報告</div>
             </div>
           </div>
         </div>
@@ -2422,36 +2422,36 @@
       <div class="meeting-section-header" style="border-left-color:#10B981">
         <div class="meeting-section-icon" style="background:rgba(16,185,129,0.12);color:#10B981">🤝</div>
         <div>
-          <div class="meeting-section-title">AM 組</div>
-          <div class="meeting-section-sub">Account Management · 週報</div>
+          <div class="meeting-section-title" data-zh="AM 組" data-en="AM Team">AM 組</div>
+          <div class="meeting-section-sub" data-zh="Account Management · 週報" data-en="Account Management · Weekly">Account Management · 週報</div>
         </div>
       </div>
       <div class="meeting-grid">
         <div class="meeting-card meeting-card-real">
           <div class="meeting-card-week">2026/03/03 · AM Operation Report</div>
-          <div class="meeting-card-title">2月業績總結 · TDAB 3.2B THB · MoM +3.9%</div>
+          <div class="meeting-card-title" data-zh="2月業績總結 · TDAB 3.2B THB · MoM +3.9%" data-en="Feb Performance Summary · TDAB 3.2B THB · MoM +3.9%">2月業績總結 · TDAB 3.2B THB · MoM +3.9%</div>
           <div class="meeting-card-meta-row">
             <span class="m-attendee" style="background:#10B981">A</span>
             <span class="m-attendee-more">AM Team</span>
           </div>
           <div class="meeting-agenda-list" style="margin-top:10px">
-            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#10B981"></span>2月 TDAB 日均：3.2B THB · MoM +3.9%</div>
-            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#10B981"></span>Italy 進入 EU Regulated Top 5 市場</div>
-            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#10B981"></span>KPI 達成率持穩，Q1 開局良好</div>
+            <div class="meeting-agenda-item" data-zh="2月 TDAB 日均：3.2B THB · MoM +3.9%" data-en="Feb TDAB daily avg: 3.2B THB · MoM +3.9%"><span class="agenda-dot" style="background:#10B981"></span>2月 TDAB 日均：3.2B THB · MoM +3.9%</div>
+            <div class="meeting-agenda-item" data-zh="Italy 進入 EU Regulated Top 5 市場" data-en="Italy enters EU Regulated Top 5 markets"><span class="agenda-dot" style="background:#10B981"></span>Italy 進入 EU Regulated Top 5 市場</div>
+            <div class="meeting-agenda-item" data-zh="KPI 達成率持穩，Q1 開局良好" data-en="KPI achievement steady, Q1 off to a good start"><span class="agenda-dot" style="background:#10B981"></span>KPI 達成率持穩，Q1 開局良好</div>
           </div>
-          <button class="meeting-toggle-btn" onclick="this.nextElementSibling.classList.toggle('open');this.textContent=this.nextElementSibling.classList.contains('open')?'▲ 收合':'▼ 展開會議記錄'">▼ 展開會議記錄</button>
+          <button class="meeting-toggle-btn" onclick="this.nextElementSibling.classList.toggle('open');this.textContent=this.nextElementSibling.classList.contains('open')?(currentLang==='en'?'▲ Collapse':'▲ 收合'):(currentLang==='en'?'▼ Expand':'▼ 展開會議記錄')">▼ 展開會議記錄</button>
           <div class="meeting-card-body">
-            <div class="meeting-subsection">📌 關鍵數據</div>
+            <div class="meeting-subsection" data-zh="📌 關鍵數據" data-en="📌 Key Metrics">📌 關鍵數據</div>
             <ul class="meeting-key-pts">
-              <li>2月 TDAB 日均：3.2B THB，MoM +3.9%</li>
-              <li>EU Regulated：Italy 進入前 5 名市場，成長動能強</li>
-              <li>Latam 整體表現穩健，Brazil / Venezuela 仍有成長空間</li>
-              <li>3月目標：TDAB ≥ 3.5B THB 日均</li>
+              <li data-zh="2月 TDAB 日均：3.2B THB，MoM +3.9%" data-en="Feb TDAB daily avg: 3.2B THB, MoM +3.9%">2月 TDAB 日均：3.2B THB，MoM +3.9%</li>
+              <li data-zh="EU Regulated：Italy 進入前 5 名市場，成長動能強" data-en="EU Regulated: Italy enters Top 5 markets, strong growth momentum">EU Regulated：Italy 進入前 5 名市場，成長動能強</li>
+              <li data-zh="Latam 整體表現穩健，Brazil / Venezuela 仍有成長空間" data-en="Latam overall performance steady, Brazil / Venezuela still with upside">Latam 整體表現穩健，Brazil / Venezuela 仍有成長空間</li>
+              <li data-zh="3月目標：TDAB ≥ 3.5B THB 日均" data-en="March target: TDAB ≥ 3.5B THB daily avg">3月目標：TDAB ≥ 3.5B THB 日均</li>
             </ul>
             <div class="meeting-subsection">✅ Action Items</div>
             <div class="meeting-action-list">
-              <div class="meeting-action-item"><span class="action-status doing">進行中</span>AM：追蹤 Italy 客戶 3月促銷執行情況</div>
-              <div class="meeting-action-item"><span class="action-status doing">進行中</span>AM：與 BD 對齊 Latam 3月推進策略</div>
+              <div class="meeting-action-item" data-zh="AM：追蹤 Italy 客戶 3月促銷執行情況" data-en="AM: Track Italy client March promo execution"><span class="action-status doing">進行中</span>AM：追蹤 Italy 客戶 3月促銷執行情況</div>
+              <div class="meeting-action-item" data-zh="AM：與 BD 對齊 Latam 3月推進策略" data-en="AM: Align Latam March push strategy with BD"><span class="action-status doing">進行中</span>AM：與 BD 對齊 Latam 3月推進策略</div>
             </div>
           </div>
         </div>
@@ -2463,36 +2463,36 @@
       <div class="meeting-section-header" style="border-left-color:#8B5CF6">
         <div class="meeting-section-icon" style="background:rgba(139,92,246,0.12);color:#8B5CF6">📣</div>
         <div>
-          <div class="meeting-section-title">MKT 組</div>
-          <div class="meeting-section-sub">Marketing · 週報</div>
+          <div class="meeting-section-title" data-zh="MKT 組" data-en="MKT Team">MKT 組</div>
+          <div class="meeting-section-sub" data-zh="Marketing · 週報" data-en="Marketing · Weekly">Marketing · 週報</div>
         </div>
       </div>
       <div class="meeting-grid">
         <div class="meeting-card meeting-card-real">
           <div class="meeting-card-week">2026/03/03 · MKT Weekly Report</div>
-          <div class="meeting-card-title">KOL & Streamer 策略 · Italy Top 5 達成</div>
+          <div class="meeting-card-title" data-zh="KOL & Streamer 策略 · Italy Top 5 達成" data-en="KOL &amp; Streamer Strategy · Italy Top 5 Achieved">KOL & Streamer 策略 · Italy Top 5 達成</div>
           <div class="meeting-card-meta-row">
             <span class="m-attendee" style="background:#8B5CF6">M</span>
             <span class="m-attendee-more">MKT Team</span>
           </div>
           <div class="meeting-agenda-list" style="margin-top:10px">
-            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#8B5CF6"></span>KOL 合作計畫推進，Italy 市場 Streamer 佈局成型</div>
-            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#8B5CF6"></span>Italy 進入平台 Top 5 遊戲排名</div>
-            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#8B5CF6"></span>Latam Streamer 活動規劃</div>
+            <div class="meeting-agenda-item" data-zh="KOL 合作計畫推進，Italy 市場 Streamer 佈局成型" data-en="KOL partnership plan advancing, Italy Streamer coverage taking shape"><span class="agenda-dot" style="background:#8B5CF6"></span>KOL 合作計畫推進，Italy 市場 Streamer 佈局成型</div>
+            <div class="meeting-agenda-item" data-zh="Italy 進入平台 Top 5 遊戲排名" data-en="Italy enters platform Top 5 game rankings"><span class="agenda-dot" style="background:#8B5CF6"></span>Italy 進入平台 Top 5 遊戲排名</div>
+            <div class="meeting-agenda-item" data-zh="Latam Streamer 活動規劃" data-en="Latam Streamer campaign planning"><span class="agenda-dot" style="background:#8B5CF6"></span>Latam Streamer 活動規劃</div>
           </div>
-          <button class="meeting-toggle-btn" onclick="this.nextElementSibling.classList.toggle('open');this.textContent=this.nextElementSibling.classList.contains('open')?'▲ 收合':'▼ 展開會議記錄'">▼ 展開會議記錄</button>
+          <button class="meeting-toggle-btn" onclick="this.nextElementSibling.classList.toggle('open');this.textContent=this.nextElementSibling.classList.contains('open')?(currentLang==='en'?'▲ Collapse':'▲ 收合'):(currentLang==='en'?'▼ Expand':'▼ 展開會議記錄')">▼ 展開會議記錄</button>
           <div class="meeting-card-body">
-            <div class="meeting-subsection">📌 關鍵討論</div>
+            <div class="meeting-subsection" data-zh="📌 關鍵討論" data-en="📌 Key Discussion">📌 關鍵討論</div>
             <ul class="meeting-key-pts">
-              <li>Italy KOL 成效：TaDa 遊戲進入多個平台 Top 5 排名</li>
-              <li>Latam Streamer 策略：Brazil / Venezuela 市場優先布局</li>
-              <li>Fortune Zombie Free Spin Campaign 準備中</li>
-              <li>Superbet Free Spin Campaign 成效追蹤中</li>
+              <li data-zh="Italy KOL 成效：TaDa 遊戲進入多個平台 Top 5 排名" data-en="Italy KOL results: TaDa games entered multiple platform Top 5 rankings">Italy KOL 成效：TaDa 遊戲進入多個平台 Top 5 排名</li>
+              <li data-zh="Latam Streamer 策略：Brazil / Venezuela 市場優先布局" data-en="Latam Streamer strategy: Brazil / Venezuela market priority deployment">Latam Streamer 策略：Brazil / Venezuela 市場優先布局</li>
+              <li data-zh="Fortune Zombie Free Spin Campaign 準備中" data-en="Fortune Zombie Free Spin Campaign in preparation">Fortune Zombie Free Spin Campaign 準備中</li>
+              <li data-zh="Superbet Free Spin Campaign 成效追蹤中" data-en="Superbet Free Spin Campaign results being tracked">Superbet Free Spin Campaign 成效追蹤中</li>
             </ul>
             <div class="meeting-subsection">✅ Action Items</div>
             <div class="meeting-action-list">
-              <div class="meeting-action-item"><span class="action-status plan">計劃中</span>MKT：Fortune Zombie Free Spin Campaign 準備</div>
-              <div class="meeting-action-item"><span class="action-status doing">進行中</span>MKT：Italy / Latam KOL 合作成效追蹤</div>
+              <div class="meeting-action-item" data-zh="MKT：Fortune Zombie Free Spin Campaign 準備" data-en="MKT: Fortune Zombie Free Spin Campaign preparation"><span class="action-status plan">計劃中</span>MKT：Fortune Zombie Free Spin Campaign 準備</div>
+              <div class="meeting-action-item" data-zh="MKT：Italy / Latam KOL 合作成效追蹤" data-en="MKT: Italy / Latam KOL partnership results tracking"><span class="action-status doing">進行中</span>MKT：Italy / Latam KOL 合作成效追蹤</div>
             </div>
           </div>
         </div>
@@ -2504,14 +2504,14 @@
 
   <!-- ══════════ W-MAR10 ══════════ -->
   <div class="meeting-week-content" id="w-mar10">
-    <div class="rpt-section-label">2026/03/10 (二) 週會 · W11</div>
+    <div class="rpt-section-label" data-zh="2026/03/10 (二) 週會 · W11" data-en="2026/03/10 (Tue) Weekly · W11">2026/03/10 (二) 週會 · W11</div>
 
     <div class="meeting-section" data-group="bd">
       <div class="meeting-section-header" style="border-left-color:#F59E0B">
         <div class="meeting-section-icon" style="background:rgba(245,158,11,0.12);color:#F59E0B">💼</div>
         <div>
-          <div class="meeting-section-title">BD 組</div>
-          <div class="meeting-section-sub">Business Development · 週報</div>
+          <div class="meeting-section-title" data-zh="BD 組" data-en="BD Team">BD 組</div>
+          <div class="meeting-section-sub" data-zh="Business Development · 週報" data-en="Business Development · Weekly">Business Development · 週報</div>
         </div>
       </div>
       <div class="meeting-grid">
@@ -2519,30 +2519,30 @@
         <!-- Hector / Latam W11 -->
         <div class="meeting-card meeting-card-real">
           <div class="meeting-card-week">Hector · Latam</div>
-          <div class="meeting-card-title">BRAGG Peru 獨家確認 · Superbet Brazil WoW +50.6%</div>
+          <div class="meeting-card-title" data-zh="BRAGG Peru 獨家確認 · Superbet Brazil WoW +50.6%" data-en="BRAGG Peru Exclusive Confirmed · Superbet Brazil WoW +50.6%">BRAGG Peru 獨家確認 · Superbet Brazil WoW +50.6%</div>
           <div class="meeting-card-meta-row">
             <span class="m-attendee" style="background:#F59E0B">H</span>
             <span class="m-attendee-more">Hector</span>
           </div>
           <div class="meeting-agenda-list" style="margin-top:10px">
-            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#F59E0B"></span>BRAGG Peru 獨家遊戲供應確認，合約條款敲定</div>
-            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#F59E0B"></span>Superbet Brazil WoW +50.6%，勢頭最強</div>
-            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#F59E0B"></span>Brazil Streaming 排名第 3，曝光大幅提升</div>
+            <div class="meeting-agenda-item" data-zh="BRAGG Peru 獨家遊戲供應確認，合約條款敲定" data-en="BRAGG Peru exclusive supply confirmed, contract terms finalized"><span class="agenda-dot" style="background:#F59E0B"></span>BRAGG Peru 獨家遊戲供應確認，合約條款敲定</div>
+            <div class="meeting-agenda-item" data-zh="Superbet Brazil WoW +50.6%，勢頭最強" data-en="Superbet Brazil WoW +50.6%, strongest momentum"><span class="agenda-dot" style="background:#F59E0B"></span>Superbet Brazil WoW +50.6%，勢頭最強</div>
+            <div class="meeting-agenda-item" data-zh="Brazil Streaming 排名第 3，曝光大幅提升" data-en="Brazil Streaming ranked #3, exposure significantly boosted"><span class="agenda-dot" style="background:#F59E0B"></span>Brazil Streaming 排名第 3，曝光大幅提升</div>
           </div>
-          <button class="meeting-toggle-btn" onclick="this.nextElementSibling.classList.toggle('open');this.textContent=this.nextElementSibling.classList.contains('open')?'▲ 收合':'▼ 展開會議記錄'">▼ 展開會議記錄</button>
+          <button class="meeting-toggle-btn" onclick="this.nextElementSibling.classList.toggle('open');this.textContent=this.nextElementSibling.classList.contains('open')?(currentLang==='en'?'▲ Collapse':'▲ 收合'):(currentLang==='en'?'▼ Expand':'▼ 展開會議記錄')">▼ 展開會議記錄</button>
           <div class="meeting-card-body">
-            <div class="meeting-subsection">📌 關鍵討論</div>
+            <div class="meeting-subsection" data-zh="📌 關鍵討論" data-en="📌 Key Discussion">📌 關鍵討論</div>
             <ul class="meeting-key-pts">
-              <li>BRAGG Peru 獨家：TaDa 成為 BRAGG 在 Peru 的獨家內容供應商，覆蓋 slots + live casino</li>
-              <li>Superbet Brazil：WoW +50.6%，為本週 Latam 最亮眼成長</li>
-              <li>Brazil 整體 Streaming rank #3，市場曝光顯著提升</li>
-              <li>Blaze Brazil：持續深化促銷合作</li>
+              <li data-zh="BRAGG Peru 獨家：TaDa 成為 BRAGG 在 Peru 的獨家內容供應商，覆蓋 slots + live casino" data-en="BRAGG Peru exclusive: TaDa becomes BRAGG exclusive content supplier in Peru, covering slots + live casino">BRAGG Peru 獨家：TaDa 成為 BRAGG 在 Peru 的獨家內容供應商，覆蓋 slots + live casino</li>
+              <li data-zh="Superbet Brazil：WoW +50.6%，為本週 Latam 最亮眼成長" data-en="Superbet Brazil: WoW +50.6%, brightest Latam growth this week">Superbet Brazil：WoW +50.6%，為本週 Latam 最亮眼成長</li>
+              <li data-zh="Brazil 整體 Streaming rank #3，市場曝光顯著提升" data-en="Brazil overall Streaming rank #3, market exposure significantly improved">Brazil 整體 Streaming rank #3，市場曝光顯著提升</li>
+              <li data-zh="Blaze Brazil：持續深化促銷合作" data-en="Blaze Brazil: continuously deepening promo partnership">Blaze Brazil：持續深化促銷合作</li>
             </ul>
             <div class="meeting-subsection">✅ Action Items</div>
             <div class="meeting-action-list">
-              <div class="meeting-action-item"><span class="action-status done">完成</span>Hector：BRAGG Peru 獨家合約確認</div>
-              <div class="meeting-action-item"><span class="action-status doing">進行中</span>Hector：Superbet Brazil 促銷計畫跟進</div>
-              <div class="meeting-action-item"><span class="action-status doing">進行中</span>Hector：Blaze Brazil 下一期促銷規劃</div>
+              <div class="meeting-action-item" data-zh="Hector：BRAGG Peru 獨家合約確認" data-en="Hector: BRAGG Peru exclusive contract confirmed"><span class="action-status done">完成</span>Hector：BRAGG Peru 獨家合約確認</div>
+              <div class="meeting-action-item" data-zh="Hector：Superbet Brazil 促銷計畫跟進" data-en="Hector: Follow up Superbet Brazil promo plan"><span class="action-status doing">進行中</span>Hector：Superbet Brazil 促銷計畫跟進</div>
+              <div class="meeting-action-item" data-zh="Hector：Blaze Brazil 下一期促銷規劃" data-en="Hector: Plan next Blaze Brazil promo campaign"><span class="action-status doing">進行中</span>Hector：Blaze Brazil 下一期促銷規劃</div>
             </div>
           </div>
         </div>
@@ -2550,30 +2550,30 @@
         <!-- Bryam / CIS+WA W11 -->
         <div class="meeting-card meeting-card-real">
           <div class="meeting-card-week">Bryam · CIS & West Asia</div>
-          <div class="meeting-card-title">Inntec / BetArabia / Broadway / Lagersoft 新夥伴接洽</div>
+          <div class="meeting-card-title" data-zh="Inntec / BetArabia / Broadway / Lagersoft 新夥伴接洽" data-en="Inntec / BetArabia / Broadway / Lagersoft New Partner Outreach">Inntec / BetArabia / Broadway / Lagersoft 新夥伴接洽</div>
           <div class="meeting-card-meta-row">
             <span class="m-attendee" style="background:#8B5CF6">B</span>
             <span class="m-attendee-more">Bryam</span>
           </div>
           <div class="meeting-agenda-list" style="margin-top:10px">
-            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#8B5CF6"></span>Inntec（West Asia）合作洽談進展</div>
-            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#8B5CF6"></span>BetArabia 沙烏地市場接洽</div>
-            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#8B5CF6"></span>Broadway / Lagersoft CIS 新合作評估</div>
+            <div class="meeting-agenda-item" data-zh="Inntec（West Asia）合作洽談進展" data-en="Inntec (West Asia) partnership negotiation progress"><span class="agenda-dot" style="background:#8B5CF6"></span>Inntec（West Asia）合作洽談進展</div>
+            <div class="meeting-agenda-item" data-zh="BetArabia 沙烏地市場接洽" data-en="BetArabia Saudi Arabia market outreach"><span class="agenda-dot" style="background:#8B5CF6"></span>BetArabia 沙烏地市場接洽</div>
+            <div class="meeting-agenda-item" data-zh="Broadway / Lagersoft CIS 新合作評估" data-en="Broadway / Lagersoft CIS new partnership evaluation"><span class="agenda-dot" style="background:#8B5CF6"></span>Broadway / Lagersoft CIS 新合作評估</div>
           </div>
-          <button class="meeting-toggle-btn" onclick="this.nextElementSibling.classList.toggle('open');this.textContent=this.nextElementSibling.classList.contains('open')?'▲ 收合':'▼ 展開會議記錄'">▼ 展開會議記錄</button>
+          <button class="meeting-toggle-btn" onclick="this.nextElementSibling.classList.toggle('open');this.textContent=this.nextElementSibling.classList.contains('open')?(currentLang==='en'?'▲ Collapse':'▲ 收合'):(currentLang==='en'?'▼ Expand':'▼ 展開會議記錄')">▼ 展開會議記錄</button>
           <div class="meeting-card-body">
-            <div class="meeting-subsection">📌 關鍵討論</div>
+            <div class="meeting-subsection" data-zh="📌 關鍵討論" data-en="📌 Key Discussion">📌 關鍵討論</div>
             <ul class="meeting-key-pts">
-              <li>Inntec：West Asia 技術整合夥伴，評估 TaDa 內容整合方案</li>
-              <li>BetArabia：沙烏地阿拉伯市場，初步接觸探索合作</li>
-              <li>Broadway：CIS 市場小型運營商，快速整合可能</li>
-              <li>Lagersoft：CIS 技術夥伴，評估 API 整合深度</li>
+              <li data-zh="Inntec：West Asia 技術整合夥伴，評估 TaDa 內容整合方案" data-en="Inntec: West Asia tech integration partner, evaluating TaDa content integration plan">Inntec：West Asia 技術整合夥伴，評估 TaDa 內容整合方案</li>
+              <li data-zh="BetArabia：沙烏地阿拉伯市場，初步接觸探索合作" data-en="BetArabia: Saudi Arabia market, initial contact exploring partnership">BetArabia：沙烏地阿拉伯市場，初步接觸探索合作</li>
+              <li data-zh="Broadway：CIS 市場小型運營商，快速整合可能" data-en="Broadway: CIS market small operator, fast integration possible">Broadway：CIS 市場小型運營商，快速整合可能</li>
+              <li data-zh="Lagersoft：CIS 技術夥伴，評估 API 整合深度" data-en="Lagersoft: CIS tech partner, evaluating API integration depth">Lagersoft：CIS 技術夥伴，評估 API 整合深度</li>
             </ul>
             <div class="meeting-subsection">✅ Action Items</div>
             <div class="meeting-action-list">
-              <div class="meeting-action-item"><span class="action-status doing">進行中</span>Bryam：Inntec 合作方案評估</div>
-              <div class="meeting-action-item"><span class="action-status doing">進行中</span>Bryam：BetArabia 初步需求確認</div>
-              <div class="meeting-action-item"><span class="action-status plan">計劃中</span>Bryam：Broadway / Lagersoft 整合可行性評估</div>
+              <div class="meeting-action-item" data-zh="Bryam：Inntec 合作方案評估" data-en="Bryam: Inntec partnership plan evaluation"><span class="action-status doing">進行中</span>Bryam：Inntec 合作方案評估</div>
+              <div class="meeting-action-item" data-zh="Bryam：BetArabia 初步需求確認" data-en="Bryam: BetArabia initial requirements confirmation"><span class="action-status doing">進行中</span>Bryam：BetArabia 初步需求確認</div>
+              <div class="meeting-action-item" data-zh="Bryam：Broadway / Lagersoft 整合可行性評估" data-en="Bryam: Broadway / Lagersoft integration feasibility evaluation"><span class="action-status plan">計劃中</span>Bryam：Broadway / Lagersoft 整合可行性評估</div>
             </div>
           </div>
         </div>
@@ -2581,30 +2581,30 @@
         <!-- Chu / Africa+Canada W11 -->
         <div class="meeting-card meeting-card-real">
           <div class="meeting-card-week">Chu · Africa & Canada</div>
-          <div class="meeting-card-title">SiGMA Africa 評估 & 南非 / 加拿大推進</div>
+          <div class="meeting-card-title" data-zh="SiGMA Africa 評估 & 南非 / 加拿大推進" data-en="SiGMA Africa Evaluation &amp; South Africa / Canada Push">SiGMA Africa 評估 & 南非 / 加拿大推進</div>
           <div class="meeting-card-meta-row">
             <span class="m-attendee" style="background:#10B981">C</span>
             <span class="m-attendee-more">Chu</span>
           </div>
           <div class="meeting-agenda-list" style="margin-top:10px">
-            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#10B981"></span>SiGMA Africa 展覽出展計畫評估</div>
-            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#10B981"></span>南非（Tsogo / Betway）BD 推進</div>
-            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#10B981"></span>加拿大 Ontario 合規市場研究</div>
+            <div class="meeting-agenda-item" data-zh="SiGMA Africa 展覽出展計畫評估" data-en="SiGMA Africa exhibition participation plan evaluation"><span class="agenda-dot" style="background:#10B981"></span>SiGMA Africa 展覽出展計畫評估</div>
+            <div class="meeting-agenda-item" data-zh="南非（Tsogo / Betway）BD 推進" data-en="South Africa (Tsogo / Betway) BD push"><span class="agenda-dot" style="background:#10B981"></span>南非（Tsogo / Betway）BD 推進</div>
+            <div class="meeting-agenda-item" data-zh="加拿大 Ontario 合規市場研究" data-en="Canada Ontario regulated market research"><span class="agenda-dot" style="background:#10B981"></span>加拿大 Ontario 合規市場研究</div>
           </div>
-          <button class="meeting-toggle-btn" onclick="this.nextElementSibling.classList.toggle('open');this.textContent=this.nextElementSibling.classList.contains('open')?'▲ 收合':'▼ 展開會議記錄'">▼ 展開會議記錄</button>
+          <button class="meeting-toggle-btn" onclick="this.nextElementSibling.classList.toggle('open');this.textContent=this.nextElementSibling.classList.contains('open')?(currentLang==='en'?'▲ Collapse':'▲ 收合'):(currentLang==='en'?'▼ Expand':'▼ 展開會議記錄')">▼ 展開會議記錄</button>
           <div class="meeting-card-body">
-            <div class="meeting-subsection">📌 關鍵討論</div>
+            <div class="meeting-subsection" data-zh="📌 關鍵討論" data-en="📌 Key Discussion">📌 關鍵討論</div>
             <ul class="meeting-key-pts">
-              <li>SiGMA Africa：評估出展 ROI 及合適時機</li>
-              <li>南非 Tsogo Sun：評估合作可行性</li>
-              <li>Betway Africa：促銷升級談判</li>
-              <li>加拿大 Ontario：iGaming Ontario 合規要求研究中</li>
+              <li data-zh="SiGMA Africa：評估出展 ROI 及合適時機" data-en="SiGMA Africa: evaluating exhibition ROI and appropriate timing">SiGMA Africa：評估出展 ROI 及合適時機</li>
+              <li data-zh="南非 Tsogo Sun：評估合作可行性" data-en="South Africa Tsogo Sun: evaluating partnership feasibility">南非 Tsogo Sun：評估合作可行性</li>
+              <li data-zh="Betway Africa：促銷升級談判" data-en="Betway Africa: promo upgrade negotiation">Betway Africa：促銷升級談判</li>
+              <li data-zh="加拿大 Ontario：iGaming Ontario 合規要求研究中" data-en="Canada Ontario: iGaming Ontario compliance requirements under research">加拿大 Ontario：iGaming Ontario 合規要求研究中</li>
             </ul>
             <div class="meeting-subsection">✅ Action Items</div>
             <div class="meeting-action-list">
-              <div class="meeting-action-item"><span class="action-status plan">計劃中</span>Chu：SiGMA Africa 出展方案提案</div>
-              <div class="meeting-action-item"><span class="action-status doing">進行中</span>Chu：Tsogo Sun 合作評估</div>
-              <div class="meeting-action-item"><span class="action-status doing">進行中</span>Chu：Ontario 合規市場研究</div>
+              <div class="meeting-action-item" data-zh="Chu：SiGMA Africa 出展方案提案" data-en="Chu: SiGMA Africa exhibition proposal"><span class="action-status plan">計劃中</span>Chu：SiGMA Africa 出展方案提案</div>
+              <div class="meeting-action-item" data-zh="Chu：Tsogo Sun 合作評估" data-en="Chu: Tsogo Sun partnership evaluation"><span class="action-status doing">進行中</span>Chu：Tsogo Sun 合作評估</div>
+              <div class="meeting-action-item" data-zh="Chu：Ontario 合規市場研究" data-en="Chu: Ontario regulated market research"><span class="action-status doing">進行中</span>Chu：Ontario 合規市場研究</div>
             </div>
           </div>
         </div>
@@ -2617,36 +2617,36 @@
       <div class="meeting-section-header" style="border-left-color:#10B981">
         <div class="meeting-section-icon" style="background:rgba(16,185,129,0.12);color:#10B981">🤝</div>
         <div>
-          <div class="meeting-section-title">AM 組</div>
-          <div class="meeting-section-sub">Account Management · 週報</div>
+          <div class="meeting-section-title" data-zh="AM 組" data-en="AM Team">AM 組</div>
+          <div class="meeting-section-sub" data-zh="Account Management · 週報" data-en="Account Management · Weekly">Account Management · 週報</div>
         </div>
       </div>
       <div class="meeting-grid">
         <div class="meeting-card meeting-card-real">
           <div class="meeting-card-week">2026/03/10 · AM Operation Report</div>
-          <div class="meeting-card-title">3月累計 TDAB 3.74B THB · WoW +14.3%</div>
+          <div class="meeting-card-title" data-zh="3月累計 TDAB 3.74B THB · WoW +14.3%" data-en="Mar Cumulative TDAB 3.74B THB · WoW +14.3%">3月累計 TDAB 3.74B THB · WoW +14.3%</div>
           <div class="meeting-card-meta-row">
             <span class="m-attendee" style="background:#10B981">A</span>
             <span class="m-attendee-more">AM Team</span>
           </div>
           <div class="meeting-agenda-list" style="margin-top:10px">
-            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#10B981"></span>3月 Week 1 TDAB：3.74B THB · WoW +14.3%</div>
-            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#10B981"></span>Brazil Streaming 排名第 3，曝光量大幅提升</div>
-            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#10B981"></span>KPI 進度超前，Q1 衝刺良好</div>
+            <div class="meeting-agenda-item" data-zh="3月 Week 1 TDAB：3.74B THB · WoW +14.3%" data-en="March Week 1 TDAB: 3.74B THB · WoW +14.3%"><span class="agenda-dot" style="background:#10B981"></span>3月 Week 1 TDAB：3.74B THB · WoW +14.3%</div>
+            <div class="meeting-agenda-item" data-zh="Brazil Streaming 排名第 3，曝光量大幅提升" data-en="Brazil Streaming ranked #3, exposure greatly increased"><span class="agenda-dot" style="background:#10B981"></span>Brazil Streaming 排名第 3，曝光量大幅提升</div>
+            <div class="meeting-agenda-item" data-zh="KPI 進度超前，Q1 衝刺良好" data-en="KPI ahead of schedule, Q1 sprint on track"><span class="agenda-dot" style="background:#10B981"></span>KPI 進度超前，Q1 衝刺良好</div>
           </div>
-          <button class="meeting-toggle-btn" onclick="this.nextElementSibling.classList.toggle('open');this.textContent=this.nextElementSibling.classList.contains('open')?'▲ 收合':'▼ 展開會議記錄'">▼ 展開會議記錄</button>
+          <button class="meeting-toggle-btn" onclick="this.nextElementSibling.classList.toggle('open');this.textContent=this.nextElementSibling.classList.contains('open')?(currentLang==='en'?'▲ Collapse':'▲ 收合'):(currentLang==='en'?'▼ Expand':'▼ 展開會議記錄')">▼ 展開會議記錄</button>
           <div class="meeting-card-body">
-            <div class="meeting-subsection">📌 關鍵數據</div>
+            <div class="meeting-subsection" data-zh="📌 關鍵數據" data-en="📌 Key Metrics">📌 關鍵數據</div>
             <ul class="meeting-key-pts">
-              <li>3月累計 TDAB：3.74B THB，WoW +14.3%</li>
-              <li>Latam 成長強勁，Venezuela 繼續領先</li>
-              <li>EU Regulated：Italy / Romania 蓄勢待發，預計本週上線</li>
-              <li>目標：月底達成 KPI ≥ 85%</li>
+              <li data-zh="3月累計 TDAB：3.74B THB，WoW +14.3%" data-en="March cumulative TDAB: 3.74B THB, WoW +14.3%">3月累計 TDAB：3.74B THB，WoW +14.3%</li>
+              <li data-zh="Latam 成長強勁，Venezuela 繼續領先" data-en="Latam growth strong, Venezuela continues to lead">Latam 成長強勁，Venezuela 繼續領先</li>
+              <li data-zh="EU Regulated：Italy / Romania 蓄勢待發，預計本週上線" data-en="EU Regulated: Italy / Romania ready to launch, expected live this week">EU Regulated：Italy / Romania 蓄勢待發，預計本週上線</li>
+              <li data-zh="目標：月底達成 KPI ≥ 85%" data-en="Target: achieve KPI ≥ 85% by month end">目標：月底達成 KPI ≥ 85%</li>
             </ul>
             <div class="meeting-subsection">✅ Action Items</div>
             <div class="meeting-action-list">
-              <div class="meeting-action-item"><span class="action-status doing">進行中</span>AM：各市場週報數據整理及分享</div>
-              <div class="meeting-action-item"><span class="action-status doing">進行中</span>AM：Latam 促銷活動成效追蹤</div>
+              <div class="meeting-action-item" data-zh="AM：各市場週報數據整理及分享" data-en="AM: Compile and share weekly market data reports"><span class="action-status doing">進行中</span>AM：各市場週報數據整理及分享</div>
+              <div class="meeting-action-item" data-zh="AM：Latam 促銷活動成效追蹤" data-en="AM: Track Latam promo campaign effectiveness"><span class="action-status doing">進行中</span>AM：Latam 促銷活動成效追蹤</div>
             </div>
           </div>
         </div>
@@ -2658,36 +2658,36 @@
       <div class="meeting-section-header" style="border-left-color:#8B5CF6">
         <div class="meeting-section-icon" style="background:rgba(139,92,246,0.12);color:#8B5CF6">📣</div>
         <div>
-          <div class="meeting-section-title">MKT 組</div>
-          <div class="meeting-section-sub">Marketing · 週報</div>
+          <div class="meeting-section-title" data-zh="MKT 組" data-en="MKT Team">MKT 組</div>
+          <div class="meeting-section-sub" data-zh="Marketing · 週報" data-en="Marketing · Weekly">Marketing · 週報</div>
         </div>
       </div>
       <div class="meeting-grid">
         <div class="meeting-card meeting-card-real">
           <div class="meeting-card-week">2026/03/10 · MKT Weekly Report</div>
-          <div class="meeting-card-title">Brazil Streaming Rank #3 · TaDa Mega Jackpot 策略強化</div>
+          <div class="meeting-card-title" data-zh="Brazil Streaming Rank #3 · TaDa Mega Jackpot 策略強化" data-en="Brazil Streaming Rank #3 · TaDa Mega Jackpot Strategy Reinforced">Brazil Streaming Rank #3 · TaDa Mega Jackpot 策略強化</div>
           <div class="meeting-card-meta-row">
             <span class="m-attendee" style="background:#8B5CF6">M</span>
             <span class="m-attendee-more">MKT Team</span>
           </div>
           <div class="meeting-agenda-list" style="margin-top:10px">
-            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#8B5CF6"></span>TaDa 在 Brazil 平台 Streaming 排名達到第 3 位</div>
-            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#8B5CF6"></span>TaDa Mega Jackpot 活動推進力道加強</div>
-            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#8B5CF6"></span>Fortune Zombie Free Spin Campaign 成效追蹤</div>
+            <div class="meeting-agenda-item" data-zh="TaDa 在 Brazil 平台 Streaming 排名達到第 3 位" data-en="TaDa reached Streaming rank #3 on Brazil platform"><span class="agenda-dot" style="background:#8B5CF6"></span>TaDa 在 Brazil 平台 Streaming 排名達到第 3 位</div>
+            <div class="meeting-agenda-item" data-zh="TaDa Mega Jackpot 活動推進力道加強" data-en="TaDa Mega Jackpot campaign push intensified"><span class="agenda-dot" style="background:#8B5CF6"></span>TaDa Mega Jackpot 活動推進力道加強</div>
+            <div class="meeting-agenda-item" data-zh="Fortune Zombie Free Spin Campaign 成效追蹤" data-en="Fortune Zombie Free Spin Campaign results tracking"><span class="agenda-dot" style="background:#8B5CF6"></span>Fortune Zombie Free Spin Campaign 成效追蹤</div>
           </div>
-          <button class="meeting-toggle-btn" onclick="this.nextElementSibling.classList.toggle('open');this.textContent=this.nextElementSibling.classList.contains('open')?'▲ 收合':'▼ 展開會議記錄'">▼ 展開會議記錄</button>
+          <button class="meeting-toggle-btn" onclick="this.nextElementSibling.classList.toggle('open');this.textContent=this.nextElementSibling.classList.contains('open')?(currentLang==='en'?'▲ Collapse':'▲ 收合'):(currentLang==='en'?'▼ Expand':'▼ 展開會議記錄')">▼ 展開會議記錄</button>
           <div class="meeting-card-body">
-            <div class="meeting-subsection">📌 關鍵討論</div>
+            <div class="meeting-subsection" data-zh="📌 關鍵討論" data-en="📌 Key Discussion">📌 關鍵討論</div>
             <ul class="meeting-key-pts">
-              <li>Brazil Streaming 排名第 3：顯示 KOL 佈局成效顯著</li>
-              <li>TaDa Mega Jackpot：需更積極宣傳力道，考慮增加 Streamer 合作</li>
-              <li>Fortune Zombie：Free Spin 活動本週數據分析</li>
-              <li>Superbet Free Spin：Campaign 效益持續追蹤</li>
+              <li data-zh="Brazil Streaming 排名第 3：顯示 KOL 佈局成效顯著" data-en="Brazil Streaming rank #3: shows significant KOL deployment effectiveness">Brazil Streaming 排名第 3：顯示 KOL 佈局成效顯著</li>
+              <li data-zh="TaDa Mega Jackpot：需更積極宣傳力道，考慮增加 Streamer 合作" data-en="TaDa Mega Jackpot: needs more aggressive promotion, considering more Streamer partnerships">TaDa Mega Jackpot：需更積極宣傳力道，考慮增加 Streamer 合作</li>
+              <li data-zh="Fortune Zombie：Free Spin 活動本週數據分析" data-en="Fortune Zombie: Free Spin campaign data analysis this week">Fortune Zombie：Free Spin 活動本週數據分析</li>
+              <li data-zh="Superbet Free Spin：Campaign 效益持續追蹤" data-en="Superbet Free Spin: Campaign effectiveness continuously tracked">Superbet Free Spin：Campaign 效益持續追蹤</li>
             </ul>
             <div class="meeting-subsection">✅ Action Items</div>
             <div class="meeting-action-list">
-              <div class="meeting-action-item"><span class="action-status doing">進行中</span>MKT：Mega Jackpot 宣傳力道提升方案</div>
-              <div class="meeting-action-item"><span class="action-status doing">進行中</span>MKT：Fortune Zombie 成效數據整理</div>
+              <div class="meeting-action-item" data-zh="MKT：Mega Jackpot 宣傳力道提升方案" data-en="MKT: Plan to boost Mega Jackpot promotion intensity"><span class="action-status doing">進行中</span>MKT：Mega Jackpot 宣傳力道提升方案</div>
+              <div class="meeting-action-item" data-zh="MKT：Fortune Zombie 成效數據整理" data-en="MKT: Compile Fortune Zombie results data"><span class="action-status doing">進行中</span>MKT：Fortune Zombie 成效數據整理</div>
             </div>
           </div>
         </div>
@@ -2699,14 +2699,14 @@
 
   <!-- ══════════ W-MAR17 ══════════ -->
   <div class="meeting-week-content" id="w-mar17">
-    <div class="rpt-section-label">2026/03/17 (二) 週會 · W12</div>
+    <div class="rpt-section-label" data-zh="2026/03/17 (二) 週會 · W12" data-en="2026/03/17 (Tue) Weekly · W12">2026/03/17 (二) 週會 · W12</div>
 
     <div class="meeting-section" data-group="bd">
       <div class="meeting-section-header" style="border-left-color:#F59E0B">
         <div class="meeting-section-icon" style="background:rgba(245,158,11,0.12);color:#F59E0B">💼</div>
         <div>
-          <div class="meeting-section-title">BD 組</div>
-          <div class="meeting-section-sub">Business Development · 週報</div>
+          <div class="meeting-section-title" data-zh="BD 組" data-en="BD Team">BD 組</div>
+          <div class="meeting-section-sub" data-zh="Business Development · 週報" data-en="Business Development · Weekly">Business Development · 週報</div>
         </div>
       </div>
       <div class="meeting-grid">
@@ -2714,30 +2714,30 @@
         <!-- Hector / Latam W12 -->
         <div class="meeting-card meeting-card-real">
           <div class="meeting-card-week">Hector · Latam</div>
-          <div class="meeting-card-title">BRAGG Latam 全面啟動 · Blaze Brazil WoW +23.8%</div>
+          <div class="meeting-card-title" data-zh="BRAGG Latam 全面啟動 · Blaze Brazil WoW +23.8%" data-en="BRAGG Latam Full Launch · Blaze Brazil WoW +23.8%">BRAGG Latam 全面啟動 · Blaze Brazil WoW +23.8%</div>
           <div class="meeting-card-meta-row">
             <span class="m-attendee" style="background:#F59E0B">H</span>
             <span class="m-attendee-more">Hector</span>
           </div>
           <div class="meeting-agenda-list" style="margin-top:10px">
-            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#F59E0B"></span>BRAGG Latam 整體整合方案推進（Peru + Mexico + Brazil）</div>
-            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#F59E0B"></span>Blaze Brazil WoW +23.8%，促銷效果顯現</div>
-            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#F59E0B"></span>KTO 4月促銷計畫啟動洽談</div>
+            <div class="meeting-agenda-item" data-zh="BRAGG Latam 整體整合方案推進（Peru + Mexico + Brazil）" data-en="BRAGG Latam full integration plan push (Peru + Mexico + Brazil)"><span class="agenda-dot" style="background:#F59E0B"></span>BRAGG Latam 整體整合方案推進（Peru + Mexico + Brazil）</div>
+            <div class="meeting-agenda-item" data-zh="Blaze Brazil WoW +23.8%，促銷效果顯現" data-en="Blaze Brazil WoW +23.8%, promo effect materializing"><span class="agenda-dot" style="background:#F59E0B"></span>Blaze Brazil WoW +23.8%，促銷效果顯現</div>
+            <div class="meeting-agenda-item" data-zh="KTO 4月促銷計畫啟動洽談" data-en="KTO April promo plan negotiation initiated"><span class="agenda-dot" style="background:#F59E0B"></span>KTO 4月促銷計畫啟動洽談</div>
           </div>
-          <button class="meeting-toggle-btn" onclick="this.nextElementSibling.classList.toggle('open');this.textContent=this.nextElementSibling.classList.contains('open')?'▲ 收合':'▼ 展開會議記錄'">▼ 展開會議記錄</button>
+          <button class="meeting-toggle-btn" onclick="this.nextElementSibling.classList.toggle('open');this.textContent=this.nextElementSibling.classList.contains('open')?(currentLang==='en'?'▲ Collapse':'▲ 收合'):(currentLang==='en'?'▼ Expand':'▼ 展開會議記錄')">▼ 展開會議記錄</button>
           <div class="meeting-card-body">
-            <div class="meeting-subsection">📌 關鍵討論</div>
+            <div class="meeting-subsection" data-zh="📌 關鍵討論" data-en="📌 Key Discussion">📌 關鍵討論</div>
             <ul class="meeting-key-pts">
-              <li>BRAGG Latam：Peru 已確認，Mexico / Brazil 後續條款談判中</li>
-              <li>Blaze Brazil：WoW +23.8%，Free Spin 活動成效強</li>
-              <li>KTO：4月促銷計畫，LJ500 系列活動洽談中</li>
-              <li>Sportingbet Brazil：3個月促銷計畫洽談</li>
+              <li data-zh="BRAGG Latam：Peru 已確認，Mexico / Brazil 後續條款談判中" data-en="BRAGG Latam: Peru confirmed, Mexico / Brazil subsequent term negotiation ongoing">BRAGG Latam：Peru 已確認，Mexico / Brazil 後續條款談判中</li>
+              <li data-zh="Blaze Brazil：WoW +23.8%，Free Spin 活動成效強" data-en="Blaze Brazil: WoW +23.8%, Free Spin campaign strong results">Blaze Brazil：WoW +23.8%，Free Spin 活動成效強</li>
+              <li data-zh="KTO：4月促銷計畫，LJ500 系列活動洽談中" data-en="KTO: April promo plan, LJ500 series campaign negotiation ongoing">KTO：4月促銷計畫，LJ500 系列活動洽談中</li>
+              <li data-zh="Sportingbet Brazil：3個月促銷計畫洽談" data-en="Sportingbet Brazil: 3-month promo plan negotiation">Sportingbet Brazil：3個月促銷計畫洽談</li>
             </ul>
             <div class="meeting-subsection">✅ Action Items</div>
             <div class="meeting-action-list">
-              <div class="meeting-action-item"><span class="action-status doing">進行中</span>Hector：BRAGG Mexico / Brazil 整合條款確認</div>
-              <div class="meeting-action-item"><span class="action-status doing">進行中</span>Hector：KTO 4月促銷計畫細節確認</div>
-              <div class="meeting-action-item"><span class="action-status doing">進行中</span>Hector：Sportingbet 3個月促銷方案</div>
+              <div class="meeting-action-item" data-zh="Hector：BRAGG Mexico / Brazil 整合條款確認" data-en="Hector: Confirm BRAGG Mexico / Brazil integration terms"><span class="action-status doing">進行中</span>Hector：BRAGG Mexico / Brazil 整合條款確認</div>
+              <div class="meeting-action-item" data-zh="Hector：KTO 4月促銷計畫細節確認" data-en="Hector: Confirm KTO April promo plan details"><span class="action-status doing">進行中</span>Hector：KTO 4月促銷計畫細節確認</div>
+              <div class="meeting-action-item" data-zh="Hector：Sportingbet 3個月促銷方案" data-en="Hector: Sportingbet 3-month promo plan"><span class="action-status doing">進行中</span>Hector：Sportingbet 3個月促銷方案</div>
             </div>
           </div>
         </div>
@@ -2745,30 +2745,30 @@
         <!-- Bryam / CIS+WA W12 -->
         <div class="meeting-card meeting-card-real">
           <div class="meeting-card-week">Bryam · CIS & West Asia</div>
-          <div class="meeting-card-title">Veganster 合約簽署 · MostBet Ukraine 目標 4月上線</div>
+          <div class="meeting-card-title" data-zh="Veganster 合約簽署 · MostBet Ukraine 目標 4月上線" data-en="Veganster Contract Signed · MostBet Ukraine Target April Launch">Veganster 合約簽署 · MostBet Ukraine 目標 4月上線</div>
           <div class="meeting-card-meta-row">
             <span class="m-attendee" style="background:#8B5CF6">B</span>
             <span class="m-attendee-more">Bryam</span>
           </div>
           <div class="meeting-agenda-list" style="margin-top:10px">
-            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#8B5CF6"></span>Veganster CIS 合約完成簽署，進入技術整合</div>
-            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#8B5CF6"></span>MostBet Ukraine 合作條款談判，目標 4月上線</div>
-            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#8B5CF6"></span>CIS 市場 Streamers 排名第 9</div>
+            <div class="meeting-agenda-item" data-zh="Veganster CIS 合約完成簽署，進入技術整合" data-en="Veganster CIS contract signed, entering technical integration"><span class="agenda-dot" style="background:#8B5CF6"></span>Veganster CIS 合約完成簽署，進入技術整合</div>
+            <div class="meeting-agenda-item" data-zh="MostBet Ukraine 合作條款談判，目標 4月上線" data-en="MostBet Ukraine partnership term negotiation, target April launch"><span class="agenda-dot" style="background:#8B5CF6"></span>MostBet Ukraine 合作條款談判，目標 4月上線</div>
+            <div class="meeting-agenda-item" data-zh="CIS 市場 Streamers 排名第 9" data-en="CIS market Streamers ranked #9"><span class="agenda-dot" style="background:#8B5CF6"></span>CIS 市場 Streamers 排名第 9</div>
           </div>
-          <button class="meeting-toggle-btn" onclick="this.nextElementSibling.classList.toggle('open');this.textContent=this.nextElementSibling.classList.contains('open')?'▲ 收合':'▼ 展開會議記錄'">▼ 展開會議記錄</button>
+          <button class="meeting-toggle-btn" onclick="this.nextElementSibling.classList.toggle('open');this.textContent=this.nextElementSibling.classList.contains('open')?(currentLang==='en'?'▲ Collapse':'▲ 收合'):(currentLang==='en'?'▼ Expand':'▼ 展開會議記錄')">▼ 展開會議記錄</button>
           <div class="meeting-card-body">
-            <div class="meeting-subsection">📌 關鍵討論</div>
+            <div class="meeting-subsection" data-zh="📌 關鍵討論" data-en="📌 Key Discussion">📌 關鍵討論</div>
             <ul class="meeting-key-pts">
-              <li>Veganster：合約簽署完成，進入技術整合準備階段</li>
-              <li>MostBet Ukraine：洽談 TaDa 遊戲上架時程，目標 4月上線</li>
-              <li>CIS Streamers：排名第 9，仍有提升空間</li>
-              <li>SlotCity Ukraine：評估合作可能性</li>
+              <li data-zh="Veganster：合約簽署完成，進入技術整合準備階段" data-en="Veganster: contract signed, entering technical integration preparation stage">Veganster：合約簽署完成，進入技術整合準備階段</li>
+              <li data-zh="MostBet Ukraine：洽談 TaDa 遊戲上架時程，目標 4月上線" data-en="MostBet Ukraine: negotiating TaDa game listing timeline, target April launch">MostBet Ukraine：洽談 TaDa 遊戲上架時程，目標 4月上線</li>
+              <li data-zh="CIS Streamers：排名第 9，仍有提升空間" data-en="CIS Streamers: ranked #9, still room for improvement">CIS Streamers：排名第 9，仍有提升空間</li>
+              <li data-zh="SlotCity Ukraine：評估合作可能性" data-en="SlotCity Ukraine: evaluating partnership possibility">SlotCity Ukraine：評估合作可能性</li>
             </ul>
             <div class="meeting-subsection">✅ Action Items</div>
             <div class="meeting-action-list">
-              <div class="meeting-action-item"><span class="action-status done">完成</span>Bryam：Veganster CIS 合約簽署</div>
-              <div class="meeting-action-item"><span class="action-status doing">進行中</span>Bryam：MostBet Ukraine 上線時程確認</div>
-              <div class="meeting-action-item"><span class="action-status plan">計劃中</span>Bryam：SlotCity Ukraine 合作評估</div>
+              <div class="meeting-action-item" data-zh="Bryam：Veganster CIS 合約簽署" data-en="Bryam: Veganster CIS contract signed"><span class="action-status done">完成</span>Bryam：Veganster CIS 合約簽署</div>
+              <div class="meeting-action-item" data-zh="Bryam：MostBet Ukraine 上線時程確認" data-en="Bryam: Confirm MostBet Ukraine launch timeline"><span class="action-status doing">進行中</span>Bryam：MostBet Ukraine 上線時程確認</div>
+              <div class="meeting-action-item" data-zh="Bryam：SlotCity Ukraine 合作評估" data-en="Bryam: SlotCity Ukraine partnership evaluation"><span class="action-status plan">計劃中</span>Bryam：SlotCity Ukraine 合作評估</div>
             </div>
           </div>
         </div>
@@ -2776,30 +2776,30 @@
         <!-- Chu / Africa+Canada W12 -->
         <div class="meeting-card meeting-card-real">
           <div class="meeting-card-week">Chu · Africa & Canada</div>
-          <div class="meeting-card-title">Tsogo Sun / Betway SA 深化 & 加拿大 Blazesoft 推進</div>
+          <div class="meeting-card-title" data-zh="Tsogo Sun / Betway SA 深化 & 加拿大 Blazesoft 推進" data-en="Tsogo Sun / Betway SA Deepening &amp; Canada Blazesoft Push">Tsogo Sun / Betway SA 深化 & 加拿大 Blazesoft 推進</div>
           <div class="meeting-card-meta-row">
             <span class="m-attendee" style="background:#10B981">C</span>
             <span class="m-attendee-more">Chu</span>
           </div>
           <div class="meeting-agenda-list" style="margin-top:10px">
-            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#10B981"></span>Tsogo Sun 南非：合作條款深化談判</div>
-            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#10B981"></span>Betway South Africa：促銷合作升級</div>
-            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#10B981"></span>加拿大：Blazesoft / GameKong 接洽</div>
+            <div class="meeting-agenda-item" data-zh="Tsogo Sun 南非：合作條款深化談判" data-en="Tsogo Sun South Africa: partnership term negotiation deepening"><span class="agenda-dot" style="background:#10B981"></span>Tsogo Sun 南非：合作條款深化談判</div>
+            <div class="meeting-agenda-item" data-zh="Betway South Africa：促銷合作升級" data-en="Betway South Africa: promo partnership upgrade"><span class="agenda-dot" style="background:#10B981"></span>Betway South Africa：促銷合作升級</div>
+            <div class="meeting-agenda-item" data-zh="加拿大：Blazesoft / GameKong 接洽" data-en="Canada: Blazesoft / GameKong outreach"><span class="agenda-dot" style="background:#10B981"></span>加拿大：Blazesoft / GameKong 接洽</div>
           </div>
-          <button class="meeting-toggle-btn" onclick="this.nextElementSibling.classList.toggle('open');this.textContent=this.nextElementSibling.classList.contains('open')?'▲ 收合':'▼ 展開會議記錄'">▼ 展開會議記錄</button>
+          <button class="meeting-toggle-btn" onclick="this.nextElementSibling.classList.toggle('open');this.textContent=this.nextElementSibling.classList.contains('open')?(currentLang==='en'?'▲ Collapse':'▲ 收合'):(currentLang==='en'?'▼ Expand':'▼ 展開會議記錄')">▼ 展開會議記錄</button>
           <div class="meeting-card-body">
-            <div class="meeting-subsection">📌 關鍵討論</div>
+            <div class="meeting-subsection" data-zh="📌 關鍵討論" data-en="📌 Key Discussion">📌 關鍵討論</div>
             <ul class="meeting-key-pts">
-              <li>Tsogo Sun：南非最大博彩集團，談判框架合作協議</li>
-              <li>Betway SA：升級促銷方案，增加 TaDa 遊戲曝光版位</li>
-              <li>Blazesoft 加拿大：探索 Ontario 監管合規進入</li>
-              <li>GameKong 加拿大：評估非監管市場合作可行性</li>
+              <li data-zh="Tsogo Sun：南非最大博彩集團，談判框架合作協議" data-en="Tsogo Sun: South Africa largest gaming group, negotiating framework agreement">Tsogo Sun：南非最大博彩集團，談判框架合作協議</li>
+              <li data-zh="Betway SA：升級促銷方案，增加 TaDa 遊戲曝光版位" data-en="Betway SA: upgrading promo plan, increasing TaDa game exposure slots">Betway SA：升級促銷方案，增加 TaDa 遊戲曝光版位</li>
+              <li data-zh="Blazesoft 加拿大：探索 Ontario 監管合規進入" data-en="Blazesoft Canada: exploring Ontario regulated compliance entry">Blazesoft 加拿大：探索 Ontario 監管合規進入</li>
+              <li data-zh="GameKong 加拿大：評估非監管市場合作可行性" data-en="GameKong Canada: evaluating unregulated market partnership feasibility">GameKong 加拿大：評估非監管市場合作可行性</li>
             </ul>
             <div class="meeting-subsection">✅ Action Items</div>
             <div class="meeting-action-list">
-              <div class="meeting-action-item"><span class="action-status doing">進行中</span>Chu：Tsogo Sun 合作框架協議</div>
-              <div class="meeting-action-item"><span class="action-status doing">進行中</span>Chu：Betway SA 促銷升級方案</div>
-              <div class="meeting-action-item"><span class="action-status doing">進行中</span>Chu：Blazesoft / GameKong 加拿大接洽</div>
+              <div class="meeting-action-item" data-zh="Chu：Tsogo Sun 合作框架協議" data-en="Chu: Tsogo Sun partnership framework agreement"><span class="action-status doing">進行中</span>Chu：Tsogo Sun 合作框架協議</div>
+              <div class="meeting-action-item" data-zh="Chu：Betway SA 促銷升級方案" data-en="Chu: Betway SA promo upgrade plan"><span class="action-status doing">進行中</span>Chu：Betway SA 促銷升級方案</div>
+              <div class="meeting-action-item" data-zh="Chu：Blazesoft / GameKong 加拿大接洽" data-en="Chu: Blazesoft / GameKong Canada outreach"><span class="action-status doing">進行中</span>Chu：Blazesoft / GameKong 加拿大接洽</div>
             </div>
           </div>
         </div>
@@ -2812,36 +2812,36 @@
       <div class="meeting-section-header" style="border-left-color:#10B981">
         <div class="meeting-section-icon" style="background:rgba(16,185,129,0.12);color:#10B981">🤝</div>
         <div>
-          <div class="meeting-section-title">AM 組</div>
-          <div class="meeting-section-sub">Account Management · 週報</div>
+          <div class="meeting-section-title" data-zh="AM 組" data-en="AM Team">AM 組</div>
+          <div class="meeting-section-sub" data-zh="Account Management · 週報" data-en="Account Management · Weekly">Account Management · 週報</div>
         </div>
       </div>
       <div class="meeting-grid">
         <div class="meeting-card meeting-card-real">
           <div class="meeting-card-week">2026/03/17 · AM Operation Report</div>
-          <div class="meeting-card-title">TDAB 3.69B THB · StarCasino Italy 3/9 上線 · Kaizen Romania 3/10 上線 🎉</div>
+          <div class="meeting-card-title" data-zh="TDAB 3.69B THB · StarCasino Italy 3/9 上線 · Kaizen Romania 3/10 上線 🎉" data-en="TDAB 3.69B THB · StarCasino Italy Live 3/9 · Kaizen Romania Live 3/10 🎉">TDAB 3.69B THB · StarCasino Italy 3/9 上線 · Kaizen Romania 3/10 上線 🎉</div>
           <div class="meeting-card-meta-row">
             <span class="m-attendee" style="background:#10B981">A</span>
             <span class="m-attendee-more">AM Team</span>
           </div>
           <div class="meeting-agenda-list" style="margin-top:10px">
-            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#10B981"></span>本週 TDAB：3.69B THB</div>
-            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#10B981"></span>StarCasino Italy 於 3/9 正式上線 🎉</div>
-            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#10B981"></span>Kaizen Romania 於 3/10 正式上線 🎉</div>
+            <div class="meeting-agenda-item" data-zh="本週 TDAB：3.69B THB" data-en="This week TDAB: 3.69B THB"><span class="agenda-dot" style="background:#10B981"></span>本週 TDAB：3.69B THB</div>
+            <div class="meeting-agenda-item" data-zh="StarCasino Italy 於 3/9 正式上線 🎉" data-en="StarCasino Italy officially live on 3/9 🎉"><span class="agenda-dot" style="background:#10B981"></span>StarCasino Italy 於 3/9 正式上線 🎉</div>
+            <div class="meeting-agenda-item" data-zh="Kaizen Romania 於 3/10 正式上線 🎉" data-en="Kaizen Romania officially live on 3/10 🎉"><span class="agenda-dot" style="background:#10B981"></span>Kaizen Romania 於 3/10 正式上線 🎉</div>
           </div>
-          <button class="meeting-toggle-btn" onclick="this.nextElementSibling.classList.toggle('open');this.textContent=this.nextElementSibling.classList.contains('open')?'▲ 收合':'▼ 展開會議記錄'">▼ 展開會議記錄</button>
+          <button class="meeting-toggle-btn" onclick="this.nextElementSibling.classList.toggle('open');this.textContent=this.nextElementSibling.classList.contains('open')?(currentLang==='en'?'▲ Collapse':'▲ 收合'):(currentLang==='en'?'▼ Expand':'▼ 展開會議記錄')">▼ 展開會議記錄</button>
           <div class="meeting-card-body">
-            <div class="meeting-subsection">📌 關鍵數據</div>
+            <div class="meeting-subsection" data-zh="📌 關鍵數據" data-en="📌 Key Metrics">📌 關鍵數據</div>
             <ul class="meeting-key-pts">
-              <li>TDAB 週均：3.69B THB，持續強勁</li>
-              <li>StarCasino Italy：3/9 上線，EU Regulated 重要里程碑</li>
-              <li>Kaizen Romania：3/10 上線，Superbet 後又一 Romania 客戶</li>
-              <li>EU Regulated 累計上線客戶大幅增加，3月成果豐碩</li>
+              <li data-zh="TDAB 週均：3.69B THB，持續強勁" data-en="TDAB weekly avg: 3.69B THB, continuously strong">TDAB 週均：3.69B THB，持續強勁</li>
+              <li data-zh="StarCasino Italy：3/9 上線，EU Regulated 重要里程碑" data-en="StarCasino Italy: live on 3/9, important EU Regulated milestone">StarCasino Italy：3/9 上線，EU Regulated 重要里程碑</li>
+              <li data-zh="Kaizen Romania：3/10 上線，Superbet 後又一 Romania 客戶" data-en="Kaizen Romania: live on 3/10, another Romania client after Superbet">Kaizen Romania：3/10 上線，Superbet 後又一 Romania 客戶</li>
+              <li data-zh="EU Regulated 累計上線客戶大幅增加，3月成果豐碩" data-en="EU Regulated cumulative live clients greatly increased, March fruitful">EU Regulated 累計上線客戶大幅增加，3月成果豐碩</li>
             </ul>
             <div class="meeting-subsection">✅ Action Items</div>
             <div class="meeting-action-list">
-              <div class="meeting-action-item"><span class="action-status doing">進行中</span>AM：StarCasino Italy 上線後數據追蹤</div>
-              <div class="meeting-action-item"><span class="action-status doing">進行中</span>AM：Kaizen Romania 首月促銷計畫確認</div>
+              <div class="meeting-action-item" data-zh="AM：StarCasino Italy 上線後數據追蹤" data-en="AM: Post-launch data tracking for StarCasino Italy"><span class="action-status doing">進行中</span>AM：StarCasino Italy 上線後數據追蹤</div>
+              <div class="meeting-action-item" data-zh="AM：Kaizen Romania 首月促銷計畫確認" data-en="AM: Confirm Kaizen Romania first-month promo plan"><span class="action-status doing">進行中</span>AM：Kaizen Romania 首月促銷計畫確認</div>
             </div>
           </div>
         </div>
@@ -2853,36 +2853,36 @@
       <div class="meeting-section-header" style="border-left-color:#8B5CF6">
         <div class="meeting-section-icon" style="background:rgba(139,92,246,0.12);color:#8B5CF6">📣</div>
         <div>
-          <div class="meeting-section-title">MKT 組</div>
-          <div class="meeting-section-sub">Marketing · 週報</div>
+          <div class="meeting-section-title" data-zh="MKT 組" data-en="MKT Team">MKT 組</div>
+          <div class="meeting-section-sub" data-zh="Marketing · 週報" data-en="Marketing · Weekly">Marketing · 週報</div>
         </div>
       </div>
       <div class="meeting-grid">
         <div class="meeting-card meeting-card-real">
           <div class="meeting-card-week">2026/03/17 · MKT Weekly Report</div>
-          <div class="meeting-card-title">CIS Streamers Rank #9 · Brazil Rank #2 攀升</div>
+          <div class="meeting-card-title" data-zh="CIS Streamers Rank #9 · Brazil Rank #2 攀升" data-en="CIS Streamers Rank #9 · Brazil Rank #2 Rising">CIS Streamers Rank #9 · Brazil Rank #2 攀升</div>
           <div class="meeting-card-meta-row">
             <span class="m-attendee" style="background:#8B5CF6">M</span>
             <span class="m-attendee-more">MKT Team</span>
           </div>
           <div class="meeting-agenda-list" style="margin-top:10px">
-            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#8B5CF6"></span>CIS 市場 Streamers 排名第 9（達成前 10 目標）</div>
-            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#8B5CF6"></span>Brazil Streaming 排名攀升至第 2</div>
-            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#8B5CF6"></span>多市場 KOL 合作成效持續顯現</div>
+            <div class="meeting-agenda-item" data-zh="CIS 市場 Streamers 排名第 9（達成前 10 目標）" data-en="CIS market Streamers ranked #9 (achieved Top 10 target)"><span class="agenda-dot" style="background:#8B5CF6"></span>CIS 市場 Streamers 排名第 9（達成前 10 目標）</div>
+            <div class="meeting-agenda-item" data-zh="Brazil Streaming 排名攀升至第 2" data-en="Brazil Streaming ranking climbed to #2"><span class="agenda-dot" style="background:#8B5CF6"></span>Brazil Streaming 排名攀升至第 2</div>
+            <div class="meeting-agenda-item" data-zh="多市場 KOL 合作成效持續顯現" data-en="Multi-market KOL partnership results continuing to show"><span class="agenda-dot" style="background:#8B5CF6"></span>多市場 KOL 合作成效持續顯現</div>
           </div>
-          <button class="meeting-toggle-btn" onclick="this.nextElementSibling.classList.toggle('open');this.textContent=this.nextElementSibling.classList.contains('open')?'▲ 收合':'▼ 展開會議記錄'">▼ 展開會議記錄</button>
+          <button class="meeting-toggle-btn" onclick="this.nextElementSibling.classList.toggle('open');this.textContent=this.nextElementSibling.classList.contains('open')?(currentLang==='en'?'▲ Collapse':'▲ 收合'):(currentLang==='en'?'▼ Expand':'▼ 展開會議記錄')">▼ 展開會議記錄</button>
           <div class="meeting-card-body">
-            <div class="meeting-subsection">📌 關鍵討論</div>
+            <div class="meeting-subsection" data-zh="📌 關鍵討論" data-en="📌 Key Discussion">📌 關鍵討論</div>
             <ul class="meeting-key-pts">
-              <li>CIS：Streamer 排名第 9，Bryam 區域成長重要指標</li>
-              <li>Brazil：排名第 2，接近市場頂端，KOL 策略有效</li>
-              <li>MKT 下週重點：擴大 Latam 區域 Streamer 覆蓋</li>
-              <li>Italy / Romania：配合 AM 上線後的 MKT 推廣計畫啟動</li>
+              <li data-zh="CIS：Streamer 排名第 9，Bryam 區域成長重要指標" data-en="CIS: Streamer rank #9, important growth indicator for Bryam region">CIS：Streamer 排名第 9，Bryam 區域成長重要指標</li>
+              <li data-zh="Brazil：排名第 2，接近市場頂端，KOL 策略有效" data-en="Brazil: rank #2, near market top, KOL strategy effective">Brazil：排名第 2，接近市場頂端，KOL 策略有效</li>
+              <li data-zh="MKT 下週重點：擴大 Latam 區域 Streamer 覆蓋" data-en="MKT next week focus: expand Latam region Streamer coverage">MKT 下週重點：擴大 Latam 區域 Streamer 覆蓋</li>
+              <li data-zh="Italy / Romania：配合 AM 上線後的 MKT 推廣計畫啟動" data-en="Italy / Romania: MKT promotion plan launched in coordination with AM launch">Italy / Romania：配合 AM 上線後的 MKT 推廣計畫啟動</li>
             </ul>
             <div class="meeting-subsection">✅ Action Items</div>
             <div class="meeting-action-list">
-              <div class="meeting-action-item"><span class="action-status doing">進行中</span>MKT：CIS Streamer 合作擴大計畫</div>
-              <div class="meeting-action-item"><span class="action-status doing">進行中</span>MKT：Italy / Romania 上線後推廣方案</div>
+              <div class="meeting-action-item" data-zh="MKT：CIS Streamer 合作擴大計畫" data-en="MKT: CIS Streamer partnership expansion plan"><span class="action-status doing">進行中</span>MKT：CIS Streamer 合作擴大計畫</div>
+              <div class="meeting-action-item" data-zh="MKT：Italy / Romania 上線後推廣方案" data-en="MKT: Italy / Romania post-launch promotion plan"><span class="action-status doing">進行中</span>MKT：Italy / Romania 上線後推廣方案</div>
             </div>
           </div>
         </div>
@@ -2894,14 +2894,14 @@
 
   <!-- ══════════ W-MAR24 ══════════ -->
   <div class="meeting-week-content" id="w-mar24">
-    <div class="rpt-section-label">2026/03/24 (二) 週會 · W13</div>
+    <div class="rpt-section-label" data-zh="2026/03/24 (二) 週會 · W13" data-en="2026/03/24 (Tue) Weekly · W13">2026/03/24 (二) 週會 · W13</div>
 
     <div class="meeting-section" data-group="bd">
       <div class="meeting-section-header" style="border-left-color:#F59E0B">
         <div class="meeting-section-icon" style="background:rgba(245,158,11,0.12);color:#F59E0B">💼</div>
         <div>
-          <div class="meeting-section-title">BD 組</div>
-          <div class="meeting-section-sub">Business Development · 週報</div>
+          <div class="meeting-section-title" data-zh="BD 組" data-en="BD Team">BD 組</div>
+          <div class="meeting-section-sub" data-zh="Business Development · 週報" data-en="Business Development · Weekly">Business Development · 週報</div>
         </div>
       </div>
       <div class="meeting-grid">
@@ -2909,30 +2909,30 @@
         <!-- Hector / Latam W13 -->
         <div class="meeting-card meeting-card-real">
           <div class="meeting-card-week">Hector · Latam</div>
-          <div class="meeting-card-title">BRAGG Peru 夥伴清單確認 · KTO 4月促銷啟動</div>
+          <div class="meeting-card-title" data-zh="BRAGG Peru 夥伴清單確認 · KTO 4月促銷啟動" data-en="BRAGG Peru Partner List Confirmed · KTO April Promo Launched">BRAGG Peru 夥伴清單確認 · KTO 4月促銷啟動</div>
           <div class="meeting-card-meta-row">
             <span class="m-attendee" style="background:#F59E0B">H</span>
             <span class="m-attendee-more">Hector</span>
           </div>
           <div class="meeting-agenda-list" style="margin-top:10px">
-            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#F59E0B"></span>BRAGG Peru 所有合作夥伴名單最終確認</div>
-            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#F59E0B"></span>KTO 4月 LJ500 促銷活動啟動</div>
-            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#F59E0B"></span>Sportingbet 3個月促銷計畫協議簽署</div>
+            <div class="meeting-agenda-item" data-zh="BRAGG Peru 所有合作夥伴名單最終確認" data-en="BRAGG Peru all partner list final confirmation"><span class="agenda-dot" style="background:#F59E0B"></span>BRAGG Peru 所有合作夥伴名單最終確認</div>
+            <div class="meeting-agenda-item" data-zh="KTO 4月 LJ500 促銷活動啟動" data-en="KTO April LJ500 promo campaign launched"><span class="agenda-dot" style="background:#F59E0B"></span>KTO 4月 LJ500 促銷活動啟動</div>
+            <div class="meeting-agenda-item" data-zh="Sportingbet 3個月促銷計畫協議簽署" data-en="Sportingbet 3-month promo plan agreement signed"><span class="agenda-dot" style="background:#F59E0B"></span>Sportingbet 3個月促銷計畫協議簽署</div>
           </div>
-          <button class="meeting-toggle-btn" onclick="this.nextElementSibling.classList.toggle('open');this.textContent=this.nextElementSibling.classList.contains('open')?'▲ 收合':'▼ 展開會議記錄'">▼ 展開會議記錄</button>
+          <button class="meeting-toggle-btn" onclick="this.nextElementSibling.classList.toggle('open');this.textContent=this.nextElementSibling.classList.contains('open')?(currentLang==='en'?'▲ Collapse':'▲ 收合'):(currentLang==='en'?'▼ Expand':'▼ 展開會議記錄')">▼ 展開會議記錄</button>
           <div class="meeting-card-body">
-            <div class="meeting-subsection">📌 關鍵討論</div>
+            <div class="meeting-subsection" data-zh="📌 關鍵討論" data-en="📌 Key Discussion">📌 關鍵討論</div>
             <ul class="meeting-key-pts">
-              <li>BRAGG Peru：所有合作夥伴 operator 清單最終確認完成</li>
-              <li>KTO：4月 LJ500 大型促銷活動，預計帶動顯著流量</li>
-              <li>Sportingbet Brazil：3個月促銷協議簽署，長期合作里程碑</li>
-              <li>BET MGM：Latam 市場合作評估持續</li>
+              <li data-zh="BRAGG Peru：所有合作夥伴 operator 清單最終確認完成" data-en="BRAGG Peru: all partner operator list final confirmation complete">BRAGG Peru：所有合作夥伴 operator 清單最終確認完成</li>
+              <li data-zh="KTO：4月 LJ500 大型促銷活動，預計帶動顯著流量" data-en="KTO: April LJ500 large promo campaign, expected to drive significant traffic">KTO：4月 LJ500 大型促銷活動，預計帶動顯著流量</li>
+              <li data-zh="Sportingbet Brazil：3個月促銷協議簽署，長期合作里程碑" data-en="Sportingbet Brazil: 3-month promo agreement signed, long-term partnership milestone">Sportingbet Brazil：3個月促銷協議簽署，長期合作里程碑</li>
+              <li data-zh="BET MGM：Latam 市場合作評估持續" data-en="BET MGM: Latam market partnership evaluation ongoing">BET MGM：Latam 市場合作評估持續</li>
             </ul>
             <div class="meeting-subsection">✅ Action Items</div>
             <div class="meeting-action-list">
-              <div class="meeting-action-item"><span class="action-status done">完成</span>Hector：BRAGG Peru 夥伴清單確認</div>
-              <div class="meeting-action-item"><span class="action-status doing">進行中</span>Hector：KTO 4月活動執行準備</div>
-              <div class="meeting-action-item"><span class="action-status done">完成</span>Hector：Sportingbet 3個月促銷協議簽署</div>
+              <div class="meeting-action-item" data-zh="Hector：BRAGG Peru 夥伴清單確認" data-en="Hector: BRAGG Peru partner list confirmed"><span class="action-status done">完成</span>Hector：BRAGG Peru 夥伴清單確認</div>
+              <div class="meeting-action-item" data-zh="Hector：KTO 4月活動執行準備" data-en="Hector: KTO April campaign execution preparation"><span class="action-status doing">進行中</span>Hector：KTO 4月活動執行準備</div>
+              <div class="meeting-action-item" data-zh="Hector：Sportingbet 3個月促銷協議簽署" data-en="Hector: Sportingbet 3-month promo agreement signed"><span class="action-status done">完成</span>Hector：Sportingbet 3個月促銷協議簽署</div>
             </div>
           </div>
         </div>
@@ -2940,30 +2940,30 @@
         <!-- Bryam / CIS+WA W13 -->
         <div class="meeting-card meeting-card-real">
           <div class="meeting-card-week">Bryam · CIS & West Asia</div>
-          <div class="meeting-card-title">MostBet 目標 4月上線 · SlotCity Ukraine · Alea 40+ 國整合</div>
+          <div class="meeting-card-title" data-zh="MostBet 目標 4月上線 · SlotCity Ukraine · Alea 40+ 國整合" data-en="MostBet Target April Launch · SlotCity Ukraine · Alea 40+ Countries Integration">MostBet 目標 4月上線 · SlotCity Ukraine · Alea 40+ 國整合</div>
           <div class="meeting-card-meta-row">
             <span class="m-attendee" style="background:#8B5CF6">B</span>
             <span class="m-attendee-more">Bryam</span>
           </div>
           <div class="meeting-agenda-list" style="margin-top:10px">
-            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#8B5CF6"></span>MostBet 目標 4月正式上線，整合最後確認</div>
-            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#8B5CF6"></span>SlotCity Ukraine 合作條款確認</div>
-            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#8B5CF6"></span>Alea：覆蓋 40+ 國家，整合範圍洽談</div>
+            <div class="meeting-agenda-item" data-zh="MostBet 目標 4月正式上線，整合最後確認" data-en="MostBet targeting April official launch, final integration confirmation"><span class="agenda-dot" style="background:#8B5CF6"></span>MostBet 目標 4月正式上線，整合最後確認</div>
+            <div class="meeting-agenda-item" data-zh="SlotCity Ukraine 合作條款確認" data-en="SlotCity Ukraine partnership terms confirmed"><span class="agenda-dot" style="background:#8B5CF6"></span>SlotCity Ukraine 合作條款確認</div>
+            <div class="meeting-agenda-item" data-zh="Alea：覆蓋 40+ 國家，整合範圍洽談" data-en="Alea: covering 40+ countries, integration scope negotiation"><span class="agenda-dot" style="background:#8B5CF6"></span>Alea：覆蓋 40+ 國家，整合範圍洽談</div>
           </div>
-          <button class="meeting-toggle-btn" onclick="this.nextElementSibling.classList.toggle('open');this.textContent=this.nextElementSibling.classList.contains('open')?'▲ 收合':'▼ 展開會議記錄'">▼ 展開會議記錄</button>
+          <button class="meeting-toggle-btn" onclick="this.nextElementSibling.classList.toggle('open');this.textContent=this.nextElementSibling.classList.contains('open')?(currentLang==='en'?'▲ Collapse':'▲ 收合'):(currentLang==='en'?'▼ Expand':'▼ 展開會議記錄')">▼ 展開會議記錄</button>
           <div class="meeting-card-body">
-            <div class="meeting-subsection">📌 關鍵討論</div>
+            <div class="meeting-subsection" data-zh="📌 關鍵討論" data-en="📌 Key Discussion">📌 關鍵討論</div>
             <ul class="meeting-key-pts">
-              <li>MostBet：技術整合完成，等待最終上線確認，目標 4月初</li>
-              <li>SlotCity Ukraine：合作條款達成共識，進入整合準備</li>
-              <li>Alea：平台覆蓋 40+ 國家，重要渠道夥伴，洽談整合規模</li>
-              <li>Inntec West Asia：技術整合方案評估完成</li>
+              <li data-zh="MostBet：技術整合完成，等待最終上線確認，目標 4月初" data-en="MostBet: technical integration complete, awaiting final launch confirmation, targeting early April">MostBet：技術整合完成，等待最終上線確認，目標 4月初</li>
+              <li data-zh="SlotCity Ukraine：合作條款達成共識，進入整合準備" data-en="SlotCity Ukraine: partnership terms consensus reached, entering integration preparation">SlotCity Ukraine：合作條款達成共識，進入整合準備</li>
+              <li data-zh="Alea：平台覆蓋 40+ 國家，重要渠道夥伴，洽談整合規模" data-en="Alea: platform covering 40+ countries, important channel partner, negotiating integration scale">Alea：平台覆蓋 40+ 國家，重要渠道夥伴，洽談整合規模</li>
+              <li data-zh="Inntec West Asia：技術整合方案評估完成" data-en="Inntec West Asia: technical integration plan evaluation complete">Inntec West Asia：技術整合方案評估完成</li>
             </ul>
             <div class="meeting-subsection">✅ Action Items</div>
             <div class="meeting-action-list">
-              <div class="meeting-action-item"><span class="action-status doing">進行中</span>Bryam：MostBet 4月上線最終確認</div>
-              <div class="meeting-action-item"><span class="action-status doing">進行中</span>Bryam：SlotCity Ukraine 整合推進</div>
-              <div class="meeting-action-item"><span class="action-status doing">進行中</span>Bryam：Alea 整合範圍及條款確認</div>
+              <div class="meeting-action-item" data-zh="Bryam：MostBet 4月上線最終確認" data-en="Bryam: MostBet April launch final confirmation"><span class="action-status doing">進行中</span>Bryam：MostBet 4月上線最終確認</div>
+              <div class="meeting-action-item" data-zh="Bryam：SlotCity Ukraine 整合推進" data-en="Bryam: SlotCity Ukraine integration push"><span class="action-status doing">進行中</span>Bryam：SlotCity Ukraine 整合推進</div>
+              <div class="meeting-action-item" data-zh="Bryam：Alea 整合範圍及條款確認" data-en="Bryam: Confirm Alea integration scope and terms"><span class="action-status doing">進行中</span>Bryam：Alea 整合範圍及條款確認</div>
             </div>
           </div>
         </div>
@@ -2971,30 +2971,30 @@
         <!-- Nina / EU W13 -->
         <div class="meeting-card meeting-card-real">
           <div class="meeting-card-week">Nina · EU Regulated</div>
-          <div class="meeting-card-title">Casino 777 Spain 正式上線 · Bingoal Belgium 新商機</div>
+          <div class="meeting-card-title" data-zh="Casino 777 Spain 正式上線 · Bingoal Belgium 新商機" data-en="Casino 777 Spain Official Launch · Bingoal Belgium New Opportunity">Casino 777 Spain 正式上線 · Bingoal Belgium 新商機</div>
           <div class="meeting-card-meta-row">
             <span class="m-attendee" style="background:#F97316">N</span>
             <span class="m-attendee-more">Nina</span>
           </div>
           <div class="meeting-agenda-list" style="margin-top:10px">
-            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#F97316"></span>Casino 777 Spain 正式上線，Spain 市場首個客戶 🎉</div>
-            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#F97316"></span>Bingoal Belgium：新商機接洽，Belgium 市場探索</div>
-            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#F97316"></span>EU Regulated 客戶組合持續擴充</div>
+            <div class="meeting-agenda-item" data-zh="Casino 777 Spain 正式上線，Spain 市場首個客戶 🎉" data-en="Casino 777 Spain officially live, Spain market first client 🎉"><span class="agenda-dot" style="background:#F97316"></span>Casino 777 Spain 正式上線，Spain 市場首個客戶 🎉</div>
+            <div class="meeting-agenda-item" data-zh="Bingoal Belgium：新商機接洽，Belgium 市場探索" data-en="Bingoal Belgium: new opportunity outreach, Belgium market exploration"><span class="agenda-dot" style="background:#F97316"></span>Bingoal Belgium：新商機接洽，Belgium 市場探索</div>
+            <div class="meeting-agenda-item" data-zh="EU Regulated 客戶組合持續擴充" data-en="EU Regulated client portfolio continuously expanding"><span class="agenda-dot" style="background:#F97316"></span>EU Regulated 客戶組合持續擴充</div>
           </div>
-          <button class="meeting-toggle-btn" onclick="this.nextElementSibling.classList.toggle('open');this.textContent=this.nextElementSibling.classList.contains('open')?'▲ 收合':'▼ 展開會議記錄'">▼ 展開會議記錄</button>
+          <button class="meeting-toggle-btn" onclick="this.nextElementSibling.classList.toggle('open');this.textContent=this.nextElementSibling.classList.contains('open')?(currentLang==='en'?'▲ Collapse':'▲ 收合'):(currentLang==='en'?'▼ Expand':'▼ 展開會議記錄')">▼ 展開會議記錄</button>
           <div class="meeting-card-body">
-            <div class="meeting-subsection">📌 關鍵討論</div>
+            <div class="meeting-subsection" data-zh="📌 關鍵討論" data-en="📌 Key Discussion">📌 關鍵討論</div>
             <ul class="meeting-key-pts">
-              <li>Casino 777 Spain：TaDa 在 Spain 市場首個正式客戶上線</li>
-              <li>Bingoal Belgium：Belgium 監管市場新商機，評估 BNLUX 合規要求</li>
-              <li>EU Regulated 上線速度提升，Italy/Romania 效果帶動其他市場</li>
-              <li>4月計畫：繼續推進 NL / Belgium / Portugal 新客戶</li>
+              <li data-zh="Casino 777 Spain：TaDa 在 Spain 市場首個正式客戶上線" data-en="Casino 777 Spain: TaDa first official client live in Spain market">Casino 777 Spain：TaDa 在 Spain 市場首個正式客戶上線</li>
+              <li data-zh="Bingoal Belgium：Belgium 監管市場新商機，評估 BNLUX 合規要求" data-en="Bingoal Belgium: new opportunity in Belgium regulated market, evaluating BNLUX compliance requirements">Bingoal Belgium：Belgium 監管市場新商機，評估 BNLUX 合規要求</li>
+              <li data-zh="EU Regulated 上線速度提升，Italy/Romania 效果帶動其他市場" data-en="EU Regulated launch pace increasing, Italy/Romania results driving other markets">EU Regulated 上線速度提升，Italy/Romania 效果帶動其他市場</li>
+              <li data-zh="4月計畫：繼續推進 NL / Belgium / Portugal 新客戶" data-en="April plan: continue pushing NL / Belgium / Portugal new clients">4月計畫：繼續推進 NL / Belgium / Portugal 新客戶</li>
             </ul>
             <div class="meeting-subsection">✅ Action Items</div>
             <div class="meeting-action-list">
-              <div class="meeting-action-item"><span class="action-status done">完成</span>Nina：Casino 777 Spain 上線確認</div>
-              <div class="meeting-action-item"><span class="action-status doing">進行中</span>Nina：Bingoal Belgium 合作評估</div>
-              <div class="meeting-action-item"><span class="action-status plan">計劃中</span>Nina：NL / Belgium 4月推進計畫</div>
+              <div class="meeting-action-item" data-zh="Nina：Casino 777 Spain 上線確認" data-en="Nina: Casino 777 Spain launch confirmed"><span class="action-status done">完成</span>Nina：Casino 777 Spain 上線確認</div>
+              <div class="meeting-action-item" data-zh="Nina：Bingoal Belgium 合作評估" data-en="Nina: Bingoal Belgium partnership evaluation"><span class="action-status doing">進行中</span>Nina：Bingoal Belgium 合作評估</div>
+              <div class="meeting-action-item" data-zh="Nina：NL / Belgium 4月推進計畫" data-en="Nina: NL / Belgium April push plan"><span class="action-status plan">計劃中</span>Nina：NL / Belgium 4月推進計畫</div>
             </div>
           </div>
         </div>
@@ -3002,30 +3002,30 @@
         <!-- Chu / Africa+Canada W13 -->
         <div class="meeting-card meeting-card-real">
           <div class="meeting-card-week">Chu · Africa & Canada</div>
-          <div class="meeting-card-title">Betway Africa 深化 & 加拿大 Blazesoft / Delasport 推進</div>
+          <div class="meeting-card-title" data-zh="Betway Africa 深化 & 加拿大 Blazesoft / Delasport 推進" data-en="Betway Africa Deepening &amp; Canada Blazesoft / Delasport Push">Betway Africa 深化 & 加拿大 Blazesoft / Delasport 推進</div>
           <div class="meeting-card-meta-row">
             <span class="m-attendee" style="background:#10B981">C</span>
             <span class="m-attendee-more">Chu</span>
           </div>
           <div class="meeting-agenda-list" style="margin-top:10px">
-            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#10B981"></span>Betway Africa 深化合作方案確認</div>
-            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#10B981"></span>加拿大 Blazesoft 合作洽談推進</div>
-            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#10B981"></span>Delasport 加拿大市場接洽</div>
+            <div class="meeting-agenda-item" data-zh="Betway Africa 深化合作方案確認" data-en="Betway Africa deepened partnership plan confirmed"><span class="agenda-dot" style="background:#10B981"></span>Betway Africa 深化合作方案確認</div>
+            <div class="meeting-agenda-item" data-zh="加拿大 Blazesoft 合作洽談推進" data-en="Canada Blazesoft partnership negotiation push"><span class="agenda-dot" style="background:#10B981"></span>加拿大 Blazesoft 合作洽談推進</div>
+            <div class="meeting-agenda-item" data-zh="Delasport 加拿大市場接洽" data-en="Delasport Canada market outreach"><span class="agenda-dot" style="background:#10B981"></span>Delasport 加拿大市場接洽</div>
           </div>
-          <button class="meeting-toggle-btn" onclick="this.nextElementSibling.classList.toggle('open');this.textContent=this.nextElementSibling.classList.contains('open')?'▲ 收合':'▼ 展開會議記錄'">▼ 展開會議記錄</button>
+          <button class="meeting-toggle-btn" onclick="this.nextElementSibling.classList.toggle('open');this.textContent=this.nextElementSibling.classList.contains('open')?(currentLang==='en'?'▲ Collapse':'▲ 收合'):(currentLang==='en'?'▼ Expand':'▼ 展開會議記錄')">▼ 展開會議記錄</button>
           <div class="meeting-card-body">
-            <div class="meeting-subsection">📌 關鍵討論</div>
+            <div class="meeting-subsection" data-zh="📌 關鍵討論" data-en="📌 Key Discussion">📌 關鍵討論</div>
             <ul class="meeting-key-pts">
-              <li>Betway Africa：促銷預算升級，計畫 4月大型活動</li>
-              <li>Blazesoft 加拿大：探索 Ontario 監管合規整合方式</li>
-              <li>Delasport：加拿大市場代理商，評估合作範圍</li>
-              <li>Tsogo Sun 南非：框架協議持續談判</li>
+              <li data-zh="Betway Africa：促銷預算升級，計畫 4月大型活動" data-en="Betway Africa: promo budget upgraded, planning April major campaign">Betway Africa：促銷預算升級，計畫 4月大型活動</li>
+              <li data-zh="Blazesoft 加拿大：探索 Ontario 監管合規整合方式" data-en="Blazesoft Canada: exploring Ontario regulated compliance integration approach">Blazesoft 加拿大：探索 Ontario 監管合規整合方式</li>
+              <li data-zh="Delasport：加拿大市場代理商，評估合作範圍" data-en="Delasport: Canada market agent, evaluating partnership scope">Delasport：加拿大市場代理商，評估合作範圍</li>
+              <li data-zh="Tsogo Sun 南非：框架協議持續談判" data-en="Tsogo Sun South Africa: framework agreement negotiation ongoing">Tsogo Sun 南非：框架協議持續談判</li>
             </ul>
             <div class="meeting-subsection">✅ Action Items</div>
             <div class="meeting-action-list">
-              <div class="meeting-action-item"><span class="action-status doing">進行中</span>Chu：Betway Africa 4月促銷計畫</div>
-              <div class="meeting-action-item"><span class="action-status doing">進行中</span>Chu：Blazesoft 加拿大整合評估</div>
-              <div class="meeting-action-item"><span class="action-status doing">進行中</span>Chu：Delasport 合作洽談</div>
+              <div class="meeting-action-item" data-zh="Chu：Betway Africa 4月促銷計畫" data-en="Chu: Betway Africa April promo plan"><span class="action-status doing">進行中</span>Chu：Betway Africa 4月促銷計畫</div>
+              <div class="meeting-action-item" data-zh="Chu：Blazesoft 加拿大整合評估" data-en="Chu: Blazesoft Canada integration evaluation"><span class="action-status doing">進行中</span>Chu：Blazesoft 加拿大整合評估</div>
+              <div class="meeting-action-item" data-zh="Chu：Delasport 合作洽談" data-en="Chu: Delasport partnership negotiation"><span class="action-status doing">進行中</span>Chu：Delasport 合作洽談</div>
             </div>
           </div>
         </div>
@@ -3038,36 +3038,36 @@
       <div class="meeting-section-header" style="border-left-color:#10B981">
         <div class="meeting-section-icon" style="background:rgba(16,185,129,0.12);color:#10B981">🤝</div>
         <div>
-          <div class="meeting-section-title">AM 組</div>
-          <div class="meeting-section-sub">Account Management · 週報</div>
+          <div class="meeting-section-title" data-zh="AM 組" data-en="AM Team">AM 組</div>
+          <div class="meeting-section-sub" data-zh="Account Management · 週報" data-en="Account Management · Weekly">Account Management · 週報</div>
         </div>
       </div>
       <div class="meeting-grid">
         <div class="meeting-card meeting-card-real">
           <div class="meeting-card-week">2026/03/24 · AM Operation Report</div>
-          <div class="meeting-card-title">TDAB 3.69B THB · WG +34.92% · Betclic Portugal 品牌遊戲上線</div>
+          <div class="meeting-card-title" data-zh="TDAB 3.69B THB · WG +34.92% · Betclic Portugal 品牌遊戲上線" data-en="TDAB 3.69B THB · WG +34.92% · Betclic Portugal Branded Game Launch">TDAB 3.69B THB · WG +34.92% · Betclic Portugal 品牌遊戲上線</div>
           <div class="meeting-card-meta-row">
             <span class="m-attendee" style="background:#10B981">A</span>
             <span class="m-attendee-more">AM Team</span>
           </div>
           <div class="meeting-agenda-list" style="margin-top:10px">
-            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#10B981"></span>本週 TDAB：3.69B THB</div>
-            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#10B981"></span>WG 成長 +34.92%，創季度新高</div>
-            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#10B981"></span>Betclic Portugal 品牌客製化遊戲正式上線 🎉</div>
+            <div class="meeting-agenda-item" data-zh="本週 TDAB：3.69B THB" data-en="This week TDAB: 3.69B THB"><span class="agenda-dot" style="background:#10B981"></span>本週 TDAB：3.69B THB</div>
+            <div class="meeting-agenda-item" data-zh="WG 成長 +34.92%，創季度新高" data-en="WG growth +34.92%, new quarterly high"><span class="agenda-dot" style="background:#10B981"></span>WG 成長 +34.92%，創季度新高</div>
+            <div class="meeting-agenda-item" data-zh="Betclic Portugal 品牌客製化遊戲正式上線 🎉" data-en="Betclic Portugal custom branded game officially launched 🎉"><span class="agenda-dot" style="background:#10B981"></span>Betclic Portugal 品牌客製化遊戲正式上線 🎉</div>
           </div>
-          <button class="meeting-toggle-btn" onclick="this.nextElementSibling.classList.toggle('open');this.textContent=this.nextElementSibling.classList.contains('open')?'▲ 收合':'▼ 展開會議記錄'">▼ 展開會議記錄</button>
+          <button class="meeting-toggle-btn" onclick="this.nextElementSibling.classList.toggle('open');this.textContent=this.nextElementSibling.classList.contains('open')?(currentLang==='en'?'▲ Collapse':'▲ 收合'):(currentLang==='en'?'▼ Expand':'▼ 展開會議記錄')">▼ 展開會議記錄</button>
           <div class="meeting-card-body">
-            <div class="meeting-subsection">📌 關鍵數據</div>
+            <div class="meeting-subsection" data-zh="📌 關鍵數據" data-en="📌 Key Metrics">📌 關鍵數據</div>
             <ul class="meeting-key-pts">
-              <li>TDAB：3.69B THB，維持強勁水位</li>
-              <li>WG +34.92%：最高成長來源之一，社群策略奏效</li>
-              <li>Betclic Portugal：品牌遊戲客製化上線，EU Regulated 重要里程碑</li>
-              <li>3月末月衝刺：KPI 達成率預估超過 90%</li>
+              <li data-zh="TDAB：3.69B THB，維持強勁水位" data-en="TDAB: 3.69B THB, maintaining strong level">TDAB：3.69B THB，維持強勁水位</li>
+              <li data-zh="WG +34.92%：最高成長來源之一，社群策略奏效" data-en="WG +34.92%: one of top growth sources, community strategy working">WG +34.92%：最高成長來源之一，社群策略奏效</li>
+              <li data-zh="Betclic Portugal：品牌遊戲客製化上線，EU Regulated 重要里程碑" data-en="Betclic Portugal: custom branded game live, important EU Regulated milestone">Betclic Portugal：品牌遊戲客製化上線，EU Regulated 重要里程碑</li>
+              <li data-zh="3月末月衝刺：KPI 達成率預估超過 90%" data-en="March end-of-month sprint: KPI achievement rate estimated above 90%">3月末月衝刺：KPI 達成率預估超過 90%</li>
             </ul>
             <div class="meeting-subsection">✅ Action Items</div>
             <div class="meeting-action-list">
-              <div class="meeting-action-item"><span class="action-status doing">進行中</span>AM：Betclic Portugal 上線後數據追蹤</div>
-              <div class="meeting-action-item"><span class="action-status doing">進行中</span>AM：3月月末 KPI 衝刺確認</div>
+              <div class="meeting-action-item" data-zh="AM：Betclic Portugal 上線後數據追蹤" data-en="AM: Post-launch data tracking for Betclic Portugal"><span class="action-status doing">進行中</span>AM：Betclic Portugal 上線後數據追蹤</div>
+              <div class="meeting-action-item" data-zh="AM：3月月末 KPI 衝刺確認" data-en="AM: Confirm March end-of-month KPI sprint"><span class="action-status doing">進行中</span>AM：3月月末 KPI 衝刺確認</div>
             </div>
           </div>
         </div>
@@ -3079,37 +3079,37 @@
       <div class="meeting-section-header" style="border-left-color:#8B5CF6">
         <div class="meeting-section-icon" style="background:rgba(139,92,246,0.12);color:#8B5CF6">📣</div>
         <div>
-          <div class="meeting-section-title">MKT 組</div>
-          <div class="meeting-section-sub">Marketing · 週報</div>
+          <div class="meeting-section-title" data-zh="MKT 組" data-en="MKT Team">MKT 組</div>
+          <div class="meeting-section-sub" data-zh="Marketing · 週報" data-en="Marketing · Weekly">Marketing · 週報</div>
         </div>
       </div>
       <div class="meeting-grid">
         <div class="meeting-card meeting-card-real">
           <div class="meeting-card-week">2026/03/24 · MKT Weekly Report</div>
-          <div class="meeting-card-title">Cerol 直播合作 · BUXEXA Studio 聯推 · 多項獎項提名</div>
+          <div class="meeting-card-title" data-zh="Cerol 直播合作 · BUXEXA Studio 聯推 · 多項獎項提名" data-en="Cerol Live Stream Partnership · BUXEXA Studio Joint Promo · Multiple Award Nominations">Cerol 直播合作 · BUXEXA Studio 聯推 · 多項獎項提名</div>
           <div class="meeting-card-meta-row">
             <span class="m-attendee" style="background:#8B5CF6">M</span>
             <span class="m-attendee-more">MKT Team</span>
           </div>
           <div class="meeting-agenda-list" style="margin-top:10px">
-            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#8B5CF6"></span>Cerol 直播合作正式啟動</div>
-            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#8B5CF6"></span>BUXEXA Studio 與 TaDa 聯合推廣</div>
-            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#8B5CF6"></span>TaDa 獲得多項行業獎項提名</div>
+            <div class="meeting-agenda-item" data-zh="Cerol 直播合作正式啟動" data-en="Cerol live stream partnership officially launched"><span class="agenda-dot" style="background:#8B5CF6"></span>Cerol 直播合作正式啟動</div>
+            <div class="meeting-agenda-item" data-zh="BUXEXA Studio 與 TaDa 聯合推廣" data-en="BUXEXA Studio and TaDa joint promotion"><span class="agenda-dot" style="background:#8B5CF6"></span>BUXEXA Studio 與 TaDa 聯合推廣</div>
+            <div class="meeting-agenda-item" data-zh="TaDa 獲得多項行業獎項提名" data-en="TaDa received multiple industry award nominations"><span class="agenda-dot" style="background:#8B5CF6"></span>TaDa 獲得多項行業獎項提名</div>
           </div>
-          <button class="meeting-toggle-btn" onclick="this.nextElementSibling.classList.toggle('open');this.textContent=this.nextElementSibling.classList.contains('open')?'▲ 收合':'▼ 展開會議記錄'">▼ 展開會議記錄</button>
+          <button class="meeting-toggle-btn" onclick="this.nextElementSibling.classList.toggle('open');this.textContent=this.nextElementSibling.classList.contains('open')?(currentLang==='en'?'▲ Collapse':'▲ 收合'):(currentLang==='en'?'▼ Expand':'▼ 展開會議記錄')">▼ 展開會議記錄</button>
           <div class="meeting-card-body">
-            <div class="meeting-subsection">📌 關鍵討論</div>
+            <div class="meeting-subsection" data-zh="📌 關鍵討論" data-en="📌 Key Discussion">📌 關鍵討論</div>
             <ul class="meeting-key-pts">
-              <li>Cerol：知名 Latam 直播主合作，預計帶動 Brazil 自然流量</li>
-              <li>BUXEXA Studio：聯合推廣活動，覆蓋 CIS / EU 市場</li>
-              <li>獎項提名：行業認可度提升，有助 BD 洽談</li>
-              <li>Orange Night Party：籌備中，預計 3/31 盛大舉辦</li>
+              <li data-zh="Cerol：知名 Latam 直播主合作，預計帶動 Brazil 自然流量" data-en="Cerol: well-known Latam streamer partnership, expected to drive Brazil organic traffic">Cerol：知名 Latam 直播主合作，預計帶動 Brazil 自然流量</li>
+              <li data-zh="BUXEXA Studio：聯合推廣活動，覆蓋 CIS / EU 市場" data-en="BUXEXA Studio: joint promotion campaign, covering CIS / EU markets">BUXEXA Studio：聯合推廣活動，覆蓋 CIS / EU 市場</li>
+              <li data-zh="獎項提名：行業認可度提升，有助 BD 洽談" data-en="Award nominations: industry recognition increasing, helpful for BD negotiations">獎項提名：行業認可度提升，有助 BD 洽談</li>
+              <li data-zh="Orange Night Party：籌備中，預計 3/31 盛大舉辦" data-en="Orange Night Party: in preparation, expected grand event on 3/31">Orange Night Party：籌備中，預計 3/31 盛大舉辦</li>
             </ul>
             <div class="meeting-subsection">✅ Action Items</div>
             <div class="meeting-action-list">
-              <div class="meeting-action-item"><span class="action-status doing">進行中</span>MKT：Cerol 合作活動執行</div>
-              <div class="meeting-action-item"><span class="action-status doing">進行中</span>MKT：BUXEXA Studio 聯合推廣素材製作</div>
-              <div class="meeting-action-item"><span class="action-status doing">進行中</span>MKT：Orange Night Party 籌備</div>
+              <div class="meeting-action-item" data-zh="MKT：Cerol 合作活動執行" data-en="MKT: Cerol partnership campaign execution"><span class="action-status doing">進行中</span>MKT：Cerol 合作活動執行</div>
+              <div class="meeting-action-item" data-zh="MKT：BUXEXA Studio 聯合推廣素材製作" data-en="MKT: BUXEXA Studio joint promotion material production"><span class="action-status doing">進行中</span>MKT：BUXEXA Studio 聯合推廣素材製作</div>
+              <div class="meeting-action-item" data-zh="MKT：Orange Night Party 籌備" data-en="MKT: Orange Night Party preparation"><span class="action-status doing">進行中</span>MKT：Orange Night Party 籌備</div>
             </div>
           </div>
         </div>
@@ -3121,14 +3121,14 @@
 
   <!-- ══════════ W-MAR31 (全體) ══════════ -->
   <div class="meeting-week-content active" id="w-mar31">
-    <div class="rpt-section-label">2026/03/31 (二) 全體會議 · W14 · 出席：Ray · Bryam · Nina · Hector · Chu + AM · MKT</div>
+    <div class="rpt-section-label" data-zh="2026/03/31 (二) 全體會議 · W14 · 出席：Ray · Bryam · Nina · Hector · Chu + AM · MKT" data-en="2026/03/31 (Tue) All-Hands · W14 · Attendees: Ray · Bryam · Nina · Hector · Chu + AM · MKT">2026/03/31 (二) 全體會議 · W14 · 出席：Ray · Bryam · Nina · Hector · Chu + AM · MKT</div>
 
     <div class="meeting-section" data-group="bd">
       <div class="meeting-section-header" style="border-left-color:#F59E0B">
         <div class="meeting-section-icon" style="background:rgba(245,158,11,0.12);color:#F59E0B">💼</div>
         <div>
-          <div class="meeting-section-title">BD 組</div>
-          <div class="meeting-section-sub">Business Development · 全體週報</div>
+          <div class="meeting-section-title" data-zh="BD 組" data-en="BD Team">BD 組</div>
+          <div class="meeting-section-sub" data-zh="Business Development · 全體週報" data-en="Business Development · All-Hands Report">Business Development · 全體週報</div>
         </div>
       </div>
       <div class="meeting-grid">
@@ -3136,31 +3136,31 @@
         <!-- Hector / Latam W14 -->
         <div class="meeting-card meeting-card-real">
           <div class="meeting-card-week">Hector · Latam</div>
-          <div class="meeting-card-title">Sportium Mexico 4/20 上線確認 · BET MGM 正式 Live · Sportingbet 3個月促銷</div>
+          <div class="meeting-card-title" data-zh="Sportium Mexico 4/20 上線確認 · BET MGM 正式 Live · Sportingbet 3個月促銷" data-en="Sportium Mexico 4/20 Launch Confirmed · BET MGM Official Live · Sportingbet 3-Month Promo">Sportium Mexico 4/20 上線確認 · BET MGM 正式 Live · Sportingbet 3個月促銷</div>
           <div class="meeting-card-meta-row">
             <span class="m-attendee" style="background:#F59E0B">H</span>
             <span class="m-attendee-more">Hector</span>
           </div>
           <div class="meeting-agenda-list" style="margin-top:10px">
-            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#F59E0B"></span>Sportium Mexico 確認 4/20 正式上線</div>
-            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#F59E0B"></span>BET MGM Latam 已正式上線 🎉</div>
-            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#F59E0B"></span>Sportingbet 3個月促銷計畫全面啟動</div>
+            <div class="meeting-agenda-item" data-zh="Sportium Mexico 確認 4/20 正式上線" data-en="Sportium Mexico confirmed 4/20 official launch"><span class="agenda-dot" style="background:#F59E0B"></span>Sportium Mexico 確認 4/20 正式上線</div>
+            <div class="meeting-agenda-item" data-zh="BET MGM Latam 已正式上線 🎉" data-en="BET MGM Latam officially live 🎉"><span class="agenda-dot" style="background:#F59E0B"></span>BET MGM Latam 已正式上線 🎉</div>
+            <div class="meeting-agenda-item" data-zh="Sportingbet 3個月促銷計畫全面啟動" data-en="Sportingbet 3-month promo plan fully launched"><span class="agenda-dot" style="background:#F59E0B"></span>Sportingbet 3個月促銷計畫全面啟動</div>
           </div>
-          <button class="meeting-toggle-btn" onclick="this.nextElementSibling.classList.toggle('open');this.textContent=this.nextElementSibling.classList.contains('open')?'▲ 收合':'▼ 展開會議記錄'">▼ 展開會議記錄</button>
+          <button class="meeting-toggle-btn" onclick="this.nextElementSibling.classList.toggle('open');this.textContent=this.nextElementSibling.classList.contains('open')?(currentLang==='en'?'▲ Collapse':'▲ 收合'):(currentLang==='en'?'▼ Expand':'▼ 展開會議記錄')">▼ 展開會議記錄</button>
           <div class="meeting-card-body">
-            <div class="meeting-subsection">📌 關鍵討論</div>
+            <div class="meeting-subsection" data-zh="📌 關鍵討論" data-en="📌 Key Discussion">📌 關鍵討論</div>
             <ul class="meeting-key-pts">
-              <li>Sportium Mexico：需確認 Microsoft Teams Business 帳號，4/20 上線準備就緒</li>
-              <li>BET MGM：Latam 正式上線，重要品牌客戶達成里程碑</li>
-              <li>Sportingbet Brazil：3個月促銷計畫全面執行</li>
-              <li>KTO Brazil：4月 LJ500 Campaign 執行中</li>
-              <li>BRAGG Peru：所有 operator 夥伴正式啟動</li>
+              <li data-zh="Sportium Mexico：需確認 Microsoft Teams Business 帳號，4/20 上線準備就緒" data-en="Sportium Mexico: needs to confirm Microsoft Teams Business account, 4/20 launch ready">Sportium Mexico：需確認 Microsoft Teams Business 帳號，4/20 上線準備就緒</li>
+              <li data-zh="BET MGM：Latam 正式上線，重要品牌客戶達成里程碑" data-en="BET MGM: Latam officially live, important brand client milestone achieved">BET MGM：Latam 正式上線，重要品牌客戶達成里程碑</li>
+              <li data-zh="Sportingbet Brazil：3個月促銷計畫全面執行" data-en="Sportingbet Brazil: 3-month promo plan fully executing">Sportingbet Brazil：3個月促銷計畫全面執行</li>
+              <li data-zh="KTO Brazil：4月 LJ500 Campaign 執行中" data-en="KTO Brazil: April LJ500 Campaign in execution">KTO Brazil：4月 LJ500 Campaign 執行中</li>
+              <li data-zh="BRAGG Peru：所有 operator 夥伴正式啟動" data-en="BRAGG Peru: all operator partners officially activated">BRAGG Peru：所有 operator 夥伴正式啟動</li>
             </ul>
             <div class="meeting-subsection">✅ Action Items</div>
             <div class="meeting-action-list">
-              <div class="meeting-action-item"><span class="action-status urgent">急件</span>Hector：確認 Sportium Mexico Teams 帳號（4/20 deadline）</div>
-              <div class="meeting-action-item"><span class="action-status done">完成</span>Hector：BET MGM 上線確認</div>
-              <div class="meeting-action-item"><span class="action-status doing">進行中</span>Hector：KTO 4月 LJ500 Campaign 執行</div>
+              <div class="meeting-action-item" data-zh="Hector：確認 Sportium Mexico Teams 帳號（4/20 deadline）" data-en="Hector: Confirm Sportium Mexico Teams account (4/20 deadline)"><span class="action-status urgent">急件</span>Hector：確認 Sportium Mexico Teams 帳號（4/20 deadline）</div>
+              <div class="meeting-action-item" data-zh="Hector：BET MGM 上線確認" data-en="Hector: BET MGM launch confirmed"><span class="action-status done">完成</span>Hector：BET MGM 上線確認</div>
+              <div class="meeting-action-item" data-zh="Hector：KTO 4月 LJ500 Campaign 執行" data-en="Hector: KTO April LJ500 Campaign execution"><span class="action-status doing">進行中</span>Hector：KTO 4月 LJ500 Campaign 執行</div>
             </div>
           </div>
         </div>
@@ -3168,30 +3168,30 @@
         <!-- Bryam / CIS+WA W14 -->
         <div class="meeting-card meeting-card-real">
           <div class="meeting-card-week">Bryam · CIS & West Asia</div>
-          <div class="meeting-card-title">MostBet 4月衝刺 · Alea 40+ 國整合 · GameKong 加拿大</div>
+          <div class="meeting-card-title" data-zh="MostBet 4月衝刺 · Alea 40+ 國整合 · GameKong 加拿大" data-en="MostBet April Sprint · Alea 40+ Countries Integration · GameKong Canada">MostBet 4月衝刺 · Alea 40+ 國整合 · GameKong 加拿大</div>
           <div class="meeting-card-meta-row">
             <span class="m-attendee" style="background:#8B5CF6">B</span>
             <span class="m-attendee-more">Bryam</span>
           </div>
           <div class="meeting-agenda-list" style="margin-top:10px">
-            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#8B5CF6"></span>MostBet：4月上線最後準備，加速整合</div>
-            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#8B5CF6"></span>Alea 40+ 國整合：範圍確認，條款談判</div>
-            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#8B5CF6"></span>GameKong 加拿大市場合作洽談</div>
+            <div class="meeting-agenda-item" data-zh="MostBet：4月上線最後準備，加速整合" data-en="MostBet: final April launch preparations, accelerating integration"><span class="agenda-dot" style="background:#8B5CF6"></span>MostBet：4月上線最後準備，加速整合</div>
+            <div class="meeting-agenda-item" data-zh="Alea 40+ 國整合：範圍確認，條款談判" data-en="Alea 40+ countries integration: scope confirmed, terms negotiation"><span class="agenda-dot" style="background:#8B5CF6"></span>Alea 40+ 國整合：範圍確認，條款談判</div>
+            <div class="meeting-agenda-item" data-zh="GameKong 加拿大市場合作洽談" data-en="GameKong Canada market partnership negotiation"><span class="agenda-dot" style="background:#8B5CF6"></span>GameKong 加拿大市場合作洽談</div>
           </div>
-          <button class="meeting-toggle-btn" onclick="this.nextElementSibling.classList.toggle('open');this.textContent=this.nextElementSibling.classList.contains('open')?'▲ 收合':'▼ 展開會議記錄'">▼ 展開會議記錄</button>
+          <button class="meeting-toggle-btn" onclick="this.nextElementSibling.classList.toggle('open');this.textContent=this.nextElementSibling.classList.contains('open')?(currentLang==='en'?'▲ Collapse':'▲ 收合'):(currentLang==='en'?'▼ Expand':'▼ 展開會議記錄')">▼ 展開會議記錄</button>
           <div class="meeting-card-body">
-            <div class="meeting-subsection">📌 關鍵討論</div>
+            <div class="meeting-subsection" data-zh="📌 關鍵討論" data-en="📌 Key Discussion">📌 關鍵討論</div>
             <ul class="meeting-key-pts">
-              <li>MostBet：整合進入最後階段，4月初目標上線</li>
-              <li>Alea：40+ 國家平台，談判整合範圍和商業條款</li>
-              <li>GameKong 加拿大：非監管市場合作，評估可行性</li>
-              <li>SlotCity Ukraine：整合持續推進中</li>
+              <li data-zh="MostBet：整合進入最後階段，4月初目標上線" data-en="MostBet: integration entering final stage, target early April launch">MostBet：整合進入最後階段，4月初目標上線</li>
+              <li data-zh="Alea：40+ 國家平台，談判整合範圍和商業條款" data-en="Alea: 40+ country platform, negotiating integration scope and commercial terms">Alea：40+ 國家平台，談判整合範圍和商業條款</li>
+              <li data-zh="GameKong 加拿大：非監管市場合作，評估可行性" data-en="GameKong Canada: unregulated market partnership, evaluating feasibility">GameKong 加拿大：非監管市場合作，評估可行性</li>
+              <li data-zh="SlotCity Ukraine：整合持續推進中" data-en="SlotCity Ukraine: integration continuing to advance">SlotCity Ukraine：整合持續推進中</li>
             </ul>
             <div class="meeting-subsection">✅ Action Items</div>
             <div class="meeting-action-list">
-              <div class="meeting-action-item"><span class="action-status doing">進行中</span>Bryam：MostBet 最後整合確認</div>
-              <div class="meeting-action-item"><span class="action-status doing">進行中</span>Bryam：Alea 40+ 國條款談判</div>
-              <div class="meeting-action-item"><span class="action-status doing">進行中</span>Bryam：GameKong 加拿大評估</div>
+              <div class="meeting-action-item" data-zh="Bryam：MostBet 最後整合確認" data-en="Bryam: MostBet final integration confirmation"><span class="action-status doing">進行中</span>Bryam：MostBet 最後整合確認</div>
+              <div class="meeting-action-item" data-zh="Bryam：Alea 40+ 國條款談判" data-en="Bryam: Alea 40+ countries terms negotiation"><span class="action-status doing">進行中</span>Bryam：Alea 40+ 國條款談判</div>
+              <div class="meeting-action-item" data-zh="Bryam：GameKong 加拿大評估" data-en="Bryam: GameKong Canada evaluation"><span class="action-status doing">進行中</span>Bryam：GameKong 加拿大評估</div>
             </div>
           </div>
         </div>
@@ -3199,30 +3199,30 @@
         <!-- Nina / EU W14 -->
         <div class="meeting-card meeting-card-real">
           <div class="meeting-card-week">Nina · EU Regulated</div>
-          <div class="meeting-card-title">EU Italy / Romania / Spain 三市場全上線 · 4月出差計畫</div>
+          <div class="meeting-card-title" data-zh="EU Italy / Romania / Spain 三市場全上線 · 4月出差計畫" data-en="EU Italy / Romania / Spain All 3 Markets Live · April Travel Plan">EU Italy / Romania / Spain 三市場全上線 · 4月出差計畫</div>
           <div class="meeting-card-meta-row">
             <span class="m-attendee" style="background:#F97316">N</span>
             <span class="m-attendee-more">Nina</span>
           </div>
           <div class="meeting-agenda-list" style="margin-top:10px">
-            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#F97316"></span>EU Regulated：Italy / Romania / Spain 三市場全上線</div>
-            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#F97316"></span>4月出差計畫：與 Ray / Silvio 對齊聯合拜訪</div>
-            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#F97316"></span>Belgium / Netherlands 新市場 4月推進</div>
+            <div class="meeting-agenda-item" data-zh="EU Regulated：Italy / Romania / Spain 三市場全上線" data-en="EU Regulated: Italy / Romania / Spain all 3 markets live"><span class="agenda-dot" style="background:#F97316"></span>EU Regulated：Italy / Romania / Spain 三市場全上線</div>
+            <div class="meeting-agenda-item" data-zh="4月出差計畫：與 Ray / Silvio 對齊聯合拜訪" data-en="April travel plan: align joint visits with Ray / Silvio"><span class="agenda-dot" style="background:#F97316"></span>4月出差計畫：與 Ray / Silvio 對齊聯合拜訪</div>
+            <div class="meeting-agenda-item" data-zh="Belgium / Netherlands 新市場 4月推進" data-en="Belgium / Netherlands new markets April push"><span class="agenda-dot" style="background:#F97316"></span>Belgium / Netherlands 新市場 4月推進</div>
           </div>
-          <button class="meeting-toggle-btn" onclick="this.nextElementSibling.classList.toggle('open');this.textContent=this.nextElementSibling.classList.contains('open')?'▲ 收合':'▼ 展開會議記錄'">▼ 展開會議記錄</button>
+          <button class="meeting-toggle-btn" onclick="this.nextElementSibling.classList.toggle('open');this.textContent=this.nextElementSibling.classList.contains('open')?(currentLang==='en'?'▲ Collapse':'▲ 收合'):(currentLang==='en'?'▼ Expand':'▼ 展開會議記錄')">▼ 展開會議記錄</button>
           <div class="meeting-card-body">
-            <div class="meeting-subsection">📌 關鍵討論</div>
+            <div class="meeting-subsection" data-zh="📌 關鍵討論" data-en="📌 Key Discussion">📌 關鍵討論</div>
             <ul class="meeting-key-pts">
-              <li>Italy / Romania / Spain：3個 EU Regulated 市場本月全數完成上線</li>
-              <li>4月重點：Bingoal Belgium / NL 監管客戶推進</li>
-              <li>聯合出差：與 AM Silvio 拜訪 EU 客戶</li>
-              <li>Superbet Romania：促銷預算增加，成效持續追蹤</li>
+              <li data-zh="Italy / Romania / Spain：3個 EU Regulated 市場本月全數完成上線" data-en="Italy / Romania / Spain: all 3 EU Regulated markets completed launch this month">Italy / Romania / Spain：3個 EU Regulated 市場本月全數完成上線</li>
+              <li data-zh="4月重點：Bingoal Belgium / NL 監管客戶推進" data-en="April focus: Bingoal Belgium / NL regulated client push">4月重點：Bingoal Belgium / NL 監管客戶推進</li>
+              <li data-zh="聯合出差：與 AM Silvio 拜訪 EU 客戶" data-en="Joint travel: visiting EU clients with AM Silvio">聯合出差：與 AM Silvio 拜訪 EU 客戶</li>
+              <li data-zh="Superbet Romania：促銷預算增加，成效持續追蹤" data-en="Superbet Romania: promo budget increased, results continuously tracked">Superbet Romania：促銷預算增加，成效持續追蹤</li>
             </ul>
             <div class="meeting-subsection">✅ Action Items</div>
             <div class="meeting-action-list">
-              <div class="meeting-action-item"><span class="action-status doing">進行中</span>Nina：Bingoal Belgium 合作正式推進</div>
-              <div class="meeting-action-item"><span class="action-status doing">進行中</span>Nina：4月出差計畫確認</div>
-              <div class="meeting-action-item"><span class="action-status doing">進行中</span>Nina：Superbet Romania 促銷成效追蹤</div>
+              <div class="meeting-action-item" data-zh="Nina：Bingoal Belgium 合作正式推進" data-en="Nina: Bingoal Belgium partnership officially advancing"><span class="action-status doing">進行中</span>Nina：Bingoal Belgium 合作正式推進</div>
+              <div class="meeting-action-item" data-zh="Nina：4月出差計畫確認" data-en="Nina: Confirm April travel plan"><span class="action-status doing">進行中</span>Nina：4月出差計畫確認</div>
+              <div class="meeting-action-item" data-zh="Nina：Superbet Romania 促銷成效追蹤" data-en="Nina: Track Superbet Romania promo results"><span class="action-status doing">進行中</span>Nina：Superbet Romania 促銷成效追蹤</div>
             </div>
           </div>
         </div>
@@ -3230,31 +3230,31 @@
         <!-- Chu / Africa+Canada W14 -->
         <div class="meeting-card meeting-card-real">
           <div class="meeting-card-week">Chu · Africa & Canada</div>
-          <div class="meeting-card-title">Betway 獨家遊戲確認 · HWB 正式上線 · 加拿大三路並進</div>
+          <div class="meeting-card-title" data-zh="Betway 獨家遊戲確認 · HWB 正式上線 · 加拿大三路並進" data-en="Betway Exclusive Game Confirmed · HWB Official Launch · Canada Three-Track Advance">Betway 獨家遊戲確認 · HWB 正式上線 · 加拿大三路並進</div>
           <div class="meeting-card-meta-row">
             <span class="m-attendee" style="background:#10B981">C</span>
             <span class="m-attendee-more">Chu</span>
           </div>
           <div class="meeting-agenda-list" style="margin-top:10px">
-            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#10B981"></span>Betway：獨家遊戲合作條款確認達成</div>
-            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#10B981"></span>HWB（Hollywoodbets）正式上線 🎉</div>
-            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#10B981"></span>加拿大：Blazesoft / GameKong / Delasport 三路並進</div>
+            <div class="meeting-agenda-item" data-zh="Betway：獨家遊戲合作條款確認達成" data-en="Betway: exclusive game partnership terms confirmed"><span class="agenda-dot" style="background:#10B981"></span>Betway：獨家遊戲合作條款確認達成</div>
+            <div class="meeting-agenda-item" data-zh="HWB（Hollywoodbets）正式上線 🎉" data-en="HWB (Hollywoodbets) officially live 🎉"><span class="agenda-dot" style="background:#10B981"></span>HWB（Hollywoodbets）正式上線 🎉</div>
+            <div class="meeting-agenda-item" data-zh="加拿大：Blazesoft / GameKong / Delasport 三路並進" data-en="Canada: Blazesoft / GameKong / Delasport three-track advance"><span class="agenda-dot" style="background:#10B981"></span>加拿大：Blazesoft / GameKong / Delasport 三路並進</div>
           </div>
-          <button class="meeting-toggle-btn" onclick="this.nextElementSibling.classList.toggle('open');this.textContent=this.nextElementSibling.classList.contains('open')?'▲ 收合':'▼ 展開會議記錄'">▼ 展開會議記錄</button>
+          <button class="meeting-toggle-btn" onclick="this.nextElementSibling.classList.toggle('open');this.textContent=this.nextElementSibling.classList.contains('open')?(currentLang==='en'?'▲ Collapse':'▲ 收合'):(currentLang==='en'?'▼ Expand':'▼ 展開會議記錄')">▼ 展開會議記錄</button>
           <div class="meeting-card-body">
-            <div class="meeting-subsection">📌 關鍵討論</div>
+            <div class="meeting-subsection" data-zh="📌 關鍵討論" data-en="📌 Key Discussion">📌 關鍵討論</div>
             <ul class="meeting-key-pts">
-              <li>Betway：獨家遊戲合作達成，Africa 市場重要突破</li>
-              <li>HWB（Hollywoodbets）：南非最大品牌之一，3月底正式上線</li>
-              <li>Blazesoft 加拿大：Ontario 合規整合推進</li>
-              <li>GameKong 加拿大：非監管市場快速上線評估</li>
-              <li>Delasport：加拿大市場技術夥伴，整合方案確認中</li>
+              <li data-zh="Betway：獨家遊戲合作達成，Africa 市場重要突破" data-en="Betway: exclusive game partnership achieved, important Africa market breakthrough">Betway：獨家遊戲合作達成，Africa 市場重要突破</li>
+              <li data-zh="HWB（Hollywoodbets）：南非最大品牌之一，3月底正式上線" data-en="HWB (Hollywoodbets): one of South Africa largest brands, officially live end of March">HWB（Hollywoodbets）：南非最大品牌之一，3月底正式上線</li>
+              <li data-zh="Blazesoft 加拿大：Ontario 合規整合推進" data-en="Blazesoft Canada: Ontario compliance integration advancing">Blazesoft 加拿大：Ontario 合規整合推進</li>
+              <li data-zh="GameKong 加拿大：非監管市場快速上線評估" data-en="GameKong Canada: unregulated market fast launch evaluation">GameKong 加拿大：非監管市場快速上線評估</li>
+              <li data-zh="Delasport：加拿大市場技術夥伴，整合方案確認中" data-en="Delasport: Canada market tech partner, integration plan being confirmed">Delasport：加拿大市場技術夥伴，整合方案確認中</li>
             </ul>
             <div class="meeting-subsection">✅ Action Items</div>
             <div class="meeting-action-list">
-              <div class="meeting-action-item"><span class="action-status done">完成</span>Chu：HWB 上線確認</div>
-              <div class="meeting-action-item"><span class="action-status done">完成</span>Chu：Betway 獨家遊戲條款確認</div>
-              <div class="meeting-action-item"><span class="action-status doing">進行中</span>Chu：加拿大三路並進執行計畫</div>
+              <div class="meeting-action-item" data-zh="Chu：HWB 上線確認" data-en="Chu: HWB launch confirmed"><span class="action-status done">完成</span>Chu：HWB 上線確認</div>
+              <div class="meeting-action-item" data-zh="Chu：Betway 獨家遊戲條款確認" data-en="Chu: Betway exclusive game terms confirmed"><span class="action-status done">完成</span>Chu：Betway 獨家遊戲條款確認</div>
+              <div class="meeting-action-item" data-zh="Chu：加拿大三路並進執行計畫" data-en="Chu: Canada three-track advance execution plan"><span class="action-status doing">進行中</span>Chu：加拿大三路並進執行計畫</div>
             </div>
           </div>
         </div>
@@ -3267,37 +3267,37 @@
       <div class="meeting-section-header" style="border-left-color:#10B981">
         <div class="meeting-section-icon" style="background:rgba(16,185,129,0.12);color:#10B981">🤝</div>
         <div>
-          <div class="meeting-section-title">AM 組</div>
-          <div class="meeting-section-sub">Account Management · 3月月底總結</div>
+          <div class="meeting-section-title" data-zh="AM 組" data-en="AM Team">AM 組</div>
+          <div class="meeting-section-sub" data-zh="Account Management · 3月月底總結" data-en="Account Management · March End Summary">Account Management · 3月月底總結</div>
         </div>
       </div>
       <div class="meeting-grid">
         <div class="meeting-card meeting-card-real">
           <div class="meeting-card-week">2026/03/31 · AM 3月最終報告</div>
-          <div class="meeting-card-title">3月 TDAB 月均 3.7B THB · MoM +12.94% 🎉</div>
+          <div class="meeting-card-title" data-zh="3月 TDAB 月均 3.7B THB · MoM +12.94% 🎉" data-en="March TDAB Monthly Avg 3.7B THB · MoM +12.94% 🎉">3月 TDAB 月均 3.7B THB · MoM +12.94% 🎉</div>
           <div class="meeting-card-meta-row">
             <span class="m-attendee" style="background:#10B981">A</span>
             <span class="m-attendee-more">AM Team</span>
           </div>
           <div class="meeting-agenda-list" style="margin-top:10px">
-            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#10B981"></span>3月最終 TDAB 月均：3.7B THB · MoM +12.94% 🎉</div>
-            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#10B981"></span>EU Regulated：Italy / Romania / Spain 三市場全上線</div>
-            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#10B981"></span>4月目標：維持強勁增長動能</div>
+            <div class="meeting-agenda-item" data-zh="3月最終 TDAB 月均：3.7B THB · MoM +12.94% 🎉" data-en="March final TDAB monthly avg: 3.7B THB · MoM +12.94% 🎉"><span class="agenda-dot" style="background:#10B981"></span>3月最終 TDAB 月均：3.7B THB · MoM +12.94% 🎉</div>
+            <div class="meeting-agenda-item" data-zh="EU Regulated：Italy / Romania / Spain 三市場全上線" data-en="EU Regulated: Italy / Romania / Spain all 3 markets live"><span class="agenda-dot" style="background:#10B981"></span>EU Regulated：Italy / Romania / Spain 三市場全上線</div>
+            <div class="meeting-agenda-item" data-zh="4月目標：維持強勁增長動能" data-en="April target: maintain strong growth momentum"><span class="agenda-dot" style="background:#10B981"></span>4月目標：維持強勁增長動能</div>
           </div>
-          <button class="meeting-toggle-btn" onclick="this.nextElementSibling.classList.toggle('open');this.textContent=this.nextElementSibling.classList.contains('open')?'▲ 收合':'▼ 展開會議記錄'">▼ 展開會議記錄</button>
+          <button class="meeting-toggle-btn" onclick="this.nextElementSibling.classList.toggle('open');this.textContent=this.nextElementSibling.classList.contains('open')?(currentLang==='en'?'▲ Collapse':'▲ 收合'):(currentLang==='en'?'▼ Expand':'▼ 展開會議記錄')">▼ 展開會議記錄</button>
           <div class="meeting-card-body">
-            <div class="meeting-subsection">📌 關鍵數據</div>
+            <div class="meeting-subsection" data-zh="📌 關鍵數據" data-en="📌 Key Metrics">📌 關鍵數據</div>
             <ul class="meeting-key-pts">
-              <li>3月 TDAB 月均：3.7B THB，MoM +12.94%</li>
-              <li>KPI 達成率：超過 90%（超預期完成）</li>
-              <li>EU Regulated：3月共上線 3 個新客戶（StarCasino Italy / Kaizen Romania / Casino 777 Spain）</li>
-              <li>Latam 成長穩健，Venezuela 繼續領先整體</li>
-              <li>4月展望：BRAGG Latam 夥伴全面激活，MostBet / Alea 等新客戶上線</li>
+              <li data-zh="3月 TDAB 月均：3.7B THB，MoM +12.94%" data-en="March TDAB monthly avg: 3.7B THB, MoM +12.94%">3月 TDAB 月均：3.7B THB，MoM +12.94%</li>
+              <li data-zh="KPI 達成率：超過 90%（超預期完成）" data-en="KPI achievement rate: above 90% (exceeded expectations)">KPI 達成率：超過 90%（超預期完成）</li>
+              <li data-zh="EU Regulated：3月共上線 3 個新客戶（StarCasino Italy / Kaizen Romania / Casino 777 Spain）" data-en="EU Regulated: 3 new clients launched in March (StarCasino Italy / Kaizen Romania / Casino 777 Spain)">EU Regulated：3月共上線 3 個新客戶（StarCasino Italy / Kaizen Romania / Casino 777 Spain）</li>
+              <li data-zh="Latam 成長穩健，Venezuela 繼續領先整體" data-en="Latam growth steady, Venezuela continues to lead overall">Latam 成長穩健，Venezuela 繼續領先整體</li>
+              <li data-zh="4月展望：BRAGG Latam 夥伴全面激活，MostBet / Alea 等新客戶上線" data-en="April outlook: BRAGG Latam partners fully activated, MostBet / Alea and other new clients launching">4月展望：BRAGG Latam 夥伴全面激活，MostBet / Alea 等新客戶上線</li>
             </ul>
             <div class="meeting-subsection">✅ Action Items</div>
             <div class="meeting-action-list">
-              <div class="meeting-action-item"><span class="action-status doing">進行中</span>AM：4月 KPI 目標設定</div>
-              <div class="meeting-action-item"><span class="action-status doing">進行中</span>AM：新上線客戶首月數據追蹤</div>
+              <div class="meeting-action-item" data-zh="AM：4月 KPI 目標設定" data-en="AM: Set April KPI targets"><span class="action-status doing">進行中</span>AM：4月 KPI 目標設定</div>
+              <div class="meeting-action-item" data-zh="AM：新上線客戶首月數據追蹤" data-en="AM: Track first-month data for newly launched clients"><span class="action-status doing">進行中</span>AM：新上線客戶首月數據追蹤</div>
             </div>
           </div>
         </div>
@@ -3309,39 +3309,39 @@
       <div class="meeting-section-header" style="border-left-color:#8B5CF6">
         <div class="meeting-section-icon" style="background:rgba(139,92,246,0.12);color:#8B5CF6">📣</div>
         <div>
-          <div class="meeting-section-title">MKT 組</div>
-          <div class="meeting-section-sub">Marketing · 3月總結 & 4月展望</div>
+          <div class="meeting-section-title" data-zh="MKT 組" data-en="MKT Team">MKT 組</div>
+          <div class="meeting-section-sub" data-zh="Marketing · 3月總結 &amp; 4月展望" data-en="Marketing · March Summary &amp; April Outlook">Marketing · 3月總結 & 4月展望</div>
         </div>
       </div>
       <div class="meeting-grid">
         <div class="meeting-card meeting-card-real">
           <div class="meeting-card-week">2026/03/31 · MKT 月度總結</div>
-          <div class="meeting-card-title">Orange Night Party 45 Streamers · BBB26 病毒爆紅 · 多項獎項獲獎</div>
+          <div class="meeting-card-title" data-zh="Orange Night Party 45 Streamers · BBB26 病毒爆紅 · 多項獎項獲獎" data-en="Orange Night Party 45 Streamers · BBB26 Viral Moment · Multiple Awards Won">Orange Night Party 45 Streamers · BBB26 病毒爆紅 · 多項獎項獲獎</div>
           <div class="meeting-card-meta-row">
             <span class="m-attendee" style="background:#8B5CF6">M</span>
             <span class="m-attendee-more">MKT Team</span>
           </div>
           <div class="meeting-agenda-list" style="margin-top:10px">
-            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#8B5CF6"></span>Orange Night Party：45 位 Streamers 出席，Brazil 市場轟動</div>
-            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#8B5CF6"></span>BBB26（Big Brother Brazil）病毒式行銷時刻引爆</div>
-            <div class="meeting-agenda-item"><span class="agenda-dot" style="background:#8B5CF6"></span>3月多項行業獎項確認獲獎</div>
+            <div class="meeting-agenda-item" data-zh="Orange Night Party：45 位 Streamers 出席，Brazil 市場轟動" data-en="Orange Night Party: 45 Streamers attended, Brazil market sensation"><span class="agenda-dot" style="background:#8B5CF6"></span>Orange Night Party：45 位 Streamers 出席，Brazil 市場轟動</div>
+            <div class="meeting-agenda-item" data-zh="BBB26（Big Brother Brazil）病毒式行銷時刻引爆" data-en="BBB26 (Big Brother Brazil) viral marketing moment ignited"><span class="agenda-dot" style="background:#8B5CF6"></span>BBB26（Big Brother Brazil）病毒式行銷時刻引爆</div>
+            <div class="meeting-agenda-item" data-zh="3月多項行業獎項確認獲獎" data-en="Multiple industry awards confirmed in March"><span class="agenda-dot" style="background:#8B5CF6"></span>3月多項行業獎項確認獲獎</div>
           </div>
-          <button class="meeting-toggle-btn" onclick="this.nextElementSibling.classList.toggle('open');this.textContent=this.nextElementSibling.classList.contains('open')?'▲ 收合':'▼ 展開會議記錄'">▼ 展開會議記錄</button>
+          <button class="meeting-toggle-btn" onclick="this.nextElementSibling.classList.toggle('open');this.textContent=this.nextElementSibling.classList.contains('open')?(currentLang==='en'?'▲ Collapse':'▲ 收合'):(currentLang==='en'?'▼ Expand':'▼ 展開會議記錄')">▼ 展開會議記錄</button>
           <div class="meeting-card-body">
-            <div class="meeting-subsection">📌 關鍵討論</div>
+            <div class="meeting-subsection" data-zh="📌 關鍵討論" data-en="📌 Key Discussion">📌 關鍵討論</div>
             <ul class="meeting-key-pts">
-              <li>Orange Night Party：45 位頂級 Streamers 出席，奠定 TaDa 在 Brazil 的品牌影響力</li>
-              <li>BBB26 病毒時刻：TaDa 遊戲出現在巴西全國直播節目，引發大量自然流量</li>
-              <li>行業獎項：多項最佳遊戲 / 最佳新遊戲供應商獎項提名並獲獎</li>
-              <li>IGB Live 攤位：UK 市場導向影片製作進行中（40-60 秒版本）</li>
-              <li>4月重點：EU Regulated 市場 MKT 推廣計畫全面啟動</li>
+              <li data-zh="Orange Night Party：45 位頂級 Streamers 出席，奠定 TaDa 在 Brazil 的品牌影響力" data-en="Orange Night Party: 45 top Streamers attended, establishing TaDa brand influence in Brazil">Orange Night Party：45 位頂級 Streamers 出席，奠定 TaDa 在 Brazil 的品牌影響力</li>
+              <li data-zh="BBB26 病毒時刻：TaDa 遊戲出現在巴西全國直播節目，引發大量自然流量" data-en="BBB26 viral moment: TaDa games appeared on Brazil national broadcast, generating massive organic traffic">BBB26 病毒時刻：TaDa 遊戲出現在巴西全國直播節目，引發大量自然流量</li>
+              <li data-zh="行業獎項：多項最佳遊戲 / 最佳新遊戲供應商獎項提名並獲獎" data-en="Industry awards: multiple Best Game / Best New Game Supplier nominations and wins">行業獎項：多項最佳遊戲 / 最佳新遊戲供應商獎項提名並獲獎</li>
+              <li data-zh="IGB Live 攤位：UK 市場導向影片製作進行中（40-60 秒版本）" data-en="IGB Live booth: UK-market-oriented video production in progress (40-60 sec version)">IGB Live 攤位：UK 市場導向影片製作進行中（40-60 秒版本）</li>
+              <li data-zh="4月重點：EU Regulated 市場 MKT 推廣計畫全面啟動" data-en="April focus: EU Regulated market MKT promotion plan fully launched">4月重點：EU Regulated 市場 MKT 推廣計畫全面啟動</li>
             </ul>
             <div class="meeting-subsection">✅ Action Items</div>
             <div class="meeting-action-list">
-              <div class="meeting-action-item"><span class="action-status done">完成</span>MKT：Orange Night Party 成功舉辦</div>
-              <div class="meeting-action-item"><span class="action-status done">完成</span>MKT：BBB26 病毒時刻素材整理</div>
-              <div class="meeting-action-item"><span class="action-status doing">進行中</span>MKT：IGB Live UK 影片製作（40-60 秒）</div>
-              <div class="meeting-action-item"><span class="action-status doing">進行中</span>MKT：EU 市場 4月推廣計畫</div>
+              <div class="meeting-action-item" data-zh="MKT：Orange Night Party 成功舉辦" data-en="MKT: Orange Night Party successfully held"><span class="action-status done">完成</span>MKT：Orange Night Party 成功舉辦</div>
+              <div class="meeting-action-item" data-zh="MKT：BBB26 病毒時刻素材整理" data-en="MKT: BBB26 viral moment assets compiled"><span class="action-status done">完成</span>MKT：BBB26 病毒時刻素材整理</div>
+              <div class="meeting-action-item" data-zh="MKT：IGB Live UK 影片製作（40-60 秒）" data-en="MKT: IGB Live UK video production (40-60 sec)"><span class="action-status doing">進行中</span>MKT：IGB Live UK 影片製作（40-60 秒）</div>
+              <div class="meeting-action-item" data-zh="MKT：EU 市場 4月推廣計畫" data-en="MKT: EU market April promotion plan"><span class="action-status doing">進行中</span>MKT：EU 市場 4月推廣計畫</div>
             </div>
           </div>
         </div>
@@ -5306,6 +5306,26 @@ function setLang(lang) {
     el.placeholder = lang === 'en'
       ? (el.getAttribute('data-placeholder-en') || el.getAttribute('data-placeholder-zh'))
       : el.getAttribute('data-placeholder-zh');
+  });
+  // Update action-status badge text in Weekly Meeting section
+  const STATUS_ZH = { doing:'進行中', plan:'計劃中', done:'完成', urgent:'急件', blocked:'擱置' };
+  const STATUS_EN = { doing:'In Progress', plan:'Planned', done:'Done', urgent:'Urgent', blocked:'Blocked' };
+  document.querySelectorAll('.action-status').forEach(el => {
+    for (const cls of Object.keys(STATUS_ZH)) {
+      if (el.classList.contains(cls)) {
+        el.textContent = lang === 'en' ? STATUS_EN[cls] : STATUS_ZH[cls]; break;
+      }
+    }
+  });
+  // Update meeting toggle button initial text
+  document.querySelectorAll('.meeting-toggle-btn').forEach(btn => {
+    const panel = btn.nextElementSibling;
+    if (panel) {
+      const isOpen = panel.classList.contains('open');
+      btn.textContent = isOpen
+        ? (lang === 'en' ? '▲ Collapse' : '▲ 收合')
+        : (lang === 'en' ? '▼ Expand' : '▼ 展開會議記錄');
+    }
   });
 }
 
