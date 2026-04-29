@@ -6172,7 +6172,41 @@ function editTask(tab, id) {
   renderTaskPanel(tab);
 }
 
+// Backfill title_en / source_en for weekly tasks already in localStorage
+// Uses sourceId to look up the original bilingual data in weekData
+function backfillWeeklyTaskEn() {
+  const all = loadTasks();
+  let changed = false;
+  (all['weekly'] || []).forEach(task => {
+    if (!task.sourceId || !task.autoExtracted) return;
+    // sourceId format: "w10-hector-plan-0" or "w10-hector-client-Slotegrator"
+    const m = task.sourceId.match(/^(w\d+)-(\w+)-(plan|client)-(.+)$/);
+    if (!m) return;
+    const [, weekId, member, type, key] = m;
+    const wData = (typeof weekData !== 'undefined') && weekData[weekId];
+    if (!wData) return;
+    const mData = wData.members && wData.members[member];
+    if (!mData) return;
+    if (type === 'plan') {
+      const i = parseInt(key, 10);
+      const plan = (mData.plans || [])[i];
+      if (!plan) return;
+      if (!task.title_en || task.title_en !== plan.en) { task.title_en = plan.en; changed = true; }
+      if (!task.source_en) { task.source_en = wData.label.en; changed = true; }
+    } else if (type === 'client') {
+      const client = (mData.clients || []).find(c => c.name === key);
+      if (!client) return;
+      const titleEn = `[${client.name}] ${client.actionEn}`;
+      if (!task.title_en || task.title_en !== titleEn) { task.title_en = titleEn; changed = true; }
+      const srcEn = `${wData.label.en} · ${client.market}`;
+      if (!task.source_en || task.source_en !== srcEn) { task.source_en = srcEn; changed = true; }
+    }
+  });
+  if (changed) saveTasks(all);
+}
+
 function initTaskPanels() {
+  backfillWeeklyTaskEn();
   TASK_TABS.forEach(tab => renderTaskPanel(tab));
 }
 
@@ -6188,19 +6222,22 @@ function autoExtractTasks(tab, silent) {
     const weekId   = document.getElementById('weekSelect')?.value || 'w13';
     const wData    = weekData[weekId];
     if (!wData) return;
-    const weekLabel = wData.label.zh;
+    const weekLabelZh = wData.label.zh;
+    const weekLabelEn = wData.label.en;
 
     Object.entries(wData.members).forEach(([member, mData]) => {
       const name = MEMBER_NAMES[member] || member;
       // Plans → 待辦
       (mData.plans || []).forEach((plan, i) => {
         extracted.push({
-          title:         zh ? plan.zh : plan.en,
+          title:         plan.zh,
+          title_en:      plan.en,
           assignee:      name,
           dueDate:       '',
           status:        'todo',
-          source:        `${weekLabel}`,
-          note:          `來源：${weekLabel} ${name} 週報 — Action Plan\n\n原文：${plan.zh}`,
+          source:        weekLabelZh,
+          source_en:     weekLabelEn,
+          note:          `來源：${weekLabelZh} ${name} 週報 — Action Plan\n\n原文：${plan.zh}`,
           autoExtracted: true,
           sourceId:      `${weekId}-${member}-plan-${i}`
         });
@@ -6208,12 +6245,14 @@ function autoExtractTasks(tab, silent) {
       // Clients with pending action (orange = in negotiation / need follow-up)
       (mData.clients || []).filter(c => c.tagClass === 'tag-orange').forEach(client => {
         extracted.push({
-          title:         `【${client.name}】${zh ? client.actionZh : client.actionEn}`,
+          title:         `【${client.name}】${client.actionZh}`,
+          title_en:      `[${client.name}] ${client.actionEn}`,
           assignee:      name,
           dueDate:       '',
           status:        'doing',
-          source:        `${weekLabel} · ${client.market}`,
-          note:          `來源：${weekLabel} ${name} 週報 — 客戶追蹤\n客戶：${client.name}（${client.market}）\n狀態：${client.statusZh}\nAction：${client.actionZh}`,
+          source:        `${weekLabelZh} · ${client.market}`,
+          source_en:     `${weekLabelEn} · ${client.market}`,
+          note:          `來源：${weekLabelZh} ${name} 週報 — 客戶追蹤\n客戶：${client.name}（${client.market}）\n狀態：${client.statusZh}\nAction：${client.actionZh}`,
           autoExtracted: true,
           sourceId:      `${weekId}-${member}-client-${client.name}`
         });
@@ -6230,18 +6269,20 @@ function autoExtractTasks(tab, silent) {
     const mKey = monthlyData[monthId] ? monthId : Object.keys(monthlyData)[0];
     const mData = monthlyData[mKey];
     if (!mData) return;
-    const label = mData.label.zh;
-
+    const labelZh = mData.label.zh;
+    const labelEn = mData.label.en;
     (mData.keyHighlights?.watchout || []).forEach((item, i) => {
       const cleanZh = item.zh.replace(/^⚠️\s*/, '');
       const cleanEn = item.en.replace(/^⚠️\s*/, '');
       extracted.push({
-        title:         zh ? cleanZh : cleanEn,
+        title:         cleanZh,
+        title_en:      cleanEn,
         assignee:      '',
         dueDate:       '',
         status:        'todo',
-        source:        label,
-        note:          `來源：${label} 月報 — 注意事項\n\n原文：${item.zh}`,
+        source:        labelZh,
+        source_en:     labelEn,
+        note:          `來源：${labelZh} 月報 — 注意事項\n\n原文：${item.zh}`,
         autoExtracted: true,
         sourceId:      `monthly-${mKey}-watchout-${i}`
       });
@@ -6250,11 +6291,13 @@ function autoExtractTasks(tab, silent) {
     (mData.kpi || []).filter(k => k.status === 'red' || k.status === 'yellow').forEach(k => {
       extracted.push({
         title:         `KPI 追蹤：${k.regionZh} (${k.achievement}%)`,
+        title_en:      `KPI Tracking: ${k.regionEn || k.regionZh} (${k.achievement}%)`,
         assignee:      MEMBER_NAMES[k.member] || k.member,
         dueDate:       '',
         status:        k.status === 'red' ? 'todo' : 'doing',
-        source:        label,
-        note:          `來源：${label} 月報 — KPI 達成率追蹤\n區域：${k.regionZh}\n達成率：${k.achievement}%\n狀態：${k.status === 'red' ? '未達標' : '接近達標'}`,
+        source:        labelZh,
+        source_en:     labelEn,
+        note:          `來源：${labelZh} 月報 — KPI 達成率追蹤\n區域：${k.regionZh}\n達成率：${k.achievement}%\n狀態：${k.status === 'red' ? '未達標' : '接近達標'}`,
         autoExtracted: true,
         sourceId:      `monthly-${mKey}-kpi-${k.regionZh}`
       });
