@@ -4973,6 +4973,280 @@ function switchWeek(val) {
 }
 
 // ══════════════════════════════════════
+//  MONTHLY BULLET TRANSLATIONS
+// ══════════════════════════════════════
+const MONTHLY_BULLET_EN = {
+  // Feb LATAM BD
+  'TaDa Jackpot Campaign 啟動：覆蓋 NQ_Seamless、9F_Brazil、BrazinoMX': 'TaDa Jackpot Campaign Launched: Covering NQ_Seamless, 9F_Brazil, BrazinoMX',
+  'Mexico TTB 追趕 Brazil，成長動能最強勁': 'Mexico TTB catching up Brazil, strongest growth momentum',
+  '多平台錦標賽（Tournaments）計畫推進': 'Multi-platform Tournament plan advancing',
+  'Fortune Garuda 500 Pre-release 準備中（NQ_Afun MX）': 'Fortune Garuda 500 Pre-release in preparation (NQ_Afun MX)',
+  'ZeroUm / BETVIP 新版位確認（via Inplaysoft / Cactus_Brazil）': 'ZeroUm / BETVIP new slot confirmation (via Inplaysoft / Cactus_Brazil)',
+  '主動向 WG_Seamless 爭取 Casino 版位': 'Proactively secure Casino slot from WG_Seamless',
+  '確認各平台 3月促銷活動落地情況': 'Confirm March promotion deployment across all platforms',
+  'Mexico Top 25 客戶名單重新排序，制定拜訪計畫': 'Reorder Mexico Top 25 client list, build visit plan',
+  // Feb LATAM AM
+  '巴西前 10 大客戶 TTB 健康度追蹤：NQ_Seamless、9F_Brazil、Betnacional': 'Brazil Top 10 client TTB health tracking: NQ_Seamless, 9F_Brazil, Betnacional',
+  'Mexico 客戶 Afun、BrazinoMX 關係深化，溝通群組已建立': 'Mexico clients Afun, BrazinoMX relationship deepened, communication groups established',
+  'Jackpot Campaign 執行後客戶回饋收集': 'Post-Jackpot Campaign client feedback collection',
+  '推動主要客戶加入 3月錦標賽計畫，提高客戶黏著度': 'Drive key clients to join March tournament plan, increase engagement',
+  '每週主動更新 BR / MX 重點客戶績效數據': 'Proactively update BR/MX key client performance data weekly',
+  '配合 BD 新版位申請，協助準備客戶素材包': 'Coordinate with BD on new slot applications, help prepare client asset kits',
+  // Feb LATAM MKT
+  'TaDa Jackpot Campaign Banner 素材：BR + MX 雙語版本產出': 'TaDa Jackpot Campaign Banner assets: BR + MX bilingual versions produced',
+  'Fortune Garuda 500 Pre-release 宣傳包設計完成': 'Fortune Garuda 500 Pre-release promotional kit design completed',
+  '錦標賽 EDM 模板製作（巴西葡語版）': 'Tournament EDM template created (Brazilian Portuguese)',
+  'World Cup 2026 長期行銷計畫啟動，素材預備': 'World Cup 2026 long-term marketing plan launched, assets prepared',
+  'MX 市場在地化素材（西語）製作與 A/B 測試': 'MX market localized assets (Spanish) production and A/B testing',
+  '錦標賽社群貼文排程（BR + MX 同步曝光）': 'Tournament social posts scheduled (BR + MX synchronized)',
+  // Feb Africa BD
+  'BongoBongo（Qtech 平台）TTB +121%，超預期成長': 'BongoBongo (Qtech platform) TTB +121%, exceeded expectations',
+  'X15-Koral Play（3/10 Pre-release）準備就緒': 'X15-Koral Play (3/10 Pre-release) ready',
+  'Fruit Diamond for Betpawa 推進中': 'Fruit Diamond for Betpawa in progress',
+  '開發 Betway South Africa 專屬 Branded Aviator': 'Developing Betway South Africa exclusive Branded Aviator',
+  '重點推進 SA 三大客戶：World Sports Betting、SportyBet、Hollywood Bet': 'Focus on SA top 3 clients: World Sports Betting, SportyBet, Hollywood Bet',
+  'AM 報告納入 Key Recommended Products 清單': 'Include Key Recommended Products list in AM reports',
+  '媒體在地語言適配（Zulu、Pidgin）': 'Media localization (Zulu, Pidgin)',
+  // Feb Africa AM
+  'BongoBongo 和 WAJE 帳號持續監控，TTB 健康度良好': 'BongoBongo and WAJE accounts continuously monitored, TTB health good',
+  'Betpawa 定期促銷溝通已建立固定節奏': 'Betpawa regular promotion communication cadence established',
+  '建立 Africa 各客戶「Key Recommended Products」清單框架': 'Build Africa clients "Key Recommended Products" list framework',
+  '每份 AM 報告強制附上 Key Recommended Products 清單': 'Mandatory Key Recommended Products list in every AM report',
+  '加強與 SA 三大新客戶的關係建立，提供入門支援包': 'Strengthen relationships with SA top 3 new clients, provide onboarding kit',
+  '追蹤 X15-Koral Play Pre-release 上線後數據': 'Track X15-Koral Play post-Pre-release data',
+  // Feb Africa MKT
+  'X15-Koral Play Pre-release 素材（英語 + Zulu 版）': 'X15-Koral Play Pre-release assets (English + Zulu)',
+  'BongoBongo 獨家錦標賽視覺設計完成': 'BongoBongo exclusive tournament visual design completed',
+  'Betway SA Branded Aviator 品牌概念稿提案': 'Betway SA Branded Aviator brand concept proposal',
+  '非洲各市場語言本地化（Zulu、Pidgin、法語西非）': 'Africa market language localization (Zulu, Pidgin, West African French)',
+  'Fruit Diamond 視覺素材製作並提前送客戶預覽': 'Fruit Diamond visual assets produced and sent to client for preview',
+  'SA 市場品牌識別度調研，了解競品曝光策略': 'SA market brand awareness research, understand competitor exposure strategies',
+  // Feb EU BD
+  'Italy：推送更多 ADM 認證遊戲至 StarCasino、Admiral、Sisal': 'Italy: Push more ADM certified games to StarCasino, Admiral, Sisal',
+  'Kaizen Romania：22 款遊戲已 Live': 'Kaizen Romania: 22 games live',
+  'Betano 目標 3/18 上線（Portugal）': 'Betano target 3/18 go-live (Portugal)',
+  'NL：711 合約洽談中；Spain：Casino 777 第二批遊戲': 'NL: 711 contract negotiation ongoing; Spain: Casino 777 second batch games',
+  'Italy：接洽 Lottomatica 和 Goldbet；PokerStars EUR 幣別修正': 'Italy: Contact Lottomatica and Goldbet; PokerStars EUR currency fix',
+  '推進 Don.ro 和 Relax 客戶': 'Advance Don.ro and Relax clients',
+  'Spain：推進 Luckia、Casino Barcelona': 'Spain: Advance Luckia, Casino Barcelona',
+  'NL：追蹤 Toto Casino 測試、Hommerson QA': 'NL: Track Toto Casino testing, Hommerson QA',
+  // Feb EU AM
+  'Kaizen Romania 22 款遊戲上線後效能追蹤報告完成': 'Kaizen Romania 22 games post-launch performance tracking report completed',
+  'StarCasino Italy 定期促銷計畫確認': 'StarCasino Italy regular promotion plan confirmed',
+  'Spain Casino 777 第一批遊戲表現數據分析': 'Spain Casino 777 first batch game performance data analysis',
+  'Betano 上線後立即建立數據追蹤儀表板': 'Build data tracking dashboard immediately after Betano launch',
+  'Italy 三大客戶月度績效報告標準化': 'Standardize Italy top 3 clients monthly performance report',
+  '推動客戶增加推薦遊戲展示版位': 'Drive clients to add recommended game display slots',
+  // Feb EU MKT
+  'Italy ADM 認證遊戲 Banner 義大利語版完成': 'Italy ADM certified games Banner (Italian version) completed',
+  'Romania：Kaizen 遊戲上線促銷素材已交付': 'Romania: Kaizen game launch promotion assets delivered',
+  'Spain Casino 777 第二批遊戲宣傳包製作': 'Spain Casino 777 second batch game promotional kit produced',
+  'Betano PT 上線慶祝活動素材（葡語）': 'Betano PT launch celebration assets (Portuguese)',
+  'NL 市場遊戲本地化（荷語），提升識別度': 'NL market game localization (Dutch), improve recognition',
+  'EU 各市場合規素材庫建立（ADM / AGCO / KSA 分類）': 'EU market compliance asset library built (ADM / AGCO / KSA categories)',
+  // Feb UK BD
+  'Belgium：Napoleon / Circus / Starcasino / Blitz 已上線': 'Belgium: Napoleon / Circus / Starcasino / Blitz are live',
+  'UK Rank Group 推動正式上線': 'UK Rank Group pushed for official go-live',
+  'My777bet（Softswiss）群組建立': 'My777bet (Softswiss) group established',
+  'Flutter 磋商（釣魚遊戲優先，老虎機明年）': 'Flutter negotiation (fishing games first, slots next year)',
+  'Belgium 剩餘客戶推進：Casino777、Unibet、bwin、betFIRST': 'Belgium remaining clients: Casino777, Unibet, bwin, betFIRST',
+  'Rainbet / Megasino / Metaspin 促銷推進': 'Rainbet / Megasino / Metaspin promotion advancement',
+  'Roobet / Soft2Bet 探索合作機會': 'Explore partnership opportunities with Roobet / Soft2Bet',
+  // Feb UK AM
+  'Belgium 已上線客戶（Napoleon、Circus 等）TTB 追蹤建立': 'Belgium live clients (Napoleon, Circus, etc.) TTB tracking established',
+  'My777bet 帳號開通並進行首次數據監控': 'My777bet account activated with first data monitoring',
+  'UK 市場客戶合規遊戲版位確認（UKGC 規範）': 'UK market client compliant game slots confirmed (UKGC standards)',
+  'Belgium 四大客戶上線後立即建立健康度追蹤': 'Build health tracking immediately after Belgium top 4 clients go live',
+  'UK 市場 UKGC 合規遊戲推薦清單更新': 'UK market UKGC compliant game recommendation list updated',
+  '協助 BD 準備 Non-reg 客戶促銷素材申請': 'Help BD prepare Non-reg client promotion asset applications',
+  // Feb UK MKT
+  'Belgium 客戶上線慶祝促銷素材（法語 / 荷語雙版本）': 'Belgium client launch celebration assets (French/Dutch bilingual)',
+  'UK 釣魚遊戲主題行銷素材設計完成': 'UK fishing game theme marketing assets design completed',
+  'Non-reg 客戶錦標賽 Banner 製作': 'Non-reg client tournament Banner produced',
+  'Belgium 剩餘四大客戶預備上線素材包提前準備': 'Belgium remaining 4 clients pre-launch asset kits prepared in advance',
+  'UK 市場遊戲本地化需求調研（英語語感偏好）': 'UK market game localization needs research (English tone preferences)',
+  'Non-reg EU 促銷季節性行銷計畫制定': 'Non-reg EU promotion seasonal marketing plan developed',
+  // Feb CIS BD
+  '1xBet：確認本地錦標賽 + Provider Page（第 3 版位）計畫': '1xBet: Confirm local tournament + Provider Page (3rd slot) plan',
+  '發送 Spec Document（計劃 2026 年 4 款品牌遊戲）': 'Send Spec Document (planned 4 branded games in 2026)',
+  'GR8：長期全組合促銷（2–4月）確認': 'GR8: Long-term full-portfolio promotion (Feb–Apr) confirmed',
+  '3月主打遊戲：3 Lightning Blitz': 'March featured game: 3 Lightning Blitz',
+  'Digitain/Pinco：Fortune Gems 2 品牌遊戲計畫推進': 'Digitain/Pinco: Fortune Gems 2 branded game plan advancing',
+  'Softswiss：Vavada Pre-release + CIS 擴大促銷': 'Softswiss: Vavada Pre-release + CIS expanded promotions',
+  'Azino Group 測試活動執行': 'Azino Group test campaign execution',
+  'Ukraine：Slots City / InfinGame / 1GameHub 持續推進': 'Ukraine: Slots City / InfinGame / 1GameHub continuously advancing',
+  // Feb CIS AM
+  '1xBet 帳號關係強化，日均 TTB 持續監控': '1xBet account relationship strengthened, daily TTB continuously monitored',
+  'GR8 長期促銷計畫客戶側確認完成': 'GR8 long-term promotion plan client-side confirmation completed',
+  'Ukraine 三個帳號健康度報告輸出': 'Ukraine 3 accounts health report output',
+  '1xBet 6/7 月促銷申請前置文件準備協助': 'Help prepare 1xBet Jun/Jul promotion application advance documents',
+  'Softswiss 旗下帳號全面整合追蹤': 'Comprehensive integrated tracking for all Softswiss accounts',
+  'CIS 各帳號月度標準報告輸出頻率提升至雙週': 'Increase CIS accounts monthly standard report output to bi-weekly',
+  // Feb CIS MKT
+  '3 Lightning Blitz 3月主推視覺素材完成': '3 Lightning Blitz March featured visual assets completed',
+  '1xBet Provider Page 設計稿提案送出': '1xBet Provider Page design proposal submitted',
+  'GR8 長期促銷 Banner 系列製作': 'GR8 long-term promotion Banner series produced',
+  'Fortune Gems 2 品牌遊戲視覺識別設計': 'Fortune Gems 2 branded game visual identity design',
+  'CIS 市場語言本地化（俄語 / 哈薩克語）': 'CIS market language localization (Russian / Kazakh)',
+  'Vavada Pre-release 專屬素材套件製作': 'Vavada Pre-release exclusive asset kit produced',
+  // Feb WA BD
+  'Betconstruct：試行 Bonus Campaign 穩定 TTB': 'Betconstruct: Trial Bonus Campaign to stabilize TTB',
+  'Pronet Gaming：網路錦標賽持續 + 4月 Pre-release 計畫': 'Pronet Gaming: Network tournament ongoing + April Pre-release plan',
+  'Tapking：全平台網路錦標賽推進': 'Tapking: Full-platform network tournament advancing',
+  'GR8 Turkey：3月遊戲版位和錦標賽全準備': 'GR8 Turkey: March game slots and tournament fully prepared',
+  '齋戒月（3/15）後：立即準備新促銷抓住反彈商機': 'Post-Ramadan (3/15): Immediately prepare new promotions to capture rebound',
+  'Turkey：Everymatrix Hitbet 促銷洽談；Bison Fortune Coins 主推': 'Turkey: Everymatrix Hitbet promotion negotiation; Bison Fortune Coins featured',
+  '新客戶目標：Bets10 Group；UAE 市場拓展規劃啟動': 'New client target: Bets10 Group; UAE market expansion planning started',
+  // Feb WA AM
+  '齋戒月期間 WA 客戶 TTB 波動監控（–30% 為正常範圍）': 'Ramadan period WA client TTB fluctuation monitoring (–30% normal range)',
+  'Betconstruct / Pronet / Tapking 三大帳號定期回報': 'Betconstruct / Pronet / Tapking top 3 accounts regular reporting',
+  'Turkey GR8 促銷執行後效能評估': 'Turkey GR8 post-promotion performance evaluation',
+  '齋戒月後（3/16起）立即切換至積極促銷模式追蹤': 'Post-Ramadan (from 3/16): Switch immediately to aggressive promotion tracking',
+  'Bets10 新帳號建立後快速入門 onboarding': 'Bets10 new account quick onboarding after setup',
+  'WA 市場季節性波動標準化報告格式建立': 'WA market seasonal fluctuation standardized report format established',
+  // Feb WA MKT
+  'Bison Fortune Coins Turkey 市場主推素材（土耳其語）': 'Bison Fortune Coins Turkey market featured assets (Turkish)',
+  'Betconstruct Bonus Campaign Banner 製作': 'Betconstruct Bonus Campaign Banner produced',
+  '齋戒月主題素材設計（適合穆斯林文化）': 'Ramadan theme assets (culturally appropriate for Muslim community)',
+  '齋戒月後促銷素材：「Ramadan 後慶祝」主題系列': 'Post-Ramadan promotion assets: "Post-Ramadan Celebration" theme series',
+  'Pronet 4月 Pre-release 宣傳素材預備': 'Pronet April Pre-release promotional assets prepared',
+  'UAE 市場文化調研（阿拉伯語素材規範）': 'UAE market cultural research (Arabic asset standards)',
+  // Mar LATAM BD
+  'TaDa Jackpot for BrazinoMX &amp; NQ_Afun（MX）持續推進': 'TaDa Jackpot for BrazinoMX & NQ_Afun (MX) continuously advancing',
+  '錦標賽：ZF310、ICECASSINO、9F_IJOGO、Betnacional（BR）、GROWE（Chile）': 'Tournaments: ZF310, ICECASSINO, 9F_IJOGO, Betnacional (BR), GROWE (Chile)',
+  'Pre-release：Betano、Superbet、BrazinoMX 三大平台確認': 'Pre-release: Betano, Superbet, BrazinoMX three platforms confirmed',
+  '⚠️ 巴西封鎖 27,000+ 違法域名，需使用 .bet.br 合規域名': '⚠️ Brazil blocks 27,000+ illegal domains, must use .bet.br compliant domains',
+  '接觸尚未進入的 Top 25 客戶：ZT001、Megaslot、Digitain_Seamless、Betmaster_Curacao': 'Contact unreach Top 25 clients: ZT001, Megaslot, Digitain_Seamless, Betmaster_Curacao',
+  'World Cup 長期促銷規劃正式啟動': 'World Cup long-term promotion planning officially launched',
+  'Mexico Pre-release 計畫（NQ_Afun 已確認）': 'Mexico Pre-release plan (NQ_Afun confirmed)',
+  // Mar LATAM AM
+  '3月錦標賽五大平台執行追蹤，KPI 達標率 92%': 'March tournament 5 platforms execution tracking, KPI attainment rate 92%',
+  'Betano、Superbet Pre-release 客戶素材及時交付': 'Betano, Superbet Pre-release client assets delivered on time',
+  '巴西合規域名問題協助客戶 migration（.bet.br）': 'Help clients with Brazil compliance domain migration (.bet.br)',
+  'Top 25 新客戶入門支援：標準 onboarding 流程執行': 'Top 25 new client onboarding support: standard process execution',
+  'World Cup 促銷期間 LATAM 客戶全面監控升級': 'LATAM client comprehensive monitoring upgrade during World Cup promotion',
+  'MX 帳號雙週 TTB 報告格式確認': 'MX account bi-weekly TTB report format confirmed',
+  // Mar LATAM MKT
+  'Pre-release 素材（Betano + Superbet + BrazinoMX）三套齊備': 'Pre-release assets (Betano + Superbet + BrazinoMX) three sets complete',
+  '錦標賽 Banner 系列（BR 葡語 + Chile 西語）按時交付': 'Tournament Banner series (BR Portuguese + Chile Spanish) delivered on time',
+  'World Cup 品牌方向初稿完成，待 CEO 審核': 'World Cup brand direction initial draft completed, pending CEO review',
+  'World Cup 2026 全球行銷主視覺確定，LATAM 版本衍生': 'World Cup 2026 global marketing hero visual confirmed, LATAM version derived',
+  'MX 市場：春季促銷（Semana Santa）特別素材': 'MX market: Spring promotion (Semana Santa) special assets',
+  'Chile GROWE 錦標賽系列素材（智利風格）': 'Chile GROWE tournament series assets (Chilean style)',
+  // Mar Africa BD
+  'TTB 3月目標 5.1B，策略從版位轉型主動促銷工具': 'TTB March target 5.1B, strategy shifts from slots to active promotion tools',
+  'Joker\'s Coin Unlimited Fortune / X15 Hot / Fruit Diamond 全面推出': "Joker's Coin Unlimited Fortune / X15 Hot / Fruit Diamond fully launched",
+  'Betway Recovery：Royal Shooter 獨家 Banner（待 10 Sparkling Crowns 監管核准）': 'Betway Recovery: Royal Shooter exclusive Banner (pending 10 Sparkling Crowns regulatory approval)',
+  'HWB 上線後立即監控 TTB 貢獻': 'Monitor TTB contribution immediately after HWB go-live',
+  '完成 PlayTsogo 和 Sunbet QA，4月正式上線': 'Complete PlayTsogo and Sunbet QA, official go-live in April',
+  '「每周最佳老虎機」常態計畫啟動': '"Weekly Best Slot" regular program launched',
+  'BongoBongo / WAJE 獨家錦標賽': 'BongoBongo / WAJE exclusive tournament',
+  '推進 BETIFY &amp; Netbet 商業談判': 'Advance BETIFY & Netbet business negotiations',
+  // Mar Africa AM
+  'TTB 5.1B 路徑監控：Betpawa + BongoBongo + WAJE 三大支柱': 'TTB 5.1B path monitoring: Betpawa + BongoBongo + WAJE three pillars',
+  'HWB 上線後 D+1 / D+7 / D+30 健康度追蹤報告啟動': 'HWB post-launch D+1 / D+7 / D+30 health tracking reports started',
+  'Joker\'s Coin 新遊戲推薦清單發送所有 Tier 1 客戶': "Joker's Coin new game recommendation list sent to all Tier 1 clients",
+  '「每周最佳老虎機」執行：每週推薦遊戲至全 Africa 客戶': '"Weekly Best Slot" execution: weekly game recommendations to all Africa clients',
+  'PlayTsogo + Sunbet 上線後快速 onboarding': 'PlayTsogo + Sunbet quick onboarding after go-live',
+  'Africa TTB 月度趨勢報告升級（含 YoY + MoM 比較）': 'Africa TTB monthly trend report upgraded (including YoY + MoM comparison)',
+  // Mar Africa MKT
+  'X15 Hot + Fruit Diamond 上線素材（英語 + Zulu + Pidgin）': 'X15 Hot + Fruit Diamond launch assets (English + Zulu + Pidgin)',
+  'Royal Shooter 獨家 Banner 設計完成，待監管核准': 'Royal Shooter exclusive Banner design completed, pending regulatory approval',
+  'BongoBongo 獨家錦標賽視覺更新版': 'BongoBongo exclusive tournament visual updated',
+  '「每周最佳老虎機」週次 Banner 模板設計（可快速換遊戲）': '"Weekly Best Slot" weekly banner template design (easy game swap)',
+  'PlayTsogo / Sunbet 上線慶祝素材（SA 英語風格）': 'PlayTsogo / Sunbet launch celebration assets (SA English style)',
+  'BETIFY 品牌素材初稿提案': 'BETIFY brand asset initial proposal',
+  // Mar EU BD
+  'Romania：Superbet 獨家錦標賽（€10K）+ Napoleon（€2K）': 'Romania: Superbet exclusive tournament (€10K) + Napoleon (€2K)',
+  'Greece：Novibet Coin of Lightning Pre-release（4/8）；Stoiximan：Money Pot Deluxe': 'Greece: Novibet Coin of Lightning Pre-release (4/8); Stoiximan: Money Pot Deluxe',
+  'Netherlands：Circus Coin of Lightning P2 版位（4/1–4/30）': 'Netherlands: Circus Coin of Lightning P2 slot (4/1–4/30)',
+  'Italy：StarCasino 品牌遊戲報告 ETA 4/15': 'Italy: StarCasino branded game report ETA 4/15',
+  'TTB 目標：0.9B → 1.0B（+12% MoM）': 'TTB target: 0.9B → 1.0B (+12% MoM)',
+  'OPAP：復活節遊戲促銷啟動': 'OPAP: Easter game promotion launched',
+  'Spain Casino 777：4月 Pre-release 計畫確認': 'Spain Casino 777: April Pre-release plan confirmed',
+  '⚽ World Cup 促銷：EU 各市場 6月計畫啟動準備': '⚽ World Cup promotion: EU market June plan preparation started',
+  // Mar EU AM
+  'Superbet RO 帳號健康度優良，錦標賽執行率 100%': 'Superbet RO account health excellent, tournament execution rate 100%',
+  'Stoiximan / OPAP 數據月報完成，GR 市場 TTB 穩定': 'Stoiximan / OPAP data monthly report completed, GR market TTB stable',
+  'NL Circus 帳號 P2 版位申請協助完成': 'NL Circus account P2 slot application assistance completed',
+  'Superbet 錦標賽執行後即時 KPI 回報（D+1）': 'Superbet post-tournament real-time KPI report (D+1)',
+  'Italy StarCasino 品牌遊戲 ETA 4/15 前追蹤到位': 'Italy StarCasino branded game tracked before ETA 4/15',
+  '復活節促銷期間 OPAP 客戶密集追蹤': 'Intensive OPAP client tracking during Easter promotion',
+  // Mar EU MKT
+  'Coin of Lightning 素材套件（GR + NL + ES 三語版）完成': 'Coin of Lightning asset kit (GR + NL + ES trilingual) completed',
+  'Superbet 錦標賽視覺（羅馬尼亞語）送出': 'Superbet tournament visual (Romanian) submitted',
+  'Money Pot Deluxe 宣傳包（希臘語）完成': 'Money Pot Deluxe promotional kit (Greek) completed',
+  '復活節主題素材（希臘語 / 羅馬尼亞語 / 義大利語）': 'Easter theme assets (Greek / Romanian / Italian)',
+  'World Cup EU 主視覺：各國語言版本分工啟動': 'World Cup EU hero visual: language version assignments started',
+  'Casino 777 ES Pre-release 素材套件製作': 'Casino 777 ES Pre-release asset kit produced',
+  // Mar UK BD
+  'GBP TTB +73.3%；Belgium +14.8%；Leon Unreg EU：4/2 正式上線': 'GBP TTB +73.3%; Belgium +14.8%; Leon Unreg EU: official go-live 4/2',
+  'Boyles（LNW）&amp; Bally\'s（LNW）configuration 推進': "Boyles (LNW) & Bally's (LNW) configuration advancing",
+  'Rank Group：9 個賭場配置，只有 1 家上線 → 全力推進': 'Rank Group: 9 casino configurations, only 1 live → full push',
+  '理解 UK 市場適合遊戲類型，制定 TOP UK 遊戲清單': 'Understand UK market suitable game types, build TOP UK games list',
+  '協助 AM 建立更多直接運營商溝通群組': 'Help AM build more direct operator communication groups',
+  'Betano Belgium：A+/B+ 評級但促銷冷淡，加強溝通': 'Betano Belgium: A+/B+ rated but promotion lukewarm, strengthen communication',
+  // Mar UK AM
+  'Leon Unreg EU 上線前 onboarding 素材準備完成': 'Leon Unreg EU pre-launch onboarding materials prepared',
+  'Belgium 整體帳號 TTB +14.8%，重點客戶深化關係': 'Belgium overall account TTB +14.8%, deepen key client relationships',
+  'UK 市場適合遊戲類型調研，提交 BD 初步洞察': 'UK market suitable game types research, submit preliminary insights to BD',
+  'Leon 上線後 D+7 快速健康度報告': 'Leon post-launch D+7 quick health report',
+  '建立 UK 直接運營商溝通群組（配合 BD 推進）': 'Build UK direct operator communication groups (coordinate with BD)',
+  'VideoSlots 第 2 版位確認後，促銷支援素材備齊': 'VideoSlots 2nd slot confirmed, promotion support assets ready',
+  // Mar UK MKT
+  'Leon 上線素材（英語，Non-reg EU 風格）完成': 'Leon launch assets (English, Non-reg EU style) completed',
+  'Belgium 月度促銷 Banner（法語 + 荷語）按時交付': 'Belgium monthly promotion Banner (French + Dutch) delivered on time',
+  'Betano Belgium 促銷提案概念稿製作': 'Betano Belgium promotion proposal concept produced',
+  'UK TOP 遊戲系列：英式風格視覺（配合 AM 洞察）': 'UK TOP Games series: British style visual (coordinated with AM insight)',
+  'VideoSlots 第 2 版位：新遊戲促銷素材': 'VideoSlots 2nd slot: new game promotion assets',
+  'Betano Belgium：強力促銷視覺（吸引 A+/B+ 評級客戶）': 'Betano Belgium: Strong promotion visual (targeting A+/B+ rated clients)',
+  // Mar CIS BD
+  '1xBet：2026 首個品牌遊戲計畫確認（全年目標 4 個）': '1xBet: 2026 first branded game plan confirmed (annual target 4)',
+  '1xBet_1xSlots 首個獨家錦標賽（4/16–4/20，€3,000）': '1xBet_1xSlots first exclusive tournament (4/16–4/20, €3,000)',
+  'Azinomobile：本地錦標賽（4/14–4/28）': 'Azinomobile: Local tournament (4/14–4/28)',
+  'GR8：長期組合促銷 + Free Spin 測試；Softswiss/RioBet：3/31 Pre-release': 'GR8: Long-term portfolio promotion + Free Spin test; Softswiss/RioBet: 3/31 Pre-release',
+  'Pinco：4月底前版位促銷 + 努力建立直接合約（繞過 Digitain 額外抽成）': 'Pinco: Slot promotion before end of April + work to establish direct contract (bypass Digitain commission)',
+  'SoftGamings：從 Top 60 → Top 20 目標': 'SoftGamings: Target Top 60 → Top 20',
+  '4月主打：Joker\'s Coin Unlimited Fortune；5月 Pre-release：3 Pot Panda': "April featured: Joker's Coin Unlimited Fortune; May Pre-release: 3 Pot Panda",
+  // Mar CIS AM
+  '1xBet TTB 月報：3月趨勢分析完成，提前送 BD': '1xBet TTB monthly report: March trend analysis completed, sent to BD early',
+  'GR8 Free Spin 測試數據收集，AM 輸出分析報告': 'GR8 Free Spin test data collected, AM outputs analysis report',
+  'RioBet / Softswiss Pre-release 執行全程協調': 'RioBet / Softswiss Pre-release full execution coordination',
+  '1xBet 品牌遊戲期間全程監控（D+1/D+7/D+30 報告）': '1xBet branded game full monitoring period (D+1/D+7/D+30 reports)',
+  'Joker\'s Coin 4月推廣期間 TTB 即時追蹤': "Joker's Coin April promotion period real-time TTB tracking",
+  'SoftGamings Top 20 路徑：AM 側監控指標設定': 'SoftGamings Top 20 path: AM-side monitoring metrics set',
+  // Mar CIS MKT
+  'Joker\'s Coin 4月主推視覺（俄語 + 哈薩克語）完成': "Joker's Coin April featured visual (Russian + Kazakh) completed",
+  '1xBet 首個品牌遊戲品牌方向稿制定': '1xBet first branded game brand direction developed',
+  'GR8 組合促銷 Banner 系列（3 款遊戲輪播格式）': 'GR8 portfolio promotion Banner series (3-game carousel format)',
+  '1xBet 品牌遊戲發布慶典素材（俄語 / 英語 / 哈薩克語）': '1xBet branded game launch celebration assets (Russian / English / Kazakh)',
+  '5月 3 Pot Panda Pre-release 素材前置準備': 'May 3 Pot Panda Pre-release assets pre-production',
+  'Tier 2 客戶入門素材庫（俄語標準版）建立': 'Tier 2 client onboarding asset library (Russian standard) established',
+  // Mar WA BD
+  'Pronet Gaming 成第一大客戶：目標日均 TTB 90M THB': 'Pronet Gaming becomes top client: target daily TTB 90M THB',
+  '計畫 3 個品牌遊戲 + 2 個 Pre-release（Pronet）': 'Plan 3 branded games + 2 Pre-releases (Pronet)',
+  'Betconstruct：全網路（500+ 網站）低成本錦標賽': 'Betconstruct: Full-network (500+ sites) low-cost tournament',
+  '⚠️ 伊朗戰局持續，效率 -50%；Tapking 預算調配至 Pronet': '⚠️ Iran conflict ongoing, efficiency -50%; Tapking budget reallocated to Pronet',
+  'Gamingtec：4月在所有運營商上線本地錦標賽': 'Gamingtec: Local tournament go-live on all operators in April',
+  '新客戶目標：Betarabia、Vegangester（土耳其大型聚合商）、Inntech': 'New client targets: Betarabia, Vegangester (large Turkish aggregator), Inntech',
+  '品牌遊戲：5月底在 Betebet/Piabet/Perabet 上線；4月主打：Clover Coins 4x4': 'Branded games: go-live on Betebet/Piabet/Perabet by end of May; April featured: Clover Coins 4x4',
+  // Mar WA AM
+  'Pronet 日均 TTB 監控升級至即時儀表板': 'Pronet daily TTB monitoring upgraded to real-time dashboard',
+  'Betconstruct 500+ 網站錦標賽執行追蹤': 'Betconstruct 500+ sites tournament execution tracking',
+  'Tapking 預算調整後 TTB 影響評估完成': 'Tapking post-budget-adjustment TTB impact assessment completed',
+  'Pronet 品牌遊戲上線後全程監控（日報）': 'Pronet branded game full monitoring after go-live (daily reports)',
+  'Inntech 整合完成後快速 onboarding': 'Inntech quick onboarding after integration complete',
+  '伊朗戰局影響：WA 整體 TTB 預警機制建立': 'Iran conflict impact: WA overall TTB early warning system established',
+  // Mar WA MKT
+  'Clover Coins 4x4 土耳其語主推素材完成': 'Clover Coins 4x4 Turkish featured assets completed',
+  'Betconstruct 全網路錦標賽 Banner 系列（英語 + 土語）': 'Betconstruct full-network tournament Banner series (English + Turkish)',
+  'Pronet 品牌遊戲品牌概念稿一輪送審': 'Pronet branded game brand concept first round review',
+  'Pronet 品牌遊戲視覺識別確定（5月前上線）': 'Pronet branded game visual identity confirmed (go-live before May)',
+  'Betebet / Piabet / Perabet 各自品牌遊戲素材套件': 'Betebet / Piabet / Perabet individual branded game asset kits',
+  'Reevo TRY 幣別合作品牌素材提案': 'Reevo TRY currency partnership brand asset proposal'
+};
+
+// ══════════════════════════════════════
 //  LANGUAGE TOGGLE
 // ══════════════════════════════════════
 function setLang(lang) {
@@ -5017,6 +5291,12 @@ function setLang(lang) {
   // 重新渲染月報 Action 追蹤台 + 出差報告任務追蹤
   initRmat();
   initTravelTrackers();
+  // Translate monthly bullet content
+  document.querySelectorAll('.monthly-bullet').forEach(el => {
+    if (!el.hasAttribute('data-orig')) el.setAttribute('data-orig', el.textContent.trim());
+    const orig = el.getAttribute('data-orig');
+    el.textContent = lang === 'en' ? (MONTHLY_BULLET_EN[orig] || orig) : orig;
+  });
 }
 
 // ══════════════════════════════════════
@@ -5139,92 +5419,92 @@ function switchMonthRpt(val) {
 // ═══ 月報 區域 Action 追蹤台 (rmat) ═══
 const MAT_DATA = {
   feb:[
-    {id:'fb1',region:'LATAM',rkey:'latam',grp:'bd',text:'跟進 WG_Seamless Casino 版位申請結果',owner:'Hector',date:'3月第1週',pri:'high'},
-    {id:'fb2',region:'LATAM',rkey:'latam',grp:'bd',text:'確認 ZeroUm 與 BETVIP 版位上線時程',owner:'Hector',date:'3/15',pri:'mid'},
-    {id:'fb3',region:'LATAM',rkey:'latam',grp:'bd',text:'彙整 MX 平台 3月促銷落地報告',owner:'Hector',date:'3/31',pri:'low'},
-    {id:'fb4',region:'Africa',rkey:'africa',grp:'bd',text:'Betway SA Branded Aviator 合約草案確認',owner:'Chu',date:'3月第2週',pri:'high'},
-    {id:'fb5',region:'Africa',rkey:'africa',grp:'bd',text:'X15-Koral Play 3/10 Pre-release 素材提交',owner:'Chu+MKT',date:'3/8',pri:'mid'},
-    {id:'fb6',region:'Africa',rkey:'africa',grp:'bd',text:'SA 三大客戶（WSB/SportyBet/HWB）初次拜訪',owner:'Chu',date:'3/20',pri:'low'},
-    {id:'fb7',region:'EU Reg.',rkey:'eu',grp:'bd',text:'確認 Betano PT 3/18 上線時程及所需文件',owner:'Nina',date:'3/10',pri:'high'},
-    {id:'fb8',region:'EU Reg.',rkey:'eu',grp:'bd',text:'Italy ADM 認證遊戲清單更新，送 StarCasino',owner:'Nina',date:'3/5',pri:'mid'},
-    {id:'fb9',region:'EU Reg.',rkey:'eu',grp:'bd',text:'NL：Toto Casino QA 進度追蹤回報',owner:'Nina',date:'3/15',pri:'low'},
-    {id:'fb10',region:'UK',rkey:'uk',grp:'bd',text:'Belgium 四大未上線客戶：確認 ETA + 障礙清單',owner:'Nina',date:'3/10',pri:'high'},
-    {id:'fb11',region:'UK',rkey:'uk',grp:'bd',text:'Rank Group UK 上線完整時程確認',owner:'Nina',date:'3/15',pri:'mid'},
-    {id:'fb12',region:'UK',rkey:'uk',grp:'bd',text:'Roobet 初步合作洽談 Email 發送',owner:'Nina',date:'3/20',pri:'low'},
-    {id:'fb13',region:'CIS',rkey:'cis',grp:'bd',text:'1xBet Spec Document 正式送出確認回執',owner:'Bryam',date:'3/5',pri:'high'},
-    {id:'fb14',region:'CIS',rkey:'cis',grp:'bd',text:'Vavada Pre-release 素材確認並排期',owner:'Bryam',date:'3/10',pri:'mid'},
-    {id:'fb15',region:'CIS',rkey:'cis',grp:'bd',text:'Azino Group 測試活動結果報告',owner:'Bryam',date:'3/31',pri:'low'},
-    {id:'fb16',region:'WA',rkey:'wa',grp:'bd',text:'齋戒月後反彈期促銷計畫（3/16啟動）',owner:'Bryam',date:'3/16',pri:'high'},
-    {id:'fb17',region:'WA',rkey:'wa',grp:'bd',text:'Bets10 Group 初次接觸並評估合作',owner:'Bryam',date:'3/25',pri:'low'},
-    {id:'fb18',region:'WA',rkey:'wa',grp:'bd',text:'UAE 市場拓展初步調研報告送 Ray',owner:'Bryam',date:'3/31',pri:'low'},
-    {id:'fb19',region:'LATAM',rkey:'latam',grp:'am',text:'建立 NQ_Seamless 3月錦標賽執行清單',owner:'AM Team',date:'3/5',pri:'low'},
-    {id:'fb20',region:'LATAM',rkey:'latam',grp:'am',text:'彙整 2月 Jackpot Campaign KPI 報告',owner:'AM Team',date:'3/10',pri:'low'},
-    {id:'fb21',region:'Africa',rkey:'africa',grp:'am',text:'為 Betpawa/BongoBongo/WAJE 各建立 Key Products 清單',owner:'AM Team',date:'3/10',pri:'high'},
-    {id:'fb22',region:'Africa',rkey:'africa',grp:'am',text:'準備 SA 新客戶入門素材包（Zulu/英語）',owner:'AM+MKT',date:'3/20',pri:'low'},
-    {id:'fb23',region:'EU Reg.',rkey:'eu',grp:'am',text:'Betano PT 上線後 D+7 數據報告',owner:'AM Team',date:'3/25',pri:'low'},
-    {id:'fb24',region:'EU Reg.',rkey:'eu',grp:'am',text:'Italy 月度績效報告格式統一，3月起執行',owner:'AM Team',date:'3/1',pri:'low'},
-    {id:'fb25',region:'UK',rkey:'uk',grp:'am',text:'Belgium 四大客戶上線後 D+7 報告範本準備',owner:'AM Team',date:'3/15',pri:'low'},
-    {id:'fb26',region:'UK',rkey:'uk',grp:'am',text:'UKGC 合規遊戲推薦清單更新版送 BD',owner:'AM Team',date:'3/20',pri:'low'},
-    {id:'fb27',region:'CIS',rkey:'cis',grp:'am',text:'1xBet 2月 TTB 月報整理並附 YoY 趨勢',owner:'AM Team',date:'3/10',pri:'low'},
-    {id:'fb28',region:'CIS',rkey:'cis',grp:'am',text:'建立 CIS 雙週報告排程（首份 3/15）',owner:'AM Team',date:'3/15',pri:'mid'},
-    {id:'fb29',region:'WA',rkey:'wa',grp:'am',text:'WA 齋戒月 TTB 趨勢圖（2月整月）送 BD',owner:'AM Team',date:'3/5',pri:'low'},
-    {id:'fb30',region:'WA',rkey:'wa',grp:'am',text:'齋戒月後反彈期各帳號監控計畫確認',owner:'AM Team',date:'3/14',pri:'low'},
-    {id:'fb31',region:'LATAM',rkey:'latam',grp:'mkt',text:'World Cup 行銷計畫草案送審',owner:'MKT Team',date:'3/15',pri:'high'},
-    {id:'fb32',region:'LATAM',rkey:'latam',grp:'mkt',text:'3月錦標賽 Banner（BR+MX）送交客戶',owner:'MKT Team',date:'3/5',pri:'mid'},
-    {id:'fb33',region:'Africa',rkey:'africa',grp:'mkt',text:'Zulu語版 Banner（X15-Koral Play）',owner:'MKT Team',date:'3/8',pri:'mid'},
-    {id:'fb34',region:'Africa',rkey:'africa',grp:'mkt',text:'Fruit Diamond 素材完成並送審',owner:'MKT Team',date:'3/18',pri:'low'},
-    {id:'fb35',region:'EU Reg.',rkey:'eu',grp:'mkt',text:'Betano PT 上線素材（葡語版）產出',owner:'MKT Team',date:'3/15',pri:'mid'},
-    {id:'fb36',region:'EU Reg.',rkey:'eu',grp:'mkt',text:'EU 合規素材庫分類建立完成',owner:'MKT Team',date:'3/31',pri:'low'},
-    {id:'fb37',region:'UK',rkey:'uk',grp:'mkt',text:'Belgium 剩餘客戶上線素材包（法/荷語）完成',owner:'MKT Team',date:'3/10',pri:'low'},
-    {id:'fb38',region:'UK',rkey:'uk',grp:'mkt',text:'Non-reg EU 促銷計畫 Q1 回顧與 Q2 提案',owner:'MKT Team',date:'3/31',pri:'low'},
-    {id:'fb39',region:'CIS',rkey:'cis',grp:'mkt',text:'Fortune Gems 2 品牌遊戲概念稿送 BD 審核',owner:'MKT Team',date:'3/15',pri:'mid'},
-    {id:'fb40',region:'CIS',rkey:'cis',grp:'mkt',text:'Vavada 素材套件（俄語）完成並送客戶',owner:'MKT Team',date:'3/20',pri:'low'},
-    {id:'fb41',region:'WA',rkey:'wa',grp:'mkt',text:'齋戒月後系列素材（土耳其語+阿語）送審',owner:'MKT Team',date:'3/14',pri:'high'},
-    {id:'fb42',region:'WA',rkey:'wa',grp:'mkt',text:'Pronet 4月 Pre-release 素材包完成',owner:'MKT Team',date:'3/25',pri:'low'}
+    {id:'fb1',region:'LATAM',rkey:'latam',grp:'bd',text:'跟進 WG_Seamless Casino 版位申請結果',text_en:'Follow up on WG_Seamless Casino slot application result',owner:'Hector',date:'3月第1週',pri:'high'},
+    {id:'fb2',region:'LATAM',rkey:'latam',grp:'bd',text:'確認 ZeroUm 與 BETVIP 版位上線時程',text_en:'Confirm ZeroUm and BETVIP slot launch timeline',owner:'Hector',date:'3/15',pri:'mid'},
+    {id:'fb3',region:'LATAM',rkey:'latam',grp:'bd',text:'彙整 MX 平台 3月促銷落地報告',text_en:'Compile MX platform March promotion deployment report',owner:'Hector',date:'3/31',pri:'low'},
+    {id:'fb4',region:'Africa',rkey:'africa',grp:'bd',text:'Betway SA Branded Aviator 合約草案確認',text_en:'Confirm Betway SA Branded Aviator contract draft',owner:'Chu',date:'3月第2週',pri:'high'},
+    {id:'fb5',region:'Africa',rkey:'africa',grp:'bd',text:'X15-Koral Play 3/10 Pre-release 素材提交',text_en:'Submit X15-Koral Play 3/10 Pre-release assets',owner:'Chu+MKT',date:'3/8',pri:'mid'},
+    {id:'fb6',region:'Africa',rkey:'africa',grp:'bd',text:'SA 三大客戶（WSB/SportyBet/HWB）初次拜訪',text_en:'First visit to SA top 3 clients (WSB/SportyBet/HWB)',owner:'Chu',date:'3/20',pri:'low'},
+    {id:'fb7',region:'EU Reg.',rkey:'eu',grp:'bd',text:'確認 Betano PT 3/18 上線時程及所需文件',text_en:'Confirm Betano PT 3/18 go-live timeline and required docs',owner:'Nina',date:'3/10',pri:'high'},
+    {id:'fb8',region:'EU Reg.',rkey:'eu',grp:'bd',text:'Italy ADM 認證遊戲清單更新，送 StarCasino',text_en:'Update Italy ADM certified games list, send to StarCasino',owner:'Nina',date:'3/5',pri:'mid'},
+    {id:'fb9',region:'EU Reg.',rkey:'eu',grp:'bd',text:'NL：Toto Casino QA 進度追蹤回報',text_en:'NL: Track and report Toto Casino QA progress',owner:'Nina',date:'3/15',pri:'low'},
+    {id:'fb10',region:'UK',rkey:'uk',grp:'bd',text:'Belgium 四大未上線客戶：確認 ETA + 障礙清單',text_en:'Belgium 4 unlaunched clients: confirm ETA + blockers list',owner:'Nina',date:'3/10',pri:'high'},
+    {id:'fb11',region:'UK',rkey:'uk',grp:'bd',text:'Rank Group UK 上線完整時程確認',text_en:'Confirm Rank Group UK full launch timeline',owner:'Nina',date:'3/15',pri:'mid'},
+    {id:'fb12',region:'UK',rkey:'uk',grp:'bd',text:'Roobet 初步合作洽談 Email 發送',text_en:'Send Roobet initial partnership inquiry email',owner:'Nina',date:'3/20',pri:'low'},
+    {id:'fb13',region:'CIS',rkey:'cis',grp:'bd',text:'1xBet Spec Document 正式送出確認回執',text_en:'Confirm 1xBet Spec Document official submission receipt',owner:'Bryam',date:'3/5',pri:'high'},
+    {id:'fb14',region:'CIS',rkey:'cis',grp:'bd',text:'Vavada Pre-release 素材確認並排期',text_en:'Confirm Vavada Pre-release assets and schedule',owner:'Bryam',date:'3/10',pri:'mid'},
+    {id:'fb15',region:'CIS',rkey:'cis',grp:'bd',text:'Azino Group 測試活動結果報告',text_en:'Azino Group test campaign results report',owner:'Bryam',date:'3/31',pri:'low'},
+    {id:'fb16',region:'WA',rkey:'wa',grp:'bd',text:'齋戒月後反彈期促銷計畫（3/16啟動）',text_en:'Post-Ramadan rebound promotion plan (launch 3/16)',owner:'Bryam',date:'3/16',pri:'high'},
+    {id:'fb17',region:'WA',rkey:'wa',grp:'bd',text:'Bets10 Group 初次接觸並評估合作',text_en:'Initial contact with Bets10 Group and evaluate partnership',owner:'Bryam',date:'3/25',pri:'low'},
+    {id:'fb18',region:'WA',rkey:'wa',grp:'bd',text:'UAE 市場拓展初步調研報告送 Ray',text_en:'UAE market expansion preliminary research report to Ray',owner:'Bryam',date:'3/31',pri:'low'},
+    {id:'fb19',region:'LATAM',rkey:'latam',grp:'am',text:'建立 NQ_Seamless 3月錦標賽執行清單',text_en:'Build NQ_Seamless March tournament execution checklist',owner:'AM Team',date:'3/5',pri:'low'},
+    {id:'fb20',region:'LATAM',rkey:'latam',grp:'am',text:'彙整 2月 Jackpot Campaign KPI 報告',text_en:'Compile Feb Jackpot Campaign KPI report',owner:'AM Team',date:'3/10',pri:'low'},
+    {id:'fb21',region:'Africa',rkey:'africa',grp:'am',text:'為 Betpawa/BongoBongo/WAJE 各建立 Key Products 清單',text_en:'Build Key Products list for Betpawa/BongoBongo/WAJE',owner:'AM Team',date:'3/10',pri:'high'},
+    {id:'fb22',region:'Africa',rkey:'africa',grp:'am',text:'準備 SA 新客戶入門素材包（Zulu/英語）',text_en:'Prepare SA new client onboarding kit (Zulu/English)',owner:'AM+MKT',date:'3/20',pri:'low'},
+    {id:'fb23',region:'EU Reg.',rkey:'eu',grp:'am',text:'Betano PT 上線後 D+7 數據報告',text_en:'Betano PT post-launch D+7 data report',owner:'AM Team',date:'3/25',pri:'low'},
+    {id:'fb24',region:'EU Reg.',rkey:'eu',grp:'am',text:'Italy 月度績效報告格式統一，3月起執行',text_en:'Standardize Italy monthly performance report format from March',owner:'AM Team',date:'3/1',pri:'low'},
+    {id:'fb25',region:'UK',rkey:'uk',grp:'am',text:'Belgium 四大客戶上線後 D+7 報告範本準備',text_en:'Prepare Belgium 4-client post-launch D+7 report template',owner:'AM Team',date:'3/15',pri:'low'},
+    {id:'fb26',region:'UK',rkey:'uk',grp:'am',text:'UKGC 合規遊戲推薦清單更新版送 BD',text_en:'Send updated UKGC compliant game recommendations to BD',owner:'AM Team',date:'3/20',pri:'low'},
+    {id:'fb27',region:'CIS',rkey:'cis',grp:'am',text:'1xBet 2月 TTB 月報整理並附 YoY 趨勢',text_en:'Compile 1xBet Feb TTB monthly report with YoY trend',owner:'AM Team',date:'3/10',pri:'low'},
+    {id:'fb28',region:'CIS',rkey:'cis',grp:'am',text:'建立 CIS 雙週報告排程（首份 3/15）',text_en:'Set up CIS bi-weekly report schedule (first report 3/15)',owner:'AM Team',date:'3/15',pri:'mid'},
+    {id:'fb29',region:'WA',rkey:'wa',grp:'am',text:'WA 齋戒月 TTB 趨勢圖（2月整月）送 BD',text_en:'Send WA Ramadan TTB trend chart (full February) to BD',owner:'AM Team',date:'3/5',pri:'low'},
+    {id:'fb30',region:'WA',rkey:'wa',grp:'am',text:'齋戒月後反彈期各帳號監控計畫確認',text_en:'Confirm post-Ramadan rebound monitoring plan for all accounts',owner:'AM Team',date:'3/14',pri:'low'},
+    {id:'fb31',region:'LATAM',rkey:'latam',grp:'mkt',text:'World Cup 行銷計畫草案送審',text_en:'Submit World Cup marketing plan draft for review',owner:'MKT Team',date:'3/15',pri:'high'},
+    {id:'fb32',region:'LATAM',rkey:'latam',grp:'mkt',text:'3月錦標賽 Banner（BR+MX）送交客戶',text_en:'Deliver March tournament banners (BR+MX) to clients',owner:'MKT Team',date:'3/5',pri:'mid'},
+    {id:'fb33',region:'Africa',rkey:'africa',grp:'mkt',text:'Zulu語版 Banner（X15-Koral Play）',text_en:'Zulu-language banner for X15-Koral Play',owner:'MKT Team',date:'3/8',pri:'mid'},
+    {id:'fb34',region:'Africa',rkey:'africa',grp:'mkt',text:'Fruit Diamond 素材完成並送審',text_en:'Complete Fruit Diamond assets and submit for review',owner:'MKT Team',date:'3/18',pri:'low'},
+    {id:'fb35',region:'EU Reg.',rkey:'eu',grp:'mkt',text:'Betano PT 上線素材（葡語版）產出',text_en:'Produce Betano PT launch assets (Portuguese)',owner:'MKT Team',date:'3/15',pri:'mid'},
+    {id:'fb36',region:'EU Reg.',rkey:'eu',grp:'mkt',text:'EU 合規素材庫分類建立完成',text_en:'Complete EU compliance asset library categorization',owner:'MKT Team',date:'3/31',pri:'low'},
+    {id:'fb37',region:'UK',rkey:'uk',grp:'mkt',text:'Belgium 剩餘客戶上線素材包（法/荷語）完成',text_en:'Complete Belgium remaining client launch kits (FR/NL)',owner:'MKT Team',date:'3/10',pri:'low'},
+    {id:'fb38',region:'UK',rkey:'uk',grp:'mkt',text:'Non-reg EU 促銷計畫 Q1 回顧與 Q2 提案',text_en:'Non-reg EU promotion Q1 review and Q2 proposal',owner:'MKT Team',date:'3/31',pri:'low'},
+    {id:'fb39',region:'CIS',rkey:'cis',grp:'mkt',text:'Fortune Gems 2 品牌遊戲概念稿送 BD 審核',text_en:'Submit Fortune Gems 2 branded game concept to BD for review',owner:'MKT Team',date:'3/15',pri:'mid'},
+    {id:'fb40',region:'CIS',rkey:'cis',grp:'mkt',text:'Vavada 素材套件（俄語）完成並送客戶',text_en:'Complete Vavada asset kit (Russian) and send to client',owner:'MKT Team',date:'3/20',pri:'low'},
+    {id:'fb41',region:'WA',rkey:'wa',grp:'mkt',text:'齋戒月後系列素材（土耳其語+阿語）送審',text_en:'Submit post-Ramadan creative series (Turkish+Arabic) for review',owner:'MKT Team',date:'3/14',pri:'high'},
+    {id:'fb42',region:'WA',rkey:'wa',grp:'mkt',text:'Pronet 4月 Pre-release 素材包完成',text_en:'Complete Pronet April Pre-release asset kit',owner:'MKT Team',date:'3/25',pri:'low'}
   ],
   mar:[
-    {id:'mb1',region:'LATAM',rkey:'latam',grp:'bd',text:'Top 25 未進入客戶初次接觸（ZT001 優先）',owner:'Hector',date:'4月第1週',pri:'high'},
-    {id:'mb2',region:'LATAM',rkey:'latam',grp:'bd',text:'World Cup 2026 LATAM 行銷計畫草案提交',owner:'Hector+MKT',date:'4/15',pri:'high'},
-    {id:'mb3',region:'LATAM',rkey:'latam',grp:'bd',text:'.bet.br 合規域名清單更新，確認各客戶狀態',owner:'Hector',date:'4/5',pri:'mid'},
-    {id:'mb4',region:'Africa',rkey:'africa',grp:'bd',text:'PlayTsogo QA 完成確認，4/1 正式上線',owner:'Chu',date:'3/31',pri:'high'},
-    {id:'mb5',region:'Africa',rkey:'africa',grp:'bd',text:'BETIFY & Netbet 談判進入合約草案階段',owner:'Chu',date:'4/15',pri:'high'},
-    {id:'mb6',region:'Africa',rkey:'africa',grp:'bd',text:'「每周最佳老虎機」計畫框架送 AM 執行',owner:'Chu',date:'4/1',pri:'mid'},
-    {id:'mb7',region:'EU Reg.',rkey:'eu',grp:'bd',text:'Superbet €10K 錦標賽執行確認 + 素材提交',owner:'Nina',date:'4/1',pri:'high'},
-    {id:'mb8',region:'EU Reg.',rkey:'eu',grp:'bd',text:'Novibet Coin of Lightning 4/8 Pre-release 確認',owner:'Nina',date:'4/5',pri:'mid'},
-    {id:'mb9',region:'EU Reg.',rkey:'eu',grp:'bd',text:'World Cup EU 計畫草案：各市場分工確認',owner:'Nina+MKT',date:'4/20',pri:'low'},
-    {id:'mb10',region:'UK',rkey:'uk',grp:'bd',text:'Rank Group 剩餘 8 個賭場：上線阻礙清單+ETA',owner:'Nina',date:'4/5',pri:'high'},
-    {id:'mb11',region:'UK',rkey:'uk',grp:'bd',text:'UK TOP 遊戲清單制定（配合 AM 市場洞察）',owner:'Nina+AM',date:'4/10',pri:'mid'},
-    {id:'mb12',region:'UK',rkey:'uk',grp:'bd',text:'Betano Belgium：促銷計畫提案送交客戶',owner:'Nina',date:'4/15',pri:'low'},
-    {id:'mb13',region:'CIS',rkey:'cis',grp:'bd',text:'1xBet 品牌遊戲 Spec Document 正式確認送出',owner:'Bryam',date:'4/1',pri:'high'},
-    {id:'mb14',region:'CIS',rkey:'cis',grp:'bd',text:'Pinco 直接合約談判：繞過 Digitain 可行性評估',owner:'Bryam',date:'4/15',pri:'high'},
-    {id:'mb15',region:'CIS',rkey:'cis',grp:'bd',text:'SoftGamings Top 20 行動計畫路徑圖制定',owner:'Bryam',date:'4/10',pri:'mid'},
-    {id:'mb16',region:'WA',rkey:'wa',grp:'bd',text:'Pronet 3 個品牌遊戲 Spec Document 確認送出',owner:'Bryam',date:'4/5',pri:'high'},
-    {id:'mb17',region:'WA',rkey:'wa',grp:'bd',text:'Vegangester 接洽（土耳其最大聚合商）',owner:'Bryam',date:'4/10',pri:'high'},
-    {id:'mb18',region:'WA',rkey:'wa',grp:'bd',text:'伊朗戰局月度影響評估報告送 Ray',owner:'Bryam',date:'4/5',pri:'mid'},
-    {id:'mb19',region:'LATAM',rkey:'latam',grp:'am',text:'Top 25 新客戶 onboarding checklist 制定',owner:'AM Team',date:'4/5',pri:'low'},
-    {id:'mb20',region:'LATAM',rkey:'latam',grp:'am',text:'World Cup 期間 LATAM 監控升級方案送 BD',owner:'AM Team',date:'4/10',pri:'low'},
-    {id:'mb21',region:'Africa',rkey:'africa',grp:'am',text:'「每周最佳老虎機」發送流程 SOP 建立',owner:'AM Team',date:'4/1',pri:'high'},
-    {id:'mb22',region:'Africa',rkey:'africa',grp:'am',text:'PlayTsogo / Sunbet onboarding 支援包準備',owner:'AM Team',date:'3/31',pri:'mid'},
-    {id:'mb23',region:'EU Reg.',rkey:'eu',grp:'am',text:'Superbet €10K 錦標賽 D+1 KPI 報告範本準備',owner:'AM Team',date:'4/1',pri:'low'},
-    {id:'mb24',region:'EU Reg.',rkey:'eu',grp:'am',text:'StarCasino 品牌遊戲進度週追蹤（至 4/15）',owner:'AM Team',date:'每週五',pri:'low'},
-    {id:'mb25',region:'UK',rkey:'uk',grp:'am',text:'Leon D+7 健康度報告（4/9 完成）',owner:'AM Team',date:'4/9',pri:'low'},
-    {id:'mb26',region:'UK',rkey:'uk',grp:'am',text:'UK 直接群組建立：Rank Group 優先',owner:'AM Team',date:'4/15',pri:'low'},
-    {id:'mb27',region:'CIS',rkey:'cis',grp:'am',text:'1xBet 品牌遊戲監控儀表板建立',owner:'AM Team',date:'上線前D-3',pri:'mid'},
-    {id:'mb28',region:'CIS',rkey:'cis',grp:'am',text:'SoftGamings KPI 監控指標設定',owner:'AM Team',date:'4/10',pri:'low'},
-    {id:'mb29',region:'WA',rkey:'wa',grp:'am',text:'Pronet 品牌遊戲上線日報監控 SOP 建立',owner:'AM Team',date:'5月前',pri:'low'},
-    {id:'mb30',region:'WA',rkey:'wa',grp:'am',text:'WA 戰區影響 TTB 預警標準設定',owner:'AM Team',date:'4/10',pri:'low'},
-    {id:'mb31',region:'LATAM',rkey:'latam',grp:'mkt',text:'World Cup 主視覺定稿並送 CEO 審核',owner:'MKT Team',date:'4/5',pri:'high'},
-    {id:'mb32',region:'LATAM',rkey:'latam',grp:'mkt',text:'Semana Santa MX 特別素材完成並送交客戶',owner:'MKT Team',date:'4/10',pri:'low'},
-    {id:'mb33',region:'Africa',rkey:'africa',grp:'mkt',text:'「每周老虎機」Banner 模板建立（可週次替換）',owner:'MKT Team',date:'4/1',pri:'mid'},
-    {id:'mb34',region:'Africa',rkey:'africa',grp:'mkt',text:'PlayTsogo + Sunbet 上線素材（英語 SA 版）',owner:'MKT Team',date:'3/31',pri:'low'},
-    {id:'mb35',region:'EU Reg.',rkey:'eu',grp:'mkt',text:'復活節素材（GR+RO+IT）全套完成',owner:'MKT Team',date:'4/5',pri:'high'},
-    {id:'mb36',region:'EU Reg.',rkey:'eu',grp:'mkt',text:'World Cup EU 各語言版分工排程確認',owner:'MKT Team',date:'4/15',pri:'low'},
-    {id:'mb37',region:'UK',rkey:'uk',grp:'mkt',text:'UK TOP 遊戲英式風格素材（首批 5 款）',owner:'MKT Team',date:'4/10',pri:'low'},
-    {id:'mb38',region:'UK',rkey:'uk',grp:'mkt',text:'Betano Belgium 強力促銷提案視覺定稿',owner:'MKT Team',date:'4/12',pri:'low'},
-    {id:'mb39',region:'CIS',rkey:'cis',grp:'mkt',text:'1xBet 品牌遊戲發布素材全套（3語言）',owner:'MKT Team',date:'上線前D-7',pri:'high'},
-    {id:'mb40',region:'CIS',rkey:'cis',grp:'mkt',text:'3 Pot Panda 5月 Pre-release 素材前置製作',owner:'MKT Team',date:'4/20',pri:'low'},
-    {id:'mb41',region:'WA',rkey:'wa',grp:'mkt',text:'Pronet 品牌遊戲視覺定稿（5月前上線）',owner:'MKT Team',date:'4/20',pri:'high'},
-    {id:'mb42',region:'WA',rkey:'wa',grp:'mkt',text:'三品牌（Betebet/Piabet/Perabet）素材套件',owner:'MKT Team',date:'4/30',pri:'low'}
+    {id:'mb1',region:'LATAM',rkey:'latam',grp:'bd',text:'Top 25 未進入客戶初次接觸（ZT001 優先）',text_en:'Initial contact with unreach Top 25 clients (ZT001 first)',owner:'Hector',date:'4月第1週',pri:'high'},
+    {id:'mb2',region:'LATAM',rkey:'latam',grp:'bd',text:'World Cup 2026 LATAM 行銷計畫草案提交',text_en:'Submit World Cup 2026 LATAM marketing plan draft',owner:'Hector+MKT',date:'4/15',pri:'high'},
+    {id:'mb3',region:'LATAM',rkey:'latam',grp:'bd',text:'.bet.br 合規域名清單更新，確認各客戶狀態',text_en:'Update .bet.br compliance domain list, confirm all client status',owner:'Hector',date:'4/5',pri:'mid'},
+    {id:'mb4',region:'Africa',rkey:'africa',grp:'bd',text:'PlayTsogo QA 完成確認，4/1 正式上線',text_en:'Confirm PlayTsogo QA completion, official go-live 4/1',owner:'Chu',date:'3/31',pri:'high'},
+    {id:'mb5',region:'Africa',rkey:'africa',grp:'bd',text:'BETIFY & Netbet 談判進入合約草案階段',text_en:'BETIFY & Netbet negotiation reaches contract draft stage',owner:'Chu',date:'4/15',pri:'high'},
+    {id:'mb6',region:'Africa',rkey:'africa',grp:'bd',text:'「每周最佳老虎機」計畫框架送 AM 執行',text_en:'Send Weekly Best Slot program framework to AM for execution',owner:'Chu',date:'4/1',pri:'mid'},
+    {id:'mb7',region:'EU Reg.',rkey:'eu',grp:'bd',text:'Superbet €10K 錦標賽執行確認 + 素材提交',text_en:'Confirm Superbet €10K tournament execution + submit assets',owner:'Nina',date:'4/1',pri:'high'},
+    {id:'mb8',region:'EU Reg.',rkey:'eu',grp:'bd',text:'Novibet Coin of Lightning 4/8 Pre-release 確認',text_en:'Confirm Novibet Coin of Lightning 4/8 Pre-release',owner:'Nina',date:'4/5',pri:'mid'},
+    {id:'mb9',region:'EU Reg.',rkey:'eu',grp:'bd',text:'World Cup EU 計畫草案：各市場分工確認',text_en:'World Cup EU plan draft: confirm responsibilities by market',owner:'Nina+MKT',date:'4/20',pri:'low'},
+    {id:'mb10',region:'UK',rkey:'uk',grp:'bd',text:'Rank Group 剩餘 8 個賭場：上線阻礙清單+ETA',text_en:'Rank Group remaining 8 casinos: blockers list + ETA',owner:'Nina',date:'4/5',pri:'high'},
+    {id:'mb11',region:'UK',rkey:'uk',grp:'bd',text:'UK TOP 遊戲清單制定（配合 AM 市場洞察）',text_en:'Build UK TOP Games list (with AM market insight)',owner:'Nina+AM',date:'4/10',pri:'mid'},
+    {id:'mb12',region:'UK',rkey:'uk',grp:'bd',text:'Betano Belgium：促銷計畫提案送交客戶',text_en:'Betano Belgium: submit promotion proposal to client',owner:'Nina',date:'4/15',pri:'low'},
+    {id:'mb13',region:'CIS',rkey:'cis',grp:'bd',text:'1xBet 品牌遊戲 Spec Document 正式確認送出',text_en:'Officially confirm and send 1xBet branded game Spec Document',owner:'Bryam',date:'4/1',pri:'high'},
+    {id:'mb14',region:'CIS',rkey:'cis',grp:'bd',text:'Pinco 直接合約談判：繞過 Digitain 可行性評估',text_en:'Pinco direct contract negotiation: assess feasibility to bypass Digitain',owner:'Bryam',date:'4/15',pri:'high'},
+    {id:'mb15',region:'CIS',rkey:'cis',grp:'bd',text:'SoftGamings Top 20 行動計畫路徑圖制定',text_en:'Build SoftGamings Top 60 → Top 20 action roadmap',owner:'Bryam',date:'4/10',pri:'mid'},
+    {id:'mb16',region:'WA',rkey:'wa',grp:'bd',text:'Pronet 3 個品牌遊戲 Spec Document 確認送出',text_en:'Confirm and send Pronet 3 branded game Spec Documents',owner:'Bryam',date:'4/5',pri:'high'},
+    {id:'mb17',region:'WA',rkey:'wa',grp:'bd',text:'Vegangester 接洽（土耳其最大聚合商）',text_en:"Reach out to Vegangester (Turkey's largest aggregator)",owner:'Bryam',date:'4/10',pri:'high'},
+    {id:'mb18',region:'WA',rkey:'wa',grp:'bd',text:'伊朗戰局月度影響評估報告送 Ray',text_en:'Monthly Iran war impact assessment report to Ray',owner:'Bryam',date:'4/5',pri:'mid'},
+    {id:'mb19',region:'LATAM',rkey:'latam',grp:'am',text:'Top 25 新客戶 onboarding checklist 制定',text_en:'Build Top 25 new client onboarding checklist',owner:'AM Team',date:'4/5',pri:'low'},
+    {id:'mb20',region:'LATAM',rkey:'latam',grp:'am',text:'World Cup 期間 LATAM 監控升級方案送 BD',text_en:'Send LATAM monitoring upgrade plan for World Cup period to BD',owner:'AM Team',date:'4/10',pri:'low'},
+    {id:'mb21',region:'Africa',rkey:'africa',grp:'am',text:'「每周最佳老虎機」發送流程 SOP 建立',text_en:'Build Weekly Best Slot sending process SOP',owner:'AM Team',date:'4/1',pri:'high'},
+    {id:'mb22',region:'Africa',rkey:'africa',grp:'am',text:'PlayTsogo / Sunbet onboarding 支援包準備',text_en:'Prepare PlayTsogo / Sunbet onboarding support kit',owner:'AM Team',date:'3/31',pri:'mid'},
+    {id:'mb23',region:'EU Reg.',rkey:'eu',grp:'am',text:'Superbet €10K 錦標賽 D+1 KPI 報告範本準備',text_en:'Prepare Superbet €10K tournament D+1 KPI report template',owner:'AM Team',date:'4/1',pri:'low'},
+    {id:'mb24',region:'EU Reg.',rkey:'eu',grp:'am',text:'StarCasino 品牌遊戲進度週追蹤（至 4/15）',text_en:'Weekly tracking of StarCasino branded game progress (until 4/15)',owner:'AM Team',date:'每週五',pri:'low'},
+    {id:'mb25',region:'UK',rkey:'uk',grp:'am',text:'Leon D+7 健康度報告（4/9 完成）',text_en:'Leon D+7 health report (complete 4/9)',owner:'AM Team',date:'4/9',pri:'low'},
+    {id:'mb26',region:'UK',rkey:'uk',grp:'am',text:'UK 直接群組建立：Rank Group 優先',text_en:'Set up UK direct communication groups: Rank Group first',owner:'AM Team',date:'4/15',pri:'low'},
+    {id:'mb27',region:'CIS',rkey:'cis',grp:'am',text:'1xBet 品牌遊戲監控儀表板建立',text_en:'Build 1xBet branded game monitoring dashboard',owner:'AM Team',date:'上線前D-3',pri:'mid'},
+    {id:'mb28',region:'CIS',rkey:'cis',grp:'am',text:'SoftGamings KPI 監控指標設定',text_en:'Set SoftGamings KPI monitoring metrics',owner:'AM Team',date:'4/10',pri:'low'},
+    {id:'mb29',region:'WA',rkey:'wa',grp:'am',text:'Pronet 品牌遊戲上線日報監控 SOP 建立',text_en:'Build Pronet branded game go-live daily monitoring SOP',owner:'AM Team',date:'5月前',pri:'low'},
+    {id:'mb30',region:'WA',rkey:'wa',grp:'am',text:'WA 戰區影響 TTB 預警標準設定',text_en:'Set WA conflict impact TTB early warning standards',owner:'AM Team',date:'4/10',pri:'low'},
+    {id:'mb31',region:'LATAM',rkey:'latam',grp:'mkt',text:'World Cup 主視覺定稿並送 CEO 審核',text_en:'Finalize World Cup hero visual and submit to CEO for review',owner:'MKT Team',date:'4/5',pri:'high'},
+    {id:'mb32',region:'LATAM',rkey:'latam',grp:'mkt',text:'Semana Santa MX 特別素材完成並送交客戶',text_en:'Complete Semana Santa MX special assets and deliver to client',owner:'MKT Team',date:'4/10',pri:'low'},
+    {id:'mb33',region:'Africa',rkey:'africa',grp:'mkt',text:'「每周老虎機」Banner 模板建立（可週次替換）',text_en:'Build Weekly Slot banner template (swappable weekly)',owner:'MKT Team',date:'4/1',pri:'mid'},
+    {id:'mb34',region:'Africa',rkey:'africa',grp:'mkt',text:'PlayTsogo + Sunbet 上線素材（英語 SA 版）',text_en:'PlayTsogo + Sunbet launch assets (English SA version)',owner:'MKT Team',date:'3/31',pri:'low'},
+    {id:'mb35',region:'EU Reg.',rkey:'eu',grp:'mkt',text:'復活節素材（GR+RO+IT）全套完成',text_en:'Complete full Easter asset set (GR+RO+IT)',owner:'MKT Team',date:'4/5',pri:'high'},
+    {id:'mb36',region:'EU Reg.',rkey:'eu',grp:'mkt',text:'World Cup EU 各語言版分工排程確認',text_en:'Confirm World Cup EU localization schedule by language',owner:'MKT Team',date:'4/15',pri:'low'},
+    {id:'mb37',region:'UK',rkey:'uk',grp:'mkt',text:'UK TOP 遊戲英式風格素材（首批 5 款）',text_en:'UK TOP Games assets in British style (first batch 5 games)',owner:'MKT Team',date:'4/10',pri:'low'},
+    {id:'mb38',region:'UK',rkey:'uk',grp:'mkt',text:'Betano Belgium 強力促銷提案視覺定稿',text_en:'Finalize Betano Belgium strong promotion proposal visual',owner:'MKT Team',date:'4/12',pri:'low'},
+    {id:'mb39',region:'CIS',rkey:'cis',grp:'mkt',text:'1xBet 品牌遊戲發布素材全套（3語言）',text_en:'Complete 1xBet branded game launch asset set (3 languages)',owner:'MKT Team',date:'上線前D-7',pri:'high'},
+    {id:'mb40',region:'CIS',rkey:'cis',grp:'mkt',text:'3 Pot Panda 5月 Pre-release 素材前置製作',text_en:'Pre-produce May 3 Pot Panda Pre-release assets',owner:'MKT Team',date:'4/20',pri:'low'},
+    {id:'mb41',region:'WA',rkey:'wa',grp:'mkt',text:'Pronet 品牌遊戲視覺定稿（5月前上線）',text_en:'Finalize Pronet branded game visual identity (go-live before May)',owner:'MKT Team',date:'4/20',pri:'high'},
+    {id:'mb42',region:'WA',rkey:'wa',grp:'mkt',text:'三品牌（Betebet/Piabet/Perabet）素材套件',text_en:'Asset kit for 3 brands (Betebet/Piabet/Perabet)',owner:'MKT Team',date:'4/30',pri:'low'}
   ]
 };
 // ── per-region filter state: key = "{month}-{rkey}" ──
@@ -5269,7 +5549,7 @@ function renderRmat(month, rkey) {
     const hide = (f.grp!=='all' && a.grp!==f.grp) || (f.status!=='all' && st!==f.status);
     return `<tr class="${hide?'rmat-row-hidden':''}${st==='done'?' rmat-row-done':''}">
       <td><button class="rmat-status-btn ${stCls[st]}" onclick="cycleRmatStatus('${month}','${a.id}','${rkey}')">${stLabel[st]}</button></td>
-      <td class="rmat-task-cell">${a.text}</td>
+      <td class="rmat-task-cell">${currentLang === 'en' && a.text_en ? a.text_en : a.text}</td>
       <td><span class="mat-chip ${grpCls[a.grp]}">${grpLabel[a.grp]}</span></td>
       <td class="rmat-owner-cell">👤 ${a.owner}</td>
       <td class="rmat-date-cell">📅 ${a.date}</td>
@@ -5331,6 +5611,7 @@ function seedRmatTasks() {
         all[tabKey] = items.map((a, i) => ({
           id: parseInt(month === 'feb' ? '1' : '2') * 1000000 + parseInt(rkey === 'latam' ? '1' : rkey === 'africa' ? '2' : rkey === 'eu' ? '3' : rkey === 'uk' ? '4' : rkey === 'cis' ? '5' : '6') * 10000 + i,
           title:     a.text,
+          title_en:  a.text_en || a.text,
           assignee:  a.owner,
           dueDate:   '',
           status:    a.pri === 'high' ? 'doing' : 'todo',
@@ -5339,6 +5620,16 @@ function seedRmatTasks() {
           createdAt: Date.now() + i
         }));
         changed = true;
+      } else {
+        // Backfill title_en for existing seeded tasks
+        let bfChanged = false;
+        all[tabKey].forEach(task => {
+          if (!task.title_en) {
+            const match = items.find(a => a.text === task.title);
+            if (match && match.text_en) { task.title_en = match.text_en; bfChanged = true; }
+          }
+        });
+        if (bfChanged) changed = true;
       }
     });
   });
@@ -5357,46 +5648,46 @@ function seedTravelTasks() {
 
   const TRAVEL_SEEDS = {
     'travel-romania-actions': [
-      { id:3001, title:'Kaizen Q2 新遊戲 QA 確認',    assignee:'Nina', dueDate:'2026-03-31', status:'doing',   note:'協調技術團隊完成 8 款新遊戲上線前測試，確保 ONJN 合規', source:'Romania 出差' },
-      { id:3002, title:'Don.ro 合規文件準備',          assignee:'Nina', dueDate:'2026-04-07', status:'todo',    note:'整理 ONJN 認證文件包，提交給 Don.ro 合規部門',           source:'Romania 出差' },
-      { id:3003, title:'Relax 合約條款最終確認',       assignee:'Nina', dueDate:'',           status:'todo',    note:'法務審閱 Revenue Share 條款，完成最終談判',               source:'Romania 出差' },
-      { id:3004, title:'羅馬尼亞語遊戲本地化',         assignee:'Nina', dueDate:'2026-04-14', status:'todo',    note:'配合 MKT 完成 Kaizen 新遊戲素材的羅馬尼亞語版本',          source:'Romania 出差' }
+      { id:3001, title:'Kaizen Q2 新遊戲 QA 確認',    title_en:'Kaizen Q2 New Game QA Confirmation',    assignee:'Nina', dueDate:'2026-03-31', status:'doing',   note:'協調技術團隊完成 8 款新遊戲上線前測試，確保 ONJN 合規', source:'Romania 出差' },
+      { id:3002, title:'Don.ro 合規文件準備',          title_en:'Don.ro Compliance Document Preparation',          assignee:'Nina', dueDate:'2026-04-07', status:'todo',    note:'整理 ONJN 認證文件包，提交給 Don.ro 合規部門',           source:'Romania 出差' },
+      { id:3003, title:'Relax 合約條款最終確認',       title_en:'Relax Contract Terms Final Confirmation',       assignee:'Nina', dueDate:'',           status:'todo',    note:'法務審閱 Revenue Share 條款，完成最終談判',               source:'Romania 出差' },
+      { id:3004, title:'羅馬尼亞語遊戲本地化',         title_en:'Romanian Language Game Localization',         assignee:'Nina', dueDate:'2026-04-14', status:'todo',    note:'配合 MKT 完成 Kaizen 新遊戲素材的羅馬尼亞語版本',          source:'Romania 出差' }
     ],
     'travel-romania-followup': [
-      { id:3101, title:'Kaizen：確認 Q2 新遊戲上線時間表', assignee:'Nina', dueDate:'', status:'doing', note:'', source:'Romania 出差' },
-      { id:3102, title:'Don.ro：提交 ONJN 合規文件包',    assignee:'Nina', dueDate:'', status:'todo',  note:'', source:'Romania 出差' },
-      { id:3103, title:'Relax Gaming：合約最終簽署',       assignee:'Nina', dueDate:'', status:'todo',  note:'', source:'Romania 出差' },
-      { id:3104, title:'Kaizen 22 款遊戲上線確認',         assignee:'Nina', dueDate:'', status:'done',  note:'', source:'Romania 出差' },
-      { id:3105, title:'MKT：羅馬尼亞語素材交付',          assignee:'Nina', dueDate:'', status:'doing', note:'', source:'Romania 出差' },
-      { id:3106, title:'Fortuna.ro 初步接觸安排',          assignee:'Nina', dueDate:'', status:'todo',  note:'', source:'Romania 出差' }
+      { id:3101, title:'Kaizen：確認 Q2 新遊戲上線時間表', title_en:'Kaizen: Confirm Q2 New Game Go-Live Schedule', assignee:'Nina', dueDate:'', status:'doing', note:'', source:'Romania 出差' },
+      { id:3102, title:'Don.ro：提交 ONJN 合規文件包',    title_en:'Don.ro: Submit ONJN Compliance Document Package',    assignee:'Nina', dueDate:'', status:'todo',  note:'', source:'Romania 出差' },
+      { id:3103, title:'Relax Gaming：合約最終簽署',       title_en:'Relax Gaming: Final Contract Signing',       assignee:'Nina', dueDate:'', status:'todo',  note:'', source:'Romania 出差' },
+      { id:3104, title:'Kaizen 22 款遊戲上線確認',         title_en:'Kaizen 22 Games Go-Live Confirmation',         assignee:'Nina', dueDate:'', status:'done',  note:'', source:'Romania 出差' },
+      { id:3105, title:'MKT：羅馬尼亞語素材交付',          title_en:'MKT: Romanian Language Asset Delivery',          assignee:'Nina', dueDate:'', status:'doing', note:'', source:'Romania 出差' },
+      { id:3106, title:'Fortuna.ro 初步接觸安排',          title_en:'Fortuna.ro Initial Contact Setup',          assignee:'Nina', dueDate:'', status:'todo',  note:'', source:'Romania 出差' }
     ],
     'travel-italy-actions': [
-      { id:4001, title:'ADM 認證申請（5 款新遊戲）',    assignee:'Nina', dueDate:'2026-03-31', status:'doing',   note:'技術團隊準備 RNG 測試報告及 ADM 數位憑證申請，送交 Admiral / Sisal（緊急）', source:'Italy 出差' },
-      { id:4002, title:'Lottomatica ADM 認證遊戲清單', assignee:'Nina', dueDate:'2026-04-07', status:'todo',    note:'整理完整 ADM 已認證遊戲列表及技術規格，提交 Lottomatica 產品部門',         source:'Italy 出差' },
-      { id:4003, title:'StarCasino Q2 聯合促銷排期',   assignee:'Nina', dueDate:'2026-04-14', status:'todo',    note:'確認 Q2 兩檔聯合促銷時間、獎池設定及行銷素材需求',                       source:'Italy 出差' },
-      { id:4004, title:'PokerStars IT 幣別問題修正',   assignee:'Nina', dueDate:'2026-03-21', status:'blocked', note:'協調技術修正 EUR 幣別顯示異常，避免影響玩家體驗及合規審查（緊急）',         source:'Italy 出差' }
+      { id:4001, title:'ADM 認證申請（5 款新遊戲）',    title_en:'ADM Certification Application (5 New Games)',    assignee:'Nina', dueDate:'2026-03-31', status:'doing',   note:'技術團隊準備 RNG 測試報告及 ADM 數位憑證申請，送交 Admiral / Sisal（緊急）', source:'Italy 出差' },
+      { id:4002, title:'Lottomatica ADM 認證遊戲清單', title_en:'Lottomatica ADM Certified Games List', assignee:'Nina', dueDate:'2026-04-07', status:'todo',    note:'整理完整 ADM 已認證遊戲列表及技術規格，提交 Lottomatica 產品部門',         source:'Italy 出差' },
+      { id:4003, title:'StarCasino Q2 聯合促銷排期',   title_en:'StarCasino Q2 Joint Promotion Schedule',   assignee:'Nina', dueDate:'2026-04-14', status:'todo',    note:'確認 Q2 兩檔聯合促銷時間、獎池設定及行銷素材需求',                       source:'Italy 出差' },
+      { id:4004, title:'PokerStars IT 幣別問題修正',   title_en:'PokerStars IT Currency Issue Fix',   assignee:'Nina', dueDate:'2026-03-21', status:'blocked', note:'協調技術修正 EUR 幣別顯示異常，避免影響玩家體驗及合規審查（緊急）',         source:'Italy 出差' }
     ],
     'travel-italy-followup': [
-      { id:4101, title:'PokerStars IT EUR 幣別修正',      assignee:'Nina', dueDate:'', status:'blocked', note:'', source:'Italy 出差' },
-      { id:4102, title:'ADM 5 款新遊戲認證申請提交',      assignee:'Nina', dueDate:'', status:'doing',   note:'', source:'Italy 出差' },
-      { id:4103, title:'Lottomatica 認證遊戲清單提交',    assignee:'Nina', dueDate:'', status:'todo',    note:'', source:'Italy 出差' },
-      { id:4104, title:'Goldbet 第二次洽談安排',           assignee:'Nina', dueDate:'', status:'todo',    note:'', source:'Italy 出差' },
-      { id:4105, title:'StarCasino 月度績效報告標準化',   assignee:'Nina', dueDate:'', status:'done',    note:'', source:'Italy 出差' },
-      { id:4106, title:'StarCasino Q2 促銷排期確認',      assignee:'Nina', dueDate:'', status:'doing',   note:'', source:'Italy 出差' }
+      { id:4101, title:'PokerStars IT EUR 幣別修正',      title_en:'PokerStars IT EUR Currency Fix',      assignee:'Nina', dueDate:'', status:'blocked', note:'', source:'Italy 出差' },
+      { id:4102, title:'ADM 5 款新遊戲認證申請提交',      title_en:'ADM 5 New Games Certification Application Submitted',      assignee:'Nina', dueDate:'', status:'doing',   note:'', source:'Italy 出差' },
+      { id:4103, title:'Lottomatica 認證遊戲清單提交',    title_en:'Lottomatica Certified Games List Submitted',    assignee:'Nina', dueDate:'', status:'todo',    note:'', source:'Italy 出差' },
+      { id:4104, title:'Goldbet 第二次洽談安排',           title_en:'Goldbet Second Meeting Arrangement',           assignee:'Nina', dueDate:'', status:'todo',    note:'', source:'Italy 出差' },
+      { id:4105, title:'StarCasino 月度績效報告標準化',   title_en:'StarCasino Monthly Performance Report Standardization',   assignee:'Nina', dueDate:'', status:'done',    note:'', source:'Italy 出差' },
+      { id:4106, title:'StarCasino Q2 促銷排期確認',      title_en:'StarCasino Q2 Promotion Schedule Confirmed',      assignee:'Nina', dueDate:'', status:'doing',   note:'', source:'Italy 出差' }
     ],
     'travel-greece-actions': [
-      { id:5001, title:'Betano.gr Q2 遊戲上線準備', assignee:'Nina', dueDate:'2026-04-07', status:'doing', note:'對照 Romania 上線清單，準備希臘語版遊戲描述及合規文件包', source:'Greece 出差' },
-      { id:5002, title:'Stoiximan 商業提案準備',    assignee:'Nina', dueDate:'2026-04-21', status:'todo',  note:'製作含 Revenue Share 模型、Jackpot 方案及推薦遊戲清單的完整商業提案', source:'Greece 出差' },
-      { id:5003, title:'Novibet Demo 安排',         assignee:'Nina', dueDate:'',           status:'todo',  note:'安排線上 Demo 會議，展示 TaDa 主力遊戲及釣魚類差異化產品',              source:'Greece 出差' },
-      { id:5004, title:'HGC 合規文件更新',          assignee:'Nina', dueDate:'2026-04-14', status:'todo',  note:'確認 HGC 最新合規要求，更新認證遊戲清單並確保 RNG 文件有效期',           source:'Greece 出差' }
+      { id:5001, title:'Betano.gr Q2 遊戲上線準備', title_en:'Betano.gr Q2 Game Launch Preparation', assignee:'Nina', dueDate:'2026-04-07', status:'doing', note:'對照 Romania 上線清單，準備希臘語版遊戲描述及合規文件包', source:'Greece 出差' },
+      { id:5002, title:'Stoiximan 商業提案準備',    title_en:'Stoiximan Business Proposal Preparation',    assignee:'Nina', dueDate:'2026-04-21', status:'todo',  note:'製作含 Revenue Share 模型、Jackpot 方案及推薦遊戲清單的完整商業提案', source:'Greece 出差' },
+      { id:5003, title:'Novibet Demo 安排',         title_en:'Novibet Demo Arrangement',         assignee:'Nina', dueDate:'',           status:'todo',  note:'安排線上 Demo 會議，展示 TaDa 主力遊戲及釣魚類差異化產品',              source:'Greece 出差' },
+      { id:5004, title:'HGC 合規文件更新',          title_en:'HGC Compliance Document Update',          assignee:'Nina', dueDate:'2026-04-14', status:'todo',  note:'確認 HGC 最新合規要求，更新認證遊戲清單並確保 RNG 文件有效期',           source:'Greece 出差' }
     ],
     'travel-greece-followup': [
-      { id:5101, title:'Betano.gr HGC 合規確認書收取',   assignee:'Nina', dueDate:'', status:'done',  note:'', source:'Greece 出差' },
-      { id:5102, title:'Betano.gr Q2 遊戲希臘語版準備', assignee:'Nina', dueDate:'', status:'doing', note:'', source:'Greece 出差' },
-      { id:5103, title:'Stoiximan 商業提案製作',         assignee:'Nina', dueDate:'', status:'doing', note:'', source:'Greece 出差' },
-      { id:5104, title:'Novibet 正式 Demo 時間確認',    assignee:'Nina', dueDate:'', status:'todo',  note:'', source:'Greece 出差' },
-      { id:5105, title:'Vistabet 進一步評估',            assignee:'Nina', dueDate:'', status:'todo',  note:'', source:'Greece 出差' },
-      { id:5106, title:'HGC 合規文件更新',               assignee:'Nina', dueDate:'', status:'todo',  note:'', source:'Greece 出差' }
+      { id:5101, title:'Betano.gr HGC 合規確認書收取',   title_en:'Betano.gr HGC Compliance Letter Received',   assignee:'Nina', dueDate:'', status:'done',  note:'', source:'Greece 出差' },
+      { id:5102, title:'Betano.gr Q2 遊戲希臘語版準備', title_en:'Betano.gr Q2 Greek Game Version Preparation', assignee:'Nina', dueDate:'', status:'doing', note:'', source:'Greece 出差' },
+      { id:5103, title:'Stoiximan 商業提案製作',         title_en:'Stoiximan Business Proposal Creation',         assignee:'Nina', dueDate:'', status:'doing', note:'', source:'Greece 出差' },
+      { id:5104, title:'Novibet 正式 Demo 時間確認',    title_en:'Novibet Official Demo Time Confirmed',    assignee:'Nina', dueDate:'', status:'todo',  note:'', source:'Greece 出差' },
+      { id:5105, title:'Vistabet 進一步評估',            title_en:'Vistabet Further Evaluation',            assignee:'Nina', dueDate:'', status:'todo',  note:'', source:'Greece 出差' },
+      { id:5106, title:'HGC 合規文件更新',               title_en:'HGC Compliance Document Update',               assignee:'Nina', dueDate:'', status:'todo',  note:'', source:'Greece 出差' }
     ]
   };
 
@@ -5404,6 +5695,16 @@ function seedTravelTasks() {
     if (!all[tabKey] || all[tabKey].length === 0) {
       all[tabKey] = seeds.map(s => ({ ...s, createdAt: Date.now() }));
       changed = true;
+    } else {
+      // Backfill title_en for existing travel tasks
+      let bfChanged = false;
+      all[tabKey].forEach(task => {
+        if (!task.title_en) {
+          const match = seeds.find(s => s.title === task.title);
+          if (match && match.title_en) { task.title_en = match.title_en; bfChanged = true; }
+        }
+      });
+      if (bfChanged) changed = true;
     }
   });
   if (changed) saveTasks(all);
@@ -5687,7 +5988,7 @@ function renderTaskRow(task, tab) {
           <button class="tp-check" onclick="cycleTaskStatus('${tab}',${task.id})" title="${zh?'快速切換完成狀態':'Toggle done'}">${isDone?'✅':'⬜'}</button>
           <div class="tp-task-inner">
             <div class="tp-task-name">
-              ${escHtml(task.title)}
+              ${escHtml(currentLang === 'en' && task.title_en ? task.title_en : task.title)}
               ${isAuto ? `<span class="tp-auto-tag">🤖 ${zh?'自動擷取':'Auto'}</span>` : ''}
             </div>
           </div>
