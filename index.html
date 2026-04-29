@@ -5265,7 +5265,17 @@ function setLang(lang) {
   if (btnExport) btnExport.textContent = lang === 'zh' ? '匯出 PDF' : 'Export PDF';
   const tabAll = document.getElementById('tab-all');
   if (tabAll) tabAll.textContent = lang === 'zh' ? '全部成員' : 'All Members';
-  // 更新所有 data-zh/data-en 元素
+  // ── 月報 bullet 雙語初始化（首次執行時為每個 bullet 設定 data-zh / data-en）──
+  // 使用 innerHTML 作為 key，避免 &amp; 被 textContent 解碼成 & 造成查找失敗
+  document.querySelectorAll('.monthly-bullet:not([data-zh])').forEach(el => {
+    const htmlKey  = el.innerHTML.trim();        // preserves &amp; → matches dict key
+    const textKey  = el.textContent.trim();
+    const enText   = MONTHLY_BULLET_EN[htmlKey] || MONTHLY_BULLET_EN[textKey];
+    el.setAttribute('data-zh', textKey);
+    el.setAttribute('data-en', enText || textKey);
+  });
+
+  // 更新所有 data-zh/data-en 元素（現在包含已初始化的 monthly-bullet）
   // 葉節點（無子元素）直接設定 textContent
   // 有子元素的節點：更新直接文字節點（text node），保留子元素不動
   document.querySelectorAll('[data-zh]').forEach(el => {
@@ -5291,12 +5301,6 @@ function setLang(lang) {
   // 重新渲染月報 Action 追蹤台 + 出差報告任務追蹤
   initRmat();
   initTravelTrackers();
-  // Translate monthly bullet content
-  document.querySelectorAll('.monthly-bullet').forEach(el => {
-    if (!el.hasAttribute('data-orig')) el.setAttribute('data-orig', el.textContent.trim());
-    const orig = el.getAttribute('data-orig');
-    el.textContent = lang === 'en' ? (MONTHLY_BULLET_EN[orig] || orig) : orig;
-  });
 }
 
 // ══════════════════════════════════════
