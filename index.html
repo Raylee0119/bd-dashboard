@@ -997,6 +997,7 @@
               </div>
             </div>
           </div>
+          <div class="rmat-wrap" id="tasks-rmat-feb-latam"></div>
         </div>
       </div>
 
@@ -1065,6 +1066,7 @@
               </div>
             </div>
           </div>
+          <div class="rmat-wrap" id="tasks-rmat-feb-africa"></div>
         </div>
       </div>
 
@@ -1134,6 +1136,7 @@
               </div>
             </div>
           </div>
+          <div class="rmat-wrap" id="tasks-rmat-feb-eu"></div>
         </div>
       </div>
 
@@ -1202,6 +1205,7 @@
               </div>
             </div>
           </div>
+          <div class="rmat-wrap" id="tasks-rmat-feb-uk"></div>
         </div>
       </div>
 
@@ -1271,6 +1275,7 @@
               </div>
             </div>
           </div>
+          <div class="rmat-wrap" id="tasks-rmat-feb-cis"></div>
         </div>
       </div>
 
@@ -1339,6 +1344,7 @@
               </div>
             </div>
           </div>
+          <div class="rmat-wrap" id="tasks-rmat-feb-wa"></div>
         </div>
       </div>
 
@@ -1433,6 +1439,7 @@
               </div>
             </div>
           </div>
+          <div class="rmat-wrap" id="tasks-rmat-mar-latam"></div>
         </div>
       </div>
 
@@ -1502,6 +1509,7 @@
               </div>
             </div>
           </div>
+          <div class="rmat-wrap" id="tasks-rmat-mar-africa"></div>
         </div>
       </div>
 
@@ -1571,6 +1579,7 @@
               </div>
             </div>
           </div>
+          <div class="rmat-wrap" id="tasks-rmat-mar-eu"></div>
         </div>
       </div>
 
@@ -1638,6 +1647,7 @@
               </div>
             </div>
           </div>
+          <div class="rmat-wrap" id="tasks-rmat-mar-uk"></div>
         </div>
       </div>
 
@@ -1706,6 +1716,7 @@
               </div>
             </div>
           </div>
+          <div class="rmat-wrap" id="tasks-rmat-mar-cis"></div>
         </div>
       </div>
 
@@ -1774,6 +1785,7 @@
               </div>
             </div>
           </div>
+          <div class="rmat-wrap" id="tasks-rmat-mar-wa"></div>
         </div>
       </div>
 
@@ -5656,7 +5668,8 @@ function seedRmatTasks() {
 }
 
 function initRmat() {
-  // rmat task panels removed from monthly report view per user request
+  seedRmatTasks();
+  RMAT_TABS.forEach(tab => renderTaskPanel(tab));
 }
 
 // ── 出差報告任務追蹤：種子資料 ──
@@ -5883,7 +5896,7 @@ const TRAVEL_TASK_TABS = [
   'travel-italy-actions','travel-italy-followup',
   'travel-greece-actions','travel-greece-followup'
 ];
-const TASK_TABS = ['weekly','meeting','monthly-rpt','exhibition','travel','regional', ...TRAVEL_TASK_TABS];
+const TASK_TABS = ['weekly','meeting','monthly-rpt','exhibition','travel','regional', ...RMAT_TABS, ...TRAVEL_TASK_TABS];
 
 const STATUS_META = {
   todo:    { zh:'待辦',   en:'To Do',      color:'#475569', bg:'#F1F5F9' },
