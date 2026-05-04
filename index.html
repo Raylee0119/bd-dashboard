@@ -5874,13 +5874,22 @@ function seedTravelTasks() {
       all[tabKey] = seeds.map(s => ({ ...s, createdAt: Date.now() }));
       changed = true;
     } else {
-      // Always sync title_en / source_en from seeds (safe: these fields are seed-managed)
       let bfChanged = false;
+      const existingIds = new Set(all[tabKey].map(t => t.id));
+      // 1. Sync title / title_en / source_en from seeds for existing tasks
       all[tabKey].forEach(task => {
-        const match = seeds.find(s => s.id === task.id || s.title === task.title);
+        const match = seeds.find(s => s.id === task.id);
         if (match) {
+          if (match.title     && task.title     !== match.title)     { task.title     = match.title;     bfChanged = true; }
           if (match.title_en  && task.title_en  !== match.title_en)  { task.title_en  = match.title_en;  bfChanged = true; }
           if (match.source_en && task.source_en !== match.source_en) { task.source_en = match.source_en; bfChanged = true; }
+        }
+      });
+      // 2. Add any seed items missing from localStorage
+      seeds.forEach(seed => {
+        if (!existingIds.has(seed.id)) {
+          all[tabKey].push({ ...seed, createdAt: Date.now() });
+          bfChanged = true;
         }
       });
       if (bfChanged) changed = true;
