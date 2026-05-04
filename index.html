@@ -5771,6 +5771,13 @@ function renderRmat(month, rkey) {
   `;
 }
 // ── 月報 Action 追蹤：從 MAT_DATA 預填種子資料（首次使用時）──
+function toEnDate(d) {
+  const mo = ['','Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  return d
+    .replace(/(\d+)月第(\d+)週/, (_, m, w) => `${mo[+m]||m+'M'} Wk${w}`)
+    .replace(/(\d+)月/, (_, m) => `${mo[+m]||m+'M'} `);
+}
+
 function seedRmatTasks() {
   const all = loadTasks();
   let changed = false;
@@ -5787,19 +5794,23 @@ function seedRmatTasks() {
           dueDate:   '',
           status:    a.pri === 'high' ? 'doing' : 'todo',
           note:      '[' + a.grp.toUpperCase() + '] Target: ' + a.date,
+          note_en:   '[' + a.grp.toUpperCase() + '] Target: ' + toEnDate(a.date),
           source:    (month === 'feb' ? 'Feb' : 'Mar') + ' · ' + a.grp.toUpperCase(),
           createdAt: Date.now() + i
         }));
         changed = true;
       } else {
-        // Backfill title_en for existing seeded tasks (items is now in scope)
+        // Backfill title_en / note / note_en for existing seeded tasks
         let bfChanged = false;
         all[tabKey].forEach(task => {
-          // Always sync title_en from MAT_DATA (safe: user cannot edit text_en)
           const match = items.find(a => a.id === task.id || a.text === task.title);
-          if (match && match.text_en && task.title_en !== match.text_en) {
-            task.title_en = match.text_en; bfChanged = true;
-          }
+          if (!match) return;
+          if (match.text_en && task.title_en !== match.text_en) { task.title_en = match.text_en; bfChanged = true; }
+          // Fix old Chinese note format ("目標時間：") and ensure note_en exists
+          const expectedNote   = '[' + match.grp.toUpperCase() + '] Target: ' + match.date;
+          const expectedNoteEn = '[' + match.grp.toUpperCase() + '] Target: ' + toEnDate(match.date);
+          if (task.note   !== expectedNote)   { task.note   = expectedNote;   bfChanged = true; }
+          if (task.note_en !== expectedNoteEn) { task.note_en = expectedNoteEn; bfChanged = true; }
         });
         if (bfChanged) changed = true;
       }
@@ -6238,7 +6249,11 @@ function saveTaskNote(tab, id, value) {
   const all  = loadTasks();
   const task = (all[tab] || []).find(t => t.id === id);
   if (!task) return;
-  task.note = value.trim();
+  if (currentLang === 'en') {
+    task.note_en = value.trim();
+  } else {
+    task.note = value.trim();
+  }
   saveTasks(all);
   // 更新 note toggle icon 不需重渲染整個 panel，只更新按鈕
   const btn = document.querySelector(`#tp-row-${tab}-${id} .tp-note-toggle`);
@@ -6349,12 +6364,15 @@ function backfillWeeklyTaskEn() {
     if (!wData) return;
     const mData = wData.members && wData.members[member];
     if (!mData) return;
+    const memberName = MEMBER_NAMES[member] || member;
     if (type === 'plan') {
       const i = parseInt(key, 10);
       const plan = (mData.plans || [])[i];
       if (!plan) return;
       if (!task.title_en || task.title_en !== plan.en) { task.title_en = plan.en; changed = true; }
       if (!task.source_en) { task.source_en = wData.label.en; changed = true; }
+      const noteEn = `Source: ${wData.label.en} ${memberName} Weekly — Action Plan\n\nOriginal: ${plan.en}`;
+      if (!task.note_en || task.note_en !== noteEn) { task.note_en = noteEn; changed = true; }
     } else if (type === 'client') {
       const client = (mData.clients || []).find(c => c.name === key);
       if (!client) return;
@@ -6362,6 +6380,8 @@ function backfillWeeklyTaskEn() {
       if (!task.title_en || task.title_en !== titleEn) { task.title_en = titleEn; changed = true; }
       const srcEn = `${wData.label.en} · ${client.market}`;
       if (!task.source_en || task.source_en !== srcEn) { task.source_en = srcEn; changed = true; }
+      const noteEn = `Source: ${wData.label.en} ${memberName} Weekly — Client Tracking\nClient: ${client.name} (${client.market})\nStatus: ${client.statusEn}\nAction: ${client.actionEn}`;
+      if (!task.note_en || task.note_en !== noteEn) { task.note_en = noteEn; changed = true; }
     }
   });
   if (changed) saveTasks(all);
@@ -6400,6 +6420,7 @@ function autoExtractTasks(tab, silent) {
           source:        weekLabelZh,
           source_en:     weekLabelEn,
           note:          `來源：${weekLabelZh} ${name} 週報 — Action Plan\n\n原文：${plan.zh}`,
+          note_en:       `Source: ${weekLabelEn} ${name} Weekly — Action Plan\n\nOriginal: ${plan.en}`,
           autoExtracted: true,
           sourceId:      `${weekId}-${member}-plan-${i}`
         });
@@ -6415,6 +6436,7 @@ function autoExtractTasks(tab, silent) {
           source:        `${weekLabelZh} · ${client.market}`,
           source_en:     `${weekLabelEn} · ${client.market}`,
           note:          `來源：${weekLabelZh} ${name} 週報 — 客戶追蹤\n客戶：${client.name}（${client.market}）\n狀態：${client.statusZh}\nAction：${client.actionZh}`,
+          note_en:       `Source: ${weekLabelEn} ${name} Weekly — Client Tracking\nClient: ${client.name} (${client.market})\nStatus: ${client.statusEn}\nAction: ${client.actionEn}`,
           autoExtracted: true,
           sourceId:      `${weekId}-${member}-client-${client.name}`
         });
@@ -6445,6 +6467,7 @@ function autoExtractTasks(tab, silent) {
         source:        labelZh,
         source_en:     labelEn,
         note:          `來源：${labelZh} 月報 — 注意事項\n\n原文：${item.zh}`,
+        note_en:       `Source: ${labelEn} Monthly Report — Watch Points\n\nOriginal: ${cleanEn}`,
         autoExtracted: true,
         sourceId:      `monthly-${mKey}-watchout-${i}`
       });
@@ -6460,6 +6483,7 @@ function autoExtractTasks(tab, silent) {
         source:        labelZh,
         source_en:     labelEn,
         note:          `來源：${labelZh} 月報 — KPI 達成率追蹤\n區域：${k.regionZh}\n達成率：${k.achievement}%\n狀態：${k.status === 'red' ? '未達標' : '接近達標'}`,
+        note_en:       `Source: ${labelEn} Monthly Report — KPI Tracking\nRegion: ${k.regionEn || k.regionZh}\nAchievement: ${k.achievement}%\nStatus: ${k.status === 'red' ? 'Below Target' : 'Near Target'}`,
         autoExtracted: true,
         sourceId:      `monthly-${mKey}-kpi-${k.regionZh}`
       });
