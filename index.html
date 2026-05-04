@@ -5429,15 +5429,18 @@ function setLang(lang) {
       if (firstTextNode) firstTextNode.textContent = newText;
     }
   });
-  // 只在週報分頁才重新渲染週報
+  // 週報分頁：重新渲染週報內容
   const activeTab = document.querySelector('.rtype-tab.active');
   const activeType = activeTab ? (activeTab.getAttribute('onclick') || '').match(/'([\w-]+)'/)?.[1] : 'weekly';
   if (activeType === 'weekly') {
     const sel = document.getElementById('weekSelect');
-    if (sel) { switchWeek(sel.value); initTaskPanels(); }
+    if (sel) switchWeek(sel.value);
   }
-  // 重新渲染月報 Action 追蹤台 + 出差報告任務追蹤
+  // 重新渲染所有任務面板（語言切換時全部更新：weekly/meeting/exhibition/regional/monthly-rpt/travel 等）
+  initTaskPanels();
+  // 月報 Action 追蹤台種子確認 + 重新渲染
   initRmat();
+  // 出差報告任務追蹤種子確認 + 重新渲染
   initTravelTrackers();
   // Update textarea placeholders for travel comment boxes
   document.querySelectorAll('[data-placeholder-zh]').forEach(el => {
