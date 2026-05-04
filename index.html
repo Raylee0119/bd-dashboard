@@ -5859,13 +5859,13 @@ function seedTravelTasks() {
       { id:5106, title:'HGC 合規文件更新',               title_en:'HGC Compliance Document Update',               assignee:'Nina', dueDate:'', status:'todo',  note:'', source:'Greece 出差', source_en:'Greece Trip' }
     ],
     'travel-spain-followup': [
-      { id:6001, title:'GameKong — 啟動 Longfu88 品牌遊戲提案',       title_en:'GameKong — Initiate Longfu88 branded game brief',                assignee:'Bryam', dueDate:'', status:'todo',  note:'由 Product / AM 團隊內部啟動，唯一剩餘的未完成項目', source:'Spain 出差', source_en:'Spain Trip' },
-      { id:6002, title:'GameKong — 促成 Jili 與 GameKong 直接對接',   title_en:'GameKong — Facilitate direct intro between GameKong and Jili',   assignee:'Bryam', dueDate:'', status:'todo',  note:'協助 GameKong 直接與 Jili Directors 對接，推進商業討論', source:'Spain 出差', source_en:'Spain Trip' },
-      { id:6003, title:'GameKong — 跟進 NGR Fangkong 分層費率回覆',   title_en:'GameKong — Follow up on NGR revised tier structure reply',        assignee:'Bryam', dueDate:'', status:'doing', note:'已分享修訂後分層架構，等待 GameKong 回覆', source:'Spain 出差', source_en:'Spain Trip' },
-      { id:6004, title:'IGT — 荷蘭 Unibet 啟動狀態確認（高優先）',  title_en:'IGT — Confirm TaDa activation status for Unibet NL (HIGH)',      assignee:'Bryam', dueDate:'', status:'todo',  note:'高優先事項，延誤可能導致版位被競爭對手搶占', source:'Spain 出差', source_en:'Spain Trip' },
-      { id:6005, title:'IGT — 捷克市場路線圖評估 + 合規確認',        title_en:'IGT — Assess Czechia roadmap + check compliance requirements',   assignee:'Bryam', dueDate:'', status:'todo',  note:'高優先市場，先與合規團隊對齊，探索 MGA homologation', source:'Spain 出差', source_en:'Spain Trip' },
-      { id:6006, title:'IGT — 監控墨西哥進入進展，確保 TaDa 領先 Playtech', title_en:'IGT — Monitor Mexico market entry and coordinate TaDa vs Playtech positioning', assignee:'Bryam', dueDate:'', status:'doing', note:'持續追蹤 IGT 透過 Caliente 及 Tier 2 運營商的市場進入情況', source:'Spain 出差', source_en:'Spain Trip' },
-      { id:6007, title:'建立西班牙及 EU 運營商分層名單（Q3 BD 規劃）', title_en:'Build Spain & EU operator tier list (Tier 1/2/3) for Q3 BD planning', assignee:'Bryam', dueDate:'', status:'todo', note:'Tier 1/2/3 分層，聚焦 Q3 商務拓展方向', source:'Spain 出差', source_en:'Spain Trip' }
+      { id:6001, title:'GameKong — 啟動 Longfu88 品牌遊戲提案',       title_en:'GameKong — Initiate Longfu88 branded game brief',                assignee:'Bryam', dueDate:'', status:'todo',  note:'由 Product / AM 團隊內部啟動，唯一剩餘的未完成項目', note_en:'To be initiated by Product / AM team internally — only remaining open item.', source:'Spain 出差', source_en:'Spain Trip' },
+      { id:6002, title:'GameKong — 促成 Jili 與 GameKong 直接對接',   title_en:'GameKong — Facilitate direct intro between GameKong and Jili',   assignee:'Bryam', dueDate:'', status:'todo',  note:'協助 GameKong 直接與 Jili Directors 對接，推進商業討論', note_en:'Facilitate direct connection between GameKong and Jili Directors to advance commercial discussions.', source:'Spain 出差', source_en:'Spain Trip' },
+      { id:6003, title:'GameKong — 跟進 NGR Fangkong 分層費率回覆',   title_en:'GameKong — Follow up on NGR revised tier structure reply',        assignee:'Bryam', dueDate:'', status:'doing', note:'已分享修訂後分層架構，等待 GameKong 回覆', note_en:'Revised tier structure already shared; awaiting GameKong\'s reply.', source:'Spain 出差', source_en:'Spain Trip' },
+      { id:6004, title:'IGT — 荷蘭 Unibet 啟動狀態確認（高優先）',  title_en:'IGT — Confirm TaDa activation status for Unibet NL (HIGH)',      assignee:'Bryam', dueDate:'', status:'todo',  note:'高優先事項，延誤可能導致版位被競爭對手搶占', note_en:'HIGH priority — delay risks losing placement to competitors.', source:'Spain 出差', source_en:'Spain Trip' },
+      { id:6005, title:'IGT — 捷克市場路線圖評估 + 合規確認',        title_en:'IGT — Assess Czechia roadmap + check compliance requirements',   assignee:'Bryam', dueDate:'', status:'todo',  note:'高優先市場，先與合規團隊對齊，探索 MGA homologation', note_en:'High-priority market; align with compliance team first and explore MGA homologation path.', source:'Spain 出差', source_en:'Spain Trip' },
+      { id:6006, title:'IGT — 監控墨西哥進入進展，確保 TaDa 領先 Playtech', title_en:'IGT — Monitor Mexico market entry and coordinate TaDa vs Playtech positioning', assignee:'Bryam', dueDate:'', status:'doing', note:'持續追蹤 IGT 透過 Caliente 及 Tier 2 運營商的市場進入情況', note_en:'Ongoing monitoring of IGT\'s market entry via Caliente and Tier 2 operators.', source:'Spain 出差', source_en:'Spain Trip' },
+      { id:6007, title:'建立西班牙及 EU 運營商分層名單（Q3 BD 規劃）', title_en:'Build Spain & EU operator tier list (Tier 1/2/3) for Q3 BD planning', assignee:'Bryam', dueDate:'', status:'todo', note:'Tier 1/2/3 分層，聚焦 Q3 商務拓展方向', note_en:'Tier 1/2/3 classification focused on Q3 business development direction.', source:'Spain 出差', source_en:'Spain Trip' }
     ]
   };
 
@@ -5883,6 +5883,7 @@ function seedTravelTasks() {
           if (match.title     && task.title     !== match.title)     { task.title     = match.title;     bfChanged = true; }
           if (match.title_en  && task.title_en  !== match.title_en)  { task.title_en  = match.title_en;  bfChanged = true; }
           if (match.source_en && task.source_en !== match.source_en) { task.source_en = match.source_en; bfChanged = true; }
+          if (match.note_en   && task.note_en   !== match.note_en)   { task.note_en   = match.note_en;   bfChanged = true; }
         }
       });
       // 2. Add any seed items missing from localStorage
@@ -6158,8 +6159,9 @@ function renderTaskPanel(tab) {
 function renderTaskRow(task, tab) {
   const isDone  = task.status === 'done';
   const od      = isOverdue(task);
-  const zh      = currentLang === 'zh';
-  const hasNote = !!(task.note && task.note.trim());
+  const zh          = currentLang === 'zh';
+  const noteContent = (!zh && task.note_en) ? task.note_en : (task.note || '');
+  const hasNote     = !!(noteContent && noteContent.trim());
   const isAuto  = !!task.autoExtracted;
   const noteId  = `tp-note-row-${tab}-${task.id}`;
 
@@ -6212,7 +6214,7 @@ function renderTaskRow(task, tab) {
         <textarea class="tp-note-area" rows="3"
           placeholder="${zh?'備註 / 任務細節（來源報告、追蹤重點、背景說明…）':'Notes / details (source report, follow-up points, context…)'}"
           onblur="saveTaskNote('${tab}',${task.id},this.value)"
-        >${escHtml(task.note||'')}</textarea>
+        >${escHtml(noteContent)}</textarea>
         <div class="tp-note-hint">${zh?'點擊外部自動儲存':'Auto-saves on blur'}</div>
       </td>
     </tr>`;
