@@ -1817,7 +1817,7 @@
     <div class="rpt-toolbar">
       <div>
         <div class="rpt-toolbar-title">✈️ <span data-zh="EU 出差報告 · Nina Cheng" data-en="EU Travel Report · Nina Cheng">EU 出差報告 · Nina Cheng</span></div>
-        <div class="rpt-toolbar-sub"><span data-zh="2026 Q1 · 羅馬尼亞 / 義大利 / 希臘 歐洲監管市場出差紀錄" data-en="2026 Q1 · Romania / Italy / Greece · EU Regulated Market Business Trip Record">2026 Q1 · 羅馬尼亞 / 義大利 / 希臘 歐洲監管市場出差紀錄</span></div>
+        <div class="rpt-toolbar-sub"><span data-zh="2026 Q1–Q2 · 羅馬尼亞 / 義大利 / 希臘 / 西班牙 歐洲監管市場出差紀錄" data-en="2026 Q1–Q2 · Romania / Italy / Greece / Spain · EU Regulated Market Business Trip Record">2026 Q1–Q2 · 羅馬尼亞 / 義大利 / 希臘 / 西班牙 歐洲監管市場出差紀錄</span></div>
       </div>
       <div class="rpt-filter-row">
         <span class="rpt-meta-chip" style="background:rgba(59,130,246,0.15);color:#60A5FA;border:1px solid rgba(59,130,246,0.3)">🏛️ EU Regulated</span>
@@ -1836,6 +1836,9 @@
       </button>
       <button class="travel-trip-tab" data-trip="greece" onclick="switchTravelTrip('greece')">
         🇬🇷 <span data-zh="希臘" data-en="Greece">希臘</span>
+      </button>
+      <button class="travel-trip-tab" data-trip="spain" onclick="switchTravelTrip('spain')">
+        🇪🇸 <span data-zh="西班牙" data-en="Spain">西班牙</span>
       </button>
     </div>
 
@@ -2097,6 +2100,106 @@
         </div>
       </div>
     </div>
+
+    <!-- ══ Spain ══ -->
+    <div class="travel-trip-content" id="trip-spain">
+      <div class="rpt-section-label">
+        🇪🇸 <span data-zh="西班牙出差報告 · DGOJ 監管市場 · 2026 Q2" data-en="Spain Travel Report · DGOJ Regulated Market · 2026 Q2">西班牙出差報告 · DGOJ 監管市場 · 2026 Q2</span>
+      </div>
+
+      <div class="travel-section-grid">
+
+        <!-- ① 出差概覽 -->
+        <div class="travel-section-card travel-full-card">
+          <div class="travel-section-hdr" style="border-left:4px solid #F59E0B">
+            📋 <span data-zh="出差概覽" data-en="Trip Overview">出差概覽</span>
+          </div>
+          <div class="travel-section-body">
+            <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px">
+              <div style="background:var(--bg);border-radius:8px;padding:12px 14px;border:1px solid var(--border)">
+                <div style="font-size:11px;color:var(--muted);margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px"><span data-zh="出差日期" data-en="Date">出差日期</span></div>
+                <div style="font-weight:600;color:var(--text)" id="spain-date">待填入</div>
+              </div>
+              <div style="background:var(--bg);border-radius:8px;padding:12px 14px;border:1px solid var(--border)">
+                <div style="font-size:11px;color:var(--muted);margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px"><span data-zh="出差目的" data-en="Purpose">出差目的</span></div>
+                <div style="font-weight:600;color:var(--text)" id="spain-purpose">待填入</div>
+              </div>
+              <div style="background:var(--bg);border-radius:8px;padding:12px 14px;border:1px solid var(--border)">
+                <div style="font-size:11px;color:var(--muted);margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px"><span data-zh="TaDa 出席人員" data-en="TaDa Attendance">TaDa 出席人員</span></div>
+                <div style="font-weight:600;color:var(--text)" id="spain-attendance">待填入</div>
+              </div>
+              <div style="background:var(--bg);border-radius:8px;padding:12px 14px;border:1px solid var(--border)">
+                <div style="font-size:11px;color:var(--muted);margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px"><span data-zh="拜訪客戶" data-en="Visit Clients">拜訪客戶</span></div>
+                <div style="font-weight:600;color:var(--text)" id="spain-clients">待填入</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ② 市場資訊 -->
+        <div class="travel-section-card">
+          <div class="travel-section-hdr" style="border-left:4px solid #3B82F6">
+            📊 <span data-zh="市場資訊" data-en="Market Intelligence">市場資訊</span>
+          </div>
+          <div class="travel-section-body" id="spain-market">
+            <div class="travel-bullet" data-zh="待填入" data-en="TBD">待填入</div>
+          </div>
+        </div>
+
+        <!-- ③ 客戶詳談細節 -->
+        <div class="travel-section-card">
+          <div class="travel-section-hdr" style="border-left:4px solid #F59E0B">
+            🤝 <span data-zh="客戶詳談細節" data-en="Client Meeting Details">客戶詳談細節</span>
+          </div>
+          <div class="travel-section-body" id="spain-client-details">
+            <div class="travel-client-card">
+              <div style="font-weight:600;color:#F59E0B;margin-bottom:4px"><span data-zh="（待填入客戶名稱）" data-en="(Client TBD)">(待填入客戶名稱)</span></div>
+              <div class="travel-bullet" data-zh="待填入" data-en="TBD">待填入</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ④ 商務策略 -->
+        <div class="travel-section-card travel-full-card">
+          <div class="travel-section-hdr" style="border-left:4px solid #8B5CF6">
+            🧭 <span data-zh="商務策略" data-en="Business Strategy">商務策略</span>
+          </div>
+          <div class="travel-section-body" id="spain-strategy">
+            <div class="travel-bullet" data-zh="待填入" data-en="TBD">待填入</div>
+          </div>
+        </div>
+
+        <!-- ⑤ 追蹤項目 -->
+        <div class="travel-section-card travel-full-card">
+          <div class="travel-section-hdr" style="border-left:4px solid #EC4899">
+            📌 <span data-zh="追蹤項目" data-en="Tracking Items">追蹤項目</span>
+          </div>
+          <div id="tasks-travel-spain-followup" class="travel-section-body" style="padding:0"></div>
+        </div>
+
+      </div><!-- end travel-section-grid -->
+
+      <!-- Andy Comment Board - Spain -->
+      <div class="monthly-comment-boards" style="margin-top:20px">
+        <div class="monthly-comment-boards-title">💬 <span data-zh="Andy 留言板 · 西班牙出差報告" data-en="Andy's Comments · Spain Travel Report">Andy 留言板 · 西班牙出差報告</span></div>
+        <div class="monthly-cmnt-single">
+          <div class="monthly-cmnt-board">
+            <div class="monthly-cmnt-header">
+              <div class="monthly-cmnt-avatar" style="background:#FEF9C3;font-size:22px">👑</div>
+              <div><div class="monthly-cmnt-name">Andy</div><div class="monthly-cmnt-role"><span data-zh="CEO · 最高決策層回饋" data-en="CEO · Executive Feedback">CEO · 最高決策層回饋</span></div></div>
+            </div>
+            <div class="monthly-cmnt-input-wrap">
+              <textarea id="tcmnt-input-spain" class="monthly-cmnt-textarea" placeholder="留言給 Nina 關於西班牙出差報告…" data-placeholder-zh="留言給 Nina 關於西班牙出差報告…" data-placeholder-en="Leave a comment for Nina about the Spain Trip Report…" rows="2"></textarea>
+              <button class="monthly-cmnt-submit" onclick="submitTravelComment('spain')">
+                <span data-zh="送出" data-en="Send">送出</span>
+              </button>
+            </div>
+            <div id="tcmnt-list-spain" class="monthly-cmnt-list"></div>
+          </div>
+        </div>
+      </div>
+    </div><!-- end trip-spain -->
+
   </div><!-- end 出差報告 view -->
 
   <!-- ══════════ 參展報告 VIEW ══════════ -->
@@ -5719,6 +5822,10 @@ function seedTravelTasks() {
       { id:5104, title:'Novibet 正式 Demo 時間確認',    title_en:'Novibet Official Demo Time Confirmed',    assignee:'Nina', dueDate:'', status:'todo',  note:'', source:'Greece 出差', source_en:'Greece Trip' },
       { id:5105, title:'Vistabet 進一步評估',            title_en:'Vistabet Further Evaluation',            assignee:'Nina', dueDate:'', status:'todo',  note:'', source:'Greece 出差', source_en:'Greece Trip' },
       { id:5106, title:'HGC 合規文件更新',               title_en:'HGC Compliance Document Update',               assignee:'Nina', dueDate:'', status:'todo',  note:'', source:'Greece 出差', source_en:'Greece Trip' }
+    ],
+    'travel-spain-followup': [
+      { id:6001, title:'待填入追蹤項目 1', title_en:'Tracking Item 1 (TBD)', assignee:'Nina', dueDate:'', status:'todo', note:'', source:'Spain 出差', source_en:'Spain Trip' },
+      { id:6002, title:'待填入追蹤項目 2', title_en:'Tracking Item 2 (TBD)', assignee:'Nina', dueDate:'', status:'todo', note:'', source:'Spain 出差', source_en:'Spain Trip' }
     ]
   };
 
@@ -5894,7 +6001,8 @@ const RMAT_TABS = [
 const TRAVEL_TASK_TABS = [
   'travel-romania-actions','travel-romania-followup',
   'travel-italy-actions','travel-italy-followup',
-  'travel-greece-actions','travel-greece-followup'
+  'travel-greece-actions','travel-greece-followup',
+  'travel-spain-followup'
 ];
 const TASK_TABS = ['weekly','meeting','monthly-rpt','exhibition','travel','regional', ...RMAT_TABS, ...TRAVEL_TASK_TABS];
 
