@@ -641,14 +641,20 @@
         <option value="w11">W11 · 3/09–3/15, 2026</option>
         <option value="w12" selected>W12 · 3/16–3/22, 2026</option>
         <option value="w13">W13 · 3/23–3/29, 2026</option>
+        <option value="w15">W15 · 4/06–4/12, 2026</option>
+        <option value="w16">W16 · 4/13–4/19, 2026</option>
+        <option value="w17">W17 · 4/20–4/26, 2026</option>
+        <option value="w18">W18 · 4/27–5/03, 2026</option>
       </optgroup>
       <optgroup label="── 月總結 ──">
         <option value="mar2026">三月 2026 月總結</option>
+        <option value="apr2026">四月 2026 月總結</option>
       </optgroup>
     </select>
     <!-- 月報選擇器 -->
     <select class="week-select" id="monthRptSelect" style="display:none" onchange="switchMonthRpt(this.value)">
       <optgroup id="mg-2026" label="── 2026 ──">
+        <option value="apr2026" data-zh="四月 2026" data-en="April 2026">四月 2026</option>
         <option value="mar2026" data-zh="三月 2026" data-en="March 2026">三月 2026</option>
         <option value="feb2026" data-zh="二月 2026" data-en="February 2026">二月 2026</option>
         <option value="jan2026" data-zh="一月 2026" data-en="January 2026">一月 2026</option>
@@ -4085,6 +4091,480 @@ const weekData = {
     }
   }  // end w13
 
+  ,w15: {
+    label:  {zh:'W15 · 4/06–4/12', en:'W15 · Apr 6–12'},
+    period: {zh:'2026/04/06 – 2026/04/12', en:'2026-04-06 – 2026-04-12'},
+    estimated: false,
+    summary: {
+      totalTDAB:    {zh:'3,672.4M THB', en:'3,672.4M THB'},
+      teamWoW:      '−0.67%',
+      teamWoWClass: 'red',
+      noteZh:'Hector + Bryam + Chu 為官方數據；Nina W15 資料缺漏，以 W13 基準推估',
+      noteEn:'Hector + Bryam + Chu official; Nina W15 data missing, estimated from W13 baseline'
+    },
+    members: {
+      bryam: {
+        tdab:166707587, tdabWoW:-2.83, estimated:false,
+        subRegions:[
+          {nameZh:'CIS 整體',nameEn:'CIS Total',tdab:166707587,wow:-2.83}
+        ],
+        highlights:[
+          {zh:'CIS 整體 166.7M THB，WoW -2.83%，DAU 46,710 (-3.14%)',en:'CIS total 166.7M THB, WoW -2.83%; DAU 46,710 (-3.14%)'},
+          {zh:'Ukraine 市場份額週環比上升 +0.72pp，相對其他市場較具韌性',en:'Ukraine market share up +0.72pp WoW; relatively more resilient'},
+          {zh:'Uzbekistan 市場份額下降 -0.61pp，需關注本地運營商動態',en:'Uzbekistan share down -0.61pp WoW; monitor local operator dynamics'},
+          {zh:'Slotegrator 合作正式執行，CIS 內容曝光持續推進',en:'Slotegrator cooperation officially executing; CIS content exposure ongoing'}
+        ],
+        clients:[
+          {name:'Slotegrator',market:'Ukraine / CIS',dotColor:'#10B981',statusZh:'執行中',statusEn:'Active',tagClass:'tag-green',actionZh:'監控首月成效',actionEn:'Monitor Month-1 Performance'},
+          {name:'Ukraine Ops',market:'Ukraine',dotColor:'#10B981',statusZh:'穩定',statusEn:'Stable',tagClass:'tag-green',actionZh:'維持份額',actionEn:'Maintain Share'},
+          {name:'Uzbekistan Ops',market:'Uzbekistan',dotColor:'#F59E0B',statusZh:'份額下滑',statusEn:'Share Declining',tagClass:'tag-orange',actionZh:'分析原因',actionEn:'Investigate Cause'},
+          {name:'Veganster',market:'CIS',dotColor:'#10B981',statusZh:'合約完成',statusEn:'Contracted',tagClass:'tag-green',actionZh:'執行整合',actionEn:'Execute Integration'}
+        ],
+        plans:[
+          {zh:'分析 Uzbekistan 份額下降原因，擬定對應方案',en:'Analyze Uzbekistan share decline; formulate response plan'},
+          {zh:'Ukraine：鞏固領先地位，確保 Slotegrator 整合效益釋放',en:'Ukraine: consolidate lead; ensure Slotegrator integration delivers value'},
+          {zh:'評估 CIS 其他市場 (Kazakhstan / Belarus) 4月拓展機會',en:'Assess April expansion opportunities in Kazakhstan/Belarus'},
+          {zh:'持續推進 Veganster 整合執行，目標 4月中旬數據可見',en:'Continue Veganster integration; target data visibility by mid-April'}
+        ]
+      },
+      hector: {
+        tdab:3283758838, tdabWoW:0.23, estimated:false,
+        subRegions:[{nameZh:'Latam 整體',nameEn:'Latam Total',tdab:3283758838,wow:0.23}],
+        highlights:[
+          {zh:'Latam 日均 3,283.8M THB，WoW +0.23%，DAU 1,524,928 (+1.96%)',en:'Latam daily avg 3,283.8M THB, WoW +0.23%; DAU 1,524,928 (+1.96%)'},
+          {zh:'Paraguay 表現突出，WoW +87.66%，爆發性增長',en:'Paraguay standout performer, WoW +87.66%; explosive growth'},
+          {zh:'Bragg_Brazil WoW +11.4%，Brazil 市場動能持續回升',en:'Bragg_Brazil WoW +11.4%; Brazil market momentum recovering'},
+          {zh:'整體 DAU 增幅優於金額增幅，顯示用戶基數正在擴大',en:'DAU growth outpaces volume growth, indicating user base expansion'}
+        ],
+        clients:[
+          {name:'Bragg Brazil',market:'Brazil',dotColor:'#10B981',statusZh:'加速成長',statusEn:'Accelerating',tagClass:'tag-green',actionZh:'維持促銷力度',actionEn:'Sustain Promo Momentum'},
+          {name:'Paraguay Partner',market:'Paraguay',dotColor:'#10B981',statusZh:'爆發成長',statusEn:'Explosive Growth',tagClass:'tag-green',actionZh:'深化合作',actionEn:'Deepen Partnership'},
+          {name:'Betcris',market:'Latam',dotColor:'#10B981',statusZh:'穩定',statusEn:'Stable',tagClass:'tag-green',actionZh:'Q2策略規劃',actionEn:'Q2 Strategy'},
+          {name:'1xBet Latam',market:'Latam',dotColor:'#10B981',statusZh:'活躍',statusEn:'Active',tagClass:'tag-green',actionZh:'監控成長',actionEn:'Monitor Growth'}
+        ],
+        plans:[
+          {zh:'深化 Paraguay 合作，確認成長驅動因素並制定延續方案',en:'Deepen Paraguay partnership; confirm growth drivers and sustain plan'},
+          {zh:'Brazil：持續推動 Bragg 合作，目標 Q2 穩定成長',en:'Brazil: continue Bragg push; target stable Q2 growth'},
+          {zh:'評估 DAU vs TDAB 增長差距，確認新用戶質量',en:'Assess DAU vs TDAB growth gap; confirm new user quality'},
+          {zh:'規劃 4月促銷活動：針對 Latam 主要市場',en:'Plan April promos targeting key Latam markets'}
+        ]
+      },
+      chu: {
+        tdab:407647024, tdabWoW:-11.22, estimated:false,
+        subRegions:[
+          {nameZh:'非洲',nameEn:'Africa',tdab:185811973,wow:-17.30},
+          {nameZh:'大洋洲',nameEn:'Oceania',tdab:59793753,wow:-2.04},
+          {nameZh:'北美',nameEn:'N. America',tdab:162041298,wow:-7.31}
+        ],
+        highlights:[
+          {zh:'非洲 185.8M THB WoW -17.30%，DAU 163,655；月初正常回調後觀察',en:'Africa 185.8M THB WoW -17.30%, DAU 163,655; monitoring post-month-start adjustment'},
+          {zh:'大洋洲 59.8M THB WoW -2.04%，DAU 3,313；相對穩定',en:'Oceania 59.8M THB WoW -2.04%, DAU 3,313; relatively stable'},
+          {zh:'北美 162.0M THB WoW -7.31%，DAU 18,235；賽季節奏正常波動',en:'N. America 162.0M THB WoW -7.31%, DAU 18,235; normal seasonal rhythm'},
+          {zh:'整體三大市場 407.6M，較 3月均值略有回調，屬正常月初態勢',en:'Total three markets 407.6M; slight pullback from March avg; normal early-month pattern'}
+        ],
+        clients:[
+          {name:'SportyBet',market:'Africa',dotColor:'#10B981',statusZh:'上線監控',statusEn:'Live - Monitoring',tagClass:'tag-green',actionZh:'確認首月達成',actionEn:'Confirm Month-1 KPIs'},
+          {name:'BetWay Africa',market:'Africa',dotColor:'#10B981',statusZh:'穩定',statusEn:'Stable',tagClass:'tag-green',actionZh:'維持合作',actionEn:'Maintain Partnership'},
+          {name:'Tabcorp',market:'Oceania',dotColor:'#10B981',statusZh:'穩定',statusEn:'Stable',tagClass:'tag-green',actionZh:'大洋洲拓展評估',actionEn:'Oceania Expansion Review'},
+          {name:'DraftKings',market:'N. America',dotColor:'#10B981',statusZh:'穩定',statusEn:'Stable',tagClass:'tag-green',actionZh:'賽季分析',actionEn:'Season Analysis'}
+        ],
+        plans:[
+          {zh:'非洲：分析 -17% 回調原因，評估是否需要促銷補強',en:'Africa: analyze -17% pullback; assess if promo reinforcement needed'},
+          {zh:'SportyBet：確認首月 KPI 達成，規劃後續激活方案',en:'SportyBet: confirm month-1 KPI achievement; plan next activation'},
+          {zh:'大洋洲：評估 NZ/AU 新合作夥伴機會',en:'Oceania: evaluate NZ/AU new partner opportunities'},
+          {zh:'北美：NBA 賽季末段，評估季後賽促銷策略',en:'N. America: NBA late season; evaluate playoff promo strategy'}
+        ]
+      },
+      nina: {
+        tdab:338000000, tdabWoW:null, estimated:true,
+        subRegions:[{nameZh:'EU 整體 (推估)',nameEn:'EU Total (Est.)',tdab:338000000,wow:null}],
+        highlights:[
+          {zh:'(推估) W15 EU 數據缺漏，以 W13 基準 338M/天維持',en:'(Est.) W15 EU data missing; using W13 baseline of 338M/day'},
+          {zh:'歐洲出差進行中：Romania / Greece / Italy 客戶拜訪',en:'Europe business trip underway: Romania/Greece/Italy client visits'},
+          {zh:'Boyles UK 上線後進入穩定期，持續監控數據表現',en:'Boyles UK post-launch stabilization; ongoing data monitoring'},
+          {zh:'Superbet Romania 出差拜訪，確認 5月促銷計畫',en:'Superbet Romania visit; confirming May promo plan'}
+        ],
+        clients:[
+          {name:'Boyles',market:'UK',dotColor:'#10B981',statusZh:'上線穩定',statusEn:'Live Stable',tagClass:'tag-green',actionZh:'監控表現',actionEn:'Monitor Performance'},
+          {name:'Superbet',market:'Romania',dotColor:'#10B981',statusZh:'面訪完成',statusEn:'Visit Done',tagClass:'tag-green',actionZh:'確認促銷計畫',actionEn:'Confirm Promo Plan'},
+          {name:'StarCasino',market:'Italy',dotColor:'#10B981',statusZh:'面訪中',statusEn:'Visiting',tagClass:'tag-green',actionZh:'深化合作',actionEn:'Deepen Partnership'},
+          {name:'Rank',market:'UK',dotColor:'#F59E0B',statusZh:'最終測試',statusEn:'Final Testing',tagClass:'tag-orange',actionZh:'推進上線',actionEn:'Push to Launch'}
+        ],
+        plans:[
+          {zh:'整理出差會議記錄，更新各客戶合作進度',en:'Compile trip meeting notes; update client cooperation progress'},
+          {zh:'Rank UK：跟進最終合規步驟，目標 4月中上線',en:'Rank UK: follow up final compliance; target mid-April launch'},
+          {zh:'Superbet Romania：確認 5月促銷方案，發出確認信',en:'Superbet Romania: confirm May promo plan; send confirmation email'},
+          {zh:'StarCasino Italy：討論 Q2 深化合作方向',en:'StarCasino Italy: discuss Q2 deeper collaboration direction'}
+        ]
+      }
+    }
+  }  // end w15
+
+  ,w16: {
+    label:  {zh:'W16 · 4/13–4/19', en:'W16 · Apr 13–19'},
+    period: {zh:'2026/04/13 – 2026/04/19', en:'2026-04-13 – 2026-04-19'},
+    estimated: false,
+    summary: {
+      totalTDAB:    {zh:'3,907.6M THB', en:'3,907.6M THB'},
+      teamWoW:      '+6.40%',
+      teamWoWClass: 'green',
+      noteZh:'全員數據完整；Hector 含 BO 數據缺漏說明；Nina 為 EU 監管市場 + Global 合計',
+      noteEn:'All members with official data; Hector note on BO data gap; Nina EU Reg + Global combined'
+    },
+    members: {
+      bryam: {
+        tdab:179022344, tdabWoW:7.39, estimated:false,
+        subRegions:[
+          {nameZh:'CIS 整體',nameEn:'CIS Total',tdab:179022344,wow:7.39}
+        ],
+        highlights:[
+          {zh:'CIS 整體 179.0M THB，WoW +7.39%，DAU 47,335 (+1.34%)，強力反彈',en:'CIS total 179.0M THB, WoW +7.39%; DAU 47,335 (+1.34%); strong rebound'},
+          {zh:'Armenia 爆發成長 +116.08%，成為本週最大驅動力',en:'Armenia explosive growth +116.08%; biggest driver this week'},
+          {zh:'Ukraine WoW -32.72%，份額較上週大幅回落，需持續觀察',en:'Ukraine WoW -32.72%; significant share pullback; needs monitoring'},
+          {zh:'Slotegrator 整合效益初步顯現，CIS 整體 TDAB 回升至 179M 以上',en:'Slotegrator integration showing initial results; CIS TDAB recovers to 179M+'}
+        ],
+        clients:[
+          {name:'Armenia Partner',market:'Armenia',dotColor:'#10B981',statusZh:'爆發成長',statusEn:'Explosive Growth',tagClass:'tag-green',actionZh:'確認成長來源',actionEn:'Confirm Growth Source'},
+          {name:'Slotegrator',market:'Ukraine / CIS',dotColor:'#10B981',statusZh:'執行中',statusEn:'Active',tagClass:'tag-green',actionZh:'評估效益',actionEn:'Evaluate ROI'},
+          {name:'Ukraine Ops',market:'Ukraine',dotColor:'#F59E0B',statusZh:'份額回落',statusEn:'Share Down',tagClass:'tag-orange',actionZh:'分析原因',actionEn:'Analyze Cause'},
+          {name:'Veganster',market:'CIS',dotColor:'#10B981',statusZh:'整合中',statusEn:'Integrating',tagClass:'tag-green',actionZh:'推進上線',actionEn:'Push to Live'}
+        ],
+        plans:[
+          {zh:'Armenia：確認成長來源是否可持續，規劃跟進方案',en:'Armenia: confirm if growth is sustainable; plan follow-up actions'},
+          {zh:'Ukraine：深入分析 -32.72% 回落原因，擬定恢復計畫',en:'Ukraine: deep-dive -32.72% drop; formulate recovery plan'},
+          {zh:'整體 CIS 策略：鞏固 Armenia 成長，修復 Ukraine 態勢',en:'Overall CIS strategy: consolidate Armenia growth, repair Ukraine momentum'},
+          {zh:'Veganster 整合最終確認，目標本週上線',en:'Veganster integration final confirmation; target go-live this week'}
+        ]
+      },
+      hector: {
+        tdab:3109040941, tdabWoW:-5.32, estimated:false,
+        subRegions:[{nameZh:'Latam 整體',nameEn:'Latam Total',tdab:3109040941,wow:-5.32}],
+        highlights:[
+          {zh:'Latam 日均 3,109.0M THB，WoW -5.32%，DAU 1,535,768 (+0.71%)',en:'Latam daily avg 3,109.0M THB, WoW -5.32%; DAU 1,535,768 (+0.71%)'},
+          {zh:'Paraguay 持續爆發 +66.15%，連續兩週高速成長',en:'Paraguay continues explosive growth +66.15%; two consecutive strong weeks'},
+          {zh:'Uruguay 大幅下滑 -79.85%，需緊急評估原因',en:'Uruguay sharp decline -79.85%; urgent investigation needed'},
+          {zh:'Bolivia (BO) 數據缺漏，對整體 Latam WoW 計算有影響',en:'Bolivia (BO) data gap affecting overall Latam WoW calculation'},
+          {zh:'DAU 逆勢微升 +0.71%，顯示用戶黏性尚佳',en:'DAU slight uptick +0.71% despite volume decline; user stickiness intact'}
+        ],
+        clients:[
+          {name:'Paraguay Partner',market:'Paraguay',dotColor:'#10B981',statusZh:'爆發成長',statusEn:'Explosive Growth',tagClass:'tag-green',actionZh:'深化合作',actionEn:'Deepen Partnership'},
+          {name:'Uruguay Ops',market:'Uruguay',dotColor:'#EF4444',statusZh:'大幅下滑',statusEn:'Sharp Decline',tagClass:'tag-red',actionZh:'緊急調查',actionEn:'Urgent Investigation'},
+          {name:'Bragg Brazil',market:'Brazil',dotColor:'#10B981',statusZh:'穩定成長',statusEn:'Steady Growth',tagClass:'tag-green',actionZh:'持續推進',actionEn:'Continue Push'},
+          {name:'Betcris',market:'Latam',dotColor:'#10B981',statusZh:'穩定',statusEn:'Stable',tagClass:'tag-green',actionZh:'Q2促銷規劃',actionEn:'Q2 Promo Plan'}
+        ],
+        plans:[
+          {zh:'Uruguay：緊急調查 -79.85% 暴跌原因，確認是否為數據異常或市場問題',en:'Uruguay: urgent investigation of -79.85% drop; confirm if data issue or market problem'},
+          {zh:'Bolivia 數據缺漏跟進：確認實際數字，補正 WoW 計算',en:'Bolivia data gap follow-up: confirm actual figures; recalculate WoW'},
+          {zh:'Paraguay：分析連續兩週成長因素，制定成長延續計畫',en:'Paraguay: analyze two-week consecutive growth; build sustainability plan'},
+          {zh:'Brazil：持續 Bragg 合作推進，評估 Q2 目標',en:'Brazil: continue Bragg partnership; assess Q2 targets'}
+        ]
+      },
+      chu: {
+        tdab:416318790, tdabWoW:2.13, estimated:false,
+        subRegions:[
+          {nameZh:'非洲',nameEn:'Africa',tdab:185744594,wow:-0.04},
+          {nameZh:'大洋洲',nameEn:'Oceania',tdab:56892039,wow:-4.85},
+          {nameZh:'北美',nameEn:'N. America',tdab:173682157,wow:7.81}
+        ],
+        highlights:[
+          {zh:'非洲 185.7M THB WoW -0.04%，DAU 159,227；幾近持平，展現穩定性',en:'Africa 185.7M THB WoW -0.04%, DAU 159,227; near flat, demonstrating stability'},
+          {zh:'大洋洲 56.9M THB WoW -4.85%，DAU 3,231；小幅回落',en:'Oceania 56.9M THB WoW -4.85%, DAU 3,231; slight pullback'},
+          {zh:'北美 173.7M THB WoW +7.81%，DAU 18,938；強勁反彈',en:'N. America 173.7M THB WoW +7.81%, DAU 18,938; strong rebound'},
+          {zh:'Egypt 大幅增長，1XBET 埃及從 4/13 起帶動顯著提升',en:'Egypt surging: 1XBET Egypt driving significant growth from Apr 13'},
+          {zh:'NZ 大洋洲：Softswiss LuckyDreams WoW +82%，帶動大洋洲 DAU',en:'NZ Oceania: Softswiss LuckyDreams WoW +82%; boosting Oceania DAU'}
+        ],
+        clients:[
+          {name:'1XBET Egypt',market:'Africa',dotColor:'#10B981',statusZh:'爆發成長',statusEn:'Surge',tagClass:'tag-green',actionZh:'確認增長持續性',actionEn:'Confirm Growth Sustainability'},
+          {name:'LuckyDreams NZ',market:'Oceania',dotColor:'#10B981',statusZh:'強勁成長',statusEn:'Strong Growth',tagClass:'tag-green',actionZh:'深化合作',actionEn:'Deepen Partnership'},
+          {name:'SportyBet',market:'Africa',dotColor:'#10B981',statusZh:'穩定',statusEn:'Stable',tagClass:'tag-green',actionZh:'首月KPI確認',actionEn:'Month-1 KPI Review'},
+          {name:'DraftKings',market:'N. America',dotColor:'#10B981',statusZh:'反彈成長',statusEn:'Rebounding',tagClass:'tag-green',actionZh:'賽季監控',actionEn:'Season Monitoring'}
+        ],
+        plans:[
+          {zh:'Egypt 1XBET：確認成長可持續性，評估是否擴大合作範圍',en:'Egypt 1XBET: confirm growth sustainability; assess scope expansion'},
+          {zh:'LuckyDreams NZ：深化 Softswiss 合作，目標帶動整體大洋洲成長',en:'LuckyDreams NZ: deepen Softswiss partnership to lift overall Oceania'},
+          {zh:'非洲整體：評估 4月整月趨勢，規劃 5月促銷計畫',en:'Africa overall: evaluate April monthly trend; plan May promos'},
+          {zh:'北美：持續評估 NBA 季後賽對賭注量的推動效果',en:'N. America: continue assessing NBA playoffs impact on wagering'}
+        ]
+      },
+      nina: {
+        tdab:388985827, tdabWoW:-8.36, estimated:false,
+        subRegions:[
+          {nameZh:'EU 整體',nameEn:'EU Total',tdab:388985827,wow:-8.36},
+          {nameZh:'EU 監管',nameEn:'EU Regulated',tdab:54294074,wow:-22.10}
+        ],
+        highlights:[
+          {zh:'EU 整體 389.0M THB WoW -8.36%；EU 監管市場 54.3M -22.10%',en:'EU total 389.0M THB WoW -8.36%; EU regulated 54.3M -22.10%'},
+          {zh:'Videoslots UK Fortune Hook P1 banner 首促：Day 1 達 1.5M TTB，表現亮眼',en:'Videoslots UK Fortune Hook P1 banner promo: Day 1 hit 1.5M TTB; outstanding result'},
+          {zh:'Superbet Romania 排名第 11，5月促銷計畫確認，6月待定',en:'Superbet Romania ranked #11; May promo confirmed; June plan pending'},
+          {zh:'StarCasino Italy：€4M 月成交量達 Top 20，被評為「年度最佳上線」',en:'StarCasino Italy: €4M monthly volume, Top 20; rated "best launch of the year"'},
+          {zh:'Stake 下一步：7% NGR 條款確認，30個 ADM code 已發出',en:'Stake next steps: 7% NGR terms confirmed; 30 ADM codes issued'},
+          {zh:'Entain Greece 預計 4/30 上線，涵蓋 3 個品牌',en:'Entain Greece target live 4/30; covering 3 brands'},
+          {zh:'Peppermil Portugal 接受直接合作方案',en:'Peppermil Portugal accepted direct partnership proposal'},
+          {zh:'Romania Bragg 8.7M (-50.78%)，Kaizen 644K (+2.31%)；UK LnW 957K (-58.74%)',en:'Romania Bragg 8.7M (-50.78%), Kaizen 644K (+2.31%); UK LnW 957K (-58.74%)'}
+        ],
+        clients:[
+          {name:'Videoslots UK',market:'UK',dotColor:'#10B981',statusZh:'促銷亮眼',statusEn:'Promo Hit',tagClass:'tag-green',actionZh:'持續 P1 位置',actionEn:'Maintain P1 Placement'},
+          {name:'Superbet Romania',market:'Romania',dotColor:'#10B981',statusZh:'活躍 #11',statusEn:'Active Rank #11',tagClass:'tag-green',actionZh:'確認 6月方案',actionEn:'Confirm June Plan'},
+          {name:'StarCasino Italy',market:'Italy',dotColor:'#10B981',statusZh:'最佳上線',statusEn:'Best Launch',tagClass:'tag-green',actionZh:'深化合作',actionEn:'Deepen Collaboration'},
+          {name:'Entain Greece',market:'Greece',dotColor:'#F59E0B',statusZh:'預計上線',statusEn:'Expected Live',tagClass:'tag-orange',actionZh:'確認 4/30',actionEn:'Confirm Apr 30'},
+          {name:'Stake',market:'ADM Italy',dotColor:'#10B981',statusZh:'ADM 進行中',statusEn:'ADM In Progress',tagClass:'tag-green',actionZh:'推進 30 codes',actionEn:'Push 30 ADM Codes'},
+          {name:'Peppermil Portugal',market:'Portugal',dotColor:'#10B981',statusZh:'接受直洽',statusEn:'Direct Deal Accepted',tagClass:'tag-green',actionZh:'推進合約',actionEn:'Progress Contract'}
+        ],
+        plans:[
+          {zh:'Videoslots UK：維持 Fortune Hook P1 banner 曝光，追蹤週資料',en:'Videoslots UK: maintain Fortune Hook P1 banner; track weekly data'},
+          {zh:'Superbet Romania：確認 6月促銷計畫，推進 Coin of Lightning 品牌遊戲',en:'Superbet Romania: confirm June promo; advance Coin of Lightning branded game'},
+          {zh:'Stake ADM：確認剩餘 code 提交進度，推進整合',en:'Stake ADM: confirm remaining code submission progress; advance integration'},
+          {zh:'Entain Greece：確認 4/30 上線細節，協調 3 個品牌上線準備',en:'Entain Greece: confirm Apr 30 live details; coordinate 3-brand launch prep'},
+          {zh:'Peppermil Portugal：推進合約草稿，確認技術對接時程',en:'Peppermil Portugal: advance contract draft; confirm technical integration timeline'}
+        ]
+      }
+    }
+  }  // end w16
+
+  ,w17: {
+    label:  {zh:'W17 · 4/20–4/26', en:'W17 · Apr 20–26'},
+    period: {zh:'2026/04/20 – 2026/04/26', en:'2026-04-20 – 2026-04-26'},
+    estimated: false,
+    summary: {
+      totalTDAB:    {zh:'3,847.3M THB', en:'3,847.3M THB'},
+      teamWoW:      '−1.54%',
+      teamWoWClass: 'red',
+      noteZh:'全員數據完整；Nina EU 整體微降，Bryam 持續回升；Hector Latam 略降',
+      noteEn:'All members with official data; Nina EU slight dip; Bryam continued recovery; Hector Latam slight decline'
+    },
+    members: {
+      bryam: {
+        tdab:190071487, tdabWoW:6.17, estimated:false,
+        subRegions:[
+          {nameZh:'CIS 整體',nameEn:'CIS Total',tdab:190071487,wow:6.17}
+        ],
+        highlights:[
+          {zh:'CIS 整體 190.1M THB，WoW +6.17%，DAU 50,514 (+6.72%)，連續兩週強勁反彈',en:'CIS total 190.1M THB, WoW +6.17%; DAU 50,514 (+6.72%); two consecutive strong rebounds'},
+          {zh:'Russia 佔主導地位，WoW +11.21%，成為 CIS 最大成長引擎',en:'Russia dominant, WoW +11.21%; largest CIS growth engine this week'},
+          {zh:'Armenia 大幅回落 -65.32%，上週爆發屬短期脈衝',en:'Armenia crash -65.32%; last week\'s spike confirmed as short-term pulse'},
+          {zh:'CIS 整體自 W15 低點 166.7M 持續回升，重返 190M+ 水位',en:'CIS recovered from W15 trough 166.7M back above 190M; sustained recovery'}
+        ],
+        clients:[
+          {name:'Russia Partners',market:'Russia',dotColor:'#10B981',statusZh:'主導成長',statusEn:'Leading Growth',tagClass:'tag-green',actionZh:'鞏固優勢',actionEn:'Consolidate Advantage'},
+          {name:'Armenia Partner',market:'Armenia',dotColor:'#F59E0B',statusZh:'脈衝後回落',statusEn:'Post-Spike Correction',tagClass:'tag-orange',actionZh:'評估基礎需求',actionEn:'Assess Base Demand'},
+          {name:'Slotegrator',market:'Ukraine / CIS',dotColor:'#10B981',statusZh:'執行中',statusEn:'Active',tagClass:'tag-green',actionZh:'持續監控',actionEn:'Monitor Ongoing'},
+          {name:'Veganster',market:'CIS',dotColor:'#10B981',statusZh:'整合完成',statusEn:'Integration Done',tagClass:'tag-green',actionZh:'上線確認',actionEn:'Confirm Live'}
+        ],
+        plans:[
+          {zh:'Russia：確認 +11% 成長驅動因素，評估是否能持續',en:'Russia: confirm +11% growth drivers; assess sustainability'},
+          {zh:'Armenia：評估基礎需求水平，判斷上週是否為促銷驅動脈衝',en:'Armenia: assess baseline demand; determine if last week was promo-driven'},
+          {zh:'CIS 整體：規劃 4月底 sprint，目標突破 200M/天',en:'CIS overall: plan late-April sprint; target breaking 200M/day'},
+          {zh:'確認 Veganster 上線狀態，追蹤首週數據',en:'Confirm Veganster live status; track week-1 data'}
+        ]
+      },
+      hector: {
+        tdab:3027074126, tdabWoW:-2.64, estimated:false,
+        subRegions:[{nameZh:'Latam 整體',nameEn:'Latam Total',tdab:3027074126,wow:-2.64}],
+        highlights:[
+          {zh:'Latam 日均 3,027.1M THB，WoW -2.64%，DAU 1,610,485 (+4.87%)',en:'Latam daily avg 3,027.1M THB, WoW -2.64%; DAU 1,610,485 (+4.87%)'},
+          {zh:'Peru 表現最佳 WoW +18.30%，成為本週亮點',en:'Peru top performer WoW +18.30%; highlight of the week'},
+          {zh:'AprietayGana 合作夥伴 WoW +66.25%，帶動整體 Latam 動能',en:'AprietayGana partner WoW +66.25%; boosting overall Latam momentum'},
+          {zh:'Bragg_Brazil 出現風險信號，需密切追蹤',en:'Bragg_Brazil showing risk signals; close monitoring needed'},
+          {zh:'DAU +4.87% 顯示用戶基數持續擴大，長期健康指標正面',en:'DAU +4.87% shows continued user base expansion; positive long-term health signal'}
+        ],
+        clients:[
+          {name:'AprietayGana',market:'Latam',dotColor:'#10B981',statusZh:'爆發成長',statusEn:'Explosive Growth',tagClass:'tag-green',actionZh:'深化合作',actionEn:'Deepen Partnership'},
+          {name:'Peru Ops',market:'Peru',dotColor:'#10B981',statusZh:'強勁表現',statusEn:'Strong Performance',tagClass:'tag-green',actionZh:'追蹤動能',actionEn:'Track Momentum'},
+          {name:'Bragg Brazil',market:'Brazil',dotColor:'#EF4444',statusZh:'風險監控',statusEn:'Risk Watch',tagClass:'tag-red',actionZh:'緊急評估',actionEn:'Urgent Assessment'},
+          {name:'Betcris',market:'Latam',dotColor:'#10B981',statusZh:'穩定',statusEn:'Stable',tagClass:'tag-green',actionZh:'Q2規劃',actionEn:'Q2 Planning'}
+        ],
+        plans:[
+          {zh:'Bragg Brazil：緊急評估風險信號來源，確認是否影響合作關係',en:'Bragg Brazil: urgently assess risk signals; confirm if impacting partnership'},
+          {zh:'AprietayGana：深化合作，規劃 4月底促銷衝刺',en:'AprietayGana: deepen collaboration; plan late-April promo sprint'},
+          {zh:'Peru：分析 +18.30% 成長因素，制定延續策略',en:'Peru: analyze +18.30% growth factors; build sustainability strategy'},
+          {zh:'確認 Latam Q2 整體目標，向 Ray 提交 4月完整報告',en:'Confirm Latam Q2 overall targets; submit full April report to Ray'}
+        ]
+      },
+      chu: {
+        tdab:425169494, tdabWoW:2.12, estimated:false,
+        subRegions:[
+          {nameZh:'非洲',nameEn:'Africa',tdab:183481516,wow:-1.22},
+          {nameZh:'大洋洲',nameEn:'Oceania',tdab:56183163,wow:-1.25},
+          {nameZh:'北美',nameEn:'N. America',tdab:185504815,wow:6.81}
+        ],
+        highlights:[
+          {zh:'非洲 183.5M THB WoW -1.22%，DAU 159,221；小幅回落，屬正常波動',en:'Africa 183.5M THB WoW -1.22%, DAU 159,221; slight pullback, normal fluctuation'},
+          {zh:'大洋洲 56.2M THB WoW -1.25%，DAU 3,279；連續兩週略降',en:'Oceania 56.2M THB WoW -1.25%, DAU 3,279; two consecutive slight declines'},
+          {zh:'北美 185.5M THB WoW +6.81%，DAU 19,890；強勁成長，突破 185M',en:'N. America 185.5M THB WoW +6.81%, DAU 19,890; strong growth, breaking 185M'},
+          {zh:'XOF 區域：1XBET Paripulse 貢獻 +775K，帶動西非成長',en:'XOF region: 1XBET Paripulse contributing +775K; driving West Africa growth'},
+          {zh:'Nigeria NGN 下滑：WJ 關閉 Jili 遊戲影響當地成交量',en:'Nigeria NGN drop: WJ closing Jili games impacting local wagering volume'}
+        ],
+        clients:[
+          {name:'1XBET Paripulse',market:'Africa (XOF)',dotColor:'#10B981',statusZh:'成長強勁',statusEn:'Strong Growth',tagClass:'tag-green',actionZh:'確認貢獻',actionEn:'Confirm Contribution'},
+          {name:'WJ Nigeria',market:'Africa (NGN)',dotColor:'#EF4444',statusZh:'Jili 關閉',statusEn:'Jili Games Closed',tagClass:'tag-red',actionZh:'恢復談判',actionEn:'Restore Negotiation'},
+          {name:'DraftKings',market:'N. America',dotColor:'#10B981',statusZh:'強勁成長',statusEn:'Strong Growth',tagClass:'tag-green',actionZh:'賽季末監控',actionEn:'Late Season Monitor'},
+          {name:'LuckyDreams NZ',market:'Oceania',dotColor:'#F59E0B',statusZh:'略降',statusEn:'Slight Decline',tagClass:'tag-orange',actionZh:'分析原因',actionEn:'Analyze Cause'}
+        ],
+        plans:[
+          {zh:'Nigeria：與 WJ 展開緊急溝通，評估重新啟動 Jili 遊戲可能性',en:'Nigeria: urgent talks with WJ; assess possibility of restoring Jili games'},
+          {zh:'1XBET Paripulse：確認 +775K 成長的可持續性，規劃後續合作',en:'1XBET Paripulse: confirm +775K growth sustainability; plan further collaboration'},
+          {zh:'北美 NBA 季後賽進行中：密切監控押注量走勢',en:'N. America NBA playoffs ongoing: closely monitor wagering trends'},
+          {zh:'大洋洲：評估 NZ 連續下滑原因，確認是否需要促銷介入',en:'Oceania: evaluate consecutive NZ decline; assess if promo intervention needed'}
+        ]
+      },
+      nina: {
+        tdab:386711858, tdabWoW:-0.58, estimated:false,
+        subRegions:[
+          {nameZh:'EU 整體',nameEn:'EU Total',tdab:386711858,wow:-0.58},
+          {nameZh:'EU 監管',nameEn:'EU Regulated',tdab:51021011,wow:-6.03}
+        ],
+        highlights:[
+          {zh:'EU 整體 386.7M THB WoW -0.58%；EU 監管 51.0M -6.03%',en:'EU total 386.7M THB WoW -0.58%; EU regulated 51.0M -6.03%'},
+          {zh:'Romania Bragg 大幅反彈 +78.14% (15.5M)，Kaizen +9.28% (704K)',en:'Romania Bragg strong rebound +78.14% (15.5M); Kaizen +9.28% (704K)'},
+          {zh:'UK LnW -23.28% (734K)；BetMaster UK 預計 4/28 正式上線',en:'UK LnW -23.28% (734K); BetMaster UK expected live 4/28'},
+          {zh:'Belgium Bingoal 最終測試中，Integration/Testing 完成',en:'Belgium Bingoal final testing; integration/testing completed'},
+          {zh:'Italy TUKO 最終整合，Bet365 條款討論中',en:'Italy TUKO final integration; Bet365 terms under discussion'},
+          {zh:'Reevo 封鎖 StarCasino + Circus NL FS，需緊急處理',en:'Reevo blocking StarCasino + Circus NL FS; urgent resolution needed'},
+          {zh:'Greece Entain 確認 4/30 上線 3 品牌，OPAP 9 個遊戲缺漏，Novibet OAR+FS',en:'Greece Entain confirmed live 4/30 (3 brands); OPAP 9 missing games; Novibet OAR+FS'},
+          {zh:'Portugal Betclic 拜訪：排名 20/44，DAU 200K，6月 lobby 自動化，暫無促銷',en:'Portugal Betclic visit: rank 20/44, DAU 200K, lobby automation June, no promos now'},
+          {zh:'Netherlands Hommerson 會議；Poland Wiztech KYC + WinEmpire crypto',en:'Netherlands Hommerson meeting; Poland Wiztech KYC + WinEmpire crypto'}
+        ],
+        clients:[
+          {name:'Superbet Romania',market:'Romania',dotColor:'#10B981',statusZh:'大幅反彈',statusEn:'Strong Rebound',tagClass:'tag-green',actionZh:'深化 5月促銷',actionEn:'Deepen May Promo'},
+          {name:'BetMaster UK',market:'UK',dotColor:'#10B981',statusZh:'預計 4/28',statusEn:'Expected 4/28',tagClass:'tag-green',actionZh:'確認上線',actionEn:'Confirm Go-Live'},
+          {name:'Bingoal Belgium',market:'Belgium',dotColor:'#F59E0B',statusZh:'最終測試',statusEn:'Final Testing',tagClass:'tag-orange',actionZh:'目標 B+上線',actionEn:'Target B+ Launch'},
+          {name:'Bet365 Italy',market:'Italy',dotColor:'#F59E0B',statusZh:'條款討論',statusEn:'Terms Discussion',tagClass:'tag-orange',actionZh:'確認 ADM codes',actionEn:'Confirm ADM Codes'},
+          {name:'Entain Greece',market:'Greece',dotColor:'#10B981',statusZh:'4/30 確認',statusEn:'4/30 Confirmed',tagClass:'tag-green',actionZh:'協調 3 品牌',actionEn:'Coordinate 3 Brands'},
+          {name:'Betclic Portugal',market:'Portugal',dotColor:'#F59E0B',statusZh:'拜訪完成',statusEn:'Visit Done',tagClass:'tag-orange',actionZh:'規劃 lobby 自動化',actionEn:'Plan Lobby Automation'}
+        ],
+        plans:[
+          {zh:'Reevo 封鎖問題：緊急協調，恢復 StarCasino + Circus NL FS 上架',en:'Reevo blocking: urgent coordination to restore StarCasino + Circus NL FS'},
+          {zh:'BetMaster UK 4/28 上線：確認技術準備完畢，協調首日支援',en:'BetMaster UK Apr 28 launch: confirm technical readiness; coordinate day-1 support'},
+          {zh:'Bingoal Belgium：完成最終測試後推進 B+ 上線',en:'Bingoal Belgium: push to B+ go-live after final testing completion'},
+          {zh:'OPAP Greece：補齊 9 個缺漏遊戲，確認整合時程',en:'OPAP Greece: fill 9 missing games; confirm integration timeline'},
+          {zh:'Bet365 Italy：加速 ADM codes 推進，確認合約條款',en:'Bet365 Italy: accelerate ADM codes; finalize contract terms'}
+        ]
+      }
+    }
+  }  // end w17
+
+  ,w18: {
+    label:  {zh:'W18 · 4/27–5/03', en:'W18 · Apr 27–May 3'},
+    period: {zh:'2026/04/27 – 2026/05/03', en:'2026-04-27 – 2026-05-03'},
+    estimated: true,
+    summary: {
+      totalTDAB:    {zh:'3,893.7M THB', en:'3,893.7M THB'},
+      teamWoW:      '+1.21%',
+      teamWoWClass: 'green',
+      noteZh:'Hector + Nina 為官方數據；Bryam + Chu 資料未到，以 W17 基準推估',
+      noteEn:'Hector + Nina official; Bryam + Chu data pending; estimated from W17 baseline'
+    },
+    members: {
+      bryam: {
+        tdab:190071487, tdabWoW:null, estimated:true,
+        subRegions:[
+          {nameZh:'CIS 整體 (推估)',nameEn:'CIS Total (Est.)',tdab:190071487,wow:null}
+        ],
+        highlights:[
+          {zh:'(推估) W18 Bryam 數據尚未提交，暫以 W17 基準 190M/天維持',en:'(Est.) W18 Bryam data not yet submitted; using W17 baseline of 190M/day'},
+          {zh:'Russia 持續主導 CIS 成長，預計本週維持正面態勢',en:'Russia continues to drive CIS growth; expected to maintain positive trend this week'},
+          {zh:'待確認：Armenia 回落後的新基準水位',en:'Pending confirmation: Armenia new baseline level after post-spike correction'}
+        ],
+        clients:[
+          {name:'Russia Partners',market:'Russia',dotColor:'#10B981',statusZh:'持續成長',statusEn:'Continuing Growth',tagClass:'tag-green',actionZh:'維持監控',actionEn:'Maintain Monitoring'},
+          {name:'Slotegrator',market:'Ukraine / CIS',dotColor:'#10B981',statusZh:'執行中',statusEn:'Active',tagClass:'tag-green',actionZh:'持續執行',actionEn:'Continue Execution'},
+          {name:'Veganster',market:'CIS',dotColor:'#10B981',statusZh:'上線中',statusEn:'Live',tagClass:'tag-green',actionZh:'追蹤首週',actionEn:'Track Week-1'},
+          {name:'Wiztech Poland',market:'Poland (Unreg)',dotColor:'#F59E0B',statusZh:'KYC 進行中',statusEn:'KYC In Progress',tagClass:'tag-orange',actionZh:'DD 流程推進',actionEn:'Advance DD Process'}
+        ],
+        plans:[
+          {zh:'提交 W18 實際數據，補充推估資料',en:'Submit actual W18 data to replace estimates'},
+          {zh:'確認 Russia 本週 TDAB 走勢，評估 4月整月達成情況',en:'Confirm Russia this week\'s TDAB trend; evaluate full-April achievement'},
+          {zh:'Armenia：確認新基準水位後，規劃後續激活策略',en:'Armenia: confirm new baseline; plan subsequent activation strategy'},
+          {zh:'Wiztech/Notix DD 流程：推進 KYC 完成',en:'Wiztech/Notix DD process: advance to KYC completion'}
+        ]
+      },
+      hector: {
+        tdab:3286064621, tdabWoW:8.56, estimated:false,
+        subRegions:[{nameZh:'Latam 整體',nameEn:'Latam Total',tdab:3286064621,wow:8.56}],
+        highlights:[
+          {zh:'Latam 日均 3,286.1M THB，WoW +8.56%，DAU 1,701,988 (+5.68%)，強力反彈',en:'Latam daily avg 3,286.1M THB, WoW +8.56%; DAU 1,701,988 (+5.68%); strong rebound'},
+          {zh:'Paraguay 持續爆發 WoW +28.72%，連續三週高速成長',en:'Paraguay continues WoW +28.72%; three consecutive high-growth weeks'},
+          {zh:'ZEN01 合作夥伴 WoW +280%，成為本週最大驚喜',en:'ZEN01 partner WoW +280%; biggest surprise of the week'},
+          {zh:'Superbet Latam 出現風險信號，需持續評估',en:'Superbet Latam showing risk signals; ongoing assessment needed'},
+          {zh:'KTO + Pixbet 識別為新成長機會，計劃本週跟進',en:'KTO + Pixbet identified as new growth opportunities; plan follow-up this week'}
+        ],
+        clients:[
+          {name:'ZEN01',market:'Latam',dotColor:'#10B981',statusZh:'爆發 +280%',statusEn:'Explosive +280%',tagClass:'tag-green',actionZh:'確認成長來源',actionEn:'Confirm Growth Source'},
+          {name:'Paraguay Partner',market:'Paraguay',dotColor:'#10B981',statusZh:'連三週高成長',statusEn:'3-Week High Growth',tagClass:'tag-green',actionZh:'深化合作',actionEn:'Deepen Partnership'},
+          {name:'KTO',market:'Brazil',dotColor:'#F59E0B',statusZh:'新機會',statusEn:'New Opportunity',tagClass:'tag-orange',actionZh:'啟動合作洽談',actionEn:'Initiate Partnership Talks'},
+          {name:'Pixbet',market:'Brazil',dotColor:'#F59E0B',statusZh:'新機會',statusEn:'New Opportunity',tagClass:'tag-orange',actionZh:'評估合作條件',actionEn:'Assess Partnership Terms'},
+          {name:'Superbet Latam',market:'Latam',dotColor:'#EF4444',statusZh:'風險監控',statusEn:'Risk Watch',tagClass:'tag-red',actionZh:'緊急評估',actionEn:'Urgent Assessment'}
+        ],
+        plans:[
+          {zh:'ZEN01：調查 +280% 來源，評估是否為長期合作機會',en:'ZEN01: investigate +280% source; evaluate as long-term partnership opportunity'},
+          {zh:'KTO + Pixbet：本週啟動初步接觸，評估合作可行性',en:'KTO + Pixbet: initiate first contact this week; assess partnership feasibility'},
+          {zh:'Superbet Latam：緊急評估風險，確認合作關係影響程度',en:'Superbet Latam: urgent risk assessment; confirm impact on partnership'},
+          {zh:'4月達成盤點：向 Ray 提交 Latam 4月完整報告',en:'April achievement review: submit full Latam April report to Ray'}
+        ]
+      },
+      chu: {
+        tdab:425169494, tdabWoW:null, estimated:true,
+        subRegions:[
+          {nameZh:'非洲 (推估)',nameEn:'Africa (Est.)',tdab:183481516,wow:null},
+          {nameZh:'大洋洲 (推估)',nameEn:'Oceania (Est.)',tdab:56183163,wow:null},
+          {nameZh:'北美 (推估)',nameEn:'N. America (Est.)',tdab:185504815,wow:null}
+        ],
+        highlights:[
+          {zh:'(推估) W18 Chu 數據尚未提交，以 W17 基準 425M/天維持',en:'(Est.) W18 Chu data not yet submitted; using W17 baseline of 425M/day'},
+          {zh:'非洲：XOF 區域 1XBET 成長持續，Nigeria NGN 恢復狀況待確認',en:'Africa: XOF 1XBET growth continuing; Nigeria NGN recovery status pending'},
+          {zh:'北美：NBA 季後賽持續，預計賭注量維持高位',en:'N. America: NBA playoffs continuing; wagering volume expected to stay elevated'}
+        ],
+        clients:[
+          {name:'1XBET Paripulse',market:'Africa (XOF)',dotColor:'#10B981',statusZh:'持續成長',statusEn:'Continuing Growth',tagClass:'tag-green',actionZh:'維持監控',actionEn:'Maintain Monitoring'},
+          {name:'WJ Nigeria',market:'Africa (NGN)',dotColor:'#F59E0B',statusZh:'恢復評估中',statusEn:'Recovery Pending',tagClass:'tag-orange',actionZh:'跟進 Jili 重開',actionEn:'Follow up Jili Restore'},
+          {name:'SportyBet',market:'Africa',dotColor:'#10B981',statusZh:'穩定',statusEn:'Stable',tagClass:'tag-green',actionZh:'4月達成確認',actionEn:'April KPI Review'},
+          {name:'DraftKings',market:'N. America',dotColor:'#10B981',statusZh:'季後賽高峰',statusEn:'Playoffs Peak',tagClass:'tag-green',actionZh:'賽季末監控',actionEn:'Late Season Monitor'}
+        ],
+        plans:[
+          {zh:'提交 W18 實際數據，補充推估資料',en:'Submit actual W18 data to replace estimates'},
+          {zh:'Nigeria WJ：跟進 Jili 遊戲恢復進度，確認影響持續時間',en:'Nigeria WJ: follow up Jili game restoration; confirm impact duration'},
+          {zh:'4月非洲整月達成：彙整報告提交 Ray',en:'April Africa full-month achievement: compile and submit report to Ray'},
+          {zh:'北美 NBA 季後賽末段：評估整月成長對 Q2 目標的貢獻',en:'N. America NBA late playoffs: assess full-month growth contribution to Q2 targets'}
+        ]
+      },
+      nina: {
+        tdab:420155303, tdabWoW:8.65, estimated:false,
+        subRegions:[
+          {nameZh:'EU 整體',nameEn:'EU Total',tdab:420155303,wow:8.65},
+          {nameZh:'EU 監管',nameEn:'EU Regulated',tdab:63317011,wow:16.62}
+        ],
+        highlights:[
+          {zh:'EU 整體 420.2M THB WoW +8.65%；EU 監管 63.3M +16.62%，強勁反彈',en:'EU total 420.2M THB WoW +8.65%; EU regulated 63.3M +16.62%; strong rebound'},
+          {zh:'Romania Bragg +8.39% (16.8M)，Kaizen -0.02% (704K)；UK LnW -4.18% (703K) + BetMaster 新上線 186K',en:'Romania Bragg +8.39% (16.8M); Kaizen -0.02% (704K); UK LnW -4.18% (703K) + BetMaster new 186K'},
+          {zh:'UK Videoslots Fortune Hook P1 banner 安排完成',en:'UK Videoslots Fortune Hook P1 banner arranged'},
+          {zh:'Italy Bet365 達成協議 + ADM codes 已發出；TUKO 整合完成 (等待 BF 合約反饋)',en:'Italy Bet365 agreed + ADM codes issued; TUKO integration done (awaiting BF contract feedback)'},
+          {zh:'Spain Casino 777 Chicken Dash 獨家 TTB 279,962 +350.3%，DAU 58 +1060%；3款新遊戲預發布',en:'Spain Casino 777 Chicken Dash exclusive: TTB 279,962 +350.3%, DAU 58 +1060%; 3 more pre-releases coming'},
+          {zh:'Sportium Spain：AM 群組已建立',en:'Sportium Spain: AM group created'},
+          {zh:'Greece Entain 4/30 上線但無 provider section (討論曝光方式)',en:'Greece Entain live 4/30 but no provider section; discussing exposure approach'},
+          {zh:'Belgium Bingoal 整合/測試完成，目標 B+ 上線',en:'Belgium Bingoal integration/testing done; targeting B+ go-live'},
+          {zh:'Lottoland 提案過高，需修訂新方案',en:'Lottoland proposal too high; need revised proposal'},
+          {zh:'SBC 見面：Cloudbet (HUB88 addendum)，ST8 400+ 品牌',en:'SBC meetings: Cloudbet (HUB88 addendum); ST8 400+ brands'}
+        ],
+        clients:[
+          {name:'Bet365 Italy',market:'Italy (ADM)',dotColor:'#10B981',statusZh:'協議達成',statusEn:'Deal Agreed',tagClass:'tag-green',actionZh:'推進整合',actionEn:'Advance Integration'},
+          {name:'Casino 777',market:'Spain',dotColor:'#10B981',statusZh:'獨家促銷爆發',statusEn:'Exclusive Promo Hit',tagClass:'tag-green',actionZh:'3款預發布',actionEn:'3 Pre-releases Coming'},
+          {name:'Entain Greece',market:'Greece',dotColor:'#F59E0B',statusZh:'上線但曝光不足',statusEn:'Live but Low Exposure',tagClass:'tag-orange',actionZh:'爭取 provider section',actionEn:'Secure Provider Section'},
+          {name:'Bingoal Belgium',market:'Belgium',dotColor:'#10B981',statusZh:'測試完成',statusEn:'Testing Done',tagClass:'tag-green',actionZh:'推進 B+ 上線',actionEn:'Push B+ Go-Live'},
+          {name:'Videoslots UK',market:'UK',dotColor:'#10B981',statusZh:'P1 banner 確認',statusEn:'P1 Banner Arranged',tagClass:'tag-green',actionZh:'追蹤成效',actionEn:'Track Performance'},
+          {name:'Lottoland',market:'EU',dotColor:'#F59E0B',statusZh:'提案過高',statusEn:'Proposal Too High',tagClass:'tag-orange',actionZh:'修訂新方案',actionEn:'Revise Proposal'}
+        ],
+        plans:[
+          {zh:'Lottoland：修訂提案，重新提交更具競爭力的方案',en:'Lottoland: revise proposal; resubmit more competitive terms'},
+          {zh:'TUKO Italy：等待 BF 合約反饋，確認執行時程',en:'TUKO Italy: await BF contract feedback; confirm execution timeline'},
+          {zh:'Entain Greece：積極爭取 provider section 曝光位置',en:'Entain Greece: actively pursue provider section placement'},
+          {zh:'Bingoal Belgium：完成最後確認後推進 B+ 正式上線',en:'Bingoal Belgium: finalize and push to B+ official go-live'},
+          {zh:'Peppermil/Viva Games/Winbet：推進合約簽署',en:'Peppermil/Viva Games/Winbet: advance contract signing'},
+          {zh:'Hommerson NL 會議 + Relax lunch + Videoslots 促銷追蹤',en:'Hommerson NL meeting + Relax lunch + Videoslots promo tracking'}
+        ]
+      }
+    }
+  }  // end w18
+
 }; // end weekData
 
 // ══════════════════════════════════════
@@ -4232,6 +4712,96 @@ const monthlyData = {
       nina:   {avgTDAB:334545423, color:'#F97316', highlightZh:'EU KPI 超標 9.3%；Boyles UK 上線里程碑', highlightEn:'EU KPI +9.3% above target; Boyles UK go-live milestone'}
     }
   }
+  ,apr2026: {
+    label:  {zh:'四月 2026 月總結', en:'April 2026 Monthly Summary'},
+    badge:  {zh:'April 2026', en:'April 2026'},
+    period: {zh:'2026/04/06 – 2026/05/03', en:'2026-04-06 – 2026-05-03'},
+    avgTDABM: 3865.3, // million THB, avg of W15–W18
+    biggestGrowth: {zh:'EU 監管 (WoW 峰值 +16.6%)', en:'EU Regulated (WoW peak +16.6%)'},
+    activeClientsCount: '20+',
+    newMilestones: {zh:'BetMaster UK 上線 · Bet365 Italy 協議達成 · Casino 777 Spain 獨家促銷 · Entain Greece 上線', en:'BetMaster UK Live · Bet365 Italy Deal · Casino 777 Spain Exclusive · Entain Greece Live'},
+
+    kpi: [
+      {regionZh:'EU 監管', regionEn:'EU Regulated',     member:'nina',   achievement:null, status:'gray'},
+      {regionZh:'EU+Global 整體', regionEn:'EU+Global Total', member:'nina', achievement:null, status:'gray'},
+      {regionZh:'CIS',           regionEn:'CIS',             member:'bryam',  achievement:null, status:'gray'},
+      {regionZh:'非洲',          regionEn:'Africa',           member:'chu',    achievement:null, status:'gray'},
+      {regionZh:'Latam',         regionEn:'Latam',            member:'hector', achievement:null, status:'gray'}
+    ],
+    kpiNoteZh:'* 四月 KPI 數據由 Ray 確認後補入。',
+    kpiNoteEn:'* April KPI data to be confirmed by Ray.',
+
+    regionBreakdown: [
+      {nameZh:'Latam (Hector)',    nameEn:'Latam (Hector)',    value:3176.7, color:'#F59E0B'},
+      {nameZh:'EU+Global (Nina)',  nameEn:'EU+Global (Nina)',  value:400.5,  color:'#F97316'},
+      {nameZh:'非洲/大洋洲/NA (Chu)', nameEn:'Africa/Oceania/NA (Chu)', value:416.3, color:'#10B981'},
+      {nameZh:'CIS (Bryam)',       nameEn:'CIS (Bryam)',       value:181.5,  color:'#8B5CF6'}
+    ],
+
+    highlights: [
+      {zh:'Latam 月均 ~3.18B THB，Paraguay 連續三週爆發成長，ZEN01 +280% 成最大亮點', en:'Latam monthly avg ~3.18B THB; Paraguay 3-week consecutive surge; ZEN01 +280% biggest highlight'},
+      {zh:'CIS 月均 ~181.5M THB，Russia 成主要成長驅動；Armenia 出現脈衝後回落', en:'CIS monthly avg ~181.5M THB; Russia primary growth driver; Armenia spike-and-correction pattern'},
+      {zh:'EU 整體月均 ~400.5M THB；EU 監管市場 W18 強勁反彈至 63.3M (+16.62%)', en:'EU total monthly avg ~400.5M THB; EU regulated strong W18 rebound to 63.3M (+16.62%)'},
+      {zh:'Chu 三市場月均 ~416M THB；Egypt 1XBET 爆發，北美 NBA 季後賽推動成長', en:'Chu three markets monthly avg ~416M THB; Egypt 1XBET surge; N. America NBA playoffs driving growth'},
+      {zh:'里程碑：BetMaster UK 上線、Bet365 Italy 協議達成、Casino 777 Spain 獨家促銷、Entain Greece 4/30 上線', en:'Milestones: BetMaster UK launched, Bet365 Italy agreed, Casino 777 Spain exclusive promo, Entain Greece live 4/30'},
+      {zh:'Bingoal Belgium 整合完成目標 B+ 上線；Peppermil Portugal / Viva Games / Winbet 合約推進中', en:'Bingoal Belgium integration done targeting B+ launch; Peppermil Portugal/Viva Games/Winbet contracts advancing'}
+    ],
+
+    currencyMix: {
+      eu: {
+        titleZh:'EU 監管幣別分布', titleEn:'EU Regulated Currency Mix',
+        noteZh:'(W16–W17 數據)', noteEn:'(W16–W17 data)',
+        icon:'🇪🇺',
+        data:[
+          {label:{zh:'EUR',en:'EUR'}, value:78.0, color:'#1D4ED8'},
+          {label:{zh:'GBP',en:'GBP'}, value:14.0, color:'#3B82F6'},
+          {label:{zh:'Others',en:'Others'}, value:8.0, color:'#BFDBFE'}
+        ]
+      },
+      cis: {
+        titleZh:'CIS 幣別分布', titleEn:'CIS Currency Mix',
+        noteZh:'(月報數據)', noteEn:'(Monthly report)',
+        icon:'🌐',
+        data:[
+          {label:'RUB',   value:69.88, color:'#065F46'},
+          {label:'UZS',   value:17.14, color:'#059669'},
+          {label:'UAH',   value:7.18,  color:'#10B981'},
+          {label:'KZT',   value:3.18,  color:'#34D399'},
+          {label:'Others',value:2.62,  color:'#A7F3D0'}
+        ]
+      },
+      latam: {
+        titleZh:'Latam 幣別分布', titleEn:'Latam Currency Mix',
+        noteZh:'(月報數據)', noteEn:'(Monthly report)',
+        icon:'🌎',
+        data:[
+          {label:'BRL',   value:49.0, color:'#5B21B6'},
+          {label:'MXN',   value:42.0, color:'#7C3AED'},
+          {label:'VES',   value:3.25, color:'#A78BFA'},
+          {label:'CLP',   value:2.27, color:'#C4B5FD'},
+          {label:'Others',value:3.48, color:'#EDE9FE'}
+        ]
+      },
+      africa: {
+        titleZh:'非洲幣別分布', titleEn:'Africa Currency Mix',
+        noteZh:'(月報數據)', noteEn:'(Monthly report)',
+        icon:'🌍',
+        data:[
+          {label:'XOF',     value:38.02, color:'#0F766E'},
+          {label:'NGN',     value:19.20, color:'#0D9488'},
+          {label:'TZS+UGX', value:14.51, color:'#14B8A6'},
+          {label:'Others',  value:28.27, color:'#99F6E4'}
+        ]
+      }
+    },
+
+    memberStats: {
+      bryam:  {avgTDAB:181700000, color:'#8B5CF6', highlightZh:'Russia 主導成長；Armenia 脈衝後修正；CIS 月均 181.7M', highlightEn:'Russia leading growth; Armenia spike corrected; CIS monthly avg 181.7M'},
+      hector: {avgTDAB:3176720000, color:'#F59E0B', highlightZh:'Paraguay 爆發 3週；ZEN01 +280%；Latam 月均 3.18B', highlightEn:'Paraguay 3-week surge; ZEN01 +280%; Latam monthly avg 3.18B'},
+      chu:    {avgTDAB:416300000, color:'#10B981', highlightZh:'Egypt 1XBET 爆發；NBA季後賽帶動北美；月均 416M', highlightEn:'Egypt 1XBET surge; NBA playoffs boosting NA; monthly avg 416M'},
+      nina:   {avgTDAB:400500000, color:'#F97316', highlightZh:'EU 監管 W18 +16.62%；多個新市場里程碑達成', highlightEn:'EU regulated W18 +16.62%; multiple new market milestones achieved'}
+    }
+  }
 };
 
 // ══════════════════════════════════════
@@ -4368,7 +4938,7 @@ const monthlyPromos = {
 };
 
 // Week → month mapping
-const WEEK_TO_MONTH = {w10:'mar2026', w11:'mar2026', w12:'mar2026', w13:'mar2026'};
+const WEEK_TO_MONTH = {w10:'mar2026', w11:'mar2026', w12:'mar2026', w13:'mar2026', w15:'apr2026', w16:'apr2026', w17:'apr2026', w18:'apr2026'};
 
 // ══════════════════════════════════════
 //  WEEKLY CURRENCY DATA (per week, per member)
