@@ -262,6 +262,12 @@
   .promo-active{background:#D1FAE5;color:#065F46;}
   .promo-done{background:#DBEAFE;color:#1D4ED8;}
   .promo-upcoming{background:#FEF3C7;color:#92400E;}
+  .promo-confirmed{background:#D1FAE5;color:#065F46;}
+  .promo-proposed{background:#FEF3C7;color:#92400E;}
+  .promo-rejected{background:#FEE2E2;color:#991B1B;}
+  .promo-noresponse{background:#F1F5F9;color:#64748B;}
+  .promo-table td.cost-cell{font-size:10px;color:#374151;white-space:nowrap;}
+  .promo-table td.remark-cell{font-size:10px;color:var(--muted);max-width:160px;}
 
   /* Monthly promo accordion */
   .mpa-item{border:1px solid var(--border);border-radius:8px;margin-bottom:10px;overflow:hidden;}
@@ -4747,15 +4753,35 @@ const monthlyData = {
       {zh:'Bingoal Belgium 整合完成目標 B+ 上線；Peppermil Portugal / Viva Games / Winbet 合約推進中', en:'Bingoal Belgium integration done targeting B+ launch; Peppermil Portugal/Viva Games/Winbet contracts advancing'}
     ],
 
-    currencyMix: {
-      eu: {
-        titleZh:'EU 監管幣別分布', titleEn:'EU Regulated Currency Mix',
+    currencies: {
+      euCurrency: {
+        titleZh:'EU 幣別分布', titleEn:'EU Currency Mix',
         noteZh:'(W16–W17 數據)', noteEn:'(W16–W17 data)',
         icon:'🇪🇺',
         data:[
-          {label:{zh:'EUR',en:'EUR'}, value:78.0, color:'#1D4ED8'},
-          {label:{zh:'GBP',en:'GBP'}, value:14.0, color:'#3B82F6'},
-          {label:{zh:'Others',en:'Others'}, value:8.0, color:'#BFDBFE'}
+          {label:'EUR',   value:78.0, color:'#1D4ED8'},
+          {label:'GBP',   value:14.0, color:'#3B82F6'},
+          {label:'Others',value:8.0,  color:'#BFDBFE'}
+        ]
+      },
+      euRegType: {
+        titleZh:'EU 合規 vs 非合規', titleEn:'EU Regulated vs Non-Reg',
+        noteZh:'(W17 數據)', noteEn:'(W17 data)',
+        icon:'⚖️',
+        data:[
+          {label:{zh:'合規市場',en:'Regulated'},      value:13.2, color:'#F97316'},
+          {label:{zh:'非合規市場',en:'Non-Regulated'}, value:86.8, color:'#1E293B'}
+        ]
+      },
+      wa: {
+        titleZh:'西亞幣別分布', titleEn:'West Asia Currency Mix',
+        noteZh:'(月報數據)', noteEn:'(Monthly report)',
+        icon:'🌍',
+        data:[
+          {label:'TRY',   value:70.9, color:'#92400E'},
+          {label:'AED',   value:16.0, color:'#B45309'},
+          {label:'SAR',   value:11.5, color:'#D97706'},
+          {label:'Others',value:1.6,  color:'#FDE68A'}
         ]
       },
       cis: {
@@ -4790,9 +4816,51 @@ const monthlyData = {
           {label:'XOF',     value:38.02, color:'#0F766E'},
           {label:'NGN',     value:19.20, color:'#0D9488'},
           {label:'TZS+UGX', value:14.51, color:'#14B8A6'},
-          {label:'Others',  value:28.27, color:'#99F6E4'}
+          {label:'XAF',     value:7.26,  color:'#2DD4BF'},
+          {label:'ZAR',     value:4.74,  color:'#5EEAD4'},
+          {label:'Others',  value:16.27, color:'#CCFBF1'}
+        ]
+      },
+      oceania: {
+        titleZh:'大洋洲幣別分布', titleEn:'Oceania Currency Mix',
+        noteZh:'(月報代表數據)', noteEn:'(Monthly representative)',
+        icon:'🦘',
+        data:[
+          {label:'AUD',    value:84.6, color:'#1D4ED8'},
+          {label:'NZD',    value:11.2, color:'#3B82F6'},
+          {label:'Others', value:4.2,  color:'#BFDBFE'}
+        ]
+      },
+      northAmerica: {
+        titleZh:'北美幣別分布', titleEn:'North America Currency Mix',
+        noteZh:'(月報代表數據)', noteEn:'(Monthly representative)',
+        icon:'🦅',
+        data:[
+          {label:'USD',    value:94.8, color:'#15803D'},
+          {label:'CAD',    value:4.2,  color:'#4ADE80'},
+          {label:'Others', value:1.0,  color:'#BBF7D0'}
         ]
       }
+    },
+
+    keyHighlights: {
+      completed: [
+        {zh:'BetMaster UK 4/28 正式上線',                          en:'BetMaster UK officially launched 4/28'},
+        {zh:'Bet365 Italy 協議達成，ADM codes 已發出',              en:'Bet365 Italy deal agreed; ADM codes issued'},
+        {zh:'Casino 777 Spain Chicken Dash 獨家促銷 +350.3%',      en:'Casino 777 Spain Chicken Dash exclusive promo +350.3%'},
+        {zh:'Entain Greece 4/30 三品牌上線',                       en:'Entain Greece live 4/30 with 3 brands'},
+        {zh:'Bingoal Belgium 整合/測試完成，目標 B+ 上線',          en:'Bingoal Belgium integration/testing done; targeting B+ launch'},
+        {zh:'Latam Paraguay 連續三週爆發成長，ZEN01 +280%',        en:'Latam Paraguay 3-week surge; ZEN01 +280%'},
+        {zh:'Egypt 1XBET 大幅成長，帶動非洲整體回升',              en:'Egypt 1XBET surge driving overall Africa growth'},
+        {zh:'TUKO Italy 整合完成',                                  en:'TUKO Italy integration completed'}
+      ],
+      watchout: [
+        {zh:'Entain Greece 曝光不足，provider section 待爭取',      en:'Entain Greece low exposure; provider section placement pending'},
+        {zh:'Lottoland 提案過高，需重新提交競爭方案',               en:'Lottoland proposal too high; revised proposal needed'},
+        {zh:'Bragg Brazil 出現風險信號，持續評估',                  en:'Bragg Brazil risk signals; ongoing assessment'},
+        {zh:'Nigeria WJ Jili 遊戲關閉，影響 NGN 成交量',           en:'Nigeria WJ Jili games closed; NGN volume impacted'},
+        {zh:'Bryam/Chu W18 數據未到，推估使用',                    en:'Bryam/Chu W18 data pending; estimates in use'}
+      ]
     },
 
     memberStats: {
@@ -4902,38 +4970,102 @@ const memberCurrencies = {
 const monthlyPromos = {
   mar2026: {
     hector: [
-      {platform:'ZeroUm',        market:'Brazil',   promoTypeZh:'位置+錦標賽',  promoTypeEn:'Position + Tournament', period:'3/01–3/31', status:'completed', impactZh:'錦標賽 25,000 BRL×2；含影響者推廣', impactEn:'Tournament 25,000 BRL ×2; incl. influencer push'},
-      {platform:'Estrela Bet',   market:'Brazil',   promoTypeZh:'位置+CRM+錦標賽',promoTypeEn:'Position+CRM+Tournament',period:'3/01–3/31',status:'completed',impactZh:'CRM 推廣＋遊戲位置＋版面',impactEn:'CRM campaigns + game positions + section'},
-      {platform:'Rei do Pitaco', market:'Brazil',   promoTypeZh:'CRM+位置+錦標賽',promoTypeEn:'CRM+Position+Tournament',period:'3/01–3/31',status:'completed',impactZh:'CRM＋位置＋使命＋錦標賽',impactEn:'CRM + positions + missions + tournament'},
-      {platform:'Betboom',       market:'Brazil',   promoTypeZh:'位置 (月中)',  promoTypeEn:'Position (mid-month)',  period:'3/02–3/16', status:'completed', impactZh:'7款遊戲位置；3月前半月', impactEn:'7 games positioned; first half March'},
-      {platform:'Betboom',       market:'Mexico',   promoTypeZh:'位置 (月末)',  promoTypeEn:'Position (month-end)',  period:'3/17–3/31', status:'completed', impactZh:'9款遊戲位置', impactEn:'9 games positioned'},
-      {platform:'Betnplay',       market:'Venezuela',promoTypeZh:'位置',          promoTypeEn:'Position',              period:'3/01–3/31', status:'completed', impactZh:'30% 折扣；委內瑞拉市場', impactEn:'30% discount; Venezuela market'},
-      {platform:'Betnplay',       market:'Venezuela',promoTypeZh:'錦標賽',         promoTypeEn:'Tournament',            period:'3/01–3/31', status:'completed', impactZh:'10,000 USDT 錦標賽；委內瑞拉', impactEn:'10,000 USDT tournament; Venezuela'},
-      {platform:'Apuestas Royal',market:'Venezuela',promoTypeZh:'錦標賽',       promoTypeEn:'Tournament',            period:'3/20–3/28', status:'completed', impactZh:'10,000 USDT；Venezuela Top 2 Casino', impactEn:'10,000 USDT; Venezuela Top 2 casino'},
-      {platform:'Superbet',      market:'Brazil',   promoTypeZh:'免費旋轉大型活動',promoTypeEn:'Free Spins Campaign',  period:'3/01–3/31', status:'completed', impactZh:'大型 FS 活動；本月重點', impactEn:'Major FS campaign; highlight of the month'},
-      {platform:'KTO',           market:'Brazil',   promoTypeZh:'位置+歡迎獎勵',promoTypeEn:'Position + Welcome',    period:'3/01–3/31', status:'completed', impactZh:'LJ500 活動上線；歡迎獎勵', impactEn:'LJ500 campaign live; welcome offer'},
-      {platform:'Pixbet',        market:'Brazil',   promoTypeZh:'位置',         promoTypeEn:'Position',              period:'3/17–3/31', status:'completed', impactZh:'高曝光位置', impactEn:'High-exposure positioning'},
-      {platform:'Aposta Ganha',  market:'Brazil',   promoTypeZh:'位置 (NGR)',   promoTypeEn:'Position (NGR)',         period:'3/01–3/31', status:'completed', impactZh:'1.5% NGR 條款', impactEn:'1.5% NGR terms'},
-      {platform:'Viva Sorte',    market:'Brazil',   promoTypeZh:'位置 (Casino版)', promoTypeEn:'Position (Casino Section)', period:'3/01–3/31', status:'completed', impactZh:'Casino 版面曝光', impactEn:'Casino section exposure'},
-      {platform:'Easy Bet',      market:'Argentina',promoTypeZh:'位置',         promoTypeEn:'Position',              period:'3/06–3/31', status:'completed', impactZh:'阿根廷市場拓展', impactEn:'Argentina market expansion'}
+      {client:'Betboom',        market:'Brazil',         status:'Confirmed', promoType:'Position',              discount:'30%',       tournamentCost:'',               freeSpins:'', tadaJP:'', startDate:'3/2/2026',  endDate:'3/16/2026', remark:'7 Games First Half of March'},
+      {client:'Betboom',        market:'Mexico',         status:'Confirmed', promoType:'Position',              discount:'30%',       tournamentCost:'',               freeSpins:'', tadaJP:'', startDate:'3/2/2026',  endDate:'3/16/2026', remark:'9 Games First Half of March'},
+      {client:'Betboom',        market:'Brazil',         status:'Confirmed', promoType:'Position',              discount:'30%',       tournamentCost:'',               freeSpins:'', tadaJP:'', startDate:'3/13/2026', endDate:'3/20/2026', remark:"St. Patrick's Day"},
+      {client:'Betboom',        market:'Mexico',         status:'Confirmed', promoType:'Position',              discount:'30%',       tournamentCost:'',               freeSpins:'', tadaJP:'', startDate:'3/13/2026', endDate:'3/20/2026', remark:"St. Patrick's Day"},
+      {client:'Betboom',        market:'Brazil',         status:'Confirmed', promoType:'Position',              discount:'30%',       tournamentCost:'',               freeSpins:'', tadaJP:'', startDate:'3/17/2026', endDate:'3/31/2026', remark:'9 Games'},
+      {client:'Betboom',        market:'Mexico',         status:'Confirmed', promoType:'Position',              discount:'30%',       tournamentCost:'',               freeSpins:'', tadaJP:'', startDate:'3/17/2026', endDate:'3/31/2026', remark:'9 Games'},
+      {client:'Apuestas Royal', market:'Venezuela',      status:'Confirmed', promoType:'Tournament',            discount:'',          tournamentCost:'10,000 USDT',    freeSpins:'', tadaJP:'', startDate:'3/20/2026', endDate:'3/28/2026', remark:'Tournament and Positions'},
+      {client:'Betvip',         market:'Brazil',         status:'Confirmed', promoType:'Position',              discount:'3% NGR',    tournamentCost:'',               freeSpins:'', tadaJP:'', startDate:'3/1/2026',  endDate:'3/31/2026', remark:''},
+      {client:'4Play',          market:'Brazil',         status:'Confirmed', promoType:'Position',              discount:'40%',       tournamentCost:'',               freeSpins:'', tadaJP:'', startDate:'3/1/2026',  endDate:'3/31/2026', remark:''},
+      {client:'Pagol',          market:'Brazil',         status:'Confirmed', promoType:'Position',              discount:'40%',       tournamentCost:'',               freeSpins:'', tadaJP:'', startDate:'3/1/2026',  endDate:'3/31/2026', remark:''},
+      {client:'ZeroUm',         market:'Brazil',         status:'Confirmed', promoType:'Position + Tournament', discount:'50%',       tournamentCost:'25,000 BRL ×2',  freeSpins:'', tadaJP:'', startDate:'3/1/2026',  endDate:'3/31/2026', remark:'Some games positioned + free positions; Sponsorship: 25,000 USDT'},
+      {client:'Aposta Ganha',   market:'Brazil',         status:'Confirmed', promoType:'Position',              discount:'1.5% NGR',  tournamentCost:'',               freeSpins:'', tadaJP:'', startDate:'3/1/2026',  endDate:'3/31/2026', remark:''},
+      {client:'KTO',            market:'Brazil',         status:'Confirmed', promoType:'Position',              discount:'50%',       tournamentCost:'',               freeSpins:'', tadaJP:'', startDate:'3/1/2026',  endDate:'3/31/2026', remark:''},
+      {client:'Oley Bet',       market:'Brazil',         status:'Confirmed', promoType:'Welcome Offer',         discount:'50%',       tournamentCost:'',               freeSpins:'', tadaJP:'', startDate:'3/1/2026',  endDate:'3/31/2026', remark:''},
+      {client:'Bingo Em Casa',  market:'Brazil',         status:'Confirmed', promoType:'Position',              discount:'50%',       tournamentCost:'',               freeSpins:'', tadaJP:'', startDate:'3/1/2026',  endDate:'3/31/2026', remark:''},
+      {client:'Bet Warrior',    market:'Brazil',         status:'Confirmed', promoType:'Position',              discount:'40%',       tournamentCost:'',               freeSpins:'', tadaJP:'', startDate:'3/1/2026',  endDate:'3/31/2026', remark:''},
+      {client:'Betfusion',      market:'Brazil',         status:'Confirmed', promoType:'Position',              discount:'4% NGR',    tournamentCost:'',               freeSpins:'', tadaJP:'', startDate:'3/1/2026',  endDate:'3/31/2026', remark:''},
+      {client:'Betou',          market:'Brazil',         status:'Confirmed', promoType:'Position',              discount:'3% NGR',    tournamentCost:'',               freeSpins:'', tadaJP:'', startDate:'3/1/2026',  endDate:'3/31/2026', remark:''},
+      {client:'Sorte na Bet',   market:'Brazil',         status:'Confirmed', promoType:'Position',              discount:'3% NGR',    tournamentCost:'',               freeSpins:'', tadaJP:'', startDate:'3/1/2026',  endDate:'3/31/2026', remark:''},
+      {client:'Betnacional',    market:'Brazil',         status:'Rejected',  promoType:'Tournament',            discount:'',          tournamentCost:'30,000 BRL',     freeSpins:'', tadaJP:'', startDate:'',          endDate:'',          remark:'Timing'},
+      {client:'Energia',        market:'Brazil',         status:'Confirmed', promoType:'Position',              discount:'40%',       tournamentCost:'',               freeSpins:'', tadaJP:'', startDate:'3/1/2026',  endDate:'3/31/2026', remark:'Casino Section and Positions'},
+      {client:'Rei do Pitaco',  market:'Brazil',         status:'Confirmed', promoType:'Position',              discount:'35%',       tournamentCost:'',               freeSpins:'', tadaJP:'', startDate:'3/1/2026',  endDate:'3/31/2026', remark:'CRM, Positions, Missions, and Tournament'},
+      {client:'Estrela Bet',    market:'Brazil',         status:'Confirmed', promoType:'Position',              discount:'35%',       tournamentCost:'',               freeSpins:'', tadaJP:'', startDate:'3/1/2026',  endDate:'3/31/2026', remark:'CRM, Positions, Section, and Tournament'},
+      {client:'Ecuabet',        market:'Ecuador',        status:'Confirmed', promoType:'Position',              discount:'60%',       tournamentCost:'',               freeSpins:'', tadaJP:'', startDate:'3/1/2026',  endDate:'3/31/2026', remark:'2 games, Row 2'},
+      {client:'Paniplay',       market:'Honduras',       status:'Confirmed', promoType:'Position',              discount:'60%',       tournamentCost:'',               freeSpins:'', tadaJP:'', startDate:'3/1/2026',  endDate:'3/31/2026', remark:'2 games, Row 2'},
+      {client:'Doradobet',      market:'Latin America',  status:'Confirmed', promoType:'Position',              discount:'60%',       tournamentCost:'',               freeSpins:'', tadaJP:'', startDate:'3/1/2026',  endDate:'3/31/2026', remark:'2 games, Row 2'},
+      {client:'Ganaplay',       market:'Central America',status:'Confirmed', promoType:'Position',              discount:'60%',       tournamentCost:'',               freeSpins:'', tadaJP:'', startDate:'3/1/2026',  endDate:'3/31/2026', remark:'2 games, Row 2'},
+      {client:'Camanbet',       market:'Venezuela',      status:'Confirmed', promoType:'Position',              discount:'60%',       tournamentCost:'',               freeSpins:'', tadaJP:'', startDate:'3/1/2026',  endDate:'3/31/2026', remark:'2 games, Row 2'},
+      {client:'Bet Pix 365',    market:'Brazil',         status:'Confirmed', promoType:'Welcome Offer',         discount:'50%',       tournamentCost:'',               freeSpins:'', tadaJP:'', startDate:'3/1/2026',  endDate:'3/31/2026', remark:''},
+      {client:'Vai De Bet',     market:'Brazil',         status:'Confirmed', promoType:'Welcome Offer',         discount:'50%',       tournamentCost:'',               freeSpins:'', tadaJP:'', startDate:'3/1/2026',  endDate:'3/31/2026', remark:''},
+      {client:'Orobet',         market:'Latin America',  status:'Confirmed', promoType:'Position',              discount:'40%',       tournamentCost:'',               freeSpins:'', tadaJP:'', startDate:'3/1/2026',  endDate:'3/31/2026', remark:''},
+      {client:'Superbet',       market:'Brazil',         status:'Confirmed', promoType:'Free Spins',            discount:'50%',       tournamentCost:'',               freeSpins:'Big FS Campaign', tadaJP:'', startDate:'', endDate:'3/31/2026', remark:'Big Free Spin Campaign'},
+      {client:'Easy Bet',       market:'Argentina',      status:'Confirmed', promoType:'Position',              discount:'35%',       tournamentCost:'',               freeSpins:'', tadaJP:'', startDate:'3/6/2026',  endDate:'3/31/2026', remark:''},
+      {client:'Aprieta Y Gana', market:'Venezuela',      status:'Proposed',  promoType:'Position',              discount:'40%',       tournamentCost:'',               freeSpins:'', tadaJP:'', startDate:'',          endDate:'3/31/2026', remark:'Dates TBC'},
+      {client:'Viva Sorte',     market:'Brazil',         status:'Confirmed', promoType:'Position',              discount:'50%',       tournamentCost:'',               freeSpins:'', tadaJP:'', startDate:'3/1/2026',  endDate:'3/31/2026', remark:'Casino Section'},
+      {client:'Pixbet',         market:'Brazil',         status:'Confirmed', promoType:'Position',              discount:'50%',       tournamentCost:'',               freeSpins:'', tadaJP:'', startDate:'3/17/2026', endDate:'3/31/2026', remark:''}
     ],
     chu: [
-      {platform:'QTech',     market:'Africa',promoTypeZh:'位置',          promoTypeEn:'Position',         period:'3/01–3/31',status:'completed',impactZh:'60% 折扣；非洲多市場', impactEn:'60% discount; multi-Africa markets'},
-      {platform:'Koralplay', market:'Africa',promoTypeZh:'新遊戲上線推廣',promoTypeEn:'Pre-release Push',  period:'3/10–4/07',status:'completed',impactZh:'多國上線追蹤：Mali/Gabon/Angola/SL', impactEn:'Multi-country launch: Mali/Gabon/Angola/SL'},
-      {platform:'SportyBet', market:'Africa',promoTypeZh:'首週上線促銷',  promoTypeEn:'Go-live Week Promo',period:'3/29–4/05',status:'completed',impactZh:'SoftSwiss 整合後首週活化', impactEn:'Week-1 activation post-SoftSwiss integration'},
-      {platform:'BetWay Africa',market:'Africa',promoTypeZh:'位置',        promoTypeEn:'Position',          period:'3/01–3/31',status:'completed',impactZh:'非洲多國位置曝光', impactEn:'Multi-country Africa positioning'}
+      {client:'QTech',    market:'Africa', status:'Confirmed', promoType:'Position',    discount:'60%',      tournamentCost:'', freeSpins:'', tadaJP:'', startDate:'', endDate:'', remark:''},
+      {client:'Koralplay',market:'Africa', status:'Confirmed', promoType:'Pre Release', discount:'',         tournamentCost:'', freeSpins:'', tadaJP:'', startDate:'3/10/2026', endDate:'4/7/2026', remark:'B2Africa Mali: Game & Banner Released; B2Africa Gabon: Released; ElephantBet Angola: Game only; ElephantBet SL: Not released; LonaguiBet: Not released'}
     ],
     bryam: [
-      {platform:'Slotegrator/CIS partners', market:'CIS',promoTypeZh:'合約完成後位置推廣',promoTypeEn:'Post-contract Position Push',period:'3/29–4/30',status:'upcoming',impactZh:'合約完成，4月開始位置推廣',impactEn:'Contract signed; position push starting April'},
-      {platform:'Turkey Ops',market:'West Asia',promoTypeZh:'Addendum 促銷啟動',promoTypeEn:'Addendum Promo Activation',period:'3/16–3/31',status:'completed',impactZh:'Addendum 效果顯現；WA W12 +10.59%',impactEn:'Addendum effect visible; WA W12 +10.59%'}
+      {client:'Softgaming', market:'Mexico', status:'Proposed', promoType:'Position', discount:'', tournamentCost:'', freeSpins:'', tadaJP:'', startDate:'', endDate:'', remark:'Sent on 25th of Feb.'}
     ],
     nina: [
-      {platform:'Superbet',   market:'Romania', promoTypeZh:'新一輪促銷活動', promoTypeEn:'New Promo Round',  period:'3/09–3/31', status:'completed', impactZh:'推動 W12 EU 市場回升', impactEn:'Key driver of EU W12 recovery'},
-      {platform:'Betclic',    market:'Portugal',promoTypeZh:'精選遊戲位置',   promoTypeEn:'Featured Game Positions',period:'3/01–3/31',status:'completed',impactZh:'Joker Coins & 3 Charge Buffalo 精選', impactEn:'Joker Coins & 3 Charge Buffalo featured'},
-      {platform:'Boyles',     market:'UK',      promoTypeZh:'上線活化推廣',   promoTypeEn:'Go-live Activation',period:'3/23–4/15',status:'completed',impactZh:'英國首個合規客戶上線', impactEn:'First UK regulated client go-live'},
-      {platform:'Megasino',   market:'Non-Reg EU',promoTypeZh:'位置推廣 (提議)',promoTypeEn:'Position (Proposed)',period:'3/01–3/31',status:'upcoming',impactZh:'50% 折扣；待確認', impactEn:'50% discount; pending confirmation'},
-      {platform:'Napoleon',   market:'Belgium', promoTypeZh:'上線後位置推廣', promoTypeEn:'Post-launch Positions',period:'3/01–3/31',status:'completed',impactZh:'11月上線後穩定成長', impactEn:'Stable growth since Nov go-live'}
+      {client:'Timeless Tech (Megasino)', market:'Unreg EU', status:'Proposed', promoType:'Position', discount:'50%', tournamentCost:'', freeSpins:'', tadaJP:'', startDate:'', endDate:'', remark:''}
     ]
+  },
+  apr2026: {
+    hector: [
+      {client:'Betboom',        market:'Brazil',         status:'Proposed',  promoType:'Tournament',            discount:'',          tournamentCost:'25,000 BRL',     freeSpins:'', tadaJP:'', startDate:'4/3/2026',  endDate:'4/10/2026', remark:''},
+      {client:'Energia',        market:'Brazil',         status:'Confirmed', promoType:'Position',              discount:'40%',       tournamentCost:'',               freeSpins:'', tadaJP:'', startDate:'4/1/2026',  endDate:'4/30/2026', remark:'Casino Section and Positions'},
+      {client:'Virtual Soft',   market:'Ecuador',        status:'Confirmed', promoType:'Position',              discount:'60%',       tournamentCost:'',               freeSpins:'', tadaJP:'', startDate:'4/1/2026',  endDate:'4/30/2026', remark:'Row 2'},
+      {client:'Betnacional',    market:'Brazil',         status:'Confirmed', promoType:'Position + Tournament', discount:'50%',       tournamentCost:'40,000 BRL',     freeSpins:'', tadaJP:'', startDate:'4/3/2026',  endDate:'4/5/2026',  remark:''},
+      {client:'Betnacional',    market:'Brazil',         status:'Confirmed', promoType:'Position + Tournament', discount:'50%',       tournamentCost:'40,000 BRL',     freeSpins:'', tadaJP:'', startDate:'4/24/2026', endDate:'4/26/2026', remark:''},
+      {client:'Jogo De Ouro',   market:'Brazil',         status:'Proposed',  promoType:'Position',              discount:'40%',       tournamentCost:'',               freeSpins:'', tadaJP:'', startDate:'4/1/2026',  endDate:'4/30/2026', remark:'Casino Section and Marketing Campaigns'},
+      {client:'Betvip',         market:'Brazil',         status:'Confirmed', promoType:'Position',              discount:'40%',       tournamentCost:'',               freeSpins:'', tadaJP:'', startDate:'4/1/2026',  endDate:'4/30/2026', remark:'Positions and Casino Section'},
+      {client:'Betvip',         market:'Brazil',         status:'Proposed',  promoType:'Tournament',            discount:'50%',       tournamentCost:'2,000 USDT',     freeSpins:'', tadaJP:'', startDate:'',          endDate:'',          remark:'Small Tournament'},
+      {client:'Rei do Pitaco',  market:'Brazil',         status:'Confirmed', promoType:'Position',              discount:'40%',       tournamentCost:'',               freeSpins:'', tadaJP:'', startDate:'4/1/2026',  endDate:'4/30/2026', remark:''},
+      {client:'Estrela Bet',    market:'Brazil',         status:'Confirmed', promoType:'Tournament + Position', discount:'35%',       tournamentCost:'',               freeSpins:'', tadaJP:'', startDate:'4/1/2026',  endDate:'4/30/2026', remark:'CRM, Positions, Section, and Tournament'},
+      {client:'Aposta Ganha',   market:'Brazil',         status:'Confirmed', promoType:'Free Spins + Position', discount:'1.5% NGR',  tournamentCost:'',               freeSpins:'', tadaJP:'', startDate:'4/1/2026',  endDate:'4/30/2026', remark:'Positions and Campaigns'},
+      {client:'Aprieta Y Gana', market:'Venezuela',      status:'Proposed',  promoType:'Position',              discount:'40%',       tournamentCost:'',               freeSpins:'', tadaJP:'', startDate:'4/1/2026',  endDate:'4/30/2026', remark:'Dates TBC'},
+      {client:'Sportingbet',    market:'Brazil',         status:'Proposed',  promoType:'Position',              discount:'35%',       tournamentCost:'',               freeSpins:'', tadaJP:'', startDate:'',          endDate:'',          remark:''},
+      {client:'Ecuabet',        market:'Ecuador',        status:'Confirmed', promoType:'Position',              discount:'60%',       tournamentCost:'',               freeSpins:'', tadaJP:'', startDate:'4/1/2026',  endDate:'4/30/2026', remark:''},
+      {client:'Ecuabet',        market:'Ecuador',        status:'Confirmed', promoType:'Position',              discount:'',          tournamentCost:'2,000 USD',      freeSpins:'', tadaJP:'', startDate:'4/1/2026',  endDate:'4/30/2026', remark:'Special Campaign with 2 games positioned'},
+      {client:'Superbet',       market:'Brazil',         status:'Confirmed', promoType:'Free Spins',            discount:'40%',       tournamentCost:'',               freeSpins:'Big FS Campaign', tadaJP:'', startDate:'4/1/2026', endDate:'4/30/2026', remark:'Big FS Campaign and Positions'},
+      {client:'Viva Sorte',     market:'Brazil',         status:'Confirmed', promoType:'Position',              discount:'50%',       tournamentCost:'',               freeSpins:'', tadaJP:'', startDate:'4/1/2026',  endDate:'4/30/2026', remark:'Casino Section'},
+      {client:'Pixbet',         market:'Brazil',         status:'Confirmed', promoType:'Position',              discount:'50%',       tournamentCost:'',               freeSpins:'', tadaJP:'', startDate:'4/1/2026',  endDate:'4/30/2026', remark:'Casino Section and Positions'},
+      {client:'Sorte na Bet',   market:'Brazil',         status:'Proposed',  promoType:'Position',              discount:'4% NGR',    tournamentCost:'',               freeSpins:'', tadaJP:'', startDate:'4/1/2026',  endDate:'4/30/2026', remark:'Casino Section and One Position'},
+      {client:'Betfusion',      market:'Brazil',         status:'Proposed',  promoType:'Position',              discount:'4% NGR',    tournamentCost:'',               freeSpins:'', tadaJP:'', startDate:'4/1/2026',  endDate:'4/30/2026', remark:'Casino Section and One Position'},
+      {client:'Betou',          market:'Brazil',         status:'Proposed',  promoType:'Position',              discount:'4% NGR',    tournamentCost:'',               freeSpins:'', tadaJP:'', startDate:'4/1/2026',  endDate:'4/30/2026', remark:'Casino Section and One Position'},
+      {client:'Pinnacle',       market:'Brazil',         status:'Proposed',  promoType:'Position',              discount:'40%',       tournamentCost:'',               freeSpins:'', tadaJP:'', startDate:'4/1/2026',  endDate:'4/30/2026', remark:''},
+      {client:'Fulltbet',       market:'Brazil',         status:'Proposed',  promoType:'Position',              discount:'40%',       tournamentCost:'',               freeSpins:'', tadaJP:'', startDate:'4/1/2026',  endDate:'4/30/2026', remark:''},
+      {client:'Betbra',         market:'Brazil',         status:'Proposed',  promoType:'Position',              discount:'40%',       tournamentCost:'',               freeSpins:'', tadaJP:'', startDate:'4/1/2026',  endDate:'4/30/2026', remark:''},
+      {client:'Bolsa de Aposta',market:'Brazil',         status:'Proposed',  promoType:'Position',              discount:'40%',       tournamentCost:'',               freeSpins:'', tadaJP:'', startDate:'4/1/2026',  endDate:'4/30/2026', remark:''},
+      {client:'Matchbook',      market:'Brazil',         status:'Proposed',  promoType:'Position',              discount:'40%',       tournamentCost:'',               freeSpins:'', tadaJP:'', startDate:'4/1/2026',  endDate:'4/30/2026', remark:''},
+      {client:'Roobet',         market:'ROW',            status:'Rejected',  promoType:'Position',              discount:'50%',       tournamentCost:'',               freeSpins:'', tadaJP:'', startDate:'4/1/2026',  endDate:'4/30/2026', remark:''},
+      {client:'TriunfoBet',     market:'Venezuela',      status:'Proposed',  promoType:'Position',              discount:'40%',       tournamentCost:'',               freeSpins:'', tadaJP:'', startDate:'4/1/2026',  endDate:'4/30/2026', remark:''},
+      {client:'KTO',            market:'Brazil',         status:'Proposed',  promoType:'Position',              discount:'45%',       tournamentCost:'',               freeSpins:'', tadaJP:'', startDate:'4/1/2026',  endDate:'4/30/2026', remark:''},
+      {client:'Betwarrior',     market:'Brazil',         status:'Confirmed', promoType:'Position',              discount:'40%',       tournamentCost:'',               freeSpins:'', tadaJP:'', startDate:'4/1/2026',  endDate:'4/30/2026', remark:''},
+      {client:'Aprieta Y Gana', market:'Venezuela',      status:'Proposed',  promoType:'Tournament',            discount:'',          tournamentCost:'2,000 EUR',      freeSpins:'', tadaJP:'', startDate:'',          endDate:'',          remark:'Date TBC'},
+      {client:'Casa De Apostas',market:'Brazil',         status:'Proposed',  promoType:'Position',              discount:'50%',       tournamentCost:'',               freeSpins:'', tadaJP:'', startDate:'4/1/2026',  endDate:'4/30/2026', remark:''},
+      {client:'Casa De Apostas',market:'Brazil',         status:'Confirmed', promoType:'Free Spins',            discount:'50%',       tournamentCost:'',               freeSpins:'', tadaJP:'', startDate:'4/9/2026',  endDate:'4/9/2026',  remark:''},
+      {client:'Multibet',       market:'Brazil',         status:'Confirmed', promoType:'Position',              discount:'40%',       tournamentCost:'',               freeSpins:'', tadaJP:'', startDate:'4/1/2026',  endDate:'4/30/2026', remark:''},
+      {client:'MC Games',       market:'Brazil',         status:'Confirmed', promoType:'Position',              discount:'3% NGR',    tournamentCost:'',               freeSpins:'', tadaJP:'', startDate:'4/1/2026',  endDate:'4/30/2026', remark:''},
+      {client:'Playbet',        market:'Brazil',         status:'Confirmed', promoType:'Position',              discount:'3% NGR',    tournamentCost:'',               freeSpins:'', tadaJP:'', startDate:'4/1/2026',  endDate:'4/30/2026', remark:''},
+      {client:'Pagol',          market:'Brazil',         status:'Confirmed', promoType:'Position',              discount:'40%',       tournamentCost:'',               freeSpins:'', tadaJP:'', startDate:'4/1/2026',  endDate:'4/30/2026', remark:''},
+      {client:'Donald Bet',     market:'Brazil',         status:'Confirmed', promoType:'Free Spins',            discount:'',          tournamentCost:'',               freeSpins:'10,000 BRL', tadaJP:'', startDate:'4/1/2026', endDate:'4/30/2026', remark:''}
+    ],
+    chu: [
+      {client:'Betway', market:'South Africa', status:'Confirmed', promoType:'Position', discount:'70%', tournamentCost:'', freeSpins:'', tadaJP:'', startDate:'4/30/2026', endDate:'5/31/2026', remark:''},
+      {client:'Betway', market:'South Africa', status:'Confirmed', promoType:'Position', discount:'50%', tournamentCost:'', freeSpins:'', tadaJP:'', startDate:'4/30/2026', endDate:'5/31/2026', remark:''},
+      {client:'Betway', market:'South Africa', status:'Confirmed', promoType:'Position', discount:'50%', tournamentCost:'', freeSpins:'', tadaJP:'', startDate:'4/30/2026', endDate:'5/31/2026', remark:''}
+    ],
+    bryam: [],
+    nina: []
   }
 };
 
@@ -5386,7 +5518,9 @@ function renderSections(memberId, mData) {
   const currLabel   = currentLang === 'zh' ? '幣別分布'   : 'Currency Mix';
   const promoLabel  = currentLang === 'zh' ? '促銷活動'   : 'Promotions';
   const clientTh    = currentLang === 'zh' ? ['客戶','市場','狀態','行動'] : ['Client','Market','Status','Action'];
-  const promoTh     = currentLang === 'zh' ? ['平台/客戶','市場','促銷類型','期間','狀態','預期效益'] : ['Platform','Market','Promo Type','Period','Status','Expected Impact'];
+  const promoTh     = currentLang === 'zh'
+    ? ['客戶','市場','狀態','促銷類型','位置折扣','錦標賽成本','Free Spins','TaDa JP','開始','結束','備註']
+    : ['Client','Market','Status','Promo Type','Discount','Tournament Cost','Free Spins','TaDa JP','Start','End','Remark'];
 
   const hiItems = mData.highlights.map(h =>
     `<li>${currentLang === 'zh' ? h.zh : h.en}</li>`).join('');
@@ -5436,19 +5570,25 @@ function renderSections(memberId, mData) {
 
   if (promos.length > 0) {
     const promoRows = promos.map(p => {
-      const statusClass = p.status === 'active' ? 'promo-active' : p.status === 'completed' ? 'promo-done' : 'promo-upcoming';
-      const statusLabel = p.status === 'active'
-        ? (currentLang === 'zh' ? '進行中' : 'Active')
-        : p.status === 'completed'
-          ? (currentLang === 'zh' ? '已完成' : 'Completed')
-          : (currentLang === 'zh' ? '即將推出' : 'Upcoming');
+      const sc = p.status === 'Confirmed' ? 'promo-confirmed'
+        : p.status === 'Proposed'  ? 'promo-proposed'
+        : p.status === 'Rejected'  ? 'promo-rejected'
+        : 'promo-noresponse';
+      const sl = currentLang === 'zh'
+        ? (p.status === 'Confirmed' ? '已確認' : p.status === 'Proposed' ? '提議中' : p.status === 'Rejected' ? '已拒絕' : '無回應')
+        : p.status;
       return `<tr>
-        <td><strong>${p.platform}</strong></td>
+        <td><strong>${p.client}</strong></td>
         <td>${p.market}</td>
-        <td>${currentLang === 'zh' ? p.promoTypeZh : p.promoTypeEn}</td>
-        <td>${p.period}</td>
-        <td><span class="promo-status ${statusClass}">${statusLabel}</span></td>
-        <td style="color:var(--muted)">${currentLang === 'zh' ? p.impactZh : p.impactEn}</td>
+        <td><span class="promo-status ${sc}">${sl}</span></td>
+        <td>${p.promoType}</td>
+        <td class="cost-cell">${p.discount || ''}</td>
+        <td class="cost-cell">${p.tournamentCost || ''}</td>
+        <td class="cost-cell">${p.freeSpins || ''}</td>
+        <td class="cost-cell">${p.tadaJP || ''}</td>
+        <td class="cost-cell">${p.startDate || ''}</td>
+        <td class="cost-cell">${p.endDate || ''}</td>
+        <td class="remark-cell">${p.remark || ''}</td>
       </tr>`;
     }).join('');
     promoHtml = `<div class="section">
@@ -5456,7 +5596,7 @@ function renderSections(memberId, mData) {
         <div class="section-title"><span>🎁</span>${promoLabel}</div>
         <span class="chevron">▼</span>
       </div>
-      <div class="section-body">
+      <div class="section-body" style="overflow-x:auto">
         <table class="promo-table">
           <thead><tr>${promoTh.map(h => `<th>${h}</th>`).join('')}</tr></thead>
           <tbody>${promoRows}</tbody>
@@ -5658,15 +5798,17 @@ function renderMonthlyView(monthId) {
   const kpiEl = document.getElementById('kpiList');
   const memberColors = {bryam:'#8B5CF6', hector:'#F59E0B', chu:'#10B981', nina:'#F97316'};
   kpiEl.innerHTML = md.kpi.map(k => {
-    const pct = Math.min(k.achievement, 120);
-    const barColor = k.status === 'green' ? '#10B981' : k.status === 'yellow' ? '#F59E0B' : '#EF4444';
-    const icon = k.status === 'green' ? '✅' : k.status === 'yellow' ? '⚠️' : '❌';
-    const textCls = k.status === 'green' ? 'kpi-green' : k.status === 'yellow' ? 'kpi-yellow' : 'kpi-red-text';
+    const hasData = k.achievement !== null && k.achievement !== undefined;
+    const pct = hasData ? Math.min(k.achievement, 120) : 0;
+    const barColor = k.status === 'green' ? '#10B981' : k.status === 'yellow' ? '#F59E0B' : k.status === 'gray' ? '#94A3B8' : '#EF4444';
+    const icon = k.status === 'green' ? '✅' : k.status === 'yellow' ? '⚠️' : k.status === 'gray' ? '–' : '❌';
+    const textCls = k.status === 'green' ? 'kpi-green' : k.status === 'yellow' ? 'kpi-yellow' : k.status === 'gray' ? '' : 'kpi-red-text';
     const region = currentLang === 'zh' ? k.regionZh : k.regionEn;
+    const achieveLabel = hasData ? `${k.achievement}%` : (currentLang === 'zh' ? '待確認' : 'TBC');
     return `<div class="kpi-bar-row">
       <div class="kpi-region" style="border-left:3px solid ${memberColors[k.member]};padding-left:8px">${region}</div>
       <div class="kpi-bar-track"><div class="kpi-bar-fill" style="width:${pct/1.2}%;background:${barColor}"></div></div>
-      <div class="kpi-pct ${textCls}">${k.achievement}%</div>
+      <div class="kpi-pct ${textCls}">${achieveLabel}</div>
       <div class="kpi-status-badge">${icon}</div>
     </div>`;
   }).join('');
@@ -5711,26 +5853,33 @@ function renderMonthlyView(monthId) {
       {id:'bryam',  name:'Bryam Jacquet', color:'#8B5CF6', regionZh:'CIS & 西亞',  regionEn:'CIS & West Asia'}
     ];
     const promoTh2 = currentLang === 'zh'
-      ? ['平台/客戶','市場','促銷類型','期間','狀態','預期效益']
-      : ['Platform','Market','Promo Type','Period','Status','Expected Impact'];
+      ? ['客戶','市場','狀態','促銷類型','位置折扣','錦標賽成本','Free Spins','TaDa JP','開始','結束','備註']
+      : ['Client','Market','Status','Promo Type','Discount','Tournament Cost','Free Spins','TaDa JP','Start','End','Remark'];
     paEl.innerHTML = paMembers.map((pm, idx) => {
       const promos = promoByMember[pm.id] || [];
       const region = currentLang === 'zh' ? pm.regionZh : pm.regionEn;
       const promoRows = promos.map(p => {
-        const statusClass = p.status === 'active' ? 'promo-active' : p.status === 'completed' ? 'promo-done' : 'promo-upcoming';
-        const statusLabel = p.status === 'active' ? (currentLang==='zh'?'進行中':'Active')
-          : p.status === 'completed' ? (currentLang==='zh'?'已完成':'Completed')
-          : (currentLang==='zh'?'即將推出':'Upcoming');
+        const sc2 = p.status === 'Confirmed' ? 'promo-confirmed'
+          : p.status === 'Proposed'  ? 'promo-proposed'
+          : p.status === 'Rejected'  ? 'promo-rejected'
+          : 'promo-noresponse';
+        const sl2 = currentLang === 'zh'
+          ? (p.status === 'Confirmed' ? '已確認' : p.status === 'Proposed' ? '提議中' : p.status === 'Rejected' ? '已拒絕' : '無回應')
+          : p.status;
         return `<tr>
-          <td><strong>${p.platform}</strong></td>
+          <td><strong>${p.client}</strong></td>
           <td>${p.market}</td>
-          <td>${currentLang==='zh' ? p.promoTypeZh : p.promoTypeEn}</td>
-          <td>${p.period}</td>
-          <td><span class="promo-status ${statusClass}">${statusLabel}</span></td>
-          <td style="color:var(--muted)">${currentLang==='zh' ? p.impactZh : p.impactEn}</td>
+          <td><span class="promo-status ${sc2}">${sl2}</span></td>
+          <td>${p.promoType}</td>
+          <td class="cost-cell">${p.discount || ''}</td>
+          <td class="cost-cell">${p.tournamentCost || ''}</td>
+          <td class="cost-cell">${p.freeSpins || ''}</td>
+          <td class="cost-cell">${p.tadaJP || ''}</td>
+          <td class="cost-cell">${p.startDate || ''}</td>
+          <td class="cost-cell">${p.endDate || ''}</td>
+          <td class="remark-cell">${p.remark || ''}</td>
         </tr>`;
       }).join('');
-      const bodyId = `mpa-body-${pm.id}`;
       const isOpen = idx === 0; // Hector open by default
       return `<div class="mpa-item">
         <div class="mpa-header" onclick="this.nextElementSibling.classList.toggle('open');this.querySelector('.chevron').classList.toggle('open')">
@@ -5743,10 +5892,10 @@ function renderMonthlyView(monthId) {
           </div>
           <span class="chevron${isOpen?' open':''}">▼</span>
         </div>
-        <div class="${isOpen?'mpa-body open':'mpa-body'}">
+        <div class="${isOpen?'mpa-body open':'mpa-body'}" style="overflow-x:auto">
           <table class="promo-table">
             <thead><tr>${promoTh2.map(h=>`<th>${h}</th>`).join('')}</tr></thead>
-            <tbody>${promoRows || `<tr><td colspan="6" style="color:var(--muted);text-align:center;padding:12px">${currentLang==='zh'?'本月無記錄促銷活動':'No promotions recorded this month'}</td></tr>`}</tbody>
+            <tbody>${promoRows || `<tr><td colspan="11" style="color:var(--muted);text-align:center;padding:12px">${currentLang==='zh'?'本月無記錄促銷活動':'No promotions recorded this month'}</td></tr>`}</tbody>
           </table>
         </div>
       </div>`;
