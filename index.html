@@ -1045,7 +1045,7 @@
     <div class="ov-pipeline-wrap">
       <div class="ov-pipeline-hdr">
         <div class="ov-pipeline-title">🔀 <span data-zh="Pipeline 看板" data-en="Pipeline Board">Pipeline 看板</span></div>
-        <div class="ov-pipeline-meta" data-zh="Q2 2026 · 進行中商務機會 · 可連結 Google Sheets 自動更新" data-en="Q2 2026 · Active Opportunities · Connect Google Sheets to auto-update">Q2 2026 · 可連結 Google Sheets 自動更新</div>
+        <div class="ov-pipeline-meta" data-zh="Q2 2026 · 進行中商務機會 · 可連結 Monday.com 自動更新" data-en="Q2 2026 · Active Opportunities · Connect Monday.com to auto-update">Q2 2026 · 可連結 Monday.com 自動更新</div>
       </div>
       <div class="ov-kanban" id="ov-kanban-board">
         <!-- LEAD -->
@@ -1172,40 +1172,48 @@
   <!-- ══════════ GOOGLE SHEETS SETUP MODAL ══════════ -->
   <div id="ov-modal" class="ov-modal-overlay" style="display:none" onclick="if(event.target===this)hideSheetsModal()">
     <div class="ov-modal">
-      <div class="ov-modal-title">🔗 連結 Google Sheets 自動更新</div>
-      <div class="ov-modal-sub">完成設定後，每次開啟 Dashboard 將自動從你的 Google Sheets 讀取最新的 Pipeline 資料，無需手動改 HTML。</div>
+      <div class="ov-modal-title">🔗 連結 Monday.com 自動更新</div>
+      <div class="ov-modal-sub">透過 Google Apps Script 橋接 Monday.com，每次開啟 Dashboard 自動讀取最新任務與 Pipeline 資料，無需手動修改。</div>
 
       <div class="ov-modal-step">
         <div class="ov-modal-step-num">1</div>
         <div class="ov-modal-step-body">
-          <div class="ov-modal-step-title" data-zh="使用已提供的 Sheet 模板" data-en="Use the provided Sheet template">使用已提供的 Sheet 模板</div>
-          <div class="ov-modal-step-desc" data-zh="第一個工作表即為 Pipeline 資料，欄位：Client（客戶名稱）、Market（市場描述）、Stage（階段）、Owner（負責人）。所有現有 Pipeline 已預填完畢，直接修改即可。" data-en="The first sheet tab is Pipeline data. Columns: Client, Market, Stage, Owner. All current deals are pre-filled — just edit.">第一個工作表為 Pipeline 資料，欄位：Client、Market、Stage、Owner。所有現有 Pipeline 資料已預填，直接修改即可。</div>
-          <div class="ov-modal-code">Stage 欄位只填：lead · proposal · negotiating · onboarding</div>
+          <div class="ov-modal-step-title">開啟 Google Apps Script</div>
+          <div class="ov-modal-step-desc">前往 <a href="https://script.google.com" target="_blank" style="color:var(--orange);font-weight:600">script.google.com</a>，點「新增專案」，刪除預設內容</div>
         </div>
       </div>
 
       <div class="ov-modal-step">
         <div class="ov-modal-step-num">2</div>
         <div class="ov-modal-step-body">
-          <div class="ov-modal-step-title" data-zh="發布為可讀取狀態" data-en="Publish to the web">發布為可讀取狀態</div>
-          <div class="ov-modal-step-desc" data-zh="在 Google Sheets：檔案 → 共用 → 發布至網路 → 選「整份試算表」→ 發布。同時將 Sheet 設為「知道連結的人都能檢視」" data-en="Google Sheets: File → Share → Publish to web → Entire spreadsheet → Publish. Also set sharing to &quot;Anyone with the link can view&quot;">在 Sheets：檔案 → 共用 → 發布至網路 → 整份試算表 → 發布</div>
+          <div class="ov-modal-step-title">複製程式碼到 Code.gs</div>
+          <div class="ov-modal-step-desc">點擊下方區塊複製完整程式碼，貼到 Code.gs，並將第一行的 <code style="background:#F1F5F9;padding:1px 5px;border-radius:4px">YOUR_TOKEN</code> 替換為你的 Monday.com API token</div>
+          <div class="ov-modal-code" id="ov-script-code-preview" onclick="copyScriptCode()" style="cursor:pointer;line-height:1.7;transition:background .2s" title="點擊複製">📋 點擊這裡複製 Apps Script 程式碼</div>
         </div>
       </div>
 
       <div class="ov-modal-step">
         <div class="ov-modal-step-num">3</div>
         <div class="ov-modal-step-body">
-          <div class="ov-modal-step-title" data-zh="貼上 Sheet ID" data-en="Paste your Sheet ID">貼上 Sheet ID</div>
-          <div class="ov-modal-step-desc" data-zh="在 Sheet 網址中找到 ID：https://docs.google.com/spreadsheets/d/【這段】/edit" data-en="Find the ID in your Sheet URL: https://docs.google.com/spreadsheets/d/[THIS PART]/edit">在 Sheet 網址中找到：docs.google.com/spreadsheets/d/<strong>【這段是 ID】</strong>/edit</div>
-          <input type="text" class="ov-modal-input" id="ov-sheet-id-input" placeholder="例如：1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgVE2upms">
-          <div class="ov-modal-connected" id="ov-modal-connected">✅ 已連線 — 資料載入成功</div>
+          <div class="ov-modal-step-title">部署為網頁應用程式</div>
+          <div class="ov-modal-step-desc">右上角「部署」→「新增部署」→ 類型選「網頁應用程式」→ 執行身份「我」→ 存取權「任何人」→「部署」</div>
+        </div>
+      </div>
+
+      <div class="ov-modal-step">
+        <div class="ov-modal-step-num">4</div>
+        <div class="ov-modal-step-body">
+          <div class="ov-modal-step-title">貼上部署 URL</div>
+          <div class="ov-modal-step-desc">複製部署後顯示的「網頁應用程式 URL」（格式：<code style="background:#F1F5F9;padding:1px 5px;border-radius:4px">https://script.google.com/macros/s/…</code>）</div>
+          <input type="text" class="ov-modal-input" id="ov-monday-url-input" placeholder="https://script.google.com/macros/s/AKfy.../exec">
+          <div class="ov-modal-connected" id="ov-modal-connected">✅ 已連線 — Monday.com 資料載入成功</div>
         </div>
       </div>
 
       <div class="ov-modal-btns">
         <button class="ov-modal-cancel" onclick="hideSheetsModal()">取消</button>
-        <button class="ov-modal-cancel" onclick="clearSheetsConfig()" style="color:#EF4444;border-color:#EF4444">清除連結</button>
-        <button class="ov-modal-save" onclick="saveSheetsConfig()">💾 儲存並連結</button>
+        <button class="ov-modal-cancel" onclick="clearMondayConfig()" style="color:#EF4444;border-color:#EF4444">清除連結</button>
+        <button class="ov-modal-save" onclick="saveMondayConfig()">💾 儲存並連結</button>
       </div>
     </div>
   </div>
@@ -8606,15 +8614,93 @@ window.onGoogleLibraryLoad = function() {
 };
 
 /* ═══════════════════════════════════════
-   OVERVIEW — Google Sheets 整合
+   OVERVIEW — Monday.com 整合
 ═══════════════════════════════════════ */
+
+// Apps Script 程式碼（供 modal 複製用）
+const _MONDAY_SCRIPT = `// BD Dashboard — Monday.com Proxy
+// 1. 到 Monday.com → 頭像 → Developers → My Access Tokens → 複製 token
+// 2. 將下方 YOUR_TOKEN 替換為你的 token
+var TOKEN = 'YOUR_TOKEN';
+
+function doGet() {
+  try {
+    var result = { tasks: getTasks(), pipeline: getPipeline(), ts: new Date().toISOString() };
+    return out(result);
+  } catch(e) { return out({ error: e.toString() }); }
+}
+function out(obj) {
+  return ContentService.createTextOutput(JSON.stringify(obj)).setMimeType(ContentService.MimeType.JSON);
+}
+function api(q) {
+  var r = UrlFetchApp.fetch('https://api.monday.com/v2', {
+    method: 'POST',
+    headers: { 'Authorization': TOKEN, 'Content-Type': 'application/json', 'API-Version': '2024-01' },
+    payload: JSON.stringify({ query: q }),
+    muteHttpExceptions: true
+  });
+  return JSON.parse(r.getContentText());
+}
+function getTasks() {
+  var q = '{boards(ids:2065148482){groups(ids:["topics","group_title","group_mkv87e7e","group_mkv8ynap"]){title items_page(limit:100){items{name column_values(ids:["status"]){id text}}}}}}';
+  var d = api(q); var out = [];
+  try {
+    d.data.boards[0].groups.forEach(function(g) {
+      g.items_page.items.forEach(function(i) {
+        var s = i.column_values[0] ? i.column_values[0].text : '';
+        if (s && s !== 'Done') out.push({ task: i.name, person: g.title, status: s, color: sc(s) });
+      });
+    });
+  } catch(e) { Logger.log(e); }
+  return out;
+}
+function getPipeline() {
+  var q = '{boards(ids:2065354631){groups(ids:["topics"]){items_page(limit:100){items{name column_values(ids:["color_mkqgq1nx","multiple_person_mkqg8q9a","dropdown_mkvcffqw"]){id text}}}}}}';
+  var d = api(q); var out = [];
+  try {
+    d.data.boards[0].groups[0].items_page.items.forEach(function(i) {
+      var s='',o='',m='';
+      i.column_values.forEach(function(c) {
+        if(c.id==='color_mkqgq1nx') s=c.text||'';
+        else if(c.id==='multiple_person_mkqg8q9a') o=c.text||'';
+        else if(c.id==='dropdown_mkvcffqw') m=c.text||'';
+      });
+      if (s && s !== 'Live') out.push({ client: i.name, market: m, stage: ms(s), owner: o });
+    });
+  } catch(e) { Logger.log(e); }
+  return out;
+}
+function ms(s) {
+  if(s==='Contact') return 'lead';
+  if(s==='Integration certificate'||s==='Requesting Aggregator') return 'proposal';
+  if(s==='Contracting'||s==='Pending Integration') return 'negotiating';
+  if(s==='Integrating'||s==='Stag/Prod'||s==='Pending Live') return 'onboarding';
+  return 'lead';
+}
+function sc(s) {
+  var m = { 'Working on it':'#fdab3d','In Progress':'#cab641','Stuck':'#df2f4a',
+    'Pending Information':'#007eb5','Pending':'#9d50dd','Pending Feedback':'#ffadad',
+    'Postponed':'#563e3e','Confirmed Promotions':'#bb3354','Pending Confirmation':'#333333' };
+  return m[s] || '#94A3B8';
+}`;
+
+function copyScriptCode() {
+  const el = document.getElementById('ov-script-code-preview');
+  navigator.clipboard.writeText(_MONDAY_SCRIPT).then(() => {
+    if (el) { el.textContent = '✅ 已複製！貼到 Code.gs 並填入你的 Monday API token'; el.style.background = '#D1FAE5'; }
+    setTimeout(() => { if (el) { el.textContent = '📋 點擊這裡複製 Apps Script 程式碼'; el.style.background = ''; }}, 3000);
+  }).catch(() => {
+    if (el) el.textContent = '⚠️ 請手動複製（瀏覽器不支援自動複製）';
+  });
+}
+
 function showSheetsModal() {
   const modal = document.getElementById('ov-modal');
   if (!modal) return;
   modal.style.display = 'flex';
-  const saved = localStorage.getItem('bd_overview_sheet_id');
+  const saved = localStorage.getItem('bd_monday_script_url');
   if (saved) {
-    const inp = document.getElementById('ov-sheet-id-input');
+    const inp = document.getElementById('ov-monday-url-input');
     if (inp) inp.value = saved;
   }
 }
@@ -8622,25 +8708,22 @@ function hideSheetsModal() {
   const modal = document.getElementById('ov-modal');
   if (modal) modal.style.display = 'none';
 }
-function clearSheetsConfig() {
-  localStorage.removeItem('bd_overview_sheet_id');
-  const inp = document.getElementById('ov-sheet-id-input');
+function clearMondayConfig() {
+  localStorage.removeItem('bd_monday_script_url');
+  const inp = document.getElementById('ov-monday-url-input');
   if (inp) inp.value = '';
   updateSourceBanner(false);
   hideSheetsModal();
 }
-function saveSheetsConfig() {
-  const inp = document.getElementById('ov-sheet-id-input');
-  const id = (inp ? inp.value : '').trim();
-  if (!id) return;
-  // Extract ID from full URL if pasted
-  const match = id.match(/\/spreadsheets\/d\/([a-zA-Z0-9_-]+)/);
-  const cleanId = match ? match[1] : id;
-  inp.value = cleanId;
-  localStorage.setItem('bd_overview_sheet_id', cleanId);
-  loadSheetsData(cleanId);
+function saveMondayConfig() {
+  const inp = document.getElementById('ov-monday-url-input');
+  const url = (inp ? inp.value : '').trim();
+  if (!url) return;
+  localStorage.setItem('bd_monday_script_url', url);
+  loadMondayData(url);
 }
-function updateSourceBanner(connected, timestamp) {
+
+function updateSourceBanner(connected, source, timestamp) {
   const dot   = document.getElementById('ov-source-dot');
   const label = document.getElementById('ov-source-label');
   const sub   = document.getElementById('ov-source-sub');
@@ -8648,39 +8731,68 @@ function updateSourceBanner(connected, timestamp) {
   if (!dot) return;
   if (connected) {
     dot.classList.add('live');
-    if (label) label.textContent = 'Google Sheets 連線中';
+    if (label) label.textContent = (source || 'Monday.com') + ' 連線中';
     if (sub)   sub.textContent   = '資料每次開啟頁面自動更新';
     if (lu)    lu.textContent    = timestamp || new Date().toLocaleString('zh-TW', {month:'numeric',day:'numeric',hour:'2-digit',minute:'2-digit'});
   } else {
     dot.classList.remove('live');
-    if (label) label.setAttribute('data-zh','手動模式');
-    if (lu)    lu.textContent = '手動';
+    if (label) label.textContent = '手動模式';
+    if (lu)    lu.textContent    = '手動';
   }
 }
-async function loadSheetsData(sheetId) {
-  if (!sheetId) return;
+
+async function loadMondayData(scriptUrl) {
+  if (!scriptUrl) return;
   try {
-    // Use Google Visualization API (no key needed for public sheets)
-    // No &sheet= param = auto-use first tab, regardless of tab name
-    const url = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json`;
-    const res  = await fetch(url);
-    if (!res.ok) throw new Error('fetch failed');
-    const text = await res.text();
-    // Strip the JSONP wrapper  google.visualization.Query.setResponse({...});
-    const jsonStr = text.replace(/^[^(]+\(/, '').replace(/\);\s*$/, '');
-    const json = JSON.parse(jsonStr);
-    if (json && json.table) {
-      renderPipelineFromSheet(json.table);
-      updateSourceBanner(true);
-      const connected = document.getElementById('ov-modal-connected');
-      if (connected) connected.style.display = 'block';
-      setTimeout(hideSheetsModal, 1200);
-    }
+    const res = await fetch(scriptUrl);
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const json = await res.json();
+    if (json.error) throw new Error(json.error);
+    if (json.tasks)    renderTasksFromMonday(json.tasks);
+    if (json.pipeline) renderPipelineFromMonday(json.pipeline);
+    const ts = json.ts ? new Date(json.ts).toLocaleString('zh-TW', {month:'numeric',day:'numeric',hour:'2-digit',minute:'2-digit'}) : null;
+    updateSourceBanner(true, 'Monday.com', ts);
+    const connected = document.getElementById('ov-modal-connected');
+    if (connected) connected.style.display = 'block';
+    setTimeout(hideSheetsModal, 1400);
   } catch(e) {
-    console.warn('Overview: Google Sheets load failed —', e.message);
+    console.warn('Monday.com load failed:', e.message);
   }
 }
-function renderPipelineFromSheet(table) {
+
+function renderTasksFromMonday(tasks) {
+  const memberMap = {
+    'Bryam':  { bodyId: 'tasks-bryam',  countId: 'cnt-bryam'  },
+    'Hector': { bodyId: 'tasks-hector', countId: 'cnt-hector' },
+    'Chu':    { bodyId: 'tasks-chu',    countId: 'cnt-chu'    },
+    'Nina':   { bodyId: 'tasks-nina',   countId: 'cnt-nina'   }
+  };
+  // Clear
+  Object.values(memberMap).forEach(({ bodyId }) => {
+    const el = document.getElementById(bodyId);
+    if (el) el.innerHTML = '';
+  });
+  // Group by person
+  const grouped = {};
+  tasks.forEach(t => { if (!grouped[t.person]) grouped[t.person] = []; grouped[t.person].push(t); });
+  // Render
+  Object.entries(grouped).forEach(([person, pts]) => {
+    const map = memberMap[person];
+    if (!map) return;
+    const body  = document.getElementById(map.bodyId);
+    const count = document.getElementById(map.countId);
+    if (!body) return;
+    pts.forEach(t => {
+      const div = document.createElement('div');
+      div.className = 'ov-tc-task';
+      div.innerHTML = `<span class="ov-tc-dot" style="background:${t.color}"></span><span>${escHtml(t.task)}</span>`;
+      body.appendChild(div);
+    });
+    if (count) count.textContent = pts.length;
+  });
+}
+
+function renderPipelineFromMonday(pipeline) {
   const cols = {
     lead:        document.getElementById('col-lead'),
     proposal:    document.getElementById('col-proposal'),
@@ -8688,43 +8800,37 @@ function renderPipelineFromSheet(table) {
     onboarding:  document.getElementById('col-onboarding')
   };
   if (!cols.lead) return;
-  // Clear existing cards
   Object.values(cols).forEach(c => { if (c) c.innerHTML = ''; });
-  const rows = table.rows || [];
-  rows.forEach(row => {
-    const cells = row.c || [];
-    const val   = i => (cells[i] && cells[i].v != null) ? String(cells[i].v).trim() : '';
-    const client = val(0), market = val(1), stage = val(2).toLowerCase().replace(/[\s_-]+/g,''), owner = val(3);
-    if (!client) return;
-    const target = cols[stage] || cols['lead'];
+  pipeline.forEach(p => {
+    const target = cols[p.stage] || cols['lead'];
     if (!target) return;
     const card = document.createElement('div');
     card.className = 'ov-deal-card';
-    card.innerHTML = `<div class="ov-deal-client">${escHtml(client)}</div>`
-      + (market ? `<div class="ov-deal-market">${escHtml(market)}</div>` : '')
-      + (owner  ? `<span class="ov-deal-owner">${escHtml(owner)}</span>` : '');
+    card.innerHTML = `<div class="ov-deal-client">${escHtml(p.client)}</div>`
+      + (p.market ? `<div class="ov-deal-market">${escHtml(p.market)}</div>` : '')
+      + (p.owner  ? `<span class="ov-deal-owner">${escHtml(p.owner)}</span>` : '');
     target.appendChild(card);
   });
-  // Update column count badges
   ['lead','proposal','negotiating','onboarding'].forEach(s => {
     const col = cols[s];
     const badge = document.getElementById('cnt-' + s);
     if (col && badge) badge.textContent = col.children.length;
   });
-  // Update KPI pipeline count
   const kpiEl = document.getElementById('ov-kpi-pipeline');
   if (kpiEl) {
     const total = Object.values(cols).reduce((n, c) => n + (c ? c.children.length : 0), 0);
     if (total > 0) kpiEl.textContent = total;
   }
 }
+
 function escHtml(s) {
-  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
-// On page load: try to auto-load sheets data if previously configured
+
+// On page load: auto-load Monday.com data if previously configured
 document.addEventListener('DOMContentLoaded', () => {
-  const savedId = localStorage.getItem('bd_overview_sheet_id');
-  if (savedId) loadSheetsData(savedId);
+  const mondayUrl = localStorage.getItem('bd_monday_script_url');
+  if (mondayUrl) loadMondayData(mondayUrl);
 });
 </script>
 </div><!-- end #app -->
