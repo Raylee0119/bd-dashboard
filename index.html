@@ -631,39 +631,29 @@
   .ov-setup-btn{background:var(--orange-light);color:#C2410C;border:1px solid rgba(249,115,22,.3);padding:5px 14px;border-radius:6px;font-size:11px;font-weight:700;cursor:pointer;transition:all .2s;white-space:nowrap;}
   .ov-setup-btn:hover{background:var(--orange);color:#fff;border-color:var(--orange);}
 
-  /* Mid grid */
-  .ov-mid-grid{display:grid;grid-template-columns:1fr 1.55fr;gap:14px;margin-bottom:18px;}
-  .ov-panel{background:var(--card);border-radius:12px;border:1px solid var(--border);overflow:hidden;}
-  .ov-panel-hdr{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--border);background:#F8FAFC;}
-  .ov-panel-title{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;color:var(--primary);}
-  .ov-panel-sub{font-size:11px;color:var(--muted);margin-left:auto;display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
-
-  /* Team member rows */
-  .ov-member-row{display:flex;align-items:flex-start;gap:12px;padding:11px 16px;border-bottom:1px solid var(--border);transition:background .15s;}
-  .ov-member-row:last-child{border-bottom:none;}
-  .ov-member-row:hover{background:#F8FAFC;}
-  .ov-m-avatar{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;color:#fff;flex-shrink:0;margin-top:1px;}
-  .ov-m-name{font-size:13px;font-weight:700;color:var(--text);}
-  .ov-m-region{font-size:11px;color:var(--muted);margin-top:1px;}
-  .ov-m-focus{font-size:12px;color:#374151;flex:1;line-height:1.5;margin-top:3px;}
-  .ov-m-badges{display:flex;flex-direction:column;align-items:flex-end;gap:3px;flex-shrink:0;}
-  .ov-m-badge{font-size:10px;font-weight:700;padding:2px 7px;border-radius:8px;white-space:nowrap;}
-  .ov-mb-pipe{background:#FFF7ED;color:#C2410C;}
-  .ov-mb-trip{background:#EFF6FF;color:#1D4ED8;}
-
-  /* Market health grid */
-  .ov-market-grid{padding:12px 14px;display:grid;grid-template-columns:repeat(2,1fr);gap:7px;}
-  .ov-mkt-row{display:flex;align-items:center;gap:9px;padding:8px 10px;border-radius:8px;background:#F8FAFC;border:1px solid var(--border);transition:background .15s;}
-  .ov-mkt-row:hover{background:#F1F5F9;}
-  .ov-mkt-flag{font-size:18px;flex-shrink:0;}
-  .ov-mkt-info{flex:1;min-width:0;}
-  .ov-mkt-name{font-size:12px;font-weight:700;color:var(--text);}
-  .ov-mkt-note{font-size:10px;color:var(--muted);margin-top:1px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
-  .ov-mkt-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
-  .mkt-green{background:#10B981;}
-  .mkt-yellow{background:#F59E0B;}
-  .mkt-red{background:#EF4444;}
-  .mkt-ghost{background:#CBD5E1;}
+  /* Team grid (4-col, one per BD member) */
+  .ov-team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:18px;}
+  @media(max-width:1100px){.ov-team-grid{grid-template-columns:repeat(2,1fr);}}
+  @media(max-width:600px){.ov-team-grid{grid-template-columns:1fr;}}
+  .ov-tc{background:var(--card);border-radius:12px;border:1px solid var(--border);overflow:hidden;display:flex;flex-direction:column;}
+  .ov-tc-hdr{display:flex;align-items:center;gap:10px;padding:12px 14px;border-bottom:1px solid var(--border);background:#F8FAFC;}
+  .ov-m-avatar{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:#fff;flex-shrink:0;}
+  .ov-tc-info{flex:1;min-width:0;}
+  .ov-tc-name{font-size:13px;font-weight:700;color:var(--text);}
+  .ov-tc-region{font-size:10px;color:var(--muted);margin-top:1px;}
+  .ov-tc-count{font-size:11px;font-weight:700;background:var(--orange-light);color:#C2410C;padding:2px 8px;border-radius:10px;white-space:nowrap;flex-shrink:0;}
+  .ov-tc-body{padding:8px 12px;flex:1;overflow:hidden;}
+  .ov-tc-task{display:flex;align-items:flex-start;gap:7px;padding:5px 0;border-bottom:1px solid #F1F5F9;font-size:12px;color:#374151;line-height:1.4;}
+  .ov-tc-task:last-child{border-bottom:none;}
+  .ov-tc-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;margin-top:4px;}
+  .ov-tc-status{font-size:9px;font-weight:700;padding:1px 5px;border-radius:5px;white-space:nowrap;flex-shrink:0;margin-top:2px;}
+  .ov-tc-empty{font-size:11px;color:var(--muted);padding:10px 0;text-align:center;font-style:italic;}
+  .ov-tc-footer{padding:8px 12px;border-top:1px solid var(--border);background:#FAFBFC;}
+  .ov-tc-link{font-size:11px;font-weight:700;color:var(--orange);text-decoration:none;display:flex;align-items:center;gap:4px;}
+  .ov-tc-link:hover{text-decoration:underline;}
+  /* Skeleton loading */
+  .ov-skel{background:linear-gradient(90deg,#F1F5F9 25%,#E2E8F0 50%,#F1F5F9 75%);background-size:200% 100%;animation:skel 1.4s infinite;border-radius:4px;height:12px;margin:5px 0;}
+  @keyframes skel{0%{background-position:200% 0}100%{background-position:-200% 0}}
 
   /* Pipeline kanban */
   .ov-pipeline-wrap{background:var(--card);border-radius:12px;border:1px solid var(--border);margin-bottom:18px;overflow:hidden;}
@@ -951,147 +941,104 @@
       <button class="ov-setup-btn" onclick="showSheetsModal()">🔗 <span data-zh="設定自動更新" data-en="Setup Auto-Sync">設定自動更新</span></button>
     </div>
 
-    <!-- Mid Grid: Team Status + Market Health -->
-    <div class="ov-mid-grid">
+    <!-- BD Member Status (4-col, live from Monday.com) -->
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+      <div style="font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);display:flex;align-items:center;gap:8px;">
+        👥 <span data-zh="BD 成員任務現況" data-en="BD Member Tasks">BD 成員任務現況</span>
+        <span style="font-weight:400;font-size:10px;color:var(--muted)" id="ov-tasks-source" data-zh="— 手動 / 連結 Monday.com 後自動更新" data-en="— manual / auto-updates after Monday.com connection">— 手動 / 連結 Monday.com 後自動更新</span>
+      </div>
+      <a href="https://tadagaming-company.monday.com/boards/2065148482" target="_blank" style="font-size:11px;font-weight:700;color:var(--orange);text-decoration:none">Monday 查看全部 →</a>
+    </div>
+    <div class="ov-team-grid" id="ov-team-grid">
 
-      <!-- BD Member Status -->
-      <div class="ov-panel">
-        <div class="ov-panel-hdr">
-          <span style="font-size:16px">👥</span>
-          <span class="ov-panel-title" data-zh="BD 成員現況" data-en="BD Member Status">BD 成員現況</span>
-          <span class="ov-panel-sub" data-zh="Q2 · 2026" data-en="Q2 · 2026">Q2 · 2026</span>
-        </div>
-        <!-- Bryam -->
-        <div class="ov-member-row">
+      <!-- Bryam -->
+      <div class="ov-tc">
+        <div class="ov-tc-hdr">
           <div class="ov-m-avatar" style="background:#8B5CF6">B</div>
-          <div style="flex:1;min-width:0">
-            <div class="ov-m-name">Bryam</div>
-            <div class="ov-m-region">🇪🇸 西班牙 · 🌎 LatAm</div>
-            <div class="ov-m-focus" data-zh="GameKong Tier1費率談判 · IGT 荷蘭 &amp; 捷克管道 · Longfu88 產品提案" data-en="GameKong Tier 1 rate negotiation · IGT Netherlands &amp; Czechia pipeline · Longfu88 brief">GameKong Tier1費率談判 · IGT 荷蘭&amp;捷克管道 · Longfu88 提案</div>
+          <div class="ov-tc-info">
+            <div class="ov-tc-name">Bryam</div>
+            <div class="ov-tc-region">🇪🇸 Spain · LatAm</div>
           </div>
-          <div class="ov-m-badges">
-            <span class="ov-m-badge ov-mb-pipe">3 deals</span>
-            <span class="ov-m-badge ov-mb-trip">🇪🇸 完成</span>
-          </div>
+          <span class="ov-tc-count" id="cnt-bryam">9</span>
         </div>
-        <!-- Hector -->
-        <div class="ov-member-row">
-          <div class="ov-m-avatar" style="background:#F59E0B">H</div>
-          <div style="flex:1;min-width:0">
-            <div class="ov-m-name">Hector</div>
-            <div class="ov-m-region">🇦🇷 阿根廷 · 🇵🇪 祕魯 · 🇧🇷 巴西</div>
-            <div class="ov-m-focus" data-zh="LatAm Q2 客戶關係維護 · IGT 墨西哥路線圖跟進 · Betsson 上線倒數" data-en="LatAm Q2 client management · IGT Mexico roadmap · Betsson go-live countdown">LatAm Q2 客戶關係維護 · IGT 墨西哥路線圖跟進</div>
-          </div>
-          <div class="ov-m-badges">
-            <span class="ov-m-badge ov-mb-pipe">2 deals</span>
-            <span class="ov-m-badge ov-mb-trip">🌎 完成</span>
-          </div>
+        <div class="ov-tc-body" id="tasks-bryam">
+          <div class="ov-tc-task"><span class="ov-tc-dot" style="background:#fdab3d"></span><span>Mostbet - Reactivation!</span></div>
+          <div class="ov-tc-task"><span class="ov-tc-dot" style="background:#fdab3d"></span><span>Stake - ACTIVATION</span></div>
+          <div class="ov-tc-task"><span class="ov-tc-dot" style="background:#fdab3d"></span><span>Royal Sweet</span></div>
+          <div class="ov-tc-task"><span class="ov-tc-dot" style="background:#fdab3d"></span><span>Pegasus</span></div>
+          <div class="ov-tc-task"><span class="ov-tc-dot" style="background:#fdab3d"></span><span>Alea new Opportunities</span></div>
+          <div class="ov-tc-task"><span class="ov-tc-dot" style="background:#cab641"></span><span>Reevo - Regulated EU</span></div>
+          <div class="ov-tc-task"><span class="ov-tc-dot" style="background:#cab641"></span><span>Sportybet - activation</span></div>
+          <div class="ov-tc-task"><span class="ov-tc-dot" style="background:#007eb5"></span><span>Reevo MGA DD</span></div>
+          <div class="ov-tc-task"><span class="ov-tc-dot" style="background:#fdab3d"></span><span>Betarabia</span></div>
         </div>
-        <!-- Chu -->
-        <div class="ov-member-row">
-          <div class="ov-m-avatar" style="background:#10B981">C</div>
-          <div style="flex:1;min-width:0">
-            <div class="ov-m-name">Chu</div>
-            <div class="ov-m-region">🌍 EU 整合支援</div>
-            <div class="ov-m-focus" data-zh="Novibet Relax OAR 文件 · OPAP 9款遊戲上線 · Elabet 促銷排程" data-en="Novibet Relax OAR documents · OPAP 9 game launches · Elabet promo scheduling">Novibet Relax OAR 文件 · OPAP 9款遊戲上線</div>
-          </div>
-          <div class="ov-m-badges">
-            <span class="ov-m-badge ov-mb-pipe">2 deals</span>
-          </div>
-        </div>
-        <!-- Nina -->
-        <div class="ov-member-row">
-          <div class="ov-m-avatar" style="background:#F97316">N</div>
-          <div style="flex:1;min-width:0">
-            <div class="ov-m-name">Nina</div>
-            <div class="ov-m-region">🇷🇴 羅馬尼亞 · 🇮🇹 義大利 · 🇬🇷 希臘</div>
-            <div class="ov-m-focus" data-zh="Stake IT 提案發送 · Reevo 技術修復 · Superbet 6月獨家計畫 · Winbet 談判" data-en="Stake IT proposal · Reevo tech fix · Superbet June exclusives · Winbet negotiation">Stake IT 提案 · Reevo 修復 · Superbet 獨家 · Winbet 談判</div>
-          </div>
-          <div class="ov-m-badges">
-            <span class="ov-m-badge ov-mb-pipe">7 deals</span>
-            <span class="ov-m-badge ov-mb-trip">🇪🇺 3城市</span>
-          </div>
+        <div class="ov-tc-footer">
+          <a href="https://tadagaming-company.monday.com/boards/2065148482/groups/topics" target="_blank" class="ov-tc-link">在 Monday 查看 →</a>
         </div>
       </div>
 
-      <!-- Market Health -->
-      <div class="ov-panel">
-        <div class="ov-panel-hdr">
-          <span style="font-size:16px">🗺️</span>
-          <span class="ov-panel-title" data-zh="市場健康度" data-en="Market Health">市場健康度</span>
-          <span class="ov-panel-sub">
-            <span style="display:inline-flex;align-items:center;gap:4px;font-size:10px;color:var(--muted)"><span style="width:8px;height:8px;border-radius:50%;background:#10B981;display:inline-block"></span><span data-zh="強勢" data-en="Strong">強勢</span></span>
-            <span style="display:inline-flex;align-items:center;gap:4px;font-size:10px;color:var(--muted)"><span style="width:8px;height:8px;border-radius:50%;background:#F59E0B;display:inline-block"></span><span data-zh="成長中" data-en="Growing">成長中</span></span>
-            <span style="display:inline-flex;align-items:center;gap:4px;font-size:10px;color:var(--muted)"><span style="width:8px;height:8px;border-radius:50%;background:#CBD5E1;display:inline-block"></span><span data-zh="開發中" data-en="Emerging">開發中</span></span>
-          </span>
+      <!-- Hector -->
+      <div class="ov-tc">
+        <div class="ov-tc-hdr">
+          <div class="ov-m-avatar" style="background:#F59E0B">H</div>
+          <div class="ov-tc-info">
+            <div class="ov-tc-name">Hector</div>
+            <div class="ov-tc-region">🇦🇷 Argentina · 🇵🇪 Peru · 🇧🇷 Brazil</div>
+          </div>
+          <span class="ov-tc-count" id="cnt-hector">4</span>
         </div>
-        <div class="ov-market-grid">
-          <div class="ov-mkt-row">
-            <span class="ov-mkt-flag">🇷🇴</span>
-            <div class="ov-mkt-info">
-              <div class="ov-mkt-name" data-zh="羅馬尼亞" data-en="Romania">羅馬尼亞</div>
-              <div class="ov-mkt-note" data-zh="Superbet 運作 · Winbet 談判中" data-en="Superbet live · Winbet negotiating">Superbet 運作 · Winbet 談判中</div>
-            </div>
-            <div class="ov-mkt-dot mkt-yellow"></div>
-          </div>
-          <div class="ov-mkt-row">
-            <span class="ov-mkt-flag">🇮🇹</span>
-            <div class="ov-mkt-info">
-              <div class="ov-mkt-name" data-zh="義大利" data-en="Italy">義大利</div>
-              <div class="ov-mkt-note" data-zh="StarCasino €4M · Stake pipeline" data-en="StarCasino €4M · Stake pipeline">StarCasino €4M · Stake pipeline</div>
-            </div>
-            <div class="ov-mkt-dot mkt-green"></div>
-          </div>
-          <div class="ov-mkt-row">
-            <span class="ov-mkt-flag">🇬🇷</span>
-            <div class="ov-mkt-info">
-              <div class="ov-mkt-name" data-zh="希臘" data-en="Greece">希臘</div>
-              <div class="ov-mkt-note" data-zh="Novibet Top 40 · Stoiximan 里程碑" data-en="Novibet Top 40 · Stoiximan milestone">Novibet Top 40 · Stoiximan 里程碑</div>
-            </div>
-            <div class="ov-mkt-dot mkt-yellow"></div>
-          </div>
-          <div class="ov-mkt-row">
-            <span class="ov-mkt-flag">🇪🇸</span>
-            <div class="ov-mkt-info">
-              <div class="ov-mkt-name" data-zh="西班牙" data-en="Spain">西班牙</div>
-              <div class="ov-mkt-note" data-zh="GameKong Tier2 · IGT pipeline" data-en="GameKong Tier 2 · IGT pipeline">GameKong Tier2 · IGT pipeline</div>
-            </div>
-            <div class="ov-mkt-dot mkt-yellow"></div>
-          </div>
-          <div class="ov-mkt-row">
-            <span class="ov-mkt-flag">🇦🇷</span>
-            <div class="ov-mkt-info">
-              <div class="ov-mkt-name" data-zh="阿根廷" data-en="Argentina">阿根廷</div>
-              <div class="ov-mkt-note" data-zh="Q2 出差完成 · 關係穩固" data-en="Q2 trip done · strong relationships">Q2 出差完成 · 關係穩固</div>
-            </div>
-            <div class="ov-mkt-dot mkt-green"></div>
-          </div>
-          <div class="ov-mkt-row">
-            <span class="ov-mkt-flag">🇵🇪</span>
-            <div class="ov-mkt-info">
-              <div class="ov-mkt-name" data-zh="祕魯" data-en="Peru">祕魯</div>
-              <div class="ov-mkt-note" data-zh="Q2 出差完成 · Bragg 合規跟進" data-en="Q2 trip done · Bragg compliance">Q2 出差完成 · Bragg 跟進中</div>
-            </div>
-            <div class="ov-mkt-dot mkt-green"></div>
-          </div>
-          <div class="ov-mkt-row">
-            <span class="ov-mkt-flag">🇧🇷</span>
-            <div class="ov-mkt-info">
-              <div class="ov-mkt-name" data-zh="巴西" data-en="Brazil">巴西</div>
-              <div class="ov-mkt-note" data-zh="Q2 出差完成 · 開發初期" data-en="Q2 trip done · early stage">Q2 出差完成 · 開發初期</div>
-            </div>
-            <div class="ov-mkt-dot mkt-yellow"></div>
-          </div>
-          <div class="ov-mkt-row" style="border-style:dashed;opacity:.65">
-            <span class="ov-mkt-flag">🇲🇽</span>
-            <div class="ov-mkt-info">
-              <div class="ov-mkt-name" data-zh="墨西哥 (目標)" data-en="Mexico (Target)">墨西哥 (目標)</div>
-              <div class="ov-mkt-note" data-zh="IGT pipeline · 合規審查中" data-en="IGT pipeline · compliance review">IGT pipeline · 合規審查中</div>
-            </div>
-            <div class="ov-mkt-dot mkt-ghost"></div>
-          </div>
+        <div class="ov-tc-body" id="tasks-hector">
+          <div class="ov-tc-task"><span class="ov-tc-dot" style="background:#df2f4a"></span><span>H2 Direct Contract For Brazil</span></div>
+          <div class="ov-tc-task"><span class="ov-tc-dot" style="background:#ffadad"></span><span>Lotus iGaming Contract</span></div>
+          <div class="ov-tc-task"><span class="ov-tc-dot" style="background:#ffadad"></span><span>Lucky Gaming Direct Contract</span></div>
+          <div class="ov-tc-task"><span class="ov-tc-dot" style="background:#ffadad"></span><span>UX/Reals Direct Contract</span></div>
+        </div>
+        <div class="ov-tc-footer">
+          <a href="https://tadagaming-company.monday.com/boards/2065148482/groups/group_title" target="_blank" class="ov-tc-link">在 Monday 查看 →</a>
         </div>
       </div>
+
+      <!-- Chu -->
+      <div class="ov-tc">
+        <div class="ov-tc-hdr">
+          <div class="ov-m-avatar" style="background:#10B981">C</div>
+          <div class="ov-tc-info">
+            <div class="ov-tc-name">Chu</div>
+            <div class="ov-tc-region">🌍 EU Integration Support</div>
+          </div>
+          <span class="ov-tc-count" id="cnt-chu">—</span>
+        </div>
+        <div class="ov-tc-body" id="tasks-chu">
+          <div class="ov-tc-task"><span class="ov-tc-dot" style="background:#cab641"></span><span>Reevo - Regulated EU</span></div>
+          <div class="ov-tc-task"><span class="ov-tc-dot" style="background:#007eb5"></span><span>Reevo MGA DD</span></div>
+          <div class="ov-tc-task"><span class="ov-tc-dot" style="background:#cab641"></span><span>Sportybet - activation</span></div>
+          <div class="ov-tc-empty" data-zh="連結 Monday.com 查看完整任務清單" data-en="Connect Monday.com to see full task list">連結 Monday.com 查看完整任務清單</div>
+        </div>
+        <div class="ov-tc-footer">
+          <a href="https://tadagaming-company.monday.com/boards/2065148482/groups/group_mkv87e7e" target="_blank" class="ov-tc-link">在 Monday 查看 →</a>
+        </div>
+      </div>
+
+      <!-- Nina -->
+      <div class="ov-tc">
+        <div class="ov-tc-hdr">
+          <div class="ov-m-avatar" style="background:#F97316">N</div>
+          <div class="ov-tc-info">
+            <div class="ov-tc-name">Nina</div>
+            <div class="ov-tc-region">🇷🇴 Romania · 🇮🇹 Italy · 🇬🇷 Greece</div>
+          </div>
+          <span class="ov-tc-count" id="cnt-nina">—</span>
+        </div>
+        <div class="ov-tc-body" id="tasks-nina">
+          <div class="ov-tc-task"><span class="ov-tc-dot" style="background:#cab641"></span><span>Reevo - Regulated EU</span></div>
+          <div class="ov-tc-task"><span class="ov-tc-dot" style="background:#007eb5"></span><span>Reevo MGA DD</span></div>
+          <div class="ov-tc-empty" data-zh="連結 Monday.com 查看完整任務清單" data-en="Connect Monday.com to see full task list">連結 Monday.com 查看完整任務清單</div>
+        </div>
+        <div class="ov-tc-footer">
+          <a href="https://tadagaming-company.monday.com/boards/2065148482/groups/group_mkv8ynap" target="_blank" class="ov-tc-link">在 Monday 查看 →</a>
+        </div>
+      </div>
+
     </div>
 
     <!-- Pipeline Kanban -->
